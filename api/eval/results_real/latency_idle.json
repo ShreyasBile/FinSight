@@ -1,0 +1,46 @@
+{
+ "note": "development documents, one at a time, nothing else running; local model already loaded",
+ "machine": null,
+ "paths": {
+  "Cleanup of a phone photo of an ID card": {
+   "n": 12,
+   "median_s": 6.8,
+   "max_s": 7.7
+  },
+  "Cleanup of a scanned page": {
+   "n": 12,
+   "median_s": 8.8,
+   "max_s": 16.1
+  },
+  "PAN card upload (cleanup + reading model + checks)": {
+   "n": 8,
+   "median_s": 7.3,
+   "max_s": 11.1
+  },
+  "Bank statement upload, digital PDF": {
+   "n": 4,
+   "median_s": 12.7,
+   "max_s": 12.9
+  },
+  "Bank statement upload, scanned PDF": {
+   "n": 4,
+   "median_s": 16.4,
+   "max_s": 16.6
+  },
+  "Masking a PAN card": {
+   "n": 8,
+   "median_s": 0.7,
+   "max_s": 8.6
+  },
+  "Integrity check of a scanned receipt": {
+   "n": 6,
+   "median_s": 0.8,
+   "max_s": 1.7
+  },
+  "Integrity check of a phone photo of an ID card": {
+   "n": 6,
+   "median_s": 3.1,
+   "max_s": 3.8
+  }
+ }
+}

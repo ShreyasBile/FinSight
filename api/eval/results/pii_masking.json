@@ -1,0 +1,143 @@
+{
+ "agent_id": "pii_masking",
+ "measured_at": "2026-09-26T23:16:34+00:00",
+ "metrics": {
+  "pii_recall": 1.0,
+  "last4_kept": 0.9375,
+  "n": 48,
+  "leaks": 0,
+  "extra_regions_masked": 0,
+  "per_condition": {
+   "clean": {
+    "n": 12,
+    "leak_free": 1.0,
+    "last4_kept": 1.0
+   },
+   "rot": {
+    "n": 6,
+    "leak_free": 1.0,
+    "last4_kept": 1.0
+   },
+   "desk": {
+    "n": 6,
+    "leak_free": 1.0,
+    "last4_kept": 1.0
+   },
+   "desk_rot": {
+    "n": 6,
+    "leak_free": 1.0,
+    "last4_kept": 0.6667
+   },
+   "blur": {
+    "n": 6,
+    "leak_free": 1.0,
+    "last4_kept": 0.8333
+   },
+   "dark": {
+    "n": 6,
+    "leak_free": 1.0,
+    "last4_kept": 1.0
+   },
+   "glare": {
+    "n": 6,
+    "leak_free": 1.0,
+    "last4_kept": 1.0
+   }
+  },
+  "real_documents_checked": 10,
+  "real_documents_leaking": 0,
+  "p50_s": 4.35,
+  "p95_s": 12.86
+ },
+ "target": {
+  "metric": "pii_recall",
+  "target": 1.0,
+  "higher": true,
+  "label": "Full ID numbers hidden (no leak)"
+ },
+ "primary_value": 1.0,
+ "rating": "Strong",
+ "secondary": [
+  {
+   "metric": "last4_kept",
+   "target": 0.95,
+   "higher": true,
+   "label": "Last four digits still visible",
+   "value": 0.9375,
+   "rating": "Acceptable"
+  }
+ ],
+ "failures": [],
+ "real_documents": [
+  {
+   "file": "APP-14261706/aadhaar",
+   "masked_regions": 3,
+   "own_numbers_found": 1,
+   "leak": false,
+   "last4_kept": true
+  },
+  {
+   "file": "APP-14261706/pan",
+   "masked_regions": 1,
+   "own_numbers_found": 1,
+   "leak": false,
+   "last4_kept": true
+  },
+  {
+   "file": "APP-24657408/aadhaar",
+   "masked_regions": 2,
+   "own_numbers_found": 1,
+   "leak": false,
+   "last4_kept": true
+  },
+  {
+   "file": "APP-24657408/pan",
+   "masked_regions": 1,
+   "own_numbers_found": 1,
+   "leak": false,
+   "last4_kept": true
+  },
+  {
+   "file": "APP-58890622/aadhaar",
+   "masked_regions": 2,
+   "own_numbers_found": 1,
+   "leak": false,
+   "last4_kept": true
+  },
+  {
+   "file": "APP-58890622/pan",
+   "masked_regions": 1,
+   "own_numbers_found": 1,
+   "leak": false,
+   "last4_kept": true
+  },
+  {
+   "file": "APP-86111005/aadhaar",
+   "masked_regions": 1,
+   "own_numbers_found": 1,
+   "leak": false,
+   "last4_kept": true
+  },
+  {
+   "file": "APP-86111005/pan",
+   "masked_regions": 1,
+   "own_numbers_found": 1,
+   "leak": false,
+   "last4_kept": true
+  },
+  {
+   "file": "APP-90000001/aadhaar",
+   "masked_regions": 2,
+   "own_numbers_found": 1,
+   "leak": false,
+   "last4_kept": true
+  },
+  {
+   "file": "APP-90000001/pan",
+   "masked_regions": 1,
+   "own_numbers_found": 1,
+   "leak": false,
+   "last4_kept": true
+  }
+ ]
+}

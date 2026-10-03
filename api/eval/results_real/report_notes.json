@@ -1,0 +1,597 @@
+{
+ "summary": [
+  "Each of FinSight's 29 agents was tested on its own, on real or public production-like data, and scored against a target written down before the agent saw that data. Results are on held-out test splits with 95% confidence intervals. Every model call stayed on this PC (local Ollama); no document left the machine.",
+  "Where real data exposed a weakness, the fix was developed on the development split only and the test split was scored once more afterwards. Both numbers are reported. Thirteen agents were changed this way; the table below lists what was found, what was changed and what it did.",
+  "Result: 25 agents meet their target, two are within 10% of it (PII masking: 98.4% against a target of 100%; Tamper Locator: the forged region boxed on 74.6% against 80%), and two are below it. Authenticity - the local vision model asked whether a document was edited - cannot see a local edit even when shown the edited area magnified; that job now belongs to a detector trained on real forgeries, which took Tampering Forensics from 17% to 89% of forged documents flagged. Preprocessing finds a card's outline in 69% of phone photos against a target of 80%. What would move each further is stated in its section."
+ ],
+ "method": [
+  "Pre-registration. Targets for every agent were fixed in eval/targets_real.yaml before that agent was run on the evaluation data (Group 1 first, Groups 2 and 3 before their runs). Where the real data changes what a fair target is, the reason is written next to the target.",
+  "Splits. Every dataset is split into development (30%) and test (70%) by a fixed seed (20261001), group-wise: a person, a document's source template, a loan or a bank account never sits in both. Official splits are used where the dataset defines them (Find it again!, LFW-family folds, NUAA lists). Improvements were developed on development data only.",
+  "Statistics. Proportions carry Wilson 95% intervals; AUC, F1 and ratios carry percentile-bootstrap intervals (1,000 resamples). Ratings: Strong = target met; Acceptable = within 10% of it; Weak = below.",
+  "What is run. The app's own code paths — the same flows an upload or an officer action triggers (run_extract, run_integrity, the agents' execute methods, the Underwriting Crew) — in an isolated data directory. Nothing touches the live case store, face index or database; the process-mining test builds and drops its own throwaway database.",
+  "Privacy. Datasets with real people's data are processed locally only, logs and caches hold scores and verdicts but never a value read from a document, and India's real PAN / Aadhaar numbers are never used: the Aadhaar Act forbids publishing them, so Indian ID tests use labelled synthetic cards and Indian ID numbers printed onto real scanned pages.",
+  "Leakage. Test documents were hashed and checked against everything FinSight's trained components saw (the tampering CNN's training folders). The two components trained during this evaluation saw development data only: the two-wheeler model was fitted on the L&T development split, and the patch detector on the development splits of the forged-document sets (Find it again!'s official train and validation parts; SIDTD's development groups), with its floors measured on held-out halves of the same development data."
+ ],
+ "datasets": [
+  [
+   "Find it again!",
+   "988 real scanned receipts, 163 forged by people, forged regions boxed (ICDAR 2023)",
+   "research use",
+   "Tampering, Locator, Explainer, Authenticity, Fusion"
+  ],
+  [
+   "SIDTD templates",
+   "ID-card templates, genuine + crop-replace / inpainting forgeries",
+   "CC BY 4.0",
+   "Tampering, Authenticity, Doc identity, Fusion"
+  ],
+  [
+   "L&T Vehicle Loan Default",
+   "~233k Indian two-wheeler loans with bureau data and default",
+   "LTFS hackathon data",
+   "Risk, Policy, Supervisor, Memo, Offer, Router, Notifier"
+  ],
+  [
+   "Berka (Czech bank)",
+   "4,500 real accounts, 1M transactions, 682 loans with outcome",
+   "CC0",
+   "Risk (2nd market), Fraud patterns, Income"
+  ],
+  [
+   "AgeDB-30 / CALFW / CPLFW / LFW",
+   "standard 6,000-pair face verification protocols",
+   "research use",
+   "Face, Dedupe, Triage, Fusion"
+  ],
+  [
+   "NUAA + CelebA-Spoof",
+   "live vs printed-photo attacks (full frames); tight-crop spoof set",
+   "academic use",
+   "Liveness"
+  ],
+  [
+   "ObliQA",
+   "regulatory QA over ADGM regulations with gold passages",
+   "Apache-2.0",
+   "KB ingestion, Regulatory Q&A, Rule authoring"
+  ],
+  [
+   "BPI Challenge 2017",
+   "event log of 31,509 real loan applications (Dutch bank)",
+   "4TU terms",
+   "Process-mining analyst"
+  ],
+  [
+   "MIDV-500, SROIE, FUNSD, RVL-CDIP",
+   "phone frames of ID cards; real scanned receipts, forms and office pages",
+   "MIT / CC BY 4.0 / research",
+   "Preprocessing, Extraction, Doc identity, PII masking, Storage"
+  ],
+  [
+   "PAN / Aadhaar synthetic, Indian bank statements",
+   "Indian-layout cards with labels; statements with JSON truth",
+   "Apache-2.0 / CC BY-ND",
+   "Extraction, PII masking, Validation, Parser"
+  ],
+  [
+   "Razorpay IFSC register, Indian names, IBM AML",
+   "every real IFSC code; 55k Indian first names; labelled laundering",
+   "MIT / Kaggle / CDLA",
+   "Validation, Cross verification, Fraud patterns"
+  ]
+ ],
+ "limitations": [
+  "Indian identity documents: no lawful public set of real PAN or Aadhaar images exists, so extraction and masking of Indian IDs were measured on labelled synthetic cards and on real scanned pages with Indian ID numbers printed onto them.",
+  "Forged documents: no public set of forged Indian salary slips, bank statements or ID cards exists. Tampering was tested on real receipts forged by people and on ID images forged by script; the new detector was trained on the development half of the same two sets. FinSight's strongest statement and payslip checks (arithmetic rules, PDF producer and re-save checks) are not exercised by that data.",
+  "Some datasets come from other markets (Czech bank accounts, a Dutch loan process, ADGM regulations). They test behaviour on real data of the same kind; absolute rates in Indian production may differ.",
+  "RBI documents could not be downloaded by script (the site serves a bot check, which was not bypassed); the RBI part of the compliance tests waits for the six PDFs listed in raw/rbi/PLEASE-DOWNLOAD.md.",
+  "Composite agents (Fraud Fusion, Supervisor) were tested on cases assembled from real component outputs or real loans; there is no public set of Indian loan applications labelled as fraudulent end to end.",
+  "The local model (qwen2.5vl 7B) was the only model used; a larger hosted model may score differently but was not used because real documents must stay on this PC.",
+  "Timing: most runs shared the PC with two or three other evaluations, so the latencies in the agent sections are upper bounds; the table 'Latency on an idle machine' gives the figures measured afterwards with nothing else running.",
+  "Re-scoring: an agent that was fixed was scored on the test split again, once per fix. PII masking and Document Identity were each fixed twice and Tampering Forensics three times, so they were scored three and four times; their final figures are a little optimistic for that reason."
+ ],
+ "reproduce": [
+  "cd api",
+  "bash ../../finsight-eval-data/work/run_until_done.sh <log> --agent <agent_id> --split test",
+  "python -m eval.real.report_real   # rebuilds this report from eval/results_real"
+ ],
+ "face_verification": {
+  "dataset": "AgeDB-30, CALFW, CPLFW, LFW (+ printed-card condition)",
+  "what": "Standard 6,000-pair protocols of four public face benchmarks (folds 4-10 as test), each pair compared both as clean crops and printed into the photo box of a real ID-card template and photographed — what the agent sees when it compares the PAN photo with the Aadhaar photo.",
+  "findings": [
+   "The matcher is strong on clean and card-printed photos alike; the hardest set is CPLFW (cross-pose). 8.2% of same-person pairs were called 'different', so the 'different' verdict is routed to a person and never decides on its own."
+  ]
+ },
+ "liveness": {
+  "dataset": "NUAA imposter database (+ CelebA-Spoof crops)",
+  "what": "Full webcam frames of live people and printed-photo attacks (NUAA official test list), scored with the ISO/IEC 30107-3 error rates; tight face crops from CelebA-Spoof reported separately.",
+  "findings": [
+   "On full frames — what the app captures — liveness is strong. On tight crops (no background) it is much weaker, because the anti-spoof models judge the area around the face; selfies must therefore be captured as full frames. Screen-replay attacks were not in the test set."
+  ]
+ },
+ "risk_scoring": {
+  "dataset": "L&T two-wheeler loans (India), Berka (Czech)",
+  "what": "Real Indian two-wheeler loans with bureau score, LTV, enquiries, overdue accounts and the real default outcome, mapped field by field to what FinSight knows at application time. Measured against a gradient-boosting model trained on the same data (the achievable ceiling).",
+  "findings": [
+   "The untrained rule engine reached AUC 0.595 (Weak). A monotonic two-wheeler default model trained on the L&T development split was added as a bounded adjustment (at most ±25 points), lifting test AUC to 0.621 — 83% of the trained ceiling. The ML overlay shipped with the vendored engine ranked at chance on this data."
+  ]
+ },
+ "improvements": [
+  {
+   "agent": "risk_scoring",
+   "problem": "Rule engine ranked real two-wheeler defaults weakly (AUC 0.595, 66% of the trained ceiling)",
+   "change": "Monotonic two-wheeler PD model trained on the L&T development split, blended as a bounded ±25-point adjustment",
+   "effect": "AUC 0.595 → 0.621; skill 0.66 → 0.83 (Weak → Strong)"
+  },
+  {
+   "agent": "dedupe",
+   "problem": "Searching one face against every applicant used the 1:1 threshold (0.363): 8 in 10,000 pairs of different people match, so with 1,000 applicants indexed most new applicants would get a false 'same face, different PAN' alert (a HIGH-fraud floor)",
+   "change": "Separate 1:N threshold FACE_DEDUPE_T = 0.50, chosen on LFW folds 1-3 (1.08M pairs of different people: about 1 false match per million; 91% of same-person pairs still match). Used by Dedupe and Fraud Triage; 1:1 verification unchanged",
+   "effect": "New applicants given a false 'same face' alert 41.8% -> 0.4%; planted duplicates found 98.0% -> 96.3%. Fraud Triage: false ring links 71 -> 0, ring precision 43% -> 100%"
+  },
+  {
+   "agent": "policy_check",
+   "problem": "An active junk rule (id and name 'on', the form's default condition, mandatory, no regulation) was live; the rule form accepted anything",
+   "change": "Server-side rule validation (id format, meaningful name, regulation required for mandatory rules, condition must reference real application fields) on manual creation and candidate approval; the junk rule deactivated with an audit entry",
+   "effect": "15 valid active rules; the junk rule is refused by the form and by the API (HTTP 400)"
+  },
+  {
+   "agent": "underwriting_supervisor",
+   "problem": "The supervisor could never recommend 'approve': the Key Facts Statement / cooling-off / fund-flow / penal-charge rules were checked during credit assessment (before any offer exists) and the borrower's consent was never recorded, so the policy check always ended in NEEDS_INFO",
+   "change": "Loan-terms rules apply from the offer stage (application.stage); consent from the wizard's five declarations is saved with the application and read by the policy check; the draft offer now carries a Key Facts Statement (APR incl. fees, every fee, cooling-off) that those rules are judged on",
+   "effect": "a clean application passes at assessment; an offer stage without a KFS fails; 16 new unit tests"
+  },
+  {
+   "agent": "tamper_explainer",
+   "problem": "With the page image in view the small vision model invented problems of its own in about 1 explanation in 6 (removed by the gate)",
+   "change": "Image passed only when a rule finding cites an on-page value; faithful rounding accepted by the gate",
+   "effect": "Fully grounded as written 81% -> 100% (57/57); 98% (59/60) on the documents flagged after the patch detector was added"
+  },
+  {
+   "agent": "fraud_patterns",
+   "problem": "Statement parser recovered 4% of the rows of real Indian statement layouts (multi-line rows, serial-number prefix, many pages)",
+   "change": "Rows assembled from date line to amount line; serial number / transaction id prefix; all pages (OCR up to 6); newest-first order; printed figures kept for exact PDF text",
+   "effect": "Rows recovered 4.4% -> 94.8% (digital 99.96%, scanned 87.7%)"
+  },
+  {
+   "agent": "tampering_forensics",
+   "problem": "84% of genuine real documents flagged, 17% rated HIGH; forged ranked below genuine (AUC 0.36). Pixel signals scaled on synthetic pages sit high - and saturate - on real genuine captures. Once calibrated, they found 17% of real forgeries",
+   "change": "(1) Per-family genuine floors for the pixel signals. (2) ELA and noise no longer raise the tier alone. (3) A patch-level detector trained on real forged receipts and ID images (development split): two models per document family, evidence only when both exceed what 95% of genuine documents reach; alone it gives MEDIUM, never HIGH",
+   "effect": "Forged flagged 16.6% -> 88.9% (receipts 54%, ID images 95%); genuine flagged 84% -> 24% (receipts 82% -> 3%); genuine wrongly HIGH 17.0% -> 0.8%; AUC 0.36 -> 0.91; genuine ID phone photos flagged 66% -> 0.5% (Weak -> Strong)"
+  },
+  {
+   "agent": "tamper_locator",
+   "problem": "No forged region was boxed (0 of 39): the locator can only box a value a rule names, and pixel signals name nothing",
+   "change": "The patch detector states where it sees the edit - up to three separate areas above the genuine floor - and the locator draws them as stated",
+   "effect": "Forged region boxed 0% -> 74.6% of flagged forged documents (ID images 79%, receipts 32%); boxes on genuine flagged documents 1% -> 2% (Weak -> Acceptable)"
+  },
+  {
+   "agent": "cross_verification",
+   "problem": "A document in the father's name ('Suresh Sharma' for applicant 'Rahul Suresh Sharma') was judged the same person in 150 of 150 pairs",
+   "change": "A dropped first name is 'similar, to be verified', a dropped middle name is still a match; server rule and browser copy changed together",
+   "effect": "Name pairs judged correctly 90.9% -> 100% (1,650 pairs); server and browser agree on all"
+  },
+  {
+   "agent": "extraction",
+   "problem": "12 of 60 statement reads timed out; the model never got a statement total right and its made-up totals raised a false forgery alarm on genuine statements; PAN number read correctly on 75% of cards",
+   "change": "First + last page to the model, retry on page one; totals from the statement (printed, or its rows) or left empty; PAN number checked against the card's OCR text",
+   "effect": "Printed fields correct 84.7% -> 94.4% (Acceptable -> Strong); statements 76.9% -> 99.7%; PAN number 75.3% -> 83.3%; valid answers 96.1% -> 100%; statement upload ~3 min -> 40 s"
+  },
+  {
+   "agent": "pii_masking",
+   "problem": "IDs printed inside a line of text were not masked at all (89 of 90 real pages fully readable); 21 of 100 PAN cards were returned as 'masked' with the number showing",
+   "change": "Inline IDs found as OCR returns them (glued labels, uneven spacing, split numbers, look-alike characters); extracted value as anchor; cover edge on the real character gap; an ID card whose number is not located is withheld, not published",
+   "effect": "Documents with no ID readable 42.1% -> 98.4%; PAN cards 79% -> 100% (9% withheld); real pages 1% -> 97%; last four kept 20% -> 85%"
+  },
+  {
+   "agent": "doc_identity",
+   "problem": "11.6% of right documents were refused (statement reads that timed out, misread PAN numbers); a receipt offered as a bank statement passed every time",
+   "change": "Follows from the extraction fixes; a 'bank statement' must carry a phrase only a statement prints; a PAN upload the page text does not confirm is flagged for the officer",
+   "effect": "Wrong uploads caught 90.3% -> 94.4%; receipts as statements caught 0 of 10 -> 10 of 10; right documents refused 11.6% -> 1.6%"
+  },
+  {
+   "agent": "preprocessing",
+   "problem": "The cleanup made 31% of real scans harder to read; on phone photos the card outline was found in 47% of frames and a wrong outline was used in 9%",
+   "change": "Clean upright pages are passed on as uploaded. Card outlines are proposed from regions as well as edges, one score chooses (edge support, ID-card shape, differs from surroundings, holds the face), and below a minimum score none is used",
+   "effect": "Scans harmed 30.7% -> 6.0%. Card outline found 47.3% -> 69.1% (hand-held 32% -> 72%); wrong outline used 9.2% -> 2.4% (still Weak: 72% needed for Acceptable)"
+  }
+ ],
+ "findings": [
+  "Document tampering now finds real forgeries (89% of forged test documents flagged, 54% of receipts edited by people), but it has never seen a forged Indian document: the floors that keep it quiet on genuine documents were measured on receipts, forms, European ID images and photos of one specimen card. Treat its tier as advice to a reviewer, and review the flag rate on the first real applications. The review verdicts officers record in production are the labelled Indian data that would let it be recalibrated.",
+  "About half of clean test cases still come out with a MEDIUM fraud tier (24% when their documents are real scans), because one flagged document is enough and a genuine file with an editor tag is flagged. Decide whether MEDIUM should mean 'officer looks at the document' for that many cases, or whether an editor tag alone should stay advisory.",
+  "Masked copies: 98.4% hide every ID, not 100%. A PAN or Aadhaar card whose number cannot be located is now withheld instead of shown unmasked (about one PAN card in eleven) and needs redacting by hand. Masked copies of free-form pages should not be treated as guaranteed yet.",
+  "The PAN number is read correctly on 83% of cards after the fix; a wrong read still looks like a valid PAN. Before the number is relied on, verify it against the Income Tax / Protean PAN service, or have the officer compare it with the card.",
+  "A foreign ID card uploaded as a PAN card is accepted about two times in three (9 of 14): the reading model returns its document number as a PAN-shaped code. The upload is now flagged 'not confirmed by the page's own text' for the officer; refusing it outright would also refuse about 9% of genuine PAN cards. Issuer verification of the PAN number (previous point) closes this as well.",
+  "Card photos: the outline is now found in 69% of phone frames (72% when the card is held in a hand). The open case is a pale card on a pale surface - a whiteboard, a white sheet; the capture screen can ask for a darker or plainer background until a learned detector exists.",
+  "RBI circulars: the compliance agents were tested on 40 real ADGM regulations. The RBI set waits for six circulars to be downloaded by hand (rbi.org.in blocks scripts) into the evaluation folder's raw/rbi.",
+  "Statement totals are now empty for a scanned statement that prints none (the rows are read after the upload returns); the model's own sums are no longer shown. Confirm that an empty total is acceptable on the review screen.",
+  "Applied during the evaluation and worth confirming: consent was back-filled on the three existing applications; the Key Facts Statement uses lender terms from config (processing fee 1%, cooling-off 3 days, penalty as charges); one extracted rule (EXT_0002) is not stage-gated; the IFSC validator checks the format, not the bank register."
+ ],
+ "validation": {
+  "dataset": "Razorpay IFSC register (183,214 real codes) + mutations",
+  "what": "Every real Indian bank-branch code (the complete public IFSC register) must be accepted, and realistic mistakes (wrong fifth character, a digit in the bank code, a character too many or too few) rejected. PAN formats come from the PAN card set; Aadhaar numbers are generated with the real Verhoeff checksum and then corrupted by one digit or a transposition.",
+  "extra_metrics": {
+   "statement_ifsc_in_real_register": "Statement IFSCs that exist in the real register (informational)"
+  },
+  "findings": [
+   "All 183,214 real codes are accepted and all 12,953 labelled cases are judged correctly. The validator checks the FORMAT only: none of the branch codes printed on the synthetic statement set exist in the real register, so a look-up against the register would be a cheap extra signal for a fabricated statement (recommended, not built)."
+  ]
+ },
+ "policy_check": {
+  "dataset": "L&T loans (real inputs) through the rules engine",
+  "what": "2,000 real loans, each evaluated at the assessment stage (only what the lender recorded) and at the offer stage (with offer terms that exercise every rule both ways). Every rule verdict is compared with an independent implementation written from the rule's declared condition.",
+  "extra_metrics": {
+   "overall_status_accuracy": "Overall status equals the independent roll-up",
+   "default_rate_by_credit_rule.PASS.default_rate": "Real default rate where the credit-score rule passes",
+   "default_rate_by_credit_rule.WARNING.default_rate": "Real default rate where it warns (score < 650)"
+  },
+  "findings": [
+   "116,000 rule verdicts agree with the independent implementation, and a rule never passes on missing evidence. The credit-score rule is meaningful on real outcomes: loans that pass it defaulted 13.9% of the time, loans it warns on 28.6%.",
+   "Found while preparing this test and fixed: an active junk rule in the live knowledge base, and loan-terms rules that were evaluated before any offer existed (see Improvements)."
+  ]
+ },
+ "income_analysis": {
+  "dataset": "Berka real accounts (3-month windows)",
+  "what": "400 real account histories; the payslip is declared consistent with the real inflows (within 3%) or inflated 1.5-3 times. The agent must flag the inflated ones and lend on the evidenced figure.",
+  "extra_metrics": {
+   "lends_on_evidenced_figure": "Flagged cases where the lower, evidenced income is used"
+  },
+  "findings": [
+   "Every inflated declaration was flagged and no consistent one was. This is an easy test by construction — the inflation is large and the rule is a direct comparison — so it confirms correct behaviour on real, lumpy inflows rather than probing subtle under-reporting."
+  ],
+  "limits": "No public data pairs real payslips with the same person's real bank statement, so the declared figure is constructed."
+ },
+ "offer_generation": {
+  "dataset": "L&T loan amounts with the risk agent's scores",
+  "what": "2,000 draft offers on real loan amounts: the EMI is recomputed with the standard formula, and the offer must keep EMIs within 50% of income.",
+  "extra_metrics": {
+   "foir_cap_respected": "Offers that keep EMI within 50% of income"
+  },
+  "findings": [
+   "Every EMI equals the formula to the paisa and every capped offer respects the 50% limit. Since this evaluation the offer also carries a Key Facts Statement (APR including fees)."
+  ]
+ },
+ "workflow_router": {
+  "dataset": "lifecycle diagram + L&T amounts",
+  "what": "All 147 status transitions of all 12 products against the lifecycle diagram, and the Head-approval rule (above Rs 5 lakh) on real loan amounts.",
+  "extra_metrics": {
+   "head_rule_on_real_amounts": "Head-approval rule correct on real amounts"
+  },
+  "findings": [
+   "Deterministic and correct on every transition."
+  ]
+ },
+ "notifier": {
+  "dataset": "all 16 events with real L&T amounts",
+  "what": "1,000 notifications across all 16 workflow events: the right recipients for each event, no unfilled placeholder, amounts in correct Indian digit grouping (checked against an independent formatter), and no outbound network connection (the network is blocked and counted during the test).",
+  "findings": [
+   "Correct recipients and wording in every case; nothing leaves the system."
+  ]
+ },
+ "audit_storage": {
+  "dataset": "real files: receipts, statement PDFs, ID cards",
+  "what": "120 real document files stored through the agent in an isolated store and read back byte for byte; the officer's sheet must hide PAN and Aadhaar, the manager's must not.",
+  "extra_metrics": {
+   "manager_sheet_full_pan": "Manager sheet keeps the full PAN"
+  },
+  "findings": [
+   "Every file is intact and no PAN or Aadhaar appears on the officer sheet."
+  ],
+  "limits": "The SQL Server write path was not exercised here (it writes to the live database); it is covered by the earlier synthetic evaluation."
+ },
+ "dedupe": {
+  "dataset": "LFW real faces (identity-disjoint folds)",
+  "what": "An index of 1,000 real people, then 350 planted duplicates (returning customer, same face under a new PAN, a stolen PAN with another face, the very same file) and 500 new, genuine applicants who are guaranteed to be different people.",
+  "extra_metrics": {
+   "baseline_at_0.363.false_alert_rate": "False alerts with the original threshold (0.363)",
+   "baseline_at_0.363.recall": "Duplicates found with the original threshold"
+  },
+  "findings": [
+   "With the original threshold 41.8% of new, genuine applicants received a false 'same face, different PAN' alert — a HIGH-fraud floor. With the stricter 1:N threshold (0.50, chosen on development folds) that falls to 0.4%, while 96.3% of planted duplicates are still found (93% of same-face-new-PAN cases)."
+  ]
+ },
+ "fraud_triage": {
+  "dataset": "same real-face index + 80 planted rings",
+  "what": "1,000 real people plus 80 planted rings: 40 pairs of the same face under two PANs, 20 bank accounts shared by three PANs, 20 files shared by two PANs.",
+  "extra_metrics": {
+   "proposals_unverifiable": "Proposals that cannot be scored (same-fold look-alikes)",
+   "baseline_at_0.363.proposals_false": "Certainly-false proposals with the original threshold",
+   "baseline_at_0.363.largest_false_proposal": "Largest false 'ring' with the original threshold"
+  },
+  "findings": [
+   "With the original threshold the triage proposed 71 certainly-false rings, one chaining 141 unrelated applicants. With the 1:N threshold there is none, and 93.8% of planted rings are proposed.",
+   "165 further proposals link people within the same benchmark fold; the benchmark repeats people inside a fold and this copy has no identity labels, so they cannot be scored and are left out of precision."
+  ]
+ },
+ "tamper_explainer": {
+  "dataset": "60 flagged documents from the tampering test",
+  "what": "The local model rewrites the detector's findings in plain language. Every figure it cites must exist in the findings, and it must never change the risk tier.",
+  "extra_metrics": {
+   "produced_rate": "Explanations produced",
+   "sentences_dropped": "Unsupported sentences removed by the gate"
+  },
+  "findings": [
+   "First measurement: 88% of explanations were fully grounded as written (81% on the smaller flagged set after the tampering calibration); the grounding gate removed the rest before display. The development analysis showed why: shown the page image with nothing to point at, the small vision model went looking for problems of its own (comparing a date of birth with an expiry date, cash with change).",
+   "Fix: the page image is passed only when a rule finding cites a value printed on the page; a figure rounded the way people say it ('about 35%' for 34.6%) counts as the same figure. On the documents flagged at the time: 57 of 57 explanations fully grounded, tier never changed.",
+   "Scored again after the patch detector was added, on 60 of the documents now flagged (their findings include the new 'looks edited at region ...' lines): 59 of 60 fully grounded as written (the gate removed one sentence), 60 of 60 produced, tier never changed."
+  ]
+ },
+ "authenticity": {
+  "dataset": "Find it again! + SIDTD (documents described truthfully)",
+  "what": "The vision model is asked whether each document looks fabricated, with the document described as what it is (a retail receipt, a European identity card).",
+  "extra_metrics": {
+   "auc": "ROC-AUC",
+   "ran_rate": "Documents the check could judge"
+  },
+  "findings": [
+   "The check flagged 11% of forged documents and 3.5% of genuine ones. It judges whether a whole document looks made up; the forgeries in these sets are small local edits (a changed digit, a replaced field) on otherwise genuine documents.",
+   "Two attempts to improve it were made on development documents, and both failed. Asked the reviewer's question instead - 'which characters look different from their neighbours?' - the model answered 'edited' for 29 of 33 forged receipts and 29 of 40 genuine ones, and for 20 of 20 forged and 20 of 20 genuine ID images.",
+   "Then the best case: the model was shown the edited area itself, magnified, with the text around it (for genuine documents, an area of the same size and place). It answered 'edited' for 31 of 33 forged and 30 of 33 genuine receipt areas, and for 19 of 20 forged and 19 of 20 genuine ID fields. The local 7B vision model cannot see a local edit even when it is pointed at it, so no prompt or region hand-over will make this check find such forgeries.",
+   "Its role in FinSight is unchanged by this result: a corroborating signal that is capped so it can never reach HIGH alone (cap respected in every case). Local edits are now the job of the patch detector (see Tampering Forensics)."
+  ],
+  "limits": "Weak against the registered target, and it will stay so with this model. A larger vision model was not tried because real documents must stay on this PC. No public set of from-scratch fabricated Indian documents exists to test the case the check was built for."
+ },
+ "tampering_forensics": {
+  "dataset": "Find it again! (real receipts, human forgeries) + SIDTD ID templates + MIDV-500 genuine ID photos",
+  "what": "Real scanned receipts of which 163 were forged by people with Paint, GIMP and similar tools (official test split: 218 receipts, 35 forged), 400 ID-document templates (200 forged by crop-and-replace or inpainting), and 207 genuine phone photos of an ID card as an extra genuine set. Every document goes through the upload path: field extraction, then the integrity cascade.",
+  "extra_metrics": {
+   "forged_high_rate": "Forged documents rated HIGH",
+   "by_dataset.findit.forged_recall": "Receipts (Find it again!): forged flagged",
+   "by_dataset.findit.genuine_flagged_any": "Receipts: genuine flagged",
+   "by_dataset.findit.genuine_false_high": "Receipts: genuine wrongly HIGH",
+   "by_dataset.findit.auc": "Receipts: ROC-AUC",
+   "by_dataset.sidtd.forged_recall": "ID images (SIDTD): forged flagged",
+   "by_dataset.sidtd.genuine_flagged_any": "ID images: genuine flagged",
+   "by_dataset.sidtd.auc": "ID images: ROC-AUC",
+   "genuine_id_photos.flagged_any": "Genuine ID phone photos flagged",
+   "genuine_id_photos.false_high": "Genuine ID phone photos wrongly HIGH",
+   "as_originally_configured.forged_recall": "As first configured: forged flagged",
+   "as_originally_configured.genuine_flagged_any": "As first configured: genuine flagged",
+   "as_originally_configured.genuine_false_high": "As first configured: genuine wrongly HIGH"
+  },
+  "findings": [
+   "As first configured, the detector flagged 84% of GENUINE real documents and rated 17% of them HIGH (27% of genuine receipts); it flagged 75% of forged ones only because it flagged almost everything, and ranked forged below genuine (AUC 0.36). The cause, found on development data: the pixel signals were scaled on synthetic pages. On real captures the CNN scores above 0.5 on 80% of genuine documents, and ELA, noise and copy-move reach their maximum on many, and two such signals 'agreeing' pushed documents to HIGH.",
+   "Fix 1 and fix 2 (development data only) stopped the false alarms: each pixel signal counts only above the score that 95% of genuine real documents of that kind reach, and a lone ELA or noise hit - as common on genuine documents as on forged ones - no longer raises the tier. Genuine documents wrongly HIGH fell from 17.0% to 0.8% and genuine receipts flagged from 82% to 8%. What was left found four forged receipts in ten and one forged ID image in eight (16.6% overall): signals built on synthetic pages carry little information about a few edited characters.",
+   "Fix 3: a detector trained on real forgeries. A small patch-level network was trained on the development split of the two forged sets - the marked edited regions as positives; genuine documents, the untouched parts of forged ones, and the genuine windows a first model got wrong as negatives. There are two models per kind of document, each trained on one half of the development documents and calibrated on the other half; a document counts as evidence only when both put it above the score that 95% of genuine documents stay under, and on its own that evidence gives MEDIUM, never HIGH.",
+   "One failure on the way is worth recording. The first ID-card models had learned 'photographed', not 'edited': one of them put 93% of genuine phone photos of a card above its floor, and the floor needed to cover them left 17% of forgeries above it. Adding camera-like renderings of genuine cards (surface, perspective, blur, sensor noise, uneven light, JPEG) to the genuine training examples fixed it: on held-out development cards 98% of forgeries are above the floor and 3-4% of genuine phone photos.",
+   "Test split, scored once with the new signal: forged documents flagged 16.6% -> 88.9% (receipts 40% -> 54%; ID images 12.5% -> 95%), genuine documents flagged 26.1% -> 24.0%, genuine wrongly HIGH unchanged at 0.8%, ROC-AUC 0.43 -> 0.91, genuine phone photos of an ID card flagged 0.5% (1 of 207). All four registered targets are met.",
+   "How to read the two figures. The receipts were edited by people with Paint, GIMP and similar tools, and 54% is the figure to expect for that kind of edit (GIMP edits 85%, Paint edits 39%). The 95% on ID images says the detector recognises SIDTD's kind of forgery - a field replaced or repainted by script - on new cards of designs it has seen other examples of. Genuine SIDTD templates are still flagged 43% of the time, because their files carry an editor tag; genuine receipts are flagged 3%."
+  ],
+  "limits": "No public set of forged Indian salary slips, bank statements, PAN or Aadhaar cards exists, so the detector has never seen a forged Indian document. On the project's own synthetic PAN card one of the two models was above its floor and the other was not, so nothing was flagged - the two-model rule doing its job, and a reminder that the floors were measured on other kinds of documents. Watch the flag rate on real applications before relying on the tier. The detector does not run on born-digital PDFs (it was trained on scans and photos); those are covered by the PDF and arithmetic checks, which this data does not exercise."
+ },
+ "tamper_locator": {
+  "dataset": "flagged documents of the tampering test",
+  "what": "For every flagged document, the boxes the locator draws are compared with the ground-truth boxes of the forged regions.",
+  "extra_metrics": {
+   "boxed_rate": "Flagged forged documents that got any box",
+   "any_overlap_rate": "A box overlaps the forged region",
+   "false_box_rate": "Genuine flagged documents that got a box",
+   "by_dataset.sidtd.hit": "ID images: forged region boxed",
+   "by_dataset.findit.hit": "Receipts: forged region boxed",
+   "by_dataset.findit.boxed": "Receipts: flagged forged documents that got any box"
+  },
+  "findings": [
+   "First measurement: the locator boxed almost nothing and hit no forged region (0 of 39). It only boxed findings that name a value printed on the page (a figure that does not add up, an ID that fails its format), which it then finds by OCR; real forgeries in these sets are caught by pixel signals, which named nothing. Boxes proposed from the ELA and noise maps were tried on development data and rejected - in every setting they boxed more genuine pages (15-54%) than they hit forged regions (7-28%).",
+   "Fix: the new patch detector says where it sees the edit, and the locator draws that region as stated - up to three separate areas, strongest first, each one above the genuine floor. On development ID cards the edit was under the strongest area on 56% of flagged forgeries and under one of three on 71%; on receipts 79% with the strongest alone.",
+   "Test split: the forged region is boxed on 74.6% of flagged forged documents (156 of 209) - ID images 79%, and on 2% of the genuine documents that were flagged. On receipts the figure is 32% (6 of 19): only 7 of the 19 flagged forged receipts were flagged by the patch detector and so got a box at all, and 6 of those 7 boxes are on the edit."
+  ],
+  "limits": "Acceptable against the registered target (80%). A box is drawn only when the patch detector is above its floor or a rule names a printed value; a document flagged for another reason (an editor tag in the file, for instance) still gets no box. The hit rule is strict for thin fields: the centre of a 48-pixel area must lie inside a field that is often 20 pixels high."
+ },
+ "fraud_patterns": {
+  "dataset": "Berka real accounts (clean + planted patterns); Indian statements for the parser",
+  "what": "600 real six-month account histories: 300 untouched (every flag on them is a false flag) and 300 with one planted pattern each (round-tripping, a late large deposit, window dressing, a payslip above the salary credited, GST turnover above all credits). The statement parser is scored on 95 Indian statements (55 digital, 40 scanned PDFs, 15,399 rows with JSON truth).",
+  "extra_metrics": {
+   "auc_planted_vs_clean": "ROC-AUC planted vs clean",
+   "parse.digital.row_recall": "Parser: digital statements, rows recovered",
+   "parse.scanned.row_recall": "Parser: scanned statements, rows recovered",
+   "parse.side_accuracy": "Parser: debit / credit side correct",
+   "aml_ibm.auc": "IBM AML laundering accounts vs clean (informational)"
+  },
+  "findings": [
+   "Pattern detection is strong on real account behaviour: every planted round-trip, window dressing, payslip mismatch and GST inflation was found; 9% of untouched real accounts were flagged, almost all for a genuinely large late deposit.",
+   "The statement parser was the weak part: it recovered 4% of the rows of the Indian statement layouts. It assumed one row per text line starting with a date; these banks print a row over 2-5 lines, start it with a serial number, run to six pages and (scans) were read from page one only. Rewritten and checked on development statements, it recovers 94.8% of rows on test (digital 99.96%, scanned 87.7%) with the debit / credit side right on 98%.",
+   "IBM's AML set is reported for information only: its typologies are graphs between accounts, not single-statement patterns, and FinSight's patterns flag over half of its 'clean' accounts too."
+  ],
+  "limits": "The scanned-statement figure includes rows this dataset prints out of running-balance order (about one in ten), which no reconciliation can match."
+ },
+ "process_mining_analyst": {
+  "dataset": "BPI Challenge 2017 - a real loan-application event log (Dutch bank)",
+  "what": "2,000 real loan applications (30,238 completed events, 24 activities) were loaded into a throwaway copy of FinSight's SQL Server schema and analysed by the Process Mining Analyst. Every figure it reports - cases, events, variants, the five most frequent paths, the six slowest hand-overs with their counts and waiting times - was recomputed from the same log with pm4py, the reference process-mining library, in a separate environment.",
+  "extra_metrics": {
+   "top_variant_match": "Most frequent paths identical to pm4py"
+  },
+  "findings": [
+   "All 38 figures agree with pm4py: 2,000 cases, 30,238 events, 719 variants, the same top paths and the same bottlenecks to the hour. The analyst's numbers can be quoted as they are.",
+   "Loading a real log exposed three loader limits, fixed in the evaluation loader only: an application number column of 20 characters, timestamps passed as text, and a missing migration in the throwaway database."
+  ],
+  "limits": "The log is a Dutch bank's process, not FinSight's own; it tests that the figures are computed correctly, not that FinSight's process is efficient. FinSight's own database holds three applications."
+ },
+ "fraud_fusion": {
+  "dataset": "composite cases built from real component outputs",
+  "what": "600 cases assembled from outputs measured on real data: tampering results of real genuine / forged documents (Find it again!, SIDTD), face comparisons of real same / different people (four benchmarks), and Indian name pairs. 300 clean cases; 300 with a forged document, another person's face, another person's name, or two of these.",
+  "extra_metrics": {
+   "clean_case_flagged": "Clean cases rated MEDIUM or HIGH",
+   "auc": "ROC-AUC fraud vs clean",
+   "by_case_kind.forged_document.flagged": "Forged document only: flagged",
+   "by_case_kind.other_persons_face.flagged": "Another person's face: flagged",
+   "by_case_kind.other_persons_name.flagged": "Another person's name: flagged",
+   "clean_cases_by_document_source.findit.clean_case_flagged": "Clean cases from real scanned receipts: flagged",
+   "clean_cases_by_document_source.sidtd.clean_case_flagged": "Clean cases from SIDTD templates: flagged"
+  },
+  "findings": [
+   "The fusion does what it was designed to do: 97% of fraud cases are rated MEDIUM or HIGH (89% before the tampering detector learned to find real forgeries), one clean case in 300 is rated HIGH, and adding evidence never lowers a score (300 of 300).",
+   "A forged document on its own now moves a case: 87% of 'forged document only' cases are flagged, against 55% before - which was no more than for clean cases. Every case with another person's face or name is flagged, as before. ROC-AUC fraud against clean 0.84 -> 0.91.",
+   "Half of the clean cases still come out MEDIUM (53%). The cause is upstream and specific: built from real scanned receipts, 24% of clean cases are flagged; built from SIDTD's templates - whose genuine files carry an editor tag - 74%."
+  ],
+  "limits": "The cases are composites: the documents, faces and names of one case come from different real sources. A MEDIUM rating means 'a person should look'; how many clean applications get one in production depends on how often genuine uploads carry an editor tag, which this data overstates (SIDTD) - see 'Findings that need a decision'."
+ },
+ "cross_verification": {
+  "dataset": "real Indian first names + common surnames, labelled variant pairs",
+  "what": "1,650 name pairs built from real Indian first names (a public list, split by name): the ways one person's name legitimately differs between documents (case, honorifics, initials, a dropped middle name, surname first, punctuation, a spelling variant, a married surname) and the ways two people's names resemble each other (same surname, a father's document). The same pairs are run through the browser's JavaScript copy of the rule, which must agree. Names read off PAN cards by the extraction model are checked as a second set.",
+  "extra_metrics": {
+   "per_category.fathers_document.accuracy": "Father's document recognised as another person's",
+   "per_category.same_surname_other_person.accuracy": "Same surname, other person: not matched"
+  },
+  "findings": [
+   "First run: 90.9%. Ten of eleven categories were perfect; one failed completely. A document in the father's name - 'Suresh Sharma' against the applicant 'Rahul Suresh Sharma', the Western-India convention of given name + father's name + surname - was judged the SAME person in 150 of 150 pairs, because every word of the shorter name is in the longer one.",
+   "Fix (development pairs only): a dropped middle name is still the same person; a dropped FIRST name is not, and is now reported as 'similar but not identical - our team will verify'. Changed in the server rule and in the browser's copy together. Test: 1,650 of 1,650, and the two copies agree on every pair.",
+   "Names as the extraction model read them off 150 PAN cards match the true name in 93% of cards; the rest are one-letter misreads, reported as 'similar'."
+  ],
+  "limits": "The pairs are generated from real names by rule; they cover the conventions listed, not every regional naming pattern."
+ },
+ "underwriting_supervisor": {
+  "dataset": "L&T two-wheeler loans with their real outcome",
+  "what": "120 real, disbursed loans with real bureau data and the real outcome (default or not). Each goes through the underwriting flow - risk score, evidence bundle, deterministic baseline, then the local model as supervisor - in the 'complete' setting: the loan with the KYC evidence a finished application carries, so that only the real credit information varies. 30 of them are also run with only what L&T recorded.",
+  "extra_metrics": {
+   "approve_default_rate": "Default rate among approve-recommended",
+   "sample_default_rate": "Default rate of the whole sample",
+   "rationale_grounded": "Rationales citing only real figures",
+   "loosening_attempts_blocked": "Model attempts to loosen the baseline, blocked",
+   "crew_latency.p50_s": "Supervisor + memo, median seconds"
+  },
+  "findings": [
+   "Loans the supervisor recommends for approval defaulted less often than the sample: 13.8% (4 of 29) against 19.2%, a ratio of 0.72. Referred loans defaulted at 20.8%, loans recommended for decline-review at 21.4% - the ordering is right. With 29 approvals the interval is wide (0.15 to 1.38): the direction is as intended, the size is not yet established.",
+   "The safety property holds without exception: the final recommendation was never looser than the deterministic baseline (120 of 120). The local model tried to loosen it four times and was overruled each time. In this sample the model never changed an outcome - its contribution is the written rationale, which cited only real figures in every case.",
+   "With only what L&T recorded (no KYC documents on file for most loans) the policy check fails on the missing evidence and no loan is recommended for approval (24 referred, 6 decline-review of 30) - the correct behaviour. Before the fix made during this evaluation (loan-terms rules applied at the offer stage, consent recorded) no application could reach 'approve' in either setting."
+  ],
+  "limits": "The KYC evidence in the 'complete' setting is supplied, not real documents: the test measures the credit judgement, not document handling. 120 loans is a small sample for a default-rate ratio."
+ },
+ "credit_memo": {
+  "dataset": "credit memos written for the same 120 real L&T loans",
+  "what": "For each loan the local model writes the six memo sections from the evidence bundle; a grounding gate replaces any section that cites a figure not in the evidence with the deterministic template. Twelve memos are exported with the download endpoint's own PDF and Word renderers and opened again.",
+  "extra_metrics": {
+   "section_grounded_rate": "Sections citing only real figures (720 sections)",
+   "final_memo_grounded": "Final memo fully grounded",
+   "llm_memos": "Memos written by the model"
+  },
+  "findings": [
+   "All 120 memos were written by the local model, complete (six sections) and grounded as written: none of the 720 sections cited a figure outside the evidence, so the gate replaced nothing.",
+   "Every exported PDF and Word file opened, carried the logo and all sections, and showed PAN and Aadhaar masked."
+  ],
+  "limits": "Grounding checks that every figure exists in the evidence, not that the prose argues well; that judgement stays with the officer who signs the memo."
+ },
+ "kb_ingestion": {
+  "dataset": "ObliQA - 40 real financial regulations (ADGM)",
+  "what": "40 real regulations (Abu Dhabi Global Market rulebooks, 7,968 chunks after ingestion) are ingested through the KB Ingestion agent - FinSight's own chunking and index. 1,000 questions from ObliQA's official test file, each with the passages that answer it, are then asked.",
+  "extra_metrics": {
+   "passage_integrity": "Answer passages kept whole in one chunk",
+   "chunks": "Chunks indexed",
+   "ingest_latency.p50_s": "Ingestion, median seconds per document",
+   "retrieval_latency.p50_s": "Retrieval, median seconds"
+  },
+  "findings": [
+   "The right document is among the top five results for 92.7% of questions, and the answering passage itself for 74.4%. 96.2% of answer passages survive chunking whole.",
+   "Ingestion takes half a second per regulation and a search a tenth of a second, on CPU."
+  ],
+  "limits": "ADGM regulations are English financial regulation, the nearest public set with question-passage labels; RBI circulars are the real target. rbi.org.in blocks scripted downloads, so the RBI part waits for six circulars to be saved by hand into the evaluation folder (PLEASE-DOWNLOAD.md)."
+ },
+ "regulatory_qa": {
+  "dataset": "ObliQA official test questions",
+  "what": "The same 1,000 real regulatory questions through the Regulatory Q&A agent: retrieval over FinSight's index, and for 30 of them the local model's written answer with citations.",
+  "extra_metrics": {
+   "obliqa_recall_at_5": "A gold passage in the top 5",
+   "obliqa_hit_at_1": "A gold passage ranked first",
+   "obliqa_mrr_at_10": "MRR@10",
+   "citation_accuracy": "Written answers citing a gold passage",
+   "synthesis_kept_rate": "Written answers kept by the grounding gate"
+  },
+  "findings": [
+   "A passage that answers the question is in the top ten for 79.4% of questions and ranked first for 55.1% (MRR 0.63) - with a plain keyword index (BM25): no embeddings, no re-ranker.",
+   "All 30 written answers passed the grounding gate; 23 of them (77%) cite a passage ObliQA marks as the answer. The others cite a related passage of the same regulation."
+  ],
+  "limits": "The RBI question set is not measured yet (see KB Ingestion). 30 written answers is a small sample."
+ },
+ "rule_authoring": {
+  "dataset": "ObliQA obligation passages in three ADGM documents",
+  "what": "The Rule Authoring agent reads three regulations chunk by chunk (158 candidate rules drafted) with the local model. The obligations to recover are the 92 passages of those documents that ObliQA's questions are built on - labels made by others.",
+  "extra_metrics": {},
+  "findings": [
+   "83.7% of the labelled obligations were drafted as candidate rules (77 of 92), and every candidate carried a well-formed condition (158 of 158).",
+   "46% of candidates sit on a labelled obligation. This understates precision: ObliQA labels only the passages its questions use, so a candidate on an unlabelled obligation counts against the agent. Candidates go to a human checker before any becomes a rule (maker-checker), which is where precision is enforced."
+  ],
+  "limits": "The labels mark obligation passages, not the correct machine-readable rule; whether a drafted condition is the right rule is the checker's judgement and is not measured here."
+ },
+ "preprocessing": {
+  "dataset": "MIDV-500 phone frames + SROIE / FUNSD real scans",
+  "what": "207 phone frames of ID cards with the true card outline (on a table, a keyboard, in a hand, on clutter, partly out of frame; two phones) and 150 real scanned pages (100 receipts, 50 forms) with their true words. On frames: is the card outline found? On scans: does the cleanup help or harm what OCR reads?",
+  "extra_metrics": {
+   "by_background.T.located": "Card on a table: outline found",
+   "by_background.K.located": "Card on a keyboard",
+   "by_background.H.located": "Card held in a hand",
+   "by_background.C.located": "Card on clutter",
+   "by_background.P.located": "Card held at the frame edge",
+   "wrong_outline_rate": "A wrong outline taken for the card",
+   "mean_iou_when_found": "Overlap with the true outline when found (IoU)",
+   "ocr_recall_before": "Scans: words read before cleanup",
+   "ocr_recall_after": "Scans: words read after cleanup",
+   "reverted_rate": "Scans passed on as uploaded"
+  },
+  "findings": [
+   "Scans, first run: the cleanup made 30.7% of real scans harder to read (words read fell from 89.0% to 88.0% overall). Three causes found on development scans: a clean scan was treated as an over-exposed photo and 'repaired'; an inner ruled box was taken for the page outline and the page warped to it; a 0.4-degree 'tilt' was corrected by re-sampling the whole page.",
+   "Fix (development scans only): a clean, upright page is recognised as paper and passed on exactly as uploaded; pages are not warped to an inner box; a tilt under 0.8 degrees is left alone. Test: scans harmed 30.7% -> 6.0%, words read after cleanup 88.0% -> 89.2% (now slightly above the upload), 61% of scans passed on untouched.",
+   "Phone frames, first run: the card outline was found in 47% of frames, and in 9% a wrong outline was used. Looking at the development frames showed why: the search took the first four-sided contour it met; a pale card on a pale surface has no edge strong enough for it; a card washed out by glare on a dark keyboard is one bright blob that a threshold finds and an edge search misses; a card filling 13% of the frame was under a 15% minimum-size rule.",
+   "Fix (development frames only): outlines are proposed from regions as well as edges - brightness and colour thresholds, colour clusters, areas of fine print - each rough outline is pulled onto the edges it runs along, and one score chooses among them: edge support of the four sides, an ID card's shape, an inside that differs from what surrounds it, and the face photo inside. Below a minimum score no outline is used at all. Test: outline found 50.2% -> 69.1%, a wrong outline used 8.7% -> 2.4%, overlap with the true outline when found 0.82 -> 0.94. Table and keyboard 100%; held in a hand 30% -> 72%, although no hand-held frame was available to develop on.",
+   "It stays three points short of 'Acceptable' (72%). What is missing: a clutter clip filmed with the second phone, which exists only in the test split (51% on clutter), and a pale glossy card held in front of a whiteboard (7%), which none of the approaches tried on the development frames solved. Two other approaches were tried there and rejected: a segmentation network trained on synthetic scenes (26% of frames, against 49% for the method then in use) and a straight-line search (26%)."
+  ],
+  "limits": "The latency in the table above was measured while other jobs shared the machine; see 'Latency on an idle machine'. The frames are of one specimen ID card filmed in ten clips, three of which fall entirely in the test split; the outline task does not depend on the card's country. Pale cards on pale surfaces remain the open case - a learned document detector trained on real photos of that kind is what would close it."
+ },
+ "extraction": {
+  "dataset": "PAN cards (labelled), Indian bank statements (real layouts), SROIE real receipts",
+  "what": "150 labelled PAN cards, 60 Indian bank statements in two real bank layouts (27 born-digital PDFs, 33 scanned PDFs, about 160 rows over six pages each, with the truth as JSON) and 100 real scanned receipts. Each goes through the upload path - cleanup, the local vision model, the deterministic checks - and every field is compared with the truth.",
+  "extra_metrics": {
+   "by_set.pan_cards.field_accuracy": "PAN cards: fields correct",
+   "by_set.pan_cards.per_field.pan_number": "PAN cards: PAN number correct",
+   "by_set.statements_printed.field_accuracy": "Statements: printed fields correct",
+   "by_set.statements_computed.per_field.total_credits": "Statements: total credits correct",
+   "by_set.statements_computed.per_field.statement_period": "Statements: period correct",
+   "by_set.receipts_sroie.per_field.date": "Receipts: date correct",
+   "latency.p50_s": "Whole upload, median seconds",
+   "latency.p95_s": "Whole upload, 95th percentile seconds"
+  },
+  "findings": [
+   "First run: 84.7% of printed fields correct (Acceptable). Three separate causes, each found on development documents:",
+   "(1) 12 of 60 statement reads timed out and returned nothing. All four pages of a statement were sent to the local model, filling its context; the read took two minutes and failed when the machine was busy. The summary the prompt asks for is printed on the first and last page, so only those two are sent now (the rows are read by the deterministic parser), and a failed read is retried on page one. Statement fields correct 76.9% -> 99.7%, valid answers 96.1% -> 100%, and a statement upload takes 40 seconds instead of about three minutes.",
+   "(2) The model never got a statement total right (0 of 60): these statements print no totals, so the model added up 160 rows itself. Worse, on 16 of 16 genuine development statements its made-up totals failed the tampering rule 'opening + credits - debits = closing' - a false forgery alarm. Totals now come from the statement: the totals it prints, else the sums of its rows when they run from the opening to the closing balance, else they are left empty rather than guessed. On test 25% of statements now carry correct totals (digital ones whose rows all add up); for scans the totals are empty, and the rule no longer fires on a guess.",
+   "(3) The PAN number was the weakest printed field (75.3%): one look-alike character in a ten-character code. It is now checked against the card's own OCR text - confirmed when they agree, replaced by the OCR read of the upload when that finds exactly one PAN-shaped code, repaired when a letter stands where a digit must be. On 110 development cards this took correct reads from 84 to 96 without changing a single correct one; on test 75.3% -> 83.3%.",
+   "After the fixes: 94.4% (Strong), every document answered, 87% of documents with every printed field right. Receipts are unchanged at 89%; their weak field is the date (66%) - receipts print dates in many formats and the model often returns the time or a second date."
+  ],
+  "limits": "The PAN cards are synthetic renders (no lawful public set of real PAN images exists), so the 83% on the PAN number is a figure for clean prints, not phone photos. One PAN number in six is still wrong and still looks valid; it is the field an officer should compare with the card. The statements use real bank layouts with generated data."
+ },
+ "pii_masking": {
+  "dataset": "PAN cards (labelled), Aadhaar cards, Indian IDs printed onto real scanned pages",
+  "what": "100 labelled PAN cards, 48 Aadhaar cards, and 90 real scanned pages (receipts, forms, office documents) with a generated PAN and Aadhaar number printed under them the way a payslip or statement carries them. After masking, the result is read back by OCR in four rotations: a document counts as exposed if a full number can still be read (exactly or with a look-alike character), or if nothing was masked at all. Other numbers on the page must stay readable.",
+  "extra_metrics": {
+   "withheld_rate": "Cards withheld (number not located, whole card blurred)",
+   "by_set.pan_cards.not_exposed": "PAN cards: number not readable",
+   "by_set.ids_on_real_pages.not_exposed": "Real pages: no ID readable",
+   "by_set.ids_on_real_pages.last4_kept": "Real pages: last four still readable",
+   "by_set.aadhaar_unlabelled.not_exposed": "Aadhaar cards: number not readable",
+   "latency.p50_s": "Median seconds per document"
+  },
+  "findings": [
+   "First run: 42% of documents safe. On real pages the IDs stayed fully readable on 89 of 90: the masker looked for a PAN or an Aadhaar number as a token of its own, and OCR returns 'PAN: ABCPE1234F' as one line. On PAN cards 21 of 100 had nothing masked - and the 'masked' copy, the one officers see and the one stored as officer-safe, showed the number in full.",
+   "Fixes, all developed on development documents: IDs inside a longer line are found, including when OCR glues them to their label, spaces the digits unevenly, splits the number after its first group, or misreads one character as its look-alike; the number the extraction step read is used as an anchor; the cover's edge is placed on the real gap before the last four characters; and a PAN or Aadhaar card whose own number cannot be located is withheld - blurred whole, with a line saying why - instead of being handed out unmasked.",
+   "After the fixes: 98.4% of documents safe (187 of 190). No PAN card and no Aadhaar card exposes its number (9 of 100 PAN cards are withheld). 87 of 90 real pages are safe; on the other three, one of the two numbers printed on the page was not found. No such miss occurred on some 300 development pages, so the cause could not be reproduced where fixes may be developed. Last four characters readable: 20% -> 85%. Other numbers on the page left intact: 98%."
+  ],
+  "limits": "The target for a privacy control is 100% and this is 98.4%: masked copies of free-form pages (payslips, statements) should not yet be treated as guaranteed. Withheld cards (about one PAN card in eleven here) need redacting by hand. The PAN cards are synthetic prints; the page numbers are generated, printed in two fonts."
+ },
+ "doc_identity": {
+  "dataset": "wrong uploads: RVL-CDIP pages, receipts, foreign ID cards; right uploads: PAN cards, statements, Aadhaar cards",
+  "what": "196 wrong uploads - real office documents of 16 kinds (RVL-CDIP), real receipts, foreign ID cards, and PAN cards or statements uploaded under another type - each offered as a PAN card, an Aadhaar card, a salary slip or a bank statement. And 258 right uploads (PAN cards, bank statements, Aadhaar cards under their own type), which must not be refused.",
+  "extra_metrics": {
+   "caught_by_source.rvl.rate": "Office documents (16 kinds) caught",
+   "caught_by_source.sroie_receipt.rate": "Receipts caught",
+   "caught_by_source.sidtd_foreign_id.rate": "Foreign ID cards caught",
+   "caught_by_asked_type.pan.rate": "Wrong documents offered as a PAN card: caught",
+   "caught_by_asked_type.bank_statement.rate": "Wrong documents offered as a bank statement: caught",
+   "blocked_by_source.pan_card.rate": "Genuine PAN cards refused",
+   "blocked_by_source.bank_statement.rate": "Genuine statements refused"
+  },
+  "findings": [
+   "First run: 90.3% of wrong uploads caught, but 11.6% of right documents refused. The refusals were side effects of two extraction faults fixed during this evaluation - statement reads that timed out (12 of 60 statements refused) and PAN numbers misread into an invalid shape (18 of 150 cards). After those fixes 1.6% of right documents are refused.",
+   "A gap found in the detail: a receipt offered as a bank statement passed every time (10 of 10). The model fills a 'balance' from the receipt's total, and one non-zero balance is all the statement rule asks for. On development documents every bank statement carries a phrase only a statement prints (account number, IFSC, opening or closing balance, statement of account) and no receipt does, so a 'statement' whose page says nothing of the kind is now refused. Test: wrong uploads caught 94.4% (185 of 196); everything offered as a bank statement, an Aadhaar card or a salary slip is caught, and no genuine statement is refused.",
+   "The gap that remains: 9 of 14 foreign ID cards offered as a PAN card pass, because the reading model returns the card's document number as a PAN-shaped code. On development cards a rule that demands a PAN heading on the page would stop all of them - and refuse 9% of genuine PAN cards whose print OCR reads poorly, so it was not adopted as a block. Such an upload is marked 'not confirmed by the page's own text' for the officer instead."
+  ],
+  "limits": "A wrong document is rare in practice and a refused genuine one is common friction, which is why the PAN gate was not tightened at the cost of genuine cards. The dependable defence against a foreign or fabricated PAN is verification of the number with the issuer."
+ }
+}

@@ -1,0 +1,36 @@
+{
+ "label": "baseline",
+ "app_dir": "D:/novacinternship/finsight-baseline/api",
+ "results": {
+  "extract_pan_photo": {
+   "p50_ms": 4332.6,
+   "p95_ms": 4729.6,
+   "n": 12
+  },
+  "extract_statement_pdf": {
+   "p50_ms": 10.7,
+   "p95_ms": 65.9,
+   "n": 12
+  },
+  "integrity_pdf": {
+   "p50_ms": 62.2,
+   "p95_ms": 69.8,
+   "n": 12
+  },
+  "integrity_photo": {
+   "p50_ms": 1135.3,
+   "p95_ms": 1146.9,
+   "n": 12
+  },
+  "mask_pan": {
+   "p50_ms": 1291.5,
+   "p95_ms": 1502.7,
+   "n": 12
+  },
+  "face_verify": {
+   "p50_ms": 631.2,
+   "p95_ms": 664.7,
+   "n": 12
+  }
+ }
+}

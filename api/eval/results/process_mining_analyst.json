@@ -1,0 +1,89 @@
+{
+ "agent_id": "process_mining_analyst",
+ "measured_at": "2026-09-25T20:25:22+00:00",
+ "metrics": {
+  "query_correctness": 1.0,
+  "figures_checked": 9,
+  "narration_grounded_rate": 1.0,
+  "narrations": 3,
+  "latency_ms": 129,
+  "conformance_result_rows": 29,
+  "findings": [
+   "0.0% of 29 cases follow a conformant path across 8 variants.",
+   "Largest wait: Application Submitted \u2192 Fields Extracted (OCR/VLM), 77.4 h on average over 28 transitions (20.4% of all waiting).",
+   "23 open cases are past their stage target.",
+   "Most repeated step: Officer Review (6 repeats in 6 cases).",
+   "Slowest agent at p95: preprocessing (24.1 s)."
+  ]
+ },
+ "target": {
+  "metric": "query_correctness",
+  "target": 1.0,
+  "higher": true,
+  "label": "Figures equal to direct SQL"
+ },
+ "primary_value": 1.0,
+ "rating": "Strong",
+ "secondary": [],
+ "comparisons": [
+  {
+   "figure": "cases",
+   "analyst": 29,
+   "direct_sql": 29.0,
+   "equal": true
+  },
+  {
+   "figure": "closed",
+   "analyst": 4,
+   "direct_sql": 4.0,
+   "equal": true
+  },
+  {
+   "figure": "straight_through_pct",
+   "analyst": 17.2,
+   "direct_sql": 17.24,
+   "equal": true
+  },
+  {
+   "figure": "events",
+   "analyst": 176,
+   "direct_sql": 176.0,
+   "equal": true
+  },
+  {
+   "figure": "event_cases",
+   "analyst": 36,
+   "direct_sql": 36.0,
+   "equal": true
+  },
+  {
+   "figure": "conformance_pct",
+   "analyst": 0.0,
+   "direct_sql": 0.0,
+   "equal": true
+  },
+  {
+   "figure": "variants",
+   "analyst": 8,
+   "direct_sql": 8.0,
+   "equal": true
+  },
+  {
+   "figure": "top_rework_repeats",
+   "analyst": 6,
+   "direct_sql": 6.0,
+   "equal": true
+  },
+  {
+   "figure": "slowest_agent_p95_ms",
+   "analyst": 24083.899999999998,
+   "direct_sql": 24083.9,
+   "equal": true
+  }
+ ],
+ "narration_samples": [
+  "The process conformance is poor, with no cases following a conformant path across the 8 variants. The biggest bottleneck is the 'Application Submitted' to 'Fields Extracted (OCR/VLM)' transition, which averages 77.4 hours of waiting time. There are 23 overdue cases, and the most repeated step is 'Officer Review' with 6 repeats in 6 cases. Additionally, the slowest agent at p95 is 'preprocessing' a",
+  "The process conformance is poor, with no cases following a conformant path across the 8 variants. The biggest bottleneck is the 'Application Submitted' to 'Fields Extracted (OCR/VLM)' transition, which averages 77.4 hours of waiting time. There are 23 overdue cases, and the most repeated step is 'Officer Review' with 6 repeats in 6 cases. Additionally, the slowest agent at p95 is 'preprocessing' a",
+  "The process conformance is poor, with no cases following a conformant path across the 8 variants. The biggest bottleneck is the 'Application Submitted' to 'Fields Extracted (OCR/VLM)' transition, which averages 77.4 hours of waiting time. There are 23 overdue cases, and the most repeated step is 'Officer Review' with 6 repeats in 6 cases. Additionally, the slowest agent at p95 is 'preprocessing' a"
+ ]
+}

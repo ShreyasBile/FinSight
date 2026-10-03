@@ -1,0 +1,211 @@
+{
+ "agent_id": "underwriting_supervisor",
+ "measured_at": "2026-09-25T20:25:03+00:00",
+ "metrics": {
+  "agreement": 1.0,
+  "never_loosens": 1.0,
+  "baseline_agreement": 1.0,
+  "llm_answered": 16,
+  "loosening_attempts_blocked": 1,
+  "tightened_beyond_policy": 0,
+  "cases": 16,
+  "crew_p50_s": 19.19,
+  "crew_p95_s": 21.16
+ },
+ "target": {
+  "metric": "agreement",
+  "target": 0.85,
+  "higher": true,
+  "label": "Agreement with expected recommendation"
+ },
+ "primary_value": 1.0,
+ "rating": "Strong",
+ "secondary": [
+  {
+   "metric": "never_loosens",
+   "target": 1.0,
+   "higher": true,
+   "label": "Never looser than the rule baseline",
+   "value": 1.0,
+   "rating": "Strong"
+  }
+ ],
+ "cases": [
+  {
+   "case": "clean",
+   "expected": "approve_recommended",
+   "baseline": "approve_recommended",
+   "llm": "approve_recommended",
+   "final": "approve_recommended",
+   "loosening_blocked": false,
+   "requires_head": false,
+   "s": 19.1,
+   "warnings": []
+  },
+  {
+   "case": "clean_large_amount",
+   "expected": "approve_recommended",
+   "baseline": "approve_recommended",
+   "llm": "approve_recommended",
+   "final": "approve_recommended",
+   "loosening_blocked": false,
+   "requires_head": true,
+   "s": 18.2,
+   "warnings": []
+  },
+  {
+   "case": "clean_home",
+   "expected": "approve_recommended",
+   "baseline": "approve_recommended",
+   "llm": "approve_recommended",
+   "final": "approve_recommended",
+   "loosening_blocked": false,
+   "requires_head": false,
+   "s": 17.1,
+   "warnings": []
+  },
+  {
+   "case": "fraud_high",
+   "expected": "decline_review_recommended",
+   "baseline": "decline_review_recommended",
+   "llm": "decline_review_recommended",
+   "final": "decline_review_recommended",
+   "loosening_blocked": false,
+   "requires_head": false,
+   "s": 20.2,
+   "warnings": []
+  },
+  {
+   "case": "risk_decline",
+   "expected": "decline_review_recommended",
+   "baseline": "decline_review_recommended",
+   "llm": "decline_review_recommended",
+   "final": "decline_review_recommended",
+   "loosening_blocked": false,
+   "requires_head": false,
+   "s": 17.9,
+   "warnings": []
+  },
+  {
+   "case": "wrong_document",
+   "expected": "request_more_info",
+   "baseline": "request_more_info",
+   "llm": "request_more_info",
+   "final": "request_more_info",
+   "loosening_blocked": false,
+   "requires_head": false,
+   "s": 23.5,
+   "warnings": []
+  },
+  {
+   "case": "policy_needs_info",
+   "expected": "request_more_info",
+   "baseline": "request_more_info",
+   "llm": "request_more_info",
+   "final": "request_more_info",
+   "loosening_blocked": false,
+   "requires_head": false,
+   "s": 19.3,
+   "warnings": []
+  },
+  {
+   "case": "fraud_medium",
+   "expected": "refer_to_officer",
+   "baseline": "refer_to_officer",
+   "llm": "refer_to_officer",
+   "final": "refer_to_officer",
+   "loosening_blocked": false,
+   "requires_head": false,
+   "s": 18.3,
+   "warnings": []
+  },
+  {
+   "case": "risk_refer",
+   "expected": "refer_to_officer",
+   "baseline": "refer_to_officer",
+   "llm": "refer_to_officer",
+   "final": "refer_to_officer",
+   "loosening_blocked": false,
+   "requires_head": false,
+   "s": 20.3,
+   "warnings": []
+  },
+  {
+   "case": "policy_fail",
+   "expected": "refer_to_officer",
+   "baseline": "refer_to_officer",
+   "llm": "refer_to_officer",
+   "final": "refer_to_officer",
+   "loosening_blocked": false,
+   "requires_head": false,
+   "s": 18.5,
+   "warnings": []
+  },
+  {
+   "case": "policy_warn",
+   "expected": "refer_to_officer",
+   "baseline": "refer_to_officer",
+   "llm": "approve_recommended",
+   "final": "refer_to_officer",
+   "loosening_blocked": true,
+   "requires_head": false,
+   "s": 18.9,
+   "warnings": []
+  },
+  {
+   "case": "income_mismatch",
+   "expected": "refer_to_officer",
+   "baseline": "refer_to_officer",
+   "llm": "refer_to_officer",
+   "final": "refer_to_officer",
+   "loosening_blocked": false,
+   "requires_head": false,
+   "s": 19.1,
+   "warnings": []
+  },
+  {
+   "case": "cross_check",
+   "expected": "refer_to_officer",
+   "baseline": "refer_to_officer",
+   "llm": "refer_to_officer",
+   "final": "refer_to_officer",
+   "loosening_blocked": false,
+   "requires_head": false,
+   "s": 20.4,
+   "warnings": []
+  },
+  {
+   "case": "face_uncertain",
+   "expected": "refer_to_officer",
+   "baseline": "refer_to_officer",
+   "llm": "refer_to_officer",
+   "final": "refer_to_officer",
+   "loosening_blocked": false,
+   "requires_head": false,
+   "s": 19.6,
+   "warnings": []
+  },
+  {
+   "case": "face_mismatch",
+   "expected": "refer_to_officer",
+   "baseline": "refer_to_officer",
+   "llm": "refer_to_officer",
+   "final": "refer_to_officer",
+   "loosening_blocked": false,
+   "requires_head": false,
+   "s": 19.3,
+   "warnings": []
+  },
+  {
+   "case": "tamper_medium_only",
+   "expected": "approve_recommended",
+   "baseline": "approve_recommended",
+   "llm": "approve_recommended",
+   "final": "approve_recommended",
+   "loosening_blocked": false,
+   "requires_head": false,
+   "s": 19.3,
+   "warnings": []
+  }
+ ]
+}

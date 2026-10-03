@@ -1,0 +1,47 @@
+{
+ "agent_id": "face_verification",
+ "measured_at": "2026-09-25T15:42:29+00:00",
+ "metrics": {
+  "verdict_accuracy": 0.9936,
+  "confident_coverage": 0.9812,
+  "detection_rate": 1.0,
+  "accuracy_at_0363": 0.9875,
+  "tar_at_far_1pct": 0.975,
+  "auc": 0.9994,
+  "false_match_rate": 0.0,
+  "false_mismatch_rate": 0.0127,
+  "low_quality_never_mismatch": 1.0,
+  "low_quality_cases": 0,
+  "washed_out_detected_as_low_quality": 0.0,
+  "n_pairs": 160,
+  "p50_s": 0.3,
+  "p95_s": 0.31
+ },
+ "target": {
+  "metric": "verdict_accuracy",
+  "target": 0.9,
+  "higher": true,
+  "label": "Correct same/different verdict (confident verdicts)"
+ },
+ "primary_value": 0.9936,
+ "rating": "Strong",
+ "secondary": [
+  {
+   "metric": "detection_rate",
+   "target": 0.95,
+   "higher": true,
+   "label": "Faces found on ID cards",
+   "value": 1.0,
+   "rating": "Strong"
+  },
+  {
+   "metric": "low_quality_never_mismatch",
+   "target": 1.0,
+   "higher": true,
+   "label": "Low-quality faces never called a mismatch",
+   "value": 1.0,
+   "rating": "Strong"
+  }
+ ],
+ "data": "LFW test pairs (public) pasted onto synthetic PAN/Aadhaar cards, camera-simulated"
+}

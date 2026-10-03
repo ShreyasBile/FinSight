@@ -1,0 +1,165 @@
+{
+ "agent_id": "extraction",
+ "measured_at": "2026-09-25T14:29:29+00:00",
+ "metrics": {
+  "field_accuracy": 0.9717,
+  "doc_all_correct": 0.8333,
+  "json_ok_rate": 1.0,
+  "n_docs": 48,
+  "n_fields": 318,
+  "degraded_field_accuracy": 0.9944,
+  "n_degraded": 36,
+  "per_doc_type": {
+   "pan": {
+    "field_accuracy": 1.0,
+    "all_correct": 1.0,
+    "n": 6
+   },
+   "aadhaar": {
+    "field_accuracy": 1.0,
+    "all_correct": 1.0,
+    "n": 6
+   },
+   "salary_slip": {
+    "field_accuracy": 1.0,
+    "all_correct": 1.0,
+    "n": 6
+   },
+   "bank_statement": {
+    "field_accuracy": 1.0,
+    "all_correct": 1.0,
+    "n": 6
+   },
+   "itr": {
+    "field_accuracy": 0.7667,
+    "all_correct": 0.0,
+    "n": 6
+   },
+   "form16": {
+    "field_accuracy": 0.9444,
+    "all_correct": 0.6667,
+    "n": 6
+   },
+   "gst_return": {
+    "field_accuracy": 1.0,
+    "all_correct": 1.0,
+    "n": 6
+   },
+   "salary_slip_photo": {
+    "field_accuracy": 1.0,
+    "all_correct": 1.0,
+    "n": 6
+   }
+  },
+  "per_degradation": {
+   "rot": 0.9667,
+   "desk": 1.0,
+   "desk_rot": 1.0,
+   "blur": 1.0,
+   "dark": 1.0,
+   "glare": 1.0
+  },
+  "most_missed_fields": {
+   "itr.document_type": 5,
+   "form16.gross_salary": 2,
+   "itr.gross_total_income": 1,
+   "itr.assessment_year": 1
+  },
+  "p50_s": 9.13,
+  "p95_s": 17.03
+ },
+ "target": {
+  "metric": "field_accuracy",
+  "target": 0.9,
+  "higher": true,
+  "label": "Field-level accuracy (clean synthetic set)"
+ },
+ "primary_value": 0.9717,
+ "rating": "Strong",
+ "secondary": [
+  {
+   "metric": "doc_all_correct",
+   "target": 0.6,
+   "higher": true,
+   "label": "Documents with every field correct",
+   "value": 0.8333,
+   "rating": "Strong"
+  },
+  {
+   "metric": "json_ok_rate",
+   "target": 0.98,
+   "higher": true,
+   "label": "Valid JSON returned",
+   "value": 1.0,
+   "rating": "Strong"
+  },
+  {
+   "metric": "degraded_field_accuracy",
+   "target": 0.85,
+   "higher": true,
+   "label": "Field accuracy on degraded ID cards",
+   "value": 0.9944,
+   "rating": "Strong"
+  }
+ ],
+ "failures": [
+  {
+   "doc": "itr",
+   "missed": [
+    "document_type"
+   ],
+   "status": 200
+  },
+  {
+   "doc": "itr",
+   "missed": [
+    "document_type"
+   ],
+   "status": 200
+  },
+  {
+   "doc": "itr",
+   "missed": [
+    "document_type"
+   ],
+   "status": 200
+  },
+  {
+   "doc": "itr",
+   "missed": [
+    "document_type",
+    "gross_total_income"
+   ],
+   "status": 200
+  },
+  {
+   "doc": "form16",
+   "missed": [
+    "gross_salary"
+   ],
+   "status": 200
+  },
+  {
+   "doc": "itr",
+   "missed": [
+    "assessment_year"
+   ],
+   "status": 200
+  },
+  {
+   "doc": "itr",
+   "missed": [
+    "document_type"
+   ],
+   "status": 200
+  },
+  {
+   "doc": "form16",
+   "missed": [
+    "gross_salary"
+   ],
+   "status": 200
+  }
+ ],
+ "model": "ollama qwen2.5vl:7b (local)"
+}

@@ -1,0 +1,2609 @@
+{
+ "components": {
+  "schemas": {
+   "ApplicationStoreRequest": {
+    "properties": {
+     "app_id": {
+      "title": "App Id",
+      "type": "string"
+     },
+     "applicant_name": {
+      "default": "",
+      "title": "Applicant Name",
+      "type": "string"
+     },
+     "documents": {
+      "default": [],
+      "items": {
+       "$ref": "#/components/schemas/StoredDocument"
+      },
+      "title": "Documents",
+      "type": "array"
+     },
+     "face_check": {
+      "anyOf": [
+       {
+        "type": "object"
+       },
+       {
+        "type": "null"
+       }
+      ],
+      "title": "Face Check"
+     },
+     "loan_type": {
+      "default": "",
+      "title": "Loan Type",
+      "type": "string"
+     },
+     "submitted_at": {
+      "default": "",
+      "title": "Submitted At",
+      "type": "string"
+     }
+    },
+    "required": [
+     "app_id"
+    ],
+    "title": "ApplicationStoreRequest",
+    "type": "object"
+   },
+   "ApplicationStoreResult": {
+    "properties": {
+     "dir": {
+      "anyOf": [
+       {
+        "type": "string"
+       },
+       {
+        "type": "null"
+       }
+      ],
+      "title": "Dir"
+     },
+     "error": {
+      "anyOf": [
+       {
+        "type": "string"
+       },
+       {
+        "type": "null"
+       }
+      ],
+      "title": "Error"
+     },
+     "ok": {
+      "title": "Ok",
+      "type": "boolean"
+     },
+     "rows": {
+      "default": 0,
+      "title": "Rows",
+      "type": "integer"
+     },
+     "xlsx": {
+      "anyOf": [
+       {
+        "type": "string"
+       },
+       {
+        "type": "null"
+       }
+      ],
+      "title": "Xlsx"
+     }
+    },
+    "required": [
+     "ok"
+    ],
+    "title": "ApplicationStoreResult",
+    "type": "object"
+   },
+   "ApproveCandidate": {
+    "description": "Reviewer ('checker') decision. Any provided field overrides the\nextractor's proposal; `condition` must have its placeholder field mapped.",
+    "properties": {
+     "applies_when": {
+      "anyOf": [
+       {
+        "type": "object"
+       },
+       {
+        "type": "null"
+       }
+      ],
+      "title": "Applies When"
+     },
+     "category": {
+      "anyOf": [
+       {
+        "type": "string"
+       },
+       {
+        "type": "null"
+       }
+      ],
+      "title": "Category"
+     },
+     "condition": {
+      "anyOf": [
+       {
+        "type": "object"
+       },
+       {
+        "type": "null"
+       }
+      ],
+      "title": "Condition"
+     },
+     "regulation": {
+      "anyOf": [
+       {
+        "type": "string"
+       },
+       {
+        "type": "null"
+       }
+      ],
+      "title": "Regulation"
+     },
+     "regulation_ref": {
+      "anyOf": [
+       {
+        "type": "string"
+       },
+       {
+        "type": "null"
+       }
+      ],
+      "title": "Regulation Ref"
+     },
+     "remediation": {
+      "anyOf": [
+       {
+        "type": "string"
+       },
+       {
+        "type": "null"
+       }
+      ],
+      "title": "Remediation"
+     },
+     "required_fields": {
+      "anyOf": [
+       {
+        "items": {
+         "type": "string"
+        },
+        "type": "array"
+       },
+       {
+        "type": "null"
+       }
+      ],
+      "title": "Required Fields"
+     },
+     "reviewer": {
+      "default": "compliance_officer",
+      "title": "Reviewer",
+      "type": "string"
+     },
+     "rule_id": {
+      "anyOf": [
+       {
+        "type": "string"
+       },
+       {
+        "type": "null"
+       }
+      ],
+      "title": "Rule Id"
+     },
+     "rule_name": {
+      "anyOf": [
+       {
+        "type": "string"
+       },
+       {
+        "type": "null"
+       }
+      ],
+      "title": "Rule Name"
+     },
+     "rule_type": {
+      "anyOf": [
+       {
+        "type": "string"
+       },
+       {
+        "type": "null"
+       }
+      ],
+      "title": "Rule Type"
+     }
+    },
+    "title": "ApproveCandidate",
+    "type": "object"
+   },
+   "Body_document_integrity_document_integrity_post": {
+    "properties": {
+     "doc_type": {
+      "title": "Doc Type",
+      "type": "string"
+     },
+     "file": {
+      "format": "binary",
+      "title": "File",
+      "type": "string"
+     },
+     "parsed_json": {
+      "default": "{}",
+      "title": "Parsed Json",
+      "type": "string"
+     }
+    },
+    "required": [
+     "doc_type",
+     "file"
+    ],
+    "title": "Body_document_integrity_document_integrity_post",
+    "type": "object"
+   },
+   "Body_document_mask_document_mask_post": {
+    "properties": {
+     "doc_type": {
+      "default": "generic",
+      "title": "Doc Type",
+      "type": "string"
+     },
+     "file": {
+      "format": "binary",
+      "title": "File",
+      "type": "string"
+     },
+     "parsed_json": {
+      "default": "{}",
+      "title": "Parsed Json",
+      "type": "string"
+     }
+    },
+    "required": [
+     "file"
+    ],
+    "title": "Body_document_mask_document_mask_post",
+    "type": "object"
+   },
+   "Body_extract_extract_post": {
+    "properties": {
+     "doc_type": {
+      "title": "Doc Type",
+      "type": "string"
+     },
+     "file": {
+      "format": "binary",
+      "title": "File",
+      "type": "string"
+     }
+    },
+    "required": [
+     "doc_type",
+     "file"
+    ],
+    "title": "Body_extract_extract_post",
+    "type": "object"
+   },
+   "Body_face_verify_face_verify_post": {
+    "properties": {
+     "doc_types": {
+      "title": "Doc Types",
+      "type": "string"
+     },
+     "files": {
+      "items": {
+       "format": "binary",
+       "type": "string"
+      },
+      "title": "Files",
+      "type": "array"
+     }
+    },
+    "required": [
+     "doc_types",
+     "files"
+    ],
+    "title": "Body_face_verify_face_verify_post",
+    "type": "object"
+   },
+   "Body_tampering_explain_tampering_explain_post": {
+    "properties": {
+     "doc_type": {
+      "title": "Doc Type",
+      "type": "string"
+     },
+     "file": {
+      "format": "binary",
+      "title": "File",
+      "type": "string"
+     },
+     "tampering_json": {
+      "title": "Tampering Json",
+      "type": "string"
+     }
+    },
+    "required": [
+     "doc_type",
+     "tampering_json",
+     "file"
+    ],
+    "title": "Body_tampering_explain_tampering_explain_post",
+    "type": "object"
+   },
+   "Body_tampering_locate_tampering_locate_post": {
+    "properties": {
+     "doc_type": {
+      "title": "Doc Type",
+      "type": "string"
+     },
+     "file": {
+      "format": "binary",
+      "title": "File",
+      "type": "string"
+     },
+     "tampering_json": {
+      "title": "Tampering Json",
+      "type": "string"
+     }
+    },
+    "required": [
+     "doc_type",
+     "tampering_json",
+     "file"
+    ],
+    "title": "Body_tampering_locate_tampering_locate_post",
+    "type": "object"
+   },
+   "DocTypeInfo": {
+    "properties": {
+     "id": {
+      "title": "Id",
+      "type": "string"
+     },
+     "label": {
+      "title": "Label",
+      "type": "string"
+     },
+     "required": {
+      "title": "Required",
+      "type": "boolean"
+     }
+    },
+    "required": [
+     "id",
+     "label",
+     "required"
+    ],
+    "title": "DocTypeInfo",
+    "type": "object"
+   },
+   "DocumentIn": {
+    "description": "Ingest real regulatory text (pasted or uploaded as .txt/.md).",
+    "properties": {
+     "category": {
+      "default": "General",
+      "title": "Category",
+      "type": "string"
+     },
+     "effective_date": {
+      "anyOf": [
+       {
+        "type": "string"
+       },
+       {
+        "type": "null"
+       }
+      ],
+      "title": "Effective Date"
+     },
+     "source_type": {
+      "default": "RBI",
+      "title": "Source Type",
+      "type": "string"
+     },
+     "text": {
+      "title": "Text",
+      "type": "string"
+     },
+     "title": {
+      "title": "Title",
+      "type": "string"
+     }
+    },
+    "required": [
+     "title",
+     "text"
+    ],
+    "title": "DocumentIn",
+    "type": "object"
+   },
+   "ExtractRequest": {
+    "properties": {
+     "prefer_llm": {
+      "default": true,
+      "title": "Prefer Llm",
+      "type": "boolean"
+     }
+    },
+    "title": "ExtractRequest",
+    "type": "object"
+   },
+   "ExtractResponse": {
+    "properties": {
+     "cleaned_preview": {
+      "anyOf": [
+       {
+        "type": "string"
+       },
+       {
+        "type": "null"
+       }
+      ],
+      "title": "Cleaned Preview"
+     },
+     "confidence": {
+      "title": "Confidence",
+      "type": "number"
+     },
+     "doc_type": {
+      "title": "Doc Type",
+      "type": "string"
+     },
+     "fields": {
+      "items": {
+       "$ref": "#/components/schemas/FieldResult"
+      },
+      "title": "Fields",
+      "type": "array"
+     },
+     "needs_review": {
+      "title": "Needs Review",
+      "type": "boolean"
+     },
+     "parsed": {
+      "title": "Parsed",
+      "type": "object"
+     },
+     "provider": {
+      "title": "Provider",
+      "type": "string"
+     },
+     "raw": {
+      "title": "Raw",
+      "type": "string"
+     },
+     "tampering": {
+      "anyOf": [
+       {
+        "$ref": "#/components/schemas/TamperingResult"
+       },
+       {
+        "type": "null"
+       }
+      ]
+     },
+     "timings": {
+      "additionalProperties": {
+       "type": "number"
+      },
+      "default": {},
+      "title": "Timings",
+      "type": "object"
+     }
+    },
+    "required": [
+     "doc_type",
+     "provider",
+     "parsed",
+     "raw",
+     "fields",
+     "confidence",
+     "needs_review"
+    ],
+    "title": "ExtractResponse",
+    "type": "object"
+   },
+   "FaceBox": {
+    "properties": {
+     "bbox": {
+      "items": {
+       "type": "integer"
+      },
+      "title": "Bbox",
+      "type": "array"
+     },
+     "quality": {
+      "default": "ok",
+      "title": "Quality",
+      "type": "string"
+     },
+     "roll_degrees": {
+      "title": "Roll Degrees",
+      "type": "number"
+     },
+     "rotation_to_upright": {
+      "title": "Rotation To Upright",
+      "type": "integer"
+     },
+     "score": {
+      "title": "Score",
+      "type": "number"
+     },
+     "thumb": {
+      "anyOf": [
+       {
+        "type": "string"
+       },
+       {
+        "type": "null"
+       }
+      ],
+      "title": "Thumb"
+     }
+    },
+    "required": [
+     "bbox",
+     "score",
+     "rotation_to_upright",
+     "roll_degrees"
+    ],
+    "title": "FaceBox",
+    "type": "object"
+   },
+   "FaceDocResult": {
+    "properties": {
+     "doc_type": {
+      "title": "Doc Type",
+      "type": "string"
+     },
+     "error": {
+      "anyOf": [
+       {
+        "type": "string"
+       },
+       {
+        "type": "null"
+       }
+      ],
+      "title": "Error"
+     },
+     "face_count": {
+      "title": "Face Count",
+      "type": "integer"
+     },
+     "faces": {
+      "items": {
+       "$ref": "#/components/schemas/FaceBox"
+      },
+      "title": "Faces",
+      "type": "array"
+     }
+    },
+    "required": [
+     "doc_type",
+     "face_count",
+     "faces"
+    ],
+    "title": "FaceDocResult",
+    "type": "object"
+   },
+   "FacePair": {
+    "properties": {
+     "a": {
+      "title": "A",
+      "type": "string"
+     },
+     "b": {
+      "title": "B",
+      "type": "string"
+     },
+     "note": {
+      "anyOf": [
+       {
+        "type": "string"
+       },
+       {
+        "type": "null"
+       }
+      ],
+      "title": "Note"
+     },
+     "similarity": {
+      "title": "Similarity",
+      "type": "number"
+     },
+     "verdict": {
+      "title": "Verdict",
+      "type": "string"
+     }
+    },
+    "required": [
+     "a",
+     "b",
+     "similarity",
+     "verdict"
+    ],
+    "title": "FacePair",
+    "type": "object"
+   },
+   "FaceVerifyResult": {
+    "properties": {
+     "documents": {
+      "items": {
+       "$ref": "#/components/schemas/FaceDocResult"
+      },
+      "title": "Documents",
+      "type": "array"
+     },
+     "overall": {
+      "title": "Overall",
+      "type": "string"
+     },
+     "pairs": {
+      "items": {
+       "$ref": "#/components/schemas/FacePair"
+      },
+      "title": "Pairs",
+      "type": "array"
+     },
+     "summary": {
+      "title": "Summary",
+      "type": "string"
+     },
+     "timings": {
+      "additionalProperties": {
+       "type": "number"
+      },
+      "default": {},
+      "title": "Timings",
+      "type": "object"
+     }
+    },
+    "required": [
+     "documents",
+     "pairs",
+     "overall",
+     "summary"
+    ],
+    "title": "FaceVerifyResult",
+    "type": "object"
+   },
+   "FieldResult": {
+    "properties": {
+     "flag": {
+      "title": "Flag",
+      "type": "string"
+     },
+     "key": {
+      "title": "Key",
+      "type": "string"
+     },
+     "label": {
+      "title": "Label",
+      "type": "string"
+     },
+     "value": {
+      "title": "Value"
+     }
+    },
+    "required": [
+     "key",
+     "label",
+     "value",
+     "flag"
+    ],
+    "title": "FieldResult",
+    "type": "object"
+   },
+   "HTTPValidationError": {
+    "properties": {
+     "detail": {
+      "items": {
+       "$ref": "#/components/schemas/ValidationError"
+      },
+      "title": "Detail",
+      "type": "array"
+     }
+    },
+    "title": "HTTPValidationError",
+    "type": "object"
+   },
+   "IntegrityResult": {
+    "description": "Deferred document-integrity bundle for the Review & Submit page: the\ntampering analysis plus the cleaned (auto-oriented/deskewed) render. Split\nout of /extract so the upload step only pays for VLM field extraction \u2014\nthe VLM reads rotated/raw images fine (verified on real sideways and\nupside-down ID cards), so preprocessing isn't needed until this step.",
+    "properties": {
+     "cleaned_preview": {
+      "anyOf": [
+       {
+        "type": "string"
+       },
+       {
+        "type": "null"
+       }
+      ],
+      "title": "Cleaned Preview"
+     },
+     "tampering": {
+      "anyOf": [
+       {
+        "$ref": "#/components/schemas/TamperingResult"
+       },
+       {
+        "type": "null"
+       }
+      ]
+     },
+     "timings": {
+      "additionalProperties": {
+       "type": "number"
+      },
+      "default": {},
+      "title": "Timings",
+      "type": "object"
+     }
+    },
+    "title": "IntegrityResult",
+    "type": "object"
+   },
+   "IssueAnnotation": {
+    "properties": {
+     "located": {
+      "title": "Located",
+      "type": "boolean"
+     },
+     "n": {
+      "title": "N",
+      "type": "integer"
+     },
+     "text": {
+      "title": "Text",
+      "type": "string"
+     }
+    },
+    "required": [
+     "n",
+     "text",
+     "located"
+    ],
+    "title": "IssueAnnotation",
+    "type": "object"
+   },
+   "LoanApplication": {
+    "properties": {
+     "application_id": {
+      "title": "Application Id",
+      "type": "string"
+     },
+     "customer": {
+      "title": "Customer",
+      "type": "object"
+     },
+     "documents": {
+      "title": "Documents",
+      "type": "object"
+     },
+     "loan_terms": {
+      "title": "Loan Terms",
+      "type": "object"
+     },
+     "loan_type": {
+      "default": "personal_loan",
+      "title": "Loan Type",
+      "type": "string"
+     },
+     "risk": {
+      "title": "Risk",
+      "type": "object"
+     }
+    },
+    "required": [
+     "application_id"
+    ],
+    "title": "LoanApplication",
+    "type": "object"
+   },
+   "LocateResult": {
+    "properties": {
+     "annotated_image": {
+      "anyOf": [
+       {
+        "type": "string"
+       },
+       {
+        "type": "null"
+       }
+      ],
+      "title": "Annotated Image"
+     },
+     "annotations": {
+      "items": {
+       "$ref": "#/components/schemas/IssueAnnotation"
+      },
+      "title": "Annotations",
+      "type": "array"
+     },
+     "located_count": {
+      "title": "Located Count",
+      "type": "integer"
+     },
+     "ocr_tokens": {
+      "title": "Ocr Tokens",
+      "type": "integer"
+     }
+    },
+    "required": [
+     "annotations",
+     "located_count",
+     "ocr_tokens"
+    ],
+    "title": "LocateResult",
+    "type": "object"
+   },
+   "MaskResult": {
+    "properties": {
+     "labels": {
+      "items": {
+       "type": "string"
+      },
+      "title": "Labels",
+      "type": "array"
+     },
+     "masked_count": {
+      "title": "Masked Count",
+      "type": "integer"
+     },
+     "masked_image": {
+      "title": "Masked Image",
+      "type": "string"
+     },
+     "timings": {
+      "additionalProperties": {
+       "type": "number"
+      },
+      "default": {},
+      "title": "Timings",
+      "type": "object"
+     }
+    },
+    "required": [
+     "masked_image",
+     "masked_count",
+     "labels"
+    ],
+    "title": "MaskResult",
+    "type": "object"
+   },
+   "PlainExplanation": {
+    "properties": {
+     "issues": {
+      "items": {
+       "type": "string"
+      },
+      "title": "Issues",
+      "type": "array"
+     },
+     "summary": {
+      "title": "Summary",
+      "type": "string"
+     }
+    },
+    "required": [
+     "summary",
+     "issues"
+    ],
+    "title": "PlainExplanation",
+    "type": "object"
+   },
+   "RagQuery": {
+    "properties": {
+     "query": {
+      "title": "Query",
+      "type": "string"
+     },
+     "top_k": {
+      "default": 5,
+      "title": "Top K",
+      "type": "integer"
+     }
+    },
+    "required": [
+     "query"
+    ],
+    "title": "RagQuery",
+    "type": "object"
+   },
+   "RejectCandidate": {
+    "properties": {
+     "note": {
+      "default": "",
+      "title": "Note",
+      "type": "string"
+     },
+     "reviewer": {
+      "default": "compliance_officer",
+      "title": "Reviewer",
+      "type": "string"
+     }
+    },
+    "title": "RejectCandidate",
+    "type": "object"
+   },
+   "RuleIn": {
+    "properties": {
+     "applies_when": {
+      "anyOf": [
+       {
+        "type": "object"
+       },
+       {
+        "type": "null"
+       }
+      ],
+      "title": "Applies When"
+     },
+     "category": {
+      "default": "general",
+      "title": "Category",
+      "type": "string"
+     },
+     "condition": {
+      "title": "Condition",
+      "type": "object"
+     },
+     "regulation": {
+      "default": "",
+      "title": "Regulation",
+      "type": "string"
+     },
+     "regulation_ref": {
+      "default": "",
+      "title": "Regulation Ref",
+      "type": "string"
+     },
+     "remediation": {
+      "default": "",
+      "title": "Remediation",
+      "type": "string"
+     },
+     "required_fields": {
+      "items": {
+       "type": "string"
+      },
+      "title": "Required Fields",
+      "type": "array"
+     },
+     "rule_id": {
+      "title": "Rule Id",
+      "type": "string"
+     },
+     "rule_name": {
+      "title": "Rule Name",
+      "type": "string"
+     },
+     "rule_type": {
+      "default": "internal_policy",
+      "title": "Rule Type",
+      "type": "string"
+     }
+    },
+    "required": [
+     "rule_id",
+     "rule_name",
+     "condition"
+    ],
+    "title": "RuleIn",
+    "type": "object"
+   },
+   "StoredDocument": {
+    "properties": {
+     "doc_type": {
+      "title": "Doc Type",
+      "type": "string"
+     },
+     "fields": {
+      "default": {},
+      "title": "Fields",
+      "type": "object"
+     },
+     "file_name": {
+      "default": "",
+      "title": "File Name",
+      "type": "string"
+     },
+     "label": {
+      "default": "",
+      "title": "Label",
+      "type": "string"
+     },
+     "masked_b64": {
+      "anyOf": [
+       {
+        "type": "string"
+       },
+       {
+        "type": "null"
+       }
+      ],
+      "title": "Masked B64"
+     },
+     "mime": {
+      "default": "",
+      "title": "Mime",
+      "type": "string"
+     },
+     "original_b64": {
+      "anyOf": [
+       {
+        "type": "string"
+       },
+       {
+        "type": "null"
+       }
+      ],
+      "title": "Original B64"
+     },
+     "tampering": {
+      "anyOf": [
+       {
+        "type": "object"
+       },
+       {
+        "type": "null"
+       }
+      ],
+      "title": "Tampering"
+     },
+     "timings": {
+      "additionalProperties": {
+       "type": "number"
+      },
+      "default": {},
+      "title": "Timings",
+      "type": "object"
+     },
+     "uploaded_at": {
+      "default": "",
+      "title": "Uploaded At",
+      "type": "string"
+     }
+    },
+    "required": [
+     "doc_type"
+    ],
+    "title": "StoredDocument",
+    "type": "object"
+   },
+   "TamperHeatmap": {
+    "properties": {
+     "caption": {
+      "title": "Caption",
+      "type": "string"
+     },
+     "image": {
+      "title": "Image",
+      "type": "string"
+     },
+     "signal": {
+      "title": "Signal",
+      "type": "string"
+     },
+     "trust": {
+      "title": "Trust",
+      "type": "string"
+     }
+    },
+    "required": [
+     "signal",
+     "trust",
+     "caption",
+     "image"
+    ],
+    "title": "TamperHeatmap",
+    "type": "object"
+   },
+   "TamperingResult": {
+    "properties": {
+     "document_preview": {
+      "anyOf": [
+       {
+        "type": "string"
+       },
+       {
+        "type": "null"
+       }
+      ],
+      "title": "Document Preview"
+     },
+     "explanations": {
+      "items": {
+       "type": "string"
+      },
+      "title": "Explanations",
+      "type": "array"
+     },
+     "fast_tracked": {
+      "title": "Fast Tracked",
+      "type": "boolean"
+     },
+     "heatmaps": {
+      "default": [],
+      "items": {
+       "$ref": "#/components/schemas/TamperHeatmap"
+      },
+      "title": "Heatmaps",
+      "type": "array"
+     },
+     "needs_review": {
+      "title": "Needs Review",
+      "type": "boolean"
+     },
+     "plain_explanation": {
+      "anyOf": [
+       {
+        "$ref": "#/components/schemas/PlainExplanation"
+       },
+       {
+        "type": "null"
+       }
+      ]
+     },
+     "risk_score": {
+      "title": "Risk Score",
+      "type": "number"
+     },
+     "risk_tier": {
+      "title": "Risk Tier",
+      "type": "string"
+     },
+     "signals": {
+      "items": {
+       "type": "object"
+      },
+      "title": "Signals",
+      "type": "array"
+     },
+     "source_format": {
+      "title": "Source Format",
+      "type": "string"
+     }
+    },
+    "required": [
+     "risk_tier",
+     "risk_score",
+     "fast_tracked",
+     "source_format",
+     "needs_review",
+     "explanations",
+     "signals"
+    ],
+    "title": "TamperingResult",
+    "type": "object"
+   },
+   "ValidationError": {
+    "properties": {
+     "loc": {
+      "items": {
+       "anyOf": [
+        {
+         "type": "string"
+        },
+        {
+         "type": "integer"
+        }
+       ]
+      },
+      "title": "Location",
+      "type": "array"
+     },
+     "msg": {
+      "title": "Message",
+      "type": "string"
+     },
+     "type": {
+      "title": "Error Type",
+      "type": "string"
+     }
+    },
+    "required": [
+     "loc",
+     "msg",
+     "type"
+    ],
+    "title": "ValidationError",
+    "type": "object"
+   }
+  }
+ },
+ "info": {
+  "title": "FinSight OCR Service",
+  "version": "0.1.0"
+ },
+ "openapi": "3.1.0",
+ "paths": {
+  "/application/store": {
+   "post": {
+    "description": "Persist a submitted application to the audit store: writes the original +\nmasked files under storage/<app_id>/ and appends one row per document to\nstorage/applications.xlsx, in both a Manager (full PII) and an Officer (PII\nmasked) sheet. See storage.py. Never fails the submission \u2014 a storage error\ncomes back as {ok: false, error}.",
+    "operationId": "application_store_application_store_post",
+    "requestBody": {
+     "content": {
+      "application/json": {
+       "schema": {
+        "$ref": "#/components/schemas/ApplicationStoreRequest"
+       }
+      }
+     },
+     "required": true
+    },
+    "responses": {
+     "200": {
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/ApplicationStoreResult"
+        }
+       }
+      },
+      "description": "Successful Response"
+     },
+     "422": {
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/HTTPValidationError"
+        }
+       }
+      },
+      "description": "Validation Error"
+     }
+    },
+    "summary": "Application Store"
+   }
+  },
+  "/compliance/audit": {
+   "get": {
+    "operationId": "audit_log_compliance_audit_get",
+    "parameters": [
+     {
+      "in": "query",
+      "name": "limit",
+      "required": false,
+      "schema": {
+       "default": 100,
+       "title": "Limit",
+       "type": "integer"
+      }
+     }
+    ],
+    "responses": {
+     "200": {
+      "content": {
+       "application/json": {
+        "schema": {}
+       }
+      },
+      "description": "Successful Response"
+     },
+     "422": {
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/HTTPValidationError"
+        }
+       }
+      },
+      "description": "Validation Error"
+     }
+    },
+    "summary": "Audit Log",
+    "tags": [
+     "compliance"
+    ]
+   }
+  },
+  "/compliance/kb/documents": {
+   "get": {
+    "operationId": "list_documents_compliance_kb_documents_get",
+    "parameters": [
+     {
+      "in": "query",
+      "name": "category",
+      "required": false,
+      "schema": {
+       "default": "",
+       "title": "Category",
+       "type": "string"
+      }
+     }
+    ],
+    "responses": {
+     "200": {
+      "content": {
+       "application/json": {
+        "schema": {}
+       }
+      },
+      "description": "Successful Response"
+     },
+     "422": {
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/HTTPValidationError"
+        }
+       }
+      },
+      "description": "Validation Error"
+     }
+    },
+    "summary": "List Documents",
+    "tags": [
+     "compliance"
+    ]
+   },
+   "post": {
+    "description": "Ingest a regulatory document (title + full text); chunked and indexed.",
+    "operationId": "ingest_document_compliance_kb_documents_post",
+    "requestBody": {
+     "content": {
+      "application/json": {
+       "schema": {
+        "$ref": "#/components/schemas/DocumentIn"
+       }
+      }
+     },
+     "required": true
+    },
+    "responses": {
+     "200": {
+      "content": {
+       "application/json": {
+        "schema": {}
+       }
+      },
+      "description": "Successful Response"
+     },
+     "422": {
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/HTTPValidationError"
+        }
+       }
+      },
+      "description": "Validation Error"
+     }
+    },
+    "summary": "Ingest Document",
+    "tags": [
+     "compliance"
+    ]
+   }
+  },
+  "/compliance/kb/documents/{doc_id}": {
+   "delete": {
+    "operationId": "delete_document_compliance_kb_documents__doc_id__delete",
+    "parameters": [
+     {
+      "in": "path",
+      "name": "doc_id",
+      "required": true,
+      "schema": {
+       "title": "Doc Id",
+       "type": "integer"
+      }
+     }
+    ],
+    "responses": {
+     "200": {
+      "content": {
+       "application/json": {
+        "schema": {}
+       }
+      },
+      "description": "Successful Response"
+     },
+     "422": {
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/HTTPValidationError"
+        }
+       }
+      },
+      "description": "Validation Error"
+     }
+    },
+    "summary": "Delete Document",
+    "tags": [
+     "compliance"
+    ]
+   }
+  },
+  "/compliance/kb/documents/{doc_id}/chunks": {
+   "get": {
+    "operationId": "document_chunks_compliance_kb_documents__doc_id__chunks_get",
+    "parameters": [
+     {
+      "in": "path",
+      "name": "doc_id",
+      "required": true,
+      "schema": {
+       "title": "Doc Id",
+       "type": "integer"
+      }
+     }
+    ],
+    "responses": {
+     "200": {
+      "content": {
+       "application/json": {
+        "schema": {}
+       }
+      },
+      "description": "Successful Response"
+     },
+     "422": {
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/HTTPValidationError"
+        }
+       }
+      },
+      "description": "Validation Error"
+     }
+    },
+    "summary": "Document Chunks",
+    "tags": [
+     "compliance"
+    ]
+   }
+  },
+  "/compliance/kb/documents/{doc_id}/extract": {
+   "post": {
+    "description": "Extract DRAFT rule candidates from a document. Candidates go into the\nreview queue \u2014 they do NOT become active rules until a reviewer approves.",
+    "operationId": "extract_rules_compliance_kb_documents__doc_id__extract_post",
+    "parameters": [
+     {
+      "in": "path",
+      "name": "doc_id",
+      "required": true,
+      "schema": {
+       "title": "Doc Id",
+       "type": "integer"
+      }
+     }
+    ],
+    "requestBody": {
+     "content": {
+      "application/json": {
+       "schema": {
+        "$ref": "#/components/schemas/ExtractRequest",
+        "default": {
+         "prefer_llm": true
+        }
+       }
+      }
+     }
+    },
+    "responses": {
+     "200": {
+      "content": {
+       "application/json": {
+        "schema": {}
+       }
+      },
+      "description": "Successful Response"
+     },
+     "422": {
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/HTTPValidationError"
+        }
+       }
+      },
+      "description": "Validation Error"
+     }
+    },
+    "summary": "Extract Rules",
+    "tags": [
+     "compliance"
+    ]
+   }
+  },
+  "/compliance/policy/check": {
+   "post": {
+    "operationId": "check_application_compliance_policy_check_post",
+    "requestBody": {
+     "content": {
+      "application/json": {
+       "schema": {
+        "$ref": "#/components/schemas/LoanApplication"
+       }
+      }
+     },
+     "required": true
+    },
+    "responses": {
+     "200": {
+      "content": {
+       "application/json": {
+        "schema": {}
+       }
+      },
+      "description": "Successful Response"
+     },
+     "422": {
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/HTTPValidationError"
+        }
+       }
+      },
+      "description": "Validation Error"
+     }
+    },
+    "summary": "Check Application",
+    "tags": [
+     "compliance"
+    ]
+   }
+  },
+  "/compliance/rag/query": {
+   "post": {
+    "operationId": "rag_query_compliance_rag_query_post",
+    "requestBody": {
+     "content": {
+      "application/json": {
+       "schema": {
+        "$ref": "#/components/schemas/RagQuery"
+       }
+      }
+     },
+     "required": true
+    },
+    "responses": {
+     "200": {
+      "content": {
+       "application/json": {
+        "schema": {}
+       }
+      },
+      "description": "Successful Response"
+     },
+     "422": {
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/HTTPValidationError"
+        }
+       }
+      },
+      "description": "Validation Error"
+     }
+    },
+    "summary": "Rag Query",
+    "tags": [
+     "compliance"
+    ]
+   }
+  },
+  "/compliance/rules": {
+   "get": {
+    "operationId": "list_rules_compliance_rules_get",
+    "responses": {
+     "200": {
+      "content": {
+       "application/json": {
+        "schema": {}
+       }
+      },
+      "description": "Successful Response"
+     }
+    },
+    "summary": "List Rules",
+    "tags": [
+     "compliance"
+    ]
+   },
+   "post": {
+    "operationId": "create_rule_compliance_rules_post",
+    "requestBody": {
+     "content": {
+      "application/json": {
+       "schema": {
+        "$ref": "#/components/schemas/RuleIn"
+       }
+      }
+     },
+     "required": true
+    },
+    "responses": {
+     "200": {
+      "content": {
+       "application/json": {
+        "schema": {}
+       }
+      },
+      "description": "Successful Response"
+     },
+     "422": {
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/HTTPValidationError"
+        }
+       }
+      },
+      "description": "Validation Error"
+     }
+    },
+    "summary": "Create Rule",
+    "tags": [
+     "compliance"
+    ]
+   }
+  },
+  "/compliance/rules/candidates": {
+   "get": {
+    "operationId": "list_candidates_compliance_rules_candidates_get",
+    "parameters": [
+     {
+      "in": "query",
+      "name": "status",
+      "required": false,
+      "schema": {
+       "default": "pending",
+       "title": "Status",
+       "type": "string"
+      }
+     }
+    ],
+    "responses": {
+     "200": {
+      "content": {
+       "application/json": {
+        "schema": {}
+       }
+      },
+      "description": "Successful Response"
+     },
+     "422": {
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/HTTPValidationError"
+        }
+       }
+      },
+      "description": "Validation Error"
+     }
+    },
+    "summary": "List Candidates",
+    "tags": [
+     "compliance"
+    ]
+   }
+  },
+  "/compliance/rules/candidates/{candidate_id}/approve": {
+   "post": {
+    "operationId": "approve_candidate_compliance_rules_candidates__candidate_id__approve_post",
+    "parameters": [
+     {
+      "in": "path",
+      "name": "candidate_id",
+      "required": true,
+      "schema": {
+       "title": "Candidate Id",
+       "type": "integer"
+      }
+     }
+    ],
+    "requestBody": {
+     "content": {
+      "application/json": {
+       "schema": {
+        "$ref": "#/components/schemas/ApproveCandidate"
+       }
+      }
+     },
+     "required": true
+    },
+    "responses": {
+     "200": {
+      "content": {
+       "application/json": {
+        "schema": {}
+       }
+      },
+      "description": "Successful Response"
+     },
+     "422": {
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/HTTPValidationError"
+        }
+       }
+      },
+      "description": "Validation Error"
+     }
+    },
+    "summary": "Approve Candidate",
+    "tags": [
+     "compliance"
+    ]
+   }
+  },
+  "/compliance/rules/candidates/{candidate_id}/reject": {
+   "post": {
+    "operationId": "reject_candidate_compliance_rules_candidates__candidate_id__reject_post",
+    "parameters": [
+     {
+      "in": "path",
+      "name": "candidate_id",
+      "required": true,
+      "schema": {
+       "title": "Candidate Id",
+       "type": "integer"
+      }
+     }
+    ],
+    "requestBody": {
+     "content": {
+      "application/json": {
+       "schema": {
+        "$ref": "#/components/schemas/RejectCandidate"
+       }
+      }
+     },
+     "required": true
+    },
+    "responses": {
+     "200": {
+      "content": {
+       "application/json": {
+        "schema": {}
+       }
+      },
+      "description": "Successful Response"
+     },
+     "422": {
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/HTTPValidationError"
+        }
+       }
+      },
+      "description": "Validation Error"
+     }
+    },
+    "summary": "Reject Candidate",
+    "tags": [
+     "compliance"
+    ]
+   }
+  },
+  "/compliance/rules/{rule_id}": {
+   "delete": {
+    "operationId": "deactivate_rule_compliance_rules__rule_id__delete",
+    "parameters": [
+     {
+      "in": "path",
+      "name": "rule_id",
+      "required": true,
+      "schema": {
+       "title": "Rule Id",
+       "type": "string"
+      }
+     }
+    ],
+    "responses": {
+     "200": {
+      "content": {
+       "application/json": {
+        "schema": {}
+       }
+      },
+      "description": "Successful Response"
+     },
+     "422": {
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/HTTPValidationError"
+        }
+       }
+      },
+      "description": "Validation Error"
+     }
+    },
+    "summary": "Deactivate Rule",
+    "tags": [
+     "compliance"
+    ]
+   }
+  },
+  "/compliance/stats": {
+   "get": {
+    "operationId": "stats_compliance_stats_get",
+    "responses": {
+     "200": {
+      "content": {
+       "application/json": {
+        "schema": {}
+       }
+      },
+      "description": "Successful Response"
+     }
+    },
+    "summary": "Stats",
+    "tags": [
+     "compliance"
+    ]
+   }
+  },
+  "/doc-types": {
+   "get": {
+    "operationId": "doc_types_doc_types_get",
+    "responses": {
+     "200": {
+      "content": {
+       "application/json": {
+        "schema": {
+         "items": {
+          "$ref": "#/components/schemas/DocTypeInfo"
+         },
+         "title": "Response Doc Types Doc Types Get",
+         "type": "array"
+        }
+       }
+      },
+      "description": "Successful Response"
+     }
+    },
+    "summary": "Doc Types"
+   }
+  },
+  "/document/integrity": {
+   "post": {
+    "description": "Deferred tampering analysis for the Review & Submit page. Runs the\nforensic cascade on the ORIGINAL bytes (preprocessing rewrites pixels and\nwould destroy the compression/noise traces the signals read), once per\ndocument when the borrower reaches Review & Submit rather than blocking\nevery upload \u2014 it's the slow (20-80s) part of document handling.\n\nThe cleaned/auto-oriented render is NOT produced here \u2014 /extract already\nreturns it (it preprocesses for extraction anyway), and the frontend reuses\nthat for the hover preview and PII masking. `parsed_json` is /extract's\nparsed fields, so business rules can corroborate the extracted values.",
+    "operationId": "document_integrity_document_integrity_post",
+    "requestBody": {
+     "content": {
+      "multipart/form-data": {
+       "schema": {
+        "$ref": "#/components/schemas/Body_document_integrity_document_integrity_post"
+       }
+      }
+     },
+     "required": true
+    },
+    "responses": {
+     "200": {
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/IntegrityResult"
+        }
+       }
+      },
+      "description": "Successful Response"
+     },
+     "422": {
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/HTTPValidationError"
+        }
+       }
+      },
+      "description": "Validation Error"
+     }
+    },
+    "summary": "Document Integrity"
+   }
+  },
+  "/document/mask": {
+   "post": {
+    "description": "Return a privacy-masked render of the document for the hover preview:\nonly the PAN number and the Aadhaar number are redacted (last 4 kept\nvisible) \u2014 no other number is touched. OCR-bound, so run off the event\nloop. A document with neither a PAN nor an Aadhaar number comes back\nre-rendered unchanged.",
+    "operationId": "document_mask_document_mask_post",
+    "requestBody": {
+     "content": {
+      "multipart/form-data": {
+       "schema": {
+        "$ref": "#/components/schemas/Body_document_mask_document_mask_post"
+       }
+      }
+     },
+     "required": true
+    },
+    "responses": {
+     "200": {
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/MaskResult"
+        }
+       }
+      },
+      "description": "Successful Response"
+     },
+     "422": {
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/HTTPValidationError"
+        }
+       }
+      },
+      "description": "Validation Error"
+     }
+    },
+    "summary": "Document Mask"
+   }
+  },
+  "/extract": {
+   "post": {
+    "operationId": "extract_extract_post",
+    "requestBody": {
+     "content": {
+      "multipart/form-data": {
+       "schema": {
+        "$ref": "#/components/schemas/Body_extract_extract_post"
+       }
+      }
+     },
+     "required": true
+    },
+    "responses": {
+     "200": {
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/ExtractResponse"
+        }
+       }
+      },
+      "description": "Successful Response"
+     },
+     "422": {
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/HTTPValidationError"
+        }
+       }
+      },
+      "description": "Validation Error"
+     }
+    },
+    "summary": "Extract"
+   }
+  },
+  "/face/verify": {
+   "post": {
+    "description": "Cross-document face verification for the Review & Submit page: finds the\nface on every submitted document (any orientation), embeds it, and reports\nwhether the same person appears across all of them. One input to the fraud\n-detection module; evidence for a human, never an auto-reject.\n\n`doc_types` is comma-separated, in the same order as `files`.",
+    "operationId": "face_verify_face_verify_post",
+    "requestBody": {
+     "content": {
+      "multipart/form-data": {
+       "schema": {
+        "$ref": "#/components/schemas/Body_face_verify_face_verify_post"
+       }
+      }
+     },
+     "required": true
+    },
+    "responses": {
+     "200": {
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/FaceVerifyResult"
+        }
+       }
+      },
+      "description": "Successful Response"
+     },
+     "422": {
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/HTTPValidationError"
+        }
+       }
+      },
+      "description": "Validation Error"
+     }
+    },
+    "summary": "Face Verify"
+   }
+  },
+  "/health": {
+   "get": {
+    "operationId": "health_health_get",
+    "responses": {
+     "200": {
+      "content": {
+       "application/json": {
+        "schema": {}
+       }
+      },
+      "description": "Successful Response"
+     }
+    },
+    "summary": "Health"
+   }
+  },
+  "/lending/applications": {
+   "get": {
+    "description": "Borrower list (customer_id) or officer queue (officer_id).\n\nPassing neither returns every application \u2014 used by the head's views.",
+    "operationId": "applications_lending_applications_get",
+    "parameters": [
+     {
+      "in": "query",
+      "name": "customer_id",
+      "required": false,
+      "schema": {
+       "anyOf": [
+        {
+         "type": "string"
+        },
+        {
+         "type": "null"
+        }
+       ],
+       "title": "Customer Id"
+      }
+     },
+     {
+      "in": "query",
+      "name": "officer_id",
+      "required": false,
+      "schema": {
+       "anyOf": [
+        {
+         "type": "string"
+        },
+        {
+         "type": "null"
+        }
+       ],
+       "title": "Officer Id"
+      }
+     },
+     {
+      "in": "query",
+      "name": "include_closed",
+      "required": false,
+      "schema": {
+       "default": true,
+       "title": "Include Closed",
+       "type": "boolean"
+      }
+     },
+     {
+      "in": "query",
+      "name": "search",
+      "required": false,
+      "schema": {
+       "anyOf": [
+        {
+         "type": "string"
+        },
+        {
+         "type": "null"
+        }
+       ],
+       "title": "Search"
+      }
+     }
+    ],
+    "responses": {
+     "200": {
+      "content": {
+       "application/json": {
+        "schema": {}
+       }
+      },
+      "description": "Successful Response"
+     },
+     "422": {
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/HTTPValidationError"
+        }
+       }
+      },
+      "description": "Validation Error"
+     }
+    },
+    "summary": "Applications",
+    "tags": [
+     "lending"
+    ]
+   }
+  },
+  "/lending/applications/{application_no}": {
+   "get": {
+    "operationId": "application_detail_lending_applications__application_no__get",
+    "parameters": [
+     {
+      "in": "path",
+      "name": "application_no",
+      "required": true,
+      "schema": {
+       "title": "Application No",
+       "type": "string"
+      }
+     }
+    ],
+    "responses": {
+     "200": {
+      "content": {
+       "application/json": {
+        "schema": {}
+       }
+      },
+      "description": "Successful Response"
+     },
+     "422": {
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/HTTPValidationError"
+        }
+       }
+      },
+      "description": "Validation Error"
+     }
+    },
+    "summary": "Application Detail",
+    "tags": [
+     "lending"
+    ]
+   }
+  },
+  "/lending/borrower/stats": {
+   "get": {
+    "operationId": "borrower_stats_lending_borrower_stats_get",
+    "parameters": [
+     {
+      "in": "query",
+      "name": "customer_id",
+      "required": true,
+      "schema": {
+       "title": "Customer Id",
+       "type": "string"
+      }
+     }
+    ],
+    "responses": {
+     "200": {
+      "content": {
+       "application/json": {
+        "schema": {}
+       }
+      },
+      "description": "Successful Response"
+     },
+     "422": {
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/HTTPValidationError"
+        }
+       }
+      },
+      "description": "Validation Error"
+     }
+    },
+    "summary": "Borrower Stats",
+    "tags": [
+     "lending"
+    ]
+   }
+  },
+  "/lending/fraud/cases": {
+   "get": {
+    "operationId": "fraud_cases_lending_fraud_cases_get",
+    "parameters": [
+     {
+      "in": "query",
+      "name": "officer_id",
+      "required": false,
+      "schema": {
+       "anyOf": [
+        {
+         "type": "string"
+        },
+        {
+         "type": "null"
+        }
+       ],
+       "title": "Officer Id"
+      }
+     }
+    ],
+    "responses": {
+     "200": {
+      "content": {
+       "application/json": {
+        "schema": {}
+       }
+      },
+      "description": "Successful Response"
+     },
+     "422": {
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/HTTPValidationError"
+        }
+       }
+      },
+      "description": "Validation Error"
+     }
+    },
+    "summary": "Fraud Cases",
+    "tags": [
+     "lending"
+    ]
+   }
+  },
+  "/lending/health": {
+   "get": {
+    "operationId": "lending_health_lending_health_get",
+    "responses": {
+     "200": {
+      "content": {
+       "application/json": {
+        "schema": {}
+       }
+      },
+      "description": "Successful Response"
+     }
+    },
+    "summary": "Lending Health",
+    "tags": [
+     "lending"
+    ]
+   }
+  },
+  "/lending/notifications": {
+   "get": {
+    "operationId": "notifications_lending_notifications_get",
+    "parameters": [
+     {
+      "in": "query",
+      "name": "user_id",
+      "required": true,
+      "schema": {
+       "title": "User Id",
+       "type": "string"
+      }
+     },
+     {
+      "in": "query",
+      "name": "limit",
+      "required": false,
+      "schema": {
+       "default": 30,
+       "title": "Limit",
+       "type": "integer"
+      }
+     }
+    ],
+    "responses": {
+     "200": {
+      "content": {
+       "application/json": {
+        "schema": {}
+       }
+      },
+      "description": "Successful Response"
+     },
+     "422": {
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/HTTPValidationError"
+        }
+       }
+      },
+      "description": "Validation Error"
+     }
+    },
+    "summary": "Notifications",
+    "tags": [
+     "lending"
+    ]
+   }
+  },
+  "/lending/officer/stats": {
+   "get": {
+    "description": "The numbers on the officer's queue header and performance card \u2014 counted\nin SQL rather than by the browser, so they match the underlying rows even\nwhen the list is paged or filtered.",
+    "operationId": "officer_stats_lending_officer_stats_get",
+    "parameters": [
+     {
+      "in": "query",
+      "name": "officer_id",
+      "required": true,
+      "schema": {
+       "title": "Officer Id",
+       "type": "string"
+      }
+     }
+    ],
+    "responses": {
+     "200": {
+      "content": {
+       "application/json": {
+        "schema": {}
+       }
+      },
+      "description": "Successful Response"
+     },
+     "422": {
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/HTTPValidationError"
+        }
+       }
+      },
+      "description": "Validation Error"
+     }
+    },
+    "summary": "Officer Stats",
+    "tags": [
+     "lending"
+    ]
+   }
+  },
+  "/lending/policy-tickets": {
+   "get": {
+    "operationId": "policy_tickets_lending_policy_tickets_get",
+    "parameters": [
+     {
+      "in": "query",
+      "name": "officer_id",
+      "required": false,
+      "schema": {
+       "anyOf": [
+        {
+         "type": "string"
+        },
+        {
+         "type": "null"
+        }
+       ],
+       "title": "Officer Id"
+      }
+     }
+    ],
+    "responses": {
+     "200": {
+      "content": {
+       "application/json": {
+        "schema": {}
+       }
+      },
+      "description": "Successful Response"
+     },
+     "422": {
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/HTTPValidationError"
+        }
+       }
+      },
+      "description": "Validation Error"
+     }
+    },
+    "summary": "Policy Tickets",
+    "tags": [
+     "lending"
+    ]
+   }
+  },
+  "/lending/products": {
+   "get": {
+    "description": "Catalogue + limits. Icons, colours and the wizard's dynamic form schema\nstay in the frontend \u2014 those are presentation, not data.",
+    "operationId": "products_lending_products_get",
+    "responses": {
+     "200": {
+      "content": {
+       "application/json": {
+        "schema": {}
+       }
+      },
+      "description": "Successful Response"
+     }
+    },
+    "summary": "Products",
+    "tags": [
+     "lending"
+    ]
+   }
+  },
+  "/lending/reports": {
+   "get": {
+    "operationId": "reports_lending_reports_get",
+    "parameters": [
+     {
+      "in": "query",
+      "name": "officer_id",
+      "required": false,
+      "schema": {
+       "anyOf": [
+        {
+         "type": "string"
+        },
+        {
+         "type": "null"
+        }
+       ],
+       "title": "Officer Id"
+      }
+     }
+    ],
+    "responses": {
+     "200": {
+      "content": {
+       "application/json": {
+        "schema": {}
+       }
+      },
+      "description": "Successful Response"
+     },
+     "422": {
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/HTTPValidationError"
+        }
+       }
+      },
+      "description": "Validation Error"
+     }
+    },
+    "summary": "Reports",
+    "tags": [
+     "lending"
+    ]
+   }
+  },
+  "/lending/session": {
+   "get": {
+    "operationId": "session_lending_session_get",
+    "parameters": [
+     {
+      "in": "query",
+      "name": "role",
+      "required": true,
+      "schema": {
+       "pattern": "^(user|officer|head|admin)$",
+       "title": "Role",
+       "type": "string"
+      }
+     }
+    ],
+    "responses": {
+     "200": {
+      "content": {
+       "application/json": {
+        "schema": {}
+       }
+      },
+      "description": "Successful Response"
+     },
+     "422": {
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/HTTPValidationError"
+        }
+       }
+      },
+      "description": "Validation Error"
+     }
+    },
+    "summary": "Session",
+    "tags": [
+     "lending"
+    ]
+   }
+  },
+  "/tampering/explain": {
+   "post": {
+    "description": "On-demand plain-language + visually-grounded explanation for a MEDIUM/HIGH\ndocument, TOGGLEABLE from the review UI. Separated from /extract so a plain\nupload never pays this call's latency (~3-4s) unless the user actually asks\nto see it \u2014 /extract already returns the raw findings for free; this just\ntranslates them (TRANSLATION ONLY, see tampering/explain.py \u2014 detection is\nunchanged and 100% deterministic, this cannot alter the risk tier).\n\n`tampering_json` is the exact `tampering` object /extract already returned\nfor this document (the frontend already has it \u2014 no need to recompute the\ncascade). Re-uploading the file lets Qwen see the actual document so it can\nsay WHERE each already-found issue is, not just restate it in text.",
+    "operationId": "tampering_explain_tampering_explain_post",
+    "requestBody": {
+     "content": {
+      "multipart/form-data": {
+       "schema": {
+        "$ref": "#/components/schemas/Body_tampering_explain_tampering_explain_post"
+       }
+      }
+     },
+     "required": true
+    },
+    "responses": {
+     "200": {
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/PlainExplanation"
+        }
+       }
+      },
+      "description": "Successful Response"
+     },
+     "422": {
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/HTTPValidationError"
+        }
+       }
+      },
+      "description": "Validation Error"
+     }
+    },
+    "summary": "Tampering Explain"
+   }
+  },
+  "/tampering/locate": {
+   "post": {
+    "description": "On-demand OCR-grounded localization: draws numbered boxes on the document\nshowing WHERE each already-detected finding is (the specific figure/ID it\ncites, found on the page by OCR). No detection, no LLM \u2014 a finding is only\nboxed if the value it names is literally printed on the document; metadata\nconcerns (e.g. producer software) come back marked \"not visually locatable\".\n\nShown on the Review & Submit page for MEDIUM/HIGH documents. `tampering_json`\nis the exact object /extract returned, so the cascade is never re-run.",
+    "operationId": "tampering_locate_tampering_locate_post",
+    "requestBody": {
+     "content": {
+      "multipart/form-data": {
+       "schema": {
+        "$ref": "#/components/schemas/Body_tampering_locate_tampering_locate_post"
+       }
+      }
+     },
+     "required": true
+    },
+    "responses": {
+     "200": {
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/LocateResult"
+        }
+       }
+      },
+      "description": "Successful Response"
+     },
+     "422": {
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/HTTPValidationError"
+        }
+       }
+      },
+      "description": "Validation Error"
+     }
+    },
+    "summary": "Tampering Locate"
+   }
+  }
+ }
+}

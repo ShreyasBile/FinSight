@@ -1,0 +1,234 @@
+{
+ "agent_id": "pii_masking",
+ "split": "test.baseline",
+ "data": {
+  "name": "PAN cards (synthetic, labelled); generated PAN + Aadhaar printed under real SROIE / FUNSD / RVL-CDIP pages; synthetic Aadhaar photos (numbers found by OCR of the original)",
+  "split": "test",
+  "n_pan": 100,
+  "n_pages": 90,
+  "n_aadhaar": 48,
+  "code_version": "v1",
+  "check": "the masked render is read back by OCR at 4 rotations; an ID is EXPOSED when it reads back (exactly or with a look-alike character) or when nothing was masked; last4_kept counts documents that are not exposed AND still show the last four characters"
+ },
+ "metrics": {
+  "pii_recall": {
+   "value": 0.4211,
+   "ci95": [
+    0.3531,
+    0.4921
+   ],
+   "k": 80,
+   "n": 190
+  },
+  "last4_kept": {
+   "value": 0.2,
+   "ci95": [
+    0.1493,
+    0.2626
+   ],
+   "k": 38,
+   "n": 190
+  },
+  "other_numbers_intact": {
+   "value": 0.9878,
+   "ci95": [
+    0.9718,
+    0.9948
+   ],
+   "k": 406,
+   "n": 411
+  },
+  "by_set": {
+   "pan_cards": {
+    "not_exposed": {
+     "value": 0.79,
+     "ci95": [
+      0.7002,
+      0.8583
+     ],
+     "k": 79,
+     "n": 100
+    },
+    "last4_kept": {
+     "value": 0.37,
+     "ci95": [
+      0.2818,
+      0.4678
+     ],
+     "k": 37,
+     "n": 100
+    },
+    "nothing_masked": 21,
+    "n": 100
+   },
+   "pan_cards_with_extracted_value": null,
+   "ids_on_real_pages": {
+    "not_exposed": {
+     "value": 0.0111,
+     "ci95": [
+      0.002,
+      0.0603
+     ],
+     "k": 1,
+     "n": 90
+    },
+    "last4_kept": {
+     "value": 0.0111,
+     "ci95": [
+      0.002,
+      0.0603
+     ],
+     "k": 1,
+     "n": 90
+    },
+    "nothing_masked": 78,
+    "n": 90
+   },
+   "ids_on_real_pages_by_source": {
+    "sroie": {
+     "not_exposed": {
+      "value": 0.0333,
+      "ci95": [
+       0.0059,
+       0.1667
+      ],
+      "k": 1,
+      "n": 30
+     },
+     "last4_kept": {
+      "value": 0.0333,
+      "ci95": [
+       0.0059,
+       0.1667
+      ],
+      "k": 1,
+      "n": 30
+     },
+     "nothing_masked": 28,
+     "n": 30
+    },
+    "funsd": {
+     "not_exposed": {
+      "value": 0.0,
+      "ci95": [
+       0,
+       0.1135
+      ],
+      "k": 0,
+      "n": 30
+     },
+     "last4_kept": {
+      "value": 0.0,
+      "ci95": [
+       0,
+       0.1135
+      ],
+      "k": 0,
+      "n": 30
+     },
+     "nothing_masked": 26,
+     "n": 30
+    },
+    "rvl": {
+     "not_exposed": {
+      "value": 0.0,
+      "ci95": [
+       0,
+       0.1135
+      ],
+      "k": 0,
+      "n": 30
+     },
+     "last4_kept": {
+      "value": 0.0,
+      "ci95": [
+       0,
+       0.1135
+      ],
+      "k": 0,
+      "n": 30
+     },
+     "nothing_masked": 24,
+     "n": 30
+    }
+   },
+   "aadhaar_unlabelled": {
+    "not_exposed": {
+     "value": 1.0,
+     "ci95": [
+      0.9259,
+      1.0
+     ],
+     "k": 48,
+     "n": 48
+    },
+    "last4_kept": {
+     "value": 0.9583,
+     "ci95": [
+      0.8602,
+      0.9885
+     ],
+     "k": 46,
+     "n": 48
+    },
+    "nothing_masked": 0,
+    "n": 48,
+    "own_number_found_by_ocr": 48,
+    "n_images": 48
+   }
+  },
+  "not_rendered": 0,
+  "latency": {
+   "n": 238,
+   "p50_s": 5.77,
+   "p95_s": 45.42,
+   "mean_s": 13.36
+  }
+ },
+ "target": {
+  "metric": "pii_recall",
+  "target": 1.0,
+  "higher": true,
+  "label": "No full PAN / Aadhaar readable after masking"
+ },
+ "primary_value": 0.4211,
+ "rating": "Weak",
+ "secondary": [
+  {
+   "metric": "last4_kept",
+   "target": 0.95,
+   "higher": true,
+   "label": "Last four characters still readable",
+   "value": 0.2,
+   "rating": "Weak"
+  },
+  {
+   "metric": "other_numbers_intact",
+   "target": 0.95,
+   "higher": true,
+   "label": "The page's other numbers (amounts, dates) still readable",
+   "value": 0.9878,
+   "rating": "Strong"
+  }
+ ],
+ "run": {
+  "git_commit": "d990476",
+  "git_dirty": true,
+  "python": "3.13.3",
+  "platform": "Windows-11-10.0.26200-SP0",
+  "cpu": "Intel64 Family 6 Model 183 Stepping 1, GenuineIntel",
+  "gpu": "NVIDIA GeForce RTX 4060 Laptop GPU, 8188 MiB",
+  "llm": {
+   "provider": "ollama",
+   "model": "qwen2.5vl:7b",
+   "temperature": 0.0,
+   "num_ctx": 8192,
+   "timeout_s": 180,
+   "keep_alive": "30m",
+   "effort": "low"
+  },
+  "split_seed": 20261001,
+  "dev_fraction": 0.3,
+  "measured_at": "2026-10-01T15:46:24+00:00"
+ }
+}

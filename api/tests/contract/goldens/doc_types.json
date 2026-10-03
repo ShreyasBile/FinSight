@@ -1,0 +1,85 @@
+{
+ "body": [
+  {
+   "id": "pan",
+   "label": "PAN Card",
+   "required": true
+  },
+  {
+   "id": "aadhaar",
+   "label": "Aadhaar Card",
+   "required": true
+  },
+  {
+   "id": "salary_slip",
+   "label": "Salary Slip",
+   "required": true
+  },
+  {
+   "id": "bank_statement",
+   "label": "Bank Statement",
+   "required": true
+  },
+  {
+   "id": "itr",
+   "label": "ITR / Form 16",
+   "required": false
+  },
+  {
+   "id": "vehicle_quotation",
+   "label": "Vehicle Quotation",
+   "required": false
+  },
+  {
+   "id": "rc_book",
+   "label": "RC Book",
+   "required": false
+  },
+  {
+   "id": "insurance",
+   "label": "Insurance Copy",
+   "required": false
+  },
+  {
+   "id": "property_doc",
+   "label": "Property Document",
+   "required": false
+  },
+  {
+   "id": "land_record",
+   "label": "Land Record",
+   "required": false
+  },
+  {
+   "id": "gst_return",
+   "label": "GST Return",
+   "required": false
+  },
+  {
+   "id": "financial_statement",
+   "label": "Financial Statement",
+   "required": false
+  },
+  {
+   "id": "form16",
+   "label": "Form 16",
+   "required": false
+  },
+  {
+   "id": "trade_license",
+   "label": "Trade License",
+   "required": false
+  },
+  {
+   "id": "cibil",
+   "label": "CIBIL Report",
+   "required": false
+  },
+  {
+   "id": "photo",
+   "label": "Photograph",
+   "required": true
+  }
+ ],
+ "status": 200
+}

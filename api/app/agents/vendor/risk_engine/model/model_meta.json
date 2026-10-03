@@ -1,0 +1,19 @@
+{
+  "dataset": "hmeq",
+  "samples": 5960,
+  "features": [
+    "LOAN",
+    "MORTDUE",
+    "VALUE",
+    "YOJ",
+    "DEROG",
+    "DELINQ",
+    "CLAGE",
+    "CLNO",
+    "DEBTINC",
+    "REASON",
+    "JOB"
+  ],
+  "accuracy": 0.9001677852348994,
+  "auc": 0.9485404224582915
+}

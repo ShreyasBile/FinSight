@@ -1,0 +1,111 @@
+{
+ "current_on_dev": {
+  "forged_recall": 0.823170731707317,
+  "forged_high": 0.3018292682926829,
+  "genuine_flagged": 0.8454545454545455,
+  "genuine_high": 0.14545454545454545,
+  "auc": 0.492
+ },
+ "chosen_on_dev": {
+  "forged_recall": 0.4146341463414634,
+  "forged_high": 0.24085365853658536,
+  "genuine_flagged": 0.296969696969697,
+  "genuine_high": 0.09696969696969697,
+  "auc": 0.5234
+ },
+ "config": {
+  "weights": {
+   "metadata": 0.1,
+   "business_rules": 0.05,
+   "copy_move": 0.3,
+   "pdf_forensics": 0.15,
+   "ela": 0.1,
+   "noise": 0.1,
+   "cnn": 0.15,
+   "authenticity": 0.2,
+   "photo_region": 0.3
+  },
+  "conf": {
+   "business_rules": 0.32,
+   "copy_move": 0.45,
+   "pdf_forensics": 0.55,
+   "metadata": 0.15,
+   "ela": 0.0,
+   "noise": 0.32,
+   "cnn": 0.25,
+   "authenticity": 0.6,
+   "photo_region": 1.0
+  },
+  "corro": 0.25,
+  "med": 0.3227,
+  "high": 0.5841
+ },
+ "dev_n": 658,
+ "per_signal_dev": {
+  "business_rules": {
+   "auc": 0.625,
+   "n_forged": 8,
+   "n_genuine": 3,
+   "genuine_ge_0.5": 0.0,
+   "forged_ge_0.5": 0.25
+  },
+  "cnn": {
+   "auc": 0.557,
+   "n_forged": 325,
+   "n_genuine": 312,
+   "genuine_ge_0.5": 0.804,
+   "forged_ge_0.5": 0.818
+  },
+  "copy_move": {
+   "auc": 0.568,
+   "n_forged": 328,
+   "n_genuine": 330,
+   "genuine_ge_0.5": 0.124,
+   "forged_ge_0.5": 0.223
+  },
+  "ela": {
+   "auc": 0.476,
+   "n_forged": 325,
+   "n_genuine": 313,
+   "genuine_ge_0.5": 0.15,
+   "forged_ge_0.5": 0.169
+  },
+  "metadata": {
+   "auc": 0.426,
+   "n_forged": 328,
+   "n_genuine": 330,
+   "genuine_ge_0.5": 0.258,
+   "forged_ge_0.5": 0.137
+  },
+  "noise": {
+   "auc": 0.393,
+   "n_forged": 328,
+   "n_genuine": 328,
+   "genuine_ge_0.5": 0.287,
+   "forged_ge_0.5": 0.183
+  },
+  "photo_region": {
+   "auc": 0.505,
+   "n_forged": 200,
+   "n_genuine": 200,
+   "genuine_ge_0.5": 0.0,
+   "forged_ge_0.5": 0.105
+  }
+ },
+ "by_dataset_dev": {
+  "findit": {
+   "forged_recall": 0.875,
+   "forged_high": 0.453125,
+   "genuine_flagged": 0.6076923076923076,
+   "genuine_high": 0.24615384615384617,
+   "auc": 0.7233
+  },
+  "sidtd": {
+   "forged_recall": 0.12,
+   "forged_high": 0.105,
+   "genuine_flagged": 0.095,
+   "genuine_high": 0.0,
+   "auc": 0.3497
+  }
+ }
+}

@@ -1,0 +1,94 @@
+{
+ "body": {
+  "cleaned_preview": null,
+  "confidence": 1.0,
+  "doc_type": "bank_statement",
+  "document_identity": {
+   "fields_ok": true,
+   "ok": true,
+   "rule": "bank_statement"
+  },
+  "fields": [
+   {
+    "flag": "ok",
+    "key": "account_holder",
+    "label": "Account Holder",
+    "value": "Rajesh Kumar"
+   },
+   {
+    "flag": "ok",
+    "key": "bank_name",
+    "label": "Bank Name",
+    "value": "HDFC Bank"
+   },
+   {
+    "flag": "ok",
+    "key": "account_number",
+    "label": "Account Number",
+    "value": "XXXX7890"
+   },
+   {
+    "flag": "ok",
+    "key": "ifsc",
+    "label": "IFSC Code",
+    "value": "HDFC0001234"
+   },
+   {
+    "flag": "ok",
+    "key": "statement_period",
+    "label": "Statement Period",
+    "value": "Jan–Jun 2024"
+   },
+   {
+    "flag": "ok",
+    "key": "opening_balance",
+    "label": "Opening Balance (₹)",
+    "value": 142000
+   },
+   {
+    "flag": "ok",
+    "key": "closing_balance",
+    "label": "Closing Balance (₹)",
+    "value": 182400
+   },
+   {
+    "flag": "ok",
+    "key": "total_credits",
+    "label": "Total Credits (₹)",
+    "value": 209610.0
+   },
+   {
+    "flag": "ok",
+    "key": "total_debits",
+    "label": "Total Debits (₹)",
+    "value": 88898.0
+   },
+   {
+    "flag": "ok",
+    "key": "average_balance",
+    "label": "Average Balance (₹)",
+    "value": 182400
+   }
+  ],
+  "needs_review": false,
+  "parsed": {
+   "account_holder": "Rajesh Kumar",
+   "account_number": "XXXX7890",
+   "average_balance": 182400,
+   "bank_name": "HDFC Bank",
+   "closing_balance": 182400,
+   "ifsc": "HDFC0001234",
+   "opening_balance": 142000,
+   "statement_period": "Jan–Jun 2024",
+   "total_credits": 209610.0,
+   "total_debits": 88898.0
+  },
+  "provider": "mock",
+  "raw": "{\"account_holder\": \"Rajesh Kumar\", \"bank_name\": \"HDFC Bank\", \"account_number\": \"XXXX7890\", \"ifsc\": \"HDFC0001234\", \"statement_period\": \"Jan–Jun 2024\", \"opening_balance\": 142000, \"closing_balance\": 182400, \"total_credits\": 540000, \"total_debits\": 499600, \"average_balance\": 182400}",
+  "tampering": null,
+  "timings": [
+   "extract_ms"
+  ]
+ },
+ "status": 200
+}

@@ -1,0 +1,294 @@
+{
+ "n_forged": 126,
+ "n_genuine": 150,
+ "grid": [
+  {
+   "kind": "ela",
+   "block": 64,
+   "z": 6.0,
+   "top_k": 1,
+   "hit_rate": 0.071,
+   "boxed_genuine": 0.147
+  },
+  {
+   "kind": "ela",
+   "block": 64,
+   "z": 6.0,
+   "top_k": 3,
+   "hit_rate": 0.087,
+   "boxed_genuine": 0.18
+  },
+  {
+   "kind": "ela",
+   "block": 64,
+   "z": 4.0,
+   "top_k": 1,
+   "hit_rate": 0.111,
+   "boxed_genuine": 0.24
+  },
+  {
+   "kind": "ela",
+   "block": 64,
+   "z": 4.0,
+   "top_k": 3,
+   "hit_rate": 0.127,
+   "boxed_genuine": 0.293
+  },
+  {
+   "kind": "ela",
+   "block": 32,
+   "z": 6.0,
+   "top_k": 1,
+   "hit_rate": 0.238,
+   "boxed_genuine": 0.453
+  },
+  {
+   "kind": "ela",
+   "block": 64,
+   "z": 3.0,
+   "top_k": 1,
+   "hit_rate": 0.135,
+   "boxed_genuine": 0.387
+  },
+  {
+   "kind": "ela",
+   "block": 32,
+   "z": 6.0,
+   "top_k": 3,
+   "hit_rate": 0.278,
+   "boxed_genuine": 0.54
+  },
+  {
+   "kind": "ela",
+   "block": 64,
+   "z": 3.0,
+   "top_k": 3,
+   "hit_rate": 0.198,
+   "boxed_genuine": 0.487
+  },
+  {
+   "kind": "ela",
+   "block": 16,
+   "z": 6.0,
+   "top_k": 1,
+   "hit_rate": 0.262,
+   "boxed_genuine": 0.667
+  },
+  {
+   "kind": "ela",
+   "block": 32,
+   "z": 4.0,
+   "top_k": 1,
+   "hit_rate": 0.183,
+   "boxed_genuine": 0.593
+  },
+  {
+   "kind": "ela",
+   "block": 16,
+   "z": 3.0,
+   "top_k": 1,
+   "hit_rate": 0.214,
+   "boxed_genuine": 0.68
+  },
+  {
+   "kind": "ela",
+   "block": 16,
+   "z": 4.0,
+   "top_k": 1,
+   "hit_rate": 0.198,
+   "boxed_genuine": 0.667
+  },
+  {
+   "kind": "ela",
+   "block": 16,
+   "z": 6.0,
+   "top_k": 3,
+   "hit_rate": 0.317,
+   "boxed_genuine": 0.787
+  },
+  {
+   "kind": "ela",
+   "block": 32,
+   "z": 3.0,
+   "top_k": 1,
+   "hit_rate": 0.175,
+   "boxed_genuine": 0.673
+  },
+  {
+   "kind": "ela",
+   "block": 32,
+   "z": 4.0,
+   "top_k": 3,
+   "hit_rate": 0.206,
+   "boxed_genuine": 0.72
+  },
+  {
+   "kind": "noise",
+   "block": 64,
+   "z": 6.0,
+   "top_k": 1,
+   "hit_rate": 0.008,
+   "boxed_genuine": 0.567
+  },
+  {
+   "kind": "noise",
+   "block": 64,
+   "z": 6.0,
+   "top_k": 3,
+   "hit_rate": 0.024,
+   "boxed_genuine": 0.593
+  },
+  {
+   "kind": "ela",
+   "block": 16,
+   "z": 4.0,
+   "top_k": 3,
+   "hit_rate": 0.246,
+   "boxed_genuine": 0.82
+  },
+  {
+   "kind": "ela",
+   "block": 32,
+   "z": 3.0,
+   "top_k": 3,
+   "hit_rate": 0.238,
+   "boxed_genuine": 0.82
+  },
+  {
+   "kind": "ela",
+   "block": 16,
+   "z": 3.0,
+   "top_k": 3,
+   "hit_rate": 0.246,
+   "boxed_genuine": 0.873
+  },
+  {
+   "kind": "noise",
+   "block": 64,
+   "z": 4.0,
+   "top_k": 1,
+   "hit_rate": 0.016,
+   "boxed_genuine": 0.76
+  },
+  {
+   "kind": "noise",
+   "block": 64,
+   "z": 3.0,
+   "top_k": 1,
+   "hit_rate": 0.016,
+   "boxed_genuine": 0.807
+  },
+  {
+   "kind": "noise",
+   "block": 64,
+   "z": 4.0,
+   "top_k": 3,
+   "hit_rate": 0.016,
+   "boxed_genuine": 0.813
+  },
+  {
+   "kind": "noise",
+   "block": 32,
+   "z": 6.0,
+   "top_k": 1,
+   "hit_rate": 0.016,
+   "boxed_genuine": 0.853
+  },
+  {
+   "kind": "noise",
+   "block": 32,
+   "z": 6.0,
+   "top_k": 3,
+   "hit_rate": 0.032,
+   "boxed_genuine": 0.873
+  },
+  {
+   "kind": "noise",
+   "block": 16,
+   "z": 3.0,
+   "top_k": 1,
+   "hit_rate": 0.024,
+   "boxed_genuine": 0.893
+  },
+  {
+   "kind": "noise",
+   "block": 16,
+   "z": 6.0,
+   "top_k": 3,
+   "hit_rate": 0.04,
+   "boxed_genuine": 0.913
+  },
+  {
+   "kind": "noise",
+   "block": 16,
+   "z": 6.0,
+   "top_k": 1,
+   "hit_rate": 0.024,
+   "boxed_genuine": 0.9
+  },
+  {
+   "kind": "noise",
+   "block": 32,
+   "z": 3.0,
+   "top_k": 1,
+   "hit_rate": 0.016,
+   "boxed_genuine": 0.92
+  },
+  {
+   "kind": "noise",
+   "block": 64,
+   "z": 3.0,
+   "top_k": 3,
+   "hit_rate": 0.016,
+   "boxed_genuine": 0.927
+  },
+  {
+   "kind": "noise",
+   "block": 32,
+   "z": 4.0,
+   "top_k": 1,
+   "hit_rate": 0.016,
+   "boxed_genuine": 0.947
+  },
+  {
+   "kind": "noise",
+   "block": 16,
+   "z": 4.0,
+   "top_k": 1,
+   "hit_rate": 0.024,
+   "boxed_genuine": 0.96
+  },
+  {
+   "kind": "noise",
+   "block": 32,
+   "z": 4.0,
+   "top_k": 3,
+   "hit_rate": 0.032,
+   "boxed_genuine": 0.98
+  },
+  {
+   "kind": "noise",
+   "block": 16,
+   "z": 4.0,
+   "top_k": 3,
+   "hit_rate": 0.04,
+   "boxed_genuine": 0.993
+  },
+  {
+   "kind": "noise",
+   "block": 32,
+   "z": 3.0,
+   "top_k": 3,
+   "hit_rate": 0.032,
+   "boxed_genuine": 0.987
+  },
+  {
+   "kind": "noise",
+   "block": 16,
+   "z": 3.0,
+   "top_k": 3,
+   "hit_rate": 0.04,
+   "boxed_genuine": 1.0
+  }
+ ]
+}

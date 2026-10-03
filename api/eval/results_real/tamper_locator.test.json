@@ -1,0 +1,99 @@
+{
+ "agent_id": "tamper_locator",
+ "split": "test",
+ "data": {
+  "name": "flagged (MEDIUM/HIGH) documents of the production run",
+  "split": "test",
+  "n_forged_flagged": 209,
+  "n_genuine_flagged": 92,
+  "criterion": "hit = a drawn box has IoU >= 0.5 with a forged region or its centre lies inside it"
+ },
+ "metrics": {
+  "box_hit_rate": {
+   "value": 0.7464,
+   "ci95": [
+    0.6833,
+    0.8006
+   ],
+   "k": 156,
+   "n": 209
+  },
+  "any_overlap_rate": {
+   "value": 0.7895,
+   "ci95": [
+    0.7292,
+    0.8393
+   ],
+   "k": 165,
+   "n": 209
+  },
+  "boxed_rate": {
+   "value": 0.9426,
+   "ci95": [
+    0.9023,
+    0.9669
+   ],
+   "k": 197,
+   "n": 209
+  },
+  "false_box_rate": {
+   "value": 0.0217,
+   "ci95": [
+    0.006,
+    0.0758
+   ],
+   "k": 2,
+   "n": 92
+  },
+  "by_dataset": {
+   "findit": {
+    "n": 19,
+    "hit": 0.3158,
+    "boxed": 0.3684
+   },
+   "sidtd": {
+    "n": 190,
+    "hit": 0.7895,
+    "boxed": 1.0
+   }
+  }
+ },
+ "target": {
+  "metric": "box_hit_rate",
+  "target": 0.8,
+  "higher": true,
+  "label": "Forged region boxed (IoU >= 0.5 or box centre inside it)"
+ },
+ "primary_value": 0.7464,
+ "rating": "Acceptable",
+ "secondary": [
+  {
+   "metric": "false_box_rate",
+   "target": 0.2,
+   "higher": false,
+   "label": "Boxes drawn on genuine documents",
+   "value": 0.0217,
+   "rating": "Strong"
+  }
+ ],
+ "run": {
+  "git_commit": "d990476",
+  "git_dirty": true,
+  "python": "3.13.3",
+  "platform": "Windows-11-10.0.26200-SP0",
+  "cpu": "Intel64 Family 6 Model 183 Stepping 1, GenuineIntel",
+  "gpu": "NVIDIA GeForce RTX 4060 Laptop GPU, 8188 MiB",
+  "llm": {
+   "provider": "ollama",
+   "model": "qwen2.5vl:7b",
+   "temperature": 0.0,
+   "num_ctx": 8192,
+   "timeout_s": 180,
+   "keep_alive": "30m",
+   "effort": "low"
+  },
+  "split_seed": 20261001,
+  "dev_fraction": 0.3,
+  "measured_at": "2026-10-03T20:04:53+00:00"
+ }
+}

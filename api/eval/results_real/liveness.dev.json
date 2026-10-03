@@ -1,0 +1,147 @@
+{
+ "agent_id": "liveness",
+ "split": "dev",
+ "data": {
+  "name": "NUAA Photograph Imposter Database (primary, full frames); CelebA-Spoof test crops (secondary)",
+  "split": "dev (NUAA official train list)",
+  "n": 120,
+  "n_celeba": 80,
+  "subjects": [
+   "0001",
+   "0002",
+   "0003",
+   "0004",
+   "0005",
+   "0006",
+   "0007",
+   "0008",
+   "0009"
+  ]
+ },
+ "metrics": {
+  "acer": 0.0833,
+  "apcer": {
+   "value": 0.0,
+   "ci95": [
+    0,
+    0.0611
+   ],
+   "k": 0,
+   "n": 59
+  },
+  "bpcer": {
+   "value": 0.1667,
+   "ci95": [
+    0.0931,
+    0.2803
+   ],
+   "k": 10,
+   "n": 60
+  },
+  "acer_ci95": [
+   0.0345,
+   0.1339
+  ],
+  "auc": {
+   "value": 1.0,
+   "ci95": [
+    1.0,
+    1.0
+   ],
+   "n": 119
+  },
+  "no_face": 1,
+  "n_live": 60,
+  "n_attack": 59,
+  "threshold": 0.5,
+  "celeba_spoof_crops": {
+   "acer": 0.3159,
+   "apcer": {
+    "value": 0.3818,
+    "ci95": [
+     0.2652,
+     0.5139
+    ],
+    "k": 21,
+    "n": 55
+   },
+   "bpcer": {
+    "value": 0.25,
+    "ci95": [
+     0.12,
+     0.449
+    ],
+    "k": 6,
+    "n": 24
+   },
+   "acer_ci95": [
+    0.208,
+    0.4303
+   ],
+   "auc": {
+    "value": 0.7826,
+    "ci95": [
+     0.664,
+     0.872
+    ],
+    "n": 79
+   },
+   "no_face": 1,
+   "n_live": 24,
+   "n_attack": 55,
+   "threshold": 0.5
+  },
+  "latency": {
+   "n": 120,
+   "p50_s": 0.16,
+   "p95_s": 0.18,
+   "mean_s": 0.2
+  }
+ },
+ "target": {
+  "metric": "acer",
+  "target": 0.1,
+  "higher": false,
+  "label": "ACER = (APCER + BPCER) / 2"
+ },
+ "primary_value": 0.0833,
+ "rating": "Strong",
+ "secondary": [
+  {
+   "metric": "apcer",
+   "target": 0.1,
+   "higher": false,
+   "label": "Attacks accepted as live",
+   "value": 0.0,
+   "rating": "Strong"
+  },
+  {
+   "metric": "bpcer",
+   "target": 0.1,
+   "higher": false,
+   "label": "Live selfies rejected",
+   "value": 0.1667,
+   "rating": "Weak"
+  }
+ ],
+ "run": {
+  "git_commit": "d990476",
+  "git_dirty": true,
+  "python": "3.13.3",
+  "platform": "Windows-11-10.0.26200-SP0",
+  "cpu": "Intel64 Family 6 Model 183 Stepping 1, GenuineIntel",
+  "gpu": "NVIDIA GeForce RTX 4060 Laptop GPU, 8188 MiB",
+  "llm": {
+   "provider": "ollama",
+   "model": "qwen2.5vl:7b",
+   "temperature": 0.0,
+   "num_ctx": 8192,
+   "timeout_s": 180,
+   "keep_alive": "30m",
+   "effort": "low"
+  },
+  "split_seed": 20261001,
+  "dev_fraction": 0.3,
+  "measured_at": "2026-10-01T00:53:52+00:00"
+ }
+}

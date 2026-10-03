@@ -1,0 +1,128 @@
+{
+ "agent_id": "fraud_triage",
+ "split": "test",
+ "data": {
+  "name": "LFW index of 1,000 real faces + 80 planted rings (40 same-face pairs, 20 shared accounts, 20 shared files)",
+  "split": "test",
+  "n_apps": 1180,
+  "n_rings": 80,
+  "scoring": "correct = contains a planted ring's link and no certainly-false link; false = contains a face link between people of different LFW folds (guaranteed different) or an unplanted account / file link; unverifiable = only same-fold face links (LFW repeats people inside a fold, this copy has no identity labels) - left out of precision. A ring is recalled when a correct proposal contains all its applications.",
+  "scoring_note": "first scoring (2026-10-01) counted every unplanted proposal as false; corrected the same day after seeing that most were same-fold links, i.e. possibly the same real person"
+ },
+ "metrics": {
+  "proposal_precision": {
+   "value": 1.0,
+   "ci95": [
+    0.9513,
+    1
+   ],
+   "k": 75,
+   "n": 75
+  },
+  "ring_recall": {
+   "value": 0.9375,
+   "ci95": [
+    0.8619,
+    0.973
+   ],
+   "k": 75,
+   "n": 80
+  },
+  "ring_exact_rate": {
+   "value": 0.8,
+   "ci95": [
+    0.6995,
+    0.873
+   ],
+   "k": 64,
+   "n": 80
+  },
+  "recall_by_ring_kind": {
+   "same_face_two_pans": {
+    "found": 0.875,
+    "n": 40
+   },
+   "shared_account": {
+    "found": 1.0,
+    "n": 20
+   },
+   "shared_file": {
+    "found": 1.0,
+    "n": 20
+   }
+  },
+  "proposals": 240,
+  "proposals_correct": 75,
+  "proposals_false": 0,
+  "proposals_unverifiable": 165,
+  "largest_proposal": 8,
+  "largest_false_proposal": 0,
+  "links": 419,
+  "indexed": 1180,
+  "face_match_threshold": 0.5,
+  "seconds": 20.9,
+  "baseline_at_0.363": {
+   "proposal_precision": {
+    "value": 0.432,
+    "ci95": [
+     0.3485,
+     0.5196
+    ],
+    "k": 54,
+    "n": 125
+   },
+   "ring_recall": {
+    "value": 0.675,
+    "ci95": [
+     0.5664,
+     0.7676
+    ],
+    "k": 54,
+    "n": 80
+   },
+   "proposals": 220,
+   "proposals_false": 71,
+   "proposals_unverifiable": 95,
+   "largest_false_proposal": 141,
+   "links": 830
+  }
+ },
+ "target": {
+  "metric": "proposal_precision",
+  "target": 0.8,
+  "higher": true,
+  "label": "Ring proposals that are a planted ring"
+ },
+ "primary_value": 1.0,
+ "rating": "Strong",
+ "secondary": [
+  {
+   "metric": "ring_recall",
+   "target": 0.9,
+   "higher": true,
+   "label": "Planted rings proposed",
+   "value": 0.9375,
+   "rating": "Strong"
+  }
+ ],
+ "run": {
+  "git_commit": "d990476",
+  "git_dirty": true,
+  "python": "3.13.3",
+  "platform": "Windows-11-10.0.26200-SP0",
+  "cpu": "Intel64 Family 6 Model 183 Stepping 1, GenuineIntel",
+  "gpu": "NVIDIA GeForce RTX 4060 Laptop GPU, 8188 MiB",
+  "llm": {
+   "provider": "ollama",
+   "model": "qwen2.5vl:7b",
+   "temperature": 0.0,
+   "num_ctx": 8192,
+   "timeout_s": 180,
+   "keep_alive": "30m",
+   "effort": "low"
+  },
+  "split_seed": 20261001,
+  "dev_fraction": 0.3,
+  "measured_at": "2026-10-01T10:47:45+00:00"
+ }
+}

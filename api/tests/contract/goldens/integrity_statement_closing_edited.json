@@ -1,0 +1,101 @@
+{
+ "body": {
+  "cleaned_preview": null,
+  "tampering": {
+   "document_preview": "img:1c8a52933f5a059e",
+   "explanations": [
+    "Risk driven by a single strong signal: business_rules (score x confidence = 0.67 > corroboration average)",
+    "[business_rules] FAILED: Bank summary: opening 107,075 + credits 192,510 - debits 83,023 = 216,562 should equal closing 542,874",
+    "[copy_move] skipped: born-digital PDF — rendered text/labels repeat pixel-identically by construction, so duplication detection is not meaningful",
+    "[metadata] skipped: EXIF does not apply to PDFs (see pdf_forensics)",
+    "[authenticity] skipped: authenticity check disabled",
+    "[ela] skipped: born-digital PDF — rendered pages carry no JPEG compression history",
+    "[cnn] skipped: born-digital PDF — CNN operates on ELA maps of real compressed images",
+    "[patch_cnn] skipped: born-digital PDF — the patch detector was trained on scans and photos"
+   ],
+   "fast_tracked": false,
+   "heatmaps": [],
+   "needs_review": true,
+   "plain_explanation": null,
+   "risk_score": 0.667,
+   "risk_tier": "HIGH",
+   "signals": [
+    {
+     "available": true,
+     "findings": [
+      "PDF Producer: 'Finacle Statement Engine 11.2'",
+      "PDF Creator: 'SAP HCM Payroll'"
+     ],
+     "name": "pdf_forensics",
+     "score": 0.0,
+     "skip_reason": null
+    },
+    {
+     "available": true,
+     "findings": [
+      "FAILED: Bank summary: opening 107,075 + credits 192,510 - debits 83,023 = 216,562 should equal closing 542,874"
+     ],
+     "name": "business_rules",
+     "score": 0.667,
+     "skip_reason": null
+    },
+    {
+     "available": false,
+     "findings": [],
+     "name": "copy_move",
+     "score": null,
+     "skip_reason": "born-digital PDF — rendered text/labels repeat pixel-identically by construction, so duplication detection is not meaningful"
+    },
+    {
+     "available": false,
+     "findings": [],
+     "name": "metadata",
+     "score": null,
+     "skip_reason": "EXIF does not apply to PDFs (see pdf_forensics)"
+    },
+    {
+     "available": false,
+     "findings": [],
+     "name": "authenticity",
+     "score": null,
+     "skip_reason": "authenticity check disabled"
+    },
+    {
+     "available": true,
+     "findings": [
+      "0/468 background blocks (0.0%) have anomalous noise levels"
+     ],
+     "name": "noise",
+     "score": 0.0,
+     "skip_reason": null
+    },
+    {
+     "available": false,
+     "findings": [],
+     "name": "ela",
+     "score": null,
+     "skip_reason": "born-digital PDF — rendered pages carry no JPEG compression history"
+    },
+    {
+     "available": false,
+     "findings": [],
+     "name": "cnn",
+     "score": null,
+     "skip_reason": "born-digital PDF — CNN operates on ELA maps of real compressed images"
+    },
+    {
+     "available": false,
+     "findings": [],
+     "name": "patch_cnn",
+     "score": null,
+     "skip_reason": "born-digital PDF — the patch detector was trained on scans and photos"
+    }
+   ],
+   "source_format": "pdf_digital"
+  },
+  "timings": [
+   "tampering_ms"
+  ]
+ },
+ "status": 200
+}

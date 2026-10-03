@@ -1,0 +1,86 @@
+{
+ "agent_id": "audit_storage",
+ "split": "dev",
+ "data": {
+  "name": "real files (PAN card PNGs, SROIE receipt scans, statement PDFs) stored by the agent in an isolated store; no SQL write",
+  "split": "dev",
+  "store": "D:\\novacinternship\\finsight-eval-data\\work\\finsight-store-b7usefr0"
+ },
+ "metrics": {
+  "roundtrip_integrity": {
+   "value": 1.0,
+   "ci95": [
+    0.7008,
+    1
+   ],
+   "k": 9,
+   "n": 9
+  },
+  "rows_ok": {
+   "value": 1.0,
+   "ci95": [
+    0.4385,
+    1
+   ],
+   "k": 3,
+   "n": 3
+  },
+  "officer_masking": {
+   "value": 1.0,
+   "ci95": [
+    0.6097,
+    1.0
+   ],
+   "k": 6,
+   "n": 6
+  },
+  "manager_sheet_full_pan": {
+   "value": 1.0,
+   "ci95": [
+    0.4385,
+    1
+   ],
+   "k": 3,
+   "n": 3
+  },
+  "n_documents": 9
+ },
+ "target": {
+  "metric": "roundtrip_integrity",
+  "target": 1.0,
+  "higher": true,
+  "label": "Stored files and rows intact"
+ },
+ "primary_value": 1.0,
+ "rating": "Strong",
+ "secondary": [
+  {
+   "metric": "officer_masking",
+   "target": 1.0,
+   "higher": true,
+   "label": "Officer sheet hides PAN / Aadhaar",
+   "value": 1.0,
+   "rating": "Strong"
+  }
+ ],
+ "run": {
+  "git_commit": "d990476",
+  "git_dirty": true,
+  "python": "3.13.3",
+  "platform": "Windows-11-10.0.26200-SP0",
+  "cpu": "Intel64 Family 6 Model 183 Stepping 1, GenuineIntel",
+  "gpu": "NVIDIA GeForce RTX 4060 Laptop GPU, 8188 MiB",
+  "llm": {
+   "provider": "ollama",
+   "model": "qwen2.5vl:7b",
+   "temperature": 0.0,
+   "num_ctx": 8192,
+   "timeout_s": 180,
+   "keep_alive": "0s",
+   "effort": "low"
+  },
+  "split_seed": 20261001,
+  "dev_fraction": 0.3,
+  "measured_at": "2026-10-01T09:28:24+00:00"
+ }
+}

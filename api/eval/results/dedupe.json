@@ -1,0 +1,138 @@
+{
+ "agent_id": "dedupe",
+ "measured_at": "2026-09-25T14:15:42+00:00",
+ "metrics": {
+  "recall": 1.0,
+  "precision": 1.0,
+  "f1": 1.0,
+  "kind_accuracy": 1.0,
+  "n_probes": 20,
+  "index_size": 35,
+  "per_kind": {
+   "same_file_reused": 1.0,
+   "same_id_different_face": 1.0,
+   "same_face_different_id": 1.0
+  },
+  "clean_false_alarms": 0
+ },
+ "target": {
+  "metric": "recall",
+  "target": 0.95,
+  "higher": true,
+  "label": "Duplicates found"
+ },
+ "primary_value": 1.0,
+ "rating": "Strong",
+ "secondary": [
+  {
+   "metric": "precision",
+   "target": 1.0,
+   "higher": true,
+   "label": "No false duplicates",
+   "value": 1.0,
+   "rating": "Strong"
+  }
+ ],
+ "details": [
+  {
+   "expected": "same_file_reused",
+   "got": "same_file_reused",
+   "score": 1.0
+  },
+  {
+   "expected": "same_file_reused",
+   "got": "same_file_reused",
+   "score": 1.0
+  },
+  {
+   "expected": "same_file_reused",
+   "got": "same_file_reused",
+   "score": 1.0
+  },
+  {
+   "expected": "same_file_reused",
+   "got": "same_file_reused",
+   "score": 1.0
+  },
+  {
+   "expected": "same_file_reused",
+   "got": "same_file_reused",
+   "score": 1.0
+  },
+  {
+   "expected": "same_id_different_face",
+   "got": "same_id_different_face",
+   "score": 0.95
+  },
+  {
+   "expected": "same_id_different_face",
+   "got": "same_id_different_face",
+   "score": 0.95
+  },
+  {
+   "expected": "same_id_different_face",
+   "got": "same_id_different_face",
+   "score": 0.95
+  },
+  {
+   "expected": "same_id_different_face",
+   "got": "same_id_different_face",
+   "score": 0.95
+  },
+  {
+   "expected": "same_id_different_face",
+   "got": "same_id_different_face",
+   "score": 0.95
+  },
+  {
+   "expected": "same_face_different_id",
+   "got": "same_face_different_id",
+   "score": 0.95
+  },
+  {
+   "expected": "same_face_different_id",
+   "got": "same_face_different_id",
+   "score": 0.95
+  },
+  {
+   "expected": "same_face_different_id",
+   "got": "same_face_different_id",
+   "score": 0.95
+  },
+  {
+   "expected": "same_face_different_id",
+   "got": "same_face_different_id",
+   "score": 0.95
+  },
+  {
+   "expected": "same_face_different_id",
+   "got": "same_face_different_id",
+   "score": 0.95
+  },
+  {
+   "expected": null,
+   "got": null,
+   "score": 0.0
+  },
+  {
+   "expected": null,
+   "got": null,
+   "score": 0.0
+  },
+  {
+   "expected": null,
+   "got": null,
+   "score": 0.0
+  },
+  {
+   "expected": null,
+   "got": null,
+   "score": 0.0
+  },
+  {
+   "expected": null,
+   "got": null,
+   "score": 0.0
+  }
+ ]
+}

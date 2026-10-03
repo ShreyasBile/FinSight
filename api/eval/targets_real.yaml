@@ -1,0 +1,185 @@
+# Real-data evaluation targets — fixed BEFORE the agent is run on the data (PROTOCOL.md §2.1).
+# Primary metrics keep the synthetic-run targets (targets.yaml, 2026-09-25) wherever the same
+# question is asked; a target only differs where the real data changes what is achievable, and then
+# the reason is given. rating: Strong = met · Acceptable = within 10% · Weak = below.
+#
+# Group 1 registered 2026-10-01, before any Group 1 agent was run on these datasets.
+
+tampering_forensics:      # Find it again! (real receipts, human forgeries) + SIDTD (ID templates, forged)
+  primary: {metric: forged_recall, target: 0.85, higher: true, label: "Forged documents flagged MEDIUM or HIGH"}
+  secondary:
+    - {metric: genuine_false_high, target: 0.10, higher: false, label: "Genuine documents wrongly HIGH"}
+    - {metric: genuine_flagged_any, target: 0.30, higher: false, label: "Genuine documents flagged at all (MEDIUM or HIGH)"}
+    - {metric: auc, target: 0.85, higher: true, label: "ROC-AUC of the fused score"}
+
+authenticity:             # same documents; the vision-model check on its own
+  primary: {metric: forged_recall, target: 0.70, higher: true, label: "Forged documents flagged by the authenticity check"}
+  secondary:
+    - {metric: genuine_false_flag, target: 0.10, higher: false, label: "Genuine documents flagged"}
+    - {metric: cap_respected, target: 1.0, higher: true, label: "A lone authenticity flag never reaches HIGH"}
+
+tamper_locator:           # Find it again! forged receipts with ground-truth boxes
+  primary: {metric: box_hit_rate, target: 0.80, higher: true, label: "Forged region boxed (IoU >= 0.5 or box centre inside it)"}
+  secondary:
+    - {metric: false_box_rate, target: 0.20, higher: false, label: "Boxes drawn on genuine documents"}
+
+face_verification:        # AgeDB-30, CALFW, CPLFW, LFW — standard 6,000-pair protocols, raw and printed-card conditions
+  primary: {metric: verdict_accuracy, target: 0.90, higher: true, label: "Correct same/different verdict (confident verdicts, all sets)"}
+  secondary:
+    - {metric: tar_at_far_1pct, target: 0.80, higher: true, label: "True accepts at 1% false accepts"}
+    - {metric: false_match_rate, target: 0.01, higher: false, label: "Different people called a match"}
+    - {metric: confident_coverage, target: 0.80, higher: true, label: "Pairs given a confident verdict"}
+
+liveness:                 # CelebA-Spoof test (live vs print / replay / 3D mask), ISO/IEC 30107-3 metrics
+  primary: {metric: acer, target: 0.10, higher: false, label: "ACER = (APCER + BPCER) / 2"}
+  secondary:
+    - {metric: apcer, target: 0.10, higher: false, label: "Attacks accepted as live"}
+    - {metric: bpcer, target: 0.10, higher: false, label: "Live selfies rejected"}
+
+risk_scoring:             # L&T vehicle loans (India, two-wheeler) — real defaults
+  # The 0.75 target (targets.yaml) was set on a teaching dataset. On L&T, trained models are reported
+  # well below that. So the target is RELATIVE to a gradient-boosting model TRAINED on the L&T dev
+  # split and scored on the same test sample (the achievable ceiling). Measured as skill above chance,
+  # (agent AUC - 0.5) / (ceiling AUC - 0.5): a plain AUC ratio flatters weak models because 0.5 is the
+  # floor. Target: the untrained agent captures at least three quarters of what a model trained on this
+  # very data captures. The ceiling is recorded in the result file.
+  primary: {metric: auc_vs_trained_ceiling, target: 0.75, higher: true, label: "Skill vs a model trained on L&T: (AUC-0.5)/(ceiling-0.5)"}
+  secondary:
+    - {metric: auc, target: 0.62, higher: true, label: "ROC-AUC on L&T test split"}
+    - {metric: grade_default_rate_monotone, target: 1.0, higher: true, label: "Default rate rises with each risk grade"}
+    - {metric: monotonicity_violations, target: 0, higher: false, label: "Worse inputs never lower the score"}
+
+kb_ingestion:             # real RBI Master Directions / circulars, full text, questions written before retrieval
+  primary: {metric: recall_at_5, target: 0.85, higher: true, label: "Gold paragraph's document in top 5"}
+  secondary:
+    - {metric: section_recall_at_5, target: 0.70, higher: true, label: "Gold paragraph itself in top 5"}
+
+regulatory_qa:            # ObliQA (ADGM regulations, gold passages) + RBI question set
+  primary: {metric: obliqa_recall_at_10, target: 0.70, higher: true, label: "ObliQA: a gold passage in top 10"}
+  secondary:
+    - {metric: rbi_hit_at_5, target: 0.85, higher: true, label: "RBI set: gold paragraph in top 5"}
+    - {metric: grounded_answer_rate, target: 0.90, higher: true, label: "Synthesised answers fully grounded"}
+
+rule_authoring:           # real regulations with THIRD-PARTY obligation labels: the passages ObliQA's questions are
+                          # built on (NLI-filtered obligations, ADGM). Changed from "RBI, annotated by us" before any
+                          # run: rbi.org.in blocks scripted downloads, and third-party labels are the stronger test.
+                          # RBI documents are added when the user downloads them (raw/rbi/PLEASE-DOWNLOAD.md).
+  primary: {metric: obligation_recall, target: 0.70, higher: true, label: "Annotated obligations recovered as candidates"}
+  secondary:
+    - {metric: valid_condition_rate, target: 0.90, higher: true, label: "Candidates with a well-formed condition"}
+    - {metric: precision, target: 0.60, higher: true, label: "Candidates that match a real obligation"}
+
+process_mining_analyst:   # BPI Challenge 2017 loaded into a throwaway database; pm4py as the independent reference
+  primary: {metric: figure_agreement, target: 1.0, higher: true, label: "Analyst figures equal the independent pm4py figures"}
+  secondary:
+    - {metric: top_variant_match, target: 1.0, higher: true, label: "Most frequent variant identical"}
+
+# ── Group 2 — registered 2026-10-01, before any Group 2 agent was run on these datasets ─────────────
+# Public data covers part of the question, or a substitute stands in for a document India does not let
+# anyone publish (real PAN/Aadhaar). Where a metric differs from targets.yaml the reason is given.
+
+preprocessing:            # MIDV-500 phone frames (card outline ground truth) + SROIE / FUNSD real scans (word ground truth)
+  # Real frames carry the card's true outline but no field text, so the primary asks the geometric
+  # question the text-recall target stood for: is the card found and flattened?
+  primary: {metric: card_located_rate, target: 0.80, higher: true, label: "Phone frames: card outline found (IoU >= 0.85 with the true outline)"}
+  secondary:
+    - {metric: scan_harm_rate, target: 0.05, higher: false, label: "Real scans that read worse after cleanup (word recall -2 pts or more)"}
+    - {metric: ocr_recall_gain, target: 0.0, higher: true, label: "Word recall after minus before, real scans"}
+    - {metric: p50_s, target: 10.0, higher: false, label: "Median cleanup time per image (s)"}
+
+extraction:               # PAN cards (synthetic, Indian layout, labelled) + Indian bank statements (synthetic data, digital and scanned PDFs, JSON truth)
+  primary: {metric: field_accuracy, target: 0.90, higher: true, label: "Printed fields read correctly (PAN cards + bank statements)"}
+  secondary:
+    - {metric: receipt_field_accuracy, target: 0.85, higher: true, label: "Real scanned receipts (SROIE), evaluation-only receipt prompt"}
+    - {metric: json_ok_rate, target: 0.98, higher: true, label: "Valid JSON returned"}
+    - {metric: doc_all_correct, target: 0.60, higher: true, label: "Documents with every printed field correct"}
+    - {metric: scanned_statement_field_accuracy, target: 0.85, higher: true, label: "Scanned bank statements: printed fields correct"}
+
+doc_identity:             # real wrong documents (RVL-CDIP 16 classes, SROIE receipts, SIDTD foreign IDs) uploaded under an Indian doc type
+  primary: {metric: wrong_doc_recall, target: 0.90, higher: true, label: "Wrong uploads caught"}
+  secondary:
+    - {metric: false_block_rate, target: 0.05, higher: false, label: "Correct uploads wrongly blocked"}
+
+pii_masking:              # PAN cards (labelled) + Indian ID numbers printed onto real scanned pages + synthetic Aadhaar variants
+  primary: {metric: pii_recall, target: 1.0, higher: true, label: "No full PAN / Aadhaar readable after masking"}
+  secondary:
+    - {metric: last4_kept, target: 0.95, higher: true, label: "Last four characters still readable"}
+    - {metric: other_numbers_intact, target: 0.95, higher: true, label: "The page's other numbers (amounts, dates) still readable"}
+
+validation:               # the complete real IFSC register (Razorpay) + mutations; PAN / Aadhaar / GSTIN generated + mutations
+  primary: {metric: accuracy, target: 1.0, higher: true, label: "Correct ok / error flag"}
+  secondary:
+    - {metric: real_ifsc_accepted, target: 1.0, higher: true, label: "Every real IFSC code accepted"}
+
+dedupe:                   # real faces (AgeDB-30, CALFW, CPLFW, LFW test folds) in an isolated index; planted duplicates
+  # The synthetic target was precision 1.0 on a handful of cases. With a real index the question is
+  # per applicant: how often does a NEW, genuine applicant get a duplicate alert? Measured with 1,000
+  # indexed people; probes come from folds not in the index, so they are guaranteed different people.
+  primary: {metric: recall, target: 0.95, higher: true, label: "Planted duplicates found with the right kind"}
+  secondary:
+    - {metric: false_alert_rate, target: 0.01, higher: false, label: "New genuine applicants given a duplicate alert (index of 1,000)"}
+
+cross_verification:       # real Indian names (55k list) in labelled variant pairs; PAN names as read by the extraction model
+  primary: {metric: name_pair_accuracy, target: 0.95, higher: true, label: "Labelled name pairs judged correctly"}
+  secondary:
+    - {metric: js_parity, target: 1.0, higher: true, label: "Identical to the browser logic"}
+    - {metric: extracted_name_match, target: 0.95, higher: true, label: "Name read off a PAN card matches its label"}
+
+fraud_patterns:           # real Berka statements: clean + with planted patterns; transaction parser on Indian statements (JSON truth)
+  primary: {metric: macro_f1, target: 0.85, higher: true, label: "Pattern detection F1 on real statements with planted patterns"}
+  secondary:
+    - {metric: parse_accuracy, target: 0.95, higher: true, label: "Transactions parsed from Indian statements"}
+    - {metric: genuine_flag_rate, target: 0.10, higher: false, label: "Clean real statements flagged"}
+
+income_analysis:          # real Berka inflows; payslip declared consistent vs inflated (>= 1.5x)
+  primary: {metric: f1, target: 0.90, higher: true, label: "Income-mismatch detection F1"}
+  secondary:
+    - {metric: false_mismatch_rate, target: 0.10, higher: false, label: "Consistent declarations flagged"}
+
+policy_check:             # real L&T loan inputs; the engine against an independent re-implementation of each rule's text
+  primary: {metric: rule_accuracy, target: 1.0, higher: true, label: "Rule verdicts equal the independent implementation"}
+  secondary:
+    - {metric: no_false_pass, target: 1.0, higher: true, label: "Missing evidence never passes"}
+    - {metric: rules_well_formed, target: 1.0, higher: true, label: "Active rules carry a name and a regulation reference"}
+
+fraud_triage:             # planted rings in a population of real faces (same isolated index as dedupe)
+  primary: {metric: proposal_precision, target: 0.80, higher: true, label: "Ring proposals that are a planted ring"}
+  secondary:
+    - {metric: ring_recall, target: 0.90, higher: true, label: "Planted rings proposed"}
+
+underwriting_supervisor:  # real L&T loans with their real outcome (default within the observation window)
+  # No labelled "expected recommendation" exists for real loans; the outcome does. Target: loans the
+  # supervisor recommends approving default clearly less often than the sample as a whole.
+  primary: {metric: approve_default_ratio, target: 0.85, higher: false, label: "Default rate of approve-recommended / sample default rate"}
+  secondary:
+    - {metric: never_loosens, target: 1.0, higher: true, label: "Never looser than the rule baseline"}
+    - {metric: llm_ran_rate, target: 0.95, higher: true, label: "LLM recommendation produced"}
+
+# ── Group 3 — registered 2026-10-01, before any Group 3 run ─────────────────────────────────────────
+fraud_fusion:             # composite cases assembled from real component outputs (Find it again! / SIDTD tamper scores, real face pairs)
+  primary: {metric: fraud_case_recall, target: 0.85, higher: true, label: "Cases with a forged document or a different face rated MEDIUM or HIGH"}
+  secondary:
+    - {metric: clean_case_false_high, target: 0.05, higher: false, label: "Clean cases rated HIGH"}
+    - {metric: monotonicity, target: 1.0, higher: true, label: "More evidence never lowers the score"}
+
+credit_memo:              # memos generated for real L&T loans, plus the PDF / Word export
+  primary: {metric: grounded_rate, target: 0.95, higher: true, label: "Memos citing only real figures"}
+  secondary:
+    - {metric: section_completeness, target: 1.0, higher: true, label: "All required sections present"}
+    - {metric: export_valid, target: 1.0, higher: true, label: "PDF and Word exports open, carry the logo, IDs masked"}
+
+offer_generation:         # real L&T loan amounts and tenures
+  primary: {metric: emi_exact, target: 1.0, higher: true, label: "EMI equal to the formula"}
+
+workflow_router:
+  primary: {metric: accuracy, target: 1.0, higher: true, label: "Next step matches the lifecycle diagram"}
+
+notifier:
+  primary: {metric: template_accuracy, target: 1.0, higher: true, label: "Correct template and fields"}
+  secondary:
+    - {metric: external_sends, target: 0, higher: false, label: "Messages sent outside the system"}
+
+audit_storage:            # real document files (SROIE scans, statement PDFs) stored and read back in an isolated store
+  primary: {metric: roundtrip_integrity, target: 1.0, higher: true, label: "Stored files and rows intact"}
+  secondary:
+    - {metric: officer_masking, target: 1.0, higher: true, label: "Officer sheet hides PAN / Aadhaar"}

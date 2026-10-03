@@ -1,0 +1,179 @@
+{
+ "agent_id": "fraud_patterns",
+ "split": "dev",
+ "data": {
+  "name": "Berka real accounts (6-month windows, clean + one planted pattern each); Indian statement set for the parser; IBM AML HI-Small (informational)",
+  "split": "dev",
+  "n_windows": 40,
+  "n_clean": 20,
+  "planted_each": 4,
+  "scale": "amounts x2.5 (CZK 1990s -> rupee magnitudes)",
+  "label_map": {
+   "VKLAD": "CASH DEPOSIT",
+   "PREVOD Z UCTU": "NEFT TRANSFER FROM ACCOUNT",
+   "VYBER": "CASH WITHDRAWAL",
+   "PREVOD NA UCET": "NEFT TRANSFER TO ACCOUNT",
+   "VYBER KARTOU": "CARD WITHDRAWAL",
+   "DUCHOD": "PENSION CREDIT",
+   "UROK": "INTEREST CREDIT",
+   "SIPO": "HOUSEHOLD BILL PAYMENT",
+   "SLUZBY": "SERVICE CHARGES",
+   "UVER": "LOAN EMI",
+   "POJISTNE": "INSURANCE PREMIUM",
+   "SANKC. UROK": "PENAL INTEREST",
+   "": ""
+  }
+ },
+ "metrics": {
+  "macro_f1": 0.9,
+  "per_pattern": {
+   "cash_cycling": {
+    "f1": 1.0,
+    "recall": 1.0,
+    "false_flags": 0
+   },
+   "sudden_deposit": {
+    "f1": 0.5,
+    "recall": 0.75,
+    "false_flags": 5
+   },
+   "window_dressing": {
+    "f1": 1.0,
+    "recall": 1.0,
+    "false_flags": 0
+   },
+   "income_mismatch": {
+    "f1": 1.0,
+    "recall": 1.0,
+    "false_flags": 0
+   },
+   "gst_inflation": {
+    "f1": 1.0,
+    "recall": 1.0,
+    "false_flags": 0
+   }
+  },
+  "macro_f1_ci95": [
+   0.7,
+   0.96
+  ],
+  "genuine_flag_rate": {
+   "value": 0.0,
+   "ci95": [
+    0,
+    0.1611
+   ],
+   "k": 0,
+   "n": 20
+  },
+  "genuine_flags_by_pattern": {},
+  "parse_accuracy": 0.0195,
+  "parse": {
+   "row_recall": 0.0195,
+   "row_precision": 0.2176,
+   "statements": 47,
+   "truth_rows": 7596,
+   "digital": {
+    "row_recall": 0.0365,
+    "row_precision": 0.2824,
+    "statements": 25,
+    "truth_rows": 4057
+   },
+   "scanned": {
+    "row_recall": 0.0,
+    "row_precision": 0.0,
+    "statements": 22,
+    "truth_rows": 3539
+   },
+   "latency": {
+    "n": 47,
+    "p50_s": 4.01,
+    "p95_s": 5.01,
+    "mean_s": 3.35
+   }
+  },
+  "aml_ibm": {
+   "auc": {
+    "value": 0.6145,
+    "ci95": [
+     0.5416,
+     0.6795
+    ],
+    "n": 350
+   },
+   "laundering_flagged": {
+    "value": 0.78,
+    "ci95": [
+     0.6476,
+     0.8725
+    ],
+    "k": 39,
+    "n": 50
+   },
+   "clean_flagged": {
+    "value": 0.55,
+    "ci95": [
+     0.4934,
+     0.6053
+    ],
+    "k": 165,
+    "n": 300
+   },
+   "note": "USD transactions only, x83 to rupees; opening balance Rs 1 lakh (AML data carries no balances)"
+  },
+  "auc_planted_vs_clean": {
+   "value": 0.975,
+   "ci95": [
+    0.9167,
+    1.0
+   ],
+   "n": 40
+  }
+ },
+ "target": {
+  "metric": "macro_f1",
+  "target": 0.85,
+  "higher": true,
+  "label": "Pattern detection F1 on real statements with planted patterns"
+ },
+ "primary_value": 0.9,
+ "rating": "Strong",
+ "secondary": [
+  {
+   "metric": "parse_accuracy",
+   "target": 0.95,
+   "higher": true,
+   "label": "Transactions parsed from Indian statements",
+   "value": 0.0195,
+   "rating": "Weak"
+  },
+  {
+   "metric": "genuine_flag_rate",
+   "target": 0.1,
+   "higher": false,
+   "label": "Clean real statements flagged",
+   "value": 0.0,
+   "rating": "Strong"
+  }
+ ],
+ "run": {
+  "git_commit": "d990476",
+  "git_dirty": true,
+  "python": "3.13.3",
+  "platform": "Windows-11-10.0.26200-SP0",
+  "cpu": "Intel64 Family 6 Model 183 Stepping 1, GenuineIntel",
+  "gpu": "NVIDIA GeForce RTX 4060 Laptop GPU, 8188 MiB",
+  "llm": {
+   "provider": "ollama",
+   "model": "qwen2.5vl:7b",
+   "temperature": 0.0,
+   "num_ctx": 8192,
+   "timeout_s": 180,
+   "keep_alive": "0s",
+   "effort": "low"
+  },
+  "split_seed": 20261001,
+  "dev_fraction": 0.3,
+  "measured_at": "2026-10-01T08:43:15+00:00"
+ }
+}

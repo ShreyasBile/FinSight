@@ -1,0 +1,83 @@
+{
+ "agent_id": "tamper_explainer",
+ "split": "test",
+ "data": {
+  "name": "flagged documents of the production run (Find it again! + SIDTD)",
+  "split": "test",
+  "n": 60
+ },
+ "metrics": {
+  "grounded_rate": {
+   "value": 0.9833,
+   "ci95": [
+    0.9114,
+    0.9971
+   ],
+   "k": 59,
+   "n": 60
+  },
+  "tier_unchanged": {
+   "value": 1.0,
+   "ci95": [
+    0.9398,
+    1.0
+   ],
+   "k": 60,
+   "n": 60
+  },
+  "produced_rate": {
+   "value": 1.0,
+   "ci95": [
+    0.9398,
+    1.0
+   ],
+   "k": 60,
+   "n": 60
+  },
+  "sentences_dropped": 1,
+  "latency": {
+   "n": 60,
+   "p50_s": 4.09,
+   "p95_s": 7.42,
+   "mean_s": 4.62
+  }
+ },
+ "target": {
+  "metric": "grounded_rate",
+  "target": 0.95,
+  "higher": true,
+  "label": "Explanations citing only real figures"
+ },
+ "primary_value": 0.9833,
+ "rating": "Strong",
+ "secondary": [
+  {
+   "metric": "tier_unchanged",
+   "target": 1.0,
+   "higher": true,
+   "label": "Risk tier never changed",
+   "value": 1.0,
+   "rating": "Strong"
+  }
+ ],
+ "run": {
+  "git_commit": "d990476",
+  "git_dirty": true,
+  "python": "3.13.3",
+  "platform": "Windows-11-10.0.26200-SP0",
+  "cpu": "Intel64 Family 6 Model 183 Stepping 1, GenuineIntel",
+  "gpu": "NVIDIA GeForce RTX 4060 Laptop GPU, 8188 MiB",
+  "llm": {
+   "provider": "ollama",
+   "model": "qwen2.5vl:7b",
+   "temperature": 0.0,
+   "num_ctx": 8192,
+   "timeout_s": 180,
+   "keep_alive": "30m",
+   "effort": "low"
+  },
+  "split_seed": 20261001,
+  "dev_fraction": 0.3,
+  "measured_at": "2026-10-03T20:09:32+00:00"
+ }
+}

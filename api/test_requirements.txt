@@ -1,0 +1,143 @@
+# ── test_requirements.txt ─────────────────────────────────────────────────
+# Staging merge of the FinSight backend (requirements.txt) and the new Face
+# Detection & Identity Verification module (Ashvin Bari, email 2026-07-09).
+#
+# Document tampering detection is intentionally excluded, per instruction —
+# and not just as a scope choice: that module pins tensorflow==2.12.0, which
+# caps Python at 3.11, while this merge targets Python 3.12 (below) with
+# tensorflow==2.21.0. The two cannot share one environment. Keep the
+# tampering-detection module in its own separate venv permanently.
+#
+# Recommended Python: 3.12.10 (per the face-matching module's own header)
+#
+# ── Conflicts resolved during this merge — re-verify before trusting in prod ──
+#   - opencv-python (face module) vs opencv-python-headless (finsight): both
+#     provide the `cv2` import and cannot safely coexist in one environment.
+#     Kept opencv-python-headless since this is a server-side FastAPI backend
+#     with no display — switch to opencv-python only if some face-matching
+#     dependency turns out to actually need GUI bindings (unlikely for
+#     deepface/retina-face/mtcnn).
+#   - fastapi / uvicorn / pydantic: took the newer pin from each pair
+#     (fastapi 0.115.6→0.116.1, uvicorn 0.34.0→0.35.0, pydantic 2.10.4→2.11.7).
+#     pydantic-core's pin below was tied to pydantic 2.10.4 — removed it
+#     rather than guess the number matching 2.11.7; let pip resolve it.
+#     Re-verify pydantic-settings==2.7.1 still works against pydantic 2.11.7.
+#   - numpy: finsight had numpy>=1.26,<3 (a range, not a pin); pinned here to
+#     the face module's numpy==2.3.1, which satisfies that range. EasyOCR /
+#     torch / scipy / scikit-image below were originally tested against
+#     finsight's range, not against numpy 2.x specifically — needs a real
+#     install + smoke test, don't trust this blind.
+#   - python-dotenv: finsight already pulls 1.2.2 transitively (via
+#     pydantic-settings); face module's requirements.txt pinned 1.1.1
+#     directly. Kept the newer 1.2.2.
+#   - pypdfium2 (finsight) and PyMuPDF (face module) both do PDF handling,
+#     via different import names (pypdfium2 / fitz) so they don't collide —
+#     just duplicate capability worth consolidating later.
+#
+# NOT included: transitive dependencies for the face-matching module itself.
+# deepface / retina-face / mtcnn / tensorflow pull in a fair number of their
+# own (gdown, flask, gunicorn, mediapipe, etc. depending on exact versions).
+# Unlike the FinSight transitive section below, these weren't provided as a
+# pip freeze — install into a clean venv and run `pip freeze` to capture and
+# pin them for real, the same way FinSight's own transitive section was.
+# The FinSight transitive section below is also now unverified post-merge —
+# several of its direct deps (pydantic, fastapi, uvicorn, numpy) moved
+# versions above, which can shift what gets resolved underneath them.
+
+# ── Direct dependencies — FinSight backend ────────────────────────────────
+fastapi==0.116.1
+uvicorn[standard]==0.35.0
+python-multipart==0.0.20
+pydantic==2.11.7
+pydantic-settings==2.7.1
+httpx==0.28.1
+pypdfium2==4.30.1
+pillow==11.3.0
+
+# Image preprocessing (OCR_PREPROCESS=true). EasyOCR pulls in torch (~2GB).
+# Powers auto-orient/deskew/warp/IQA cleanup for the borrower OCR pipeline.
+opencv-python-headless==4.10.0.84
+numpy==2.3.1
+easyocr==1.7.2
+
+# Optional: background removal (PREPROCESS_SEGMENT=true). Not installed by
+# default — uncomment to enable, first use downloads the ~170MB U2Net model.
+# rembg==2.0.59
+# onnxruntime==1.20.1
+
+# ── Direct dependencies — Face Detection & Identity Verification module ──
+python-dotenv==1.2.2
+loguru==0.7.3
+requests==2.32.4
+pandas==2.3.1
+PyMuPDF==1.26.3
+# pytesseract needs the Tesseract OCR *binary* installed and on PATH too —
+# the pip package alone is just a wrapper around it.
+pytesseract==0.3.13
+tensorflow==2.21.0
+tf-keras==2.21.0
+deepface==0.0.95
+retina-face==0.0.17
+mtcnn==1.0.0
+ollama==0.5.1
+tqdm==4.67.1
+
+# ── Transitive dependencies — pulled in by the FinSight packages above ───
+# (mainly torch/scipy/scikit-image via easyocr, starlette/anyio/h11 via
+# fastapi+httpx, uvicorn's [standard] extras). Carried over from the
+# pre-merge freeze — unverified against the version bumps above, and does
+# not yet include anything the face-matching packages pull in. Regenerate
+# via a clean install + `pip freeze` before relying on this for real.
+annotated-types==0.7.0
+anyio==4.14.1
+certifi==2026.6.17
+click==8.4.2
+colorama==0.4.6
+filelock==3.29.5
+fsspec==2026.6.0
+h11==0.16.0
+httpcore==1.0.9
+httptools==0.8.0
+idna==3.18
+imageio==2.37.3
+jinja2==3.1.6
+lazy-loader==0.5
+markupsafe==3.0.3
+mpmath==1.3.0
+networkx==3.6.1
+ninja==1.13.0
+packaging==26.2
+pyclipper==1.4.0
+# pydantic-core intentionally left unpinned — it must match pydantic==2.11.7
+# exactly and the old 2.27.2 pin was for pydantic 2.10.4. Let pip resolve it.
+python-bidi==0.6.11
+pyyaml==6.0.3
+scikit-image==0.26.0
+scipy==1.18.0
+setuptools==81.0.0
+shapely==2.1.2
+starlette==0.41.3
+sympy==1.14.0
+tifffile==2026.6.1
+torch==2.12.1
+torchvision==0.27.1
+typing-extensions==4.15.0
+watchfiles==1.2.0
+websockets==16.0
+
+# ── Future extensions — carried over as-is from the face-matching module's ──
+# own requirements.txt (Ashvin Bari). Still commented out there; kept
+# commented here too, unchanged, so nothing from the original submission is
+# silently lost in this merge.
+# SQLAlchemy==2.0.41
+# alembic==1.16.4
+# pymysql==1.1.1
+# psycopg2-binary==2.9.10
+# redis==6.2.0
+# celery==5.5.3
+# onnxruntime==1.22.1
+# insightface==0.7.3
+# easyocr==1.7.2
+# openai==1.98.0
+# langchain==0.3.27
+# chromadb==1.0.16

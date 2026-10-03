@@ -1,0 +1,135 @@
+{
+ "agent_id": "underwriting_supervisor",
+ "split": "dev",
+ "data": {
+  "name": "L&T vehicle loans (real bureau / loan fields and real default outcome), test split",
+  "split": "dev",
+  "n": 3,
+  "settings": {
+   "complete": "primary",
+   "as_built": "what the app supplies today"
+  }
+ },
+ "metrics": {
+  "approve_default_ratio": {
+   "value": 1.5002,
+   "ci95": [
+    1.0,
+    3.0003
+   ],
+   "n": 3
+  },
+  "never_loosens": {
+   "value": 1.0,
+   "ci95": [
+    0.4385,
+    1
+   ],
+   "k": 3,
+   "n": 3
+  },
+  "llm_ran_rate": {
+   "value": 1.0,
+   "ci95": [
+    0.4385,
+    1
+   ],
+   "k": 3,
+   "n": 3
+  },
+  "sample_default_rate": 0.3333,
+  "approve_default_rate": 0.5,
+  "default_rate_by_recommendation": {
+   "approve_recommended": {
+    "default_rate": 0.5,
+    "n": 2
+   },
+   "refer_to_officer": {
+    "default_rate": 0.0,
+    "n": 1
+   }
+  },
+  "baseline_vs_final": {
+   "approve_recommended->approve_recommended": 2,
+   "refer_to_officer->refer_to_officer": 1
+  },
+  "loosening_attempts_blocked": 0,
+  "rationale_grounded": {
+   "value": 1.0,
+   "ci95": [
+    0.4385,
+    1
+   ],
+   "k": 3,
+   "n": 3
+  },
+  "as_built": {
+   "n": 3,
+   "final": {
+    "approve_recommended": 0,
+    "request_more_info": 0,
+    "refer_to_officer": 3,
+    "decline_review_recommended": 0
+   },
+   "policy_status": {
+    "PASS": 0,
+    "PASS_WITH_WARNINGS": 0,
+    "NEEDS_INFO": 0,
+    "FAIL": 3
+   }
+  },
+  "failed_runs": 0,
+  "crew_latency": {
+   "n": 3,
+   "p50_s": 20.0,
+   "p95_s": 21.26,
+   "mean_s": 20.27
+  }
+ },
+ "target": {
+  "metric": "approve_default_ratio",
+  "target": 0.85,
+  "higher": false,
+  "label": "Default rate of approve-recommended / sample default rate"
+ },
+ "primary_value": 1.5002,
+ "rating": "Weak",
+ "secondary": [
+  {
+   "metric": "never_loosens",
+   "target": 1.0,
+   "higher": true,
+   "label": "Never looser than the rule baseline",
+   "value": 1.0,
+   "rating": "Strong"
+  },
+  {
+   "metric": "llm_ran_rate",
+   "target": 0.95,
+   "higher": true,
+   "label": "LLM recommendation produced",
+   "value": 1.0,
+   "rating": "Strong"
+  }
+ ],
+ "run": {
+  "git_commit": "d990476",
+  "git_dirty": true,
+  "python": "3.13.3",
+  "platform": "Windows-11-10.0.26200-SP0",
+  "cpu": "Intel64 Family 6 Model 183 Stepping 1, GenuineIntel",
+  "gpu": "NVIDIA GeForce RTX 4060 Laptop GPU, 8188 MiB",
+  "llm": {
+   "provider": "ollama",
+   "model": "qwen2.5vl:7b",
+   "temperature": 0.0,
+   "num_ctx": 8192,
+   "timeout_s": 180,
+   "keep_alive": "0s",
+   "effort": "low"
+  },
+  "split_seed": 20261001,
+  "dev_fraction": 0.3,
+  "measured_at": "2026-10-01T09:28:22+00:00"
+ }
+}

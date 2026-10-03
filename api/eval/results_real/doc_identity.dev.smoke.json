@@ -1,0 +1,105 @@
+{
+ "agent_id": "doc_identity",
+ "split": "dev",
+ "data": {
+  "name": "wrong: RVL-CDIP (16 classes), SROIE receipts, SIDTD foreign IDs, PAN cards and statements under another type; right: PAN cards, statements, synthetic Aadhaar cards under their own type",
+  "split": "dev",
+  "n_wrong": 4,
+  "n_right": 6
+ },
+ "metrics": {
+  "wrong_doc_recall": {
+   "value": 1.0,
+   "ci95": [
+    0.5101,
+    1
+   ],
+   "k": 4,
+   "n": 4
+  },
+  "false_block_rate": {
+   "value": 0.0,
+   "ci95": [
+    0,
+    0.3903
+   ],
+   "k": 0,
+   "n": 6
+  },
+  "caught_by_source": {
+   "rvl": {
+    "rate": 1.0,
+    "n": 4
+   }
+  },
+  "caught_by_rvl_class": {
+   "rvl:advertisement": {
+    "rate": 1.0,
+    "n": 4
+   }
+  },
+  "caught_by_asked_type": {
+   "aadhaar": {
+    "rate": 1.0,
+    "n": 1
+   },
+   "salary_slip": {
+    "rate": 1.0,
+    "n": 3
+   }
+  },
+  "blocked_by_source": {
+   "aadhaar_card": {
+    "rate": 0.0,
+    "n": 2
+   },
+   "bank_statement": {
+    "rate": 0.0,
+    "n": 2
+   },
+   "pan_card": {
+    "rate": 0.0,
+    "n": 2
+   }
+  },
+  "failed_runs": 0
+ },
+ "target": {
+  "metric": "wrong_doc_recall",
+  "target": 0.9,
+  "higher": true,
+  "label": "Wrong uploads caught"
+ },
+ "primary_value": 1.0,
+ "rating": "Strong",
+ "secondary": [
+  {
+   "metric": "false_block_rate",
+   "target": 0.05,
+   "higher": false,
+   "label": "Correct uploads wrongly blocked",
+   "value": 0.0,
+   "rating": "Strong"
+  }
+ ],
+ "run": {
+  "git_commit": "d990476",
+  "git_dirty": true,
+  "python": "3.13.3",
+  "platform": "Windows-11-10.0.26200-SP0",
+  "cpu": "Intel64 Family 6 Model 183 Stepping 1, GenuineIntel",
+  "gpu": "NVIDIA GeForce RTX 4060 Laptop GPU, 8188 MiB",
+  "llm": {
+   "provider": "ollama",
+   "model": "qwen2.5vl:7b",
+   "temperature": 0.0,
+   "num_ctx": 8192,
+   "timeout_s": 180,
+   "keep_alive": "0s",
+   "effort": "low"
+  },
+  "split_seed": 20261001,
+  "dev_fraction": 0.3,
+  "measured_at": "2026-10-01T09:26:17+00:00"
+ }
+}

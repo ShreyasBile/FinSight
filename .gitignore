@@ -1,0 +1,35 @@
+# Dependencies / builds
+node_modules/
+dist/
+__pycache__/
+*.pyc
+.pytest_cache/
+
+# Secrets — api/.env holds the Anthropic key
+.env
+api/.env
+
+# Python virtual environments
+.venv*/
+api/.venv*/
+
+# Real applicant documents and runtime state (contain personal data)
+storage/
+api/data/
+api/app/compliance/data/*.db
+
+# Evaluation data that must never be committed
+api/eval/datasets/real/
+api/eval/datasets/external/
+api/eval/datasets/synth/out/
+api/eval/results/raw/
+
+# Logs and machine-local settings
+api/server.log
+*.log
+.claude/settings.local.json
+
+# Debug renderings written next to the API while tuning - they can show a real document
+api/*.png
+api/*.jpg
+api/*.jpeg

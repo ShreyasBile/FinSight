@@ -1,0 +1,53 @@
+{
+ "body": {
+  "cleaned_preview": "img:d6b2c590768c8b71",
+  "confidence": 1.0,
+  "doc_type": "pan",
+  "document_identity": {
+   "fields_ok": true,
+   "ok": true,
+   "rule": "pan"
+  },
+  "fields": [
+   {
+    "flag": "ok",
+    "key": "pan_number",
+    "label": "PAN Number",
+    "value": "MCQPD5333A"
+   },
+   {
+    "flag": "ok",
+    "key": "full_name",
+    "label": "Full Name",
+    "value": "Rajesh Kumar"
+   },
+   {
+    "flag": "ok",
+    "key": "dob",
+    "label": "Date of Birth",
+    "value": "15/03/1986"
+   },
+   {
+    "flag": "ok",
+    "key": "father_name",
+    "label": "Father's Name",
+    "value": "Suresh Kumar"
+   }
+  ],
+  "needs_review": false,
+  "parsed": {
+   "dob": "15/03/1986",
+   "father_name": "Suresh Kumar",
+   "full_name": "Rajesh Kumar",
+   "pan_number": "MCQPD5333A"
+  },
+  "provider": "mock",
+  "raw": "{\"pan_number\": \"ABCPK1234D\", \"full_name\": \"Rajesh Kumar\", \"dob\": \"15/03/1986\", \"father_name\": \"Suresh Kumar\"}",
+  "tampering": null,
+  "timings": [
+   "extract_ms",
+   "preprocess_ms"
+  ]
+ },
+ "status": 200
+}

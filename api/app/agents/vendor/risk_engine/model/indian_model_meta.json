@@ -1,0 +1,22 @@
+{
+  "dataset": "indian_nbfc",
+  "features": [
+    "LOAN",
+    "MORTDUE",
+    "VALUE",
+    "YOJ",
+    "DEROG",
+    "DELINQ",
+    "CLAGE",
+    "CLNO",
+    "DEBTINC",
+    "REASON",
+    "JOB"
+  ],
+  "auc": 0.752,
+  "accuracy": 0.7035,
+  "precision": 0.174,
+  "recall": 0.6542,
+  "f1": 0.2749,
+  "default_rate": 0.08594
+}

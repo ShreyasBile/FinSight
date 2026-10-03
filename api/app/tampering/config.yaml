@@ -1,0 +1,200 @@
+# Every tunable number in the pipeline lives here. Code never hardcodes a
+# threshold or weight — change this file, restart, done.
+
+pipeline:
+  # Stage-1 gate: if every stage-1 signal scores below this AND business rules
+  # all pass, the document is fast-tracked as low risk and stage 2 never runs.
+  gate_threshold: 0.25
+  # Cap pages examined for multi-page PDFs.
+  max_pdf_pages: 4
+  # Doc types that NEVER fast-track, regardless of the Stage-1 score. ID
+  # documents have the thinnest Stage-1 coverage of any doc type: no
+  # Verhoeff-style checksum for business_rules to lean on (only Aadhaar has
+  # one), and the authenticity signal (built to catch a from-scratch
+  # fabrication) does not run on this doc-type family at all (see
+  # signals/authenticity.py). With that little to trip on, "stage-1 found
+  # nothing" is a much weaker signal here than for an income/financial
+  # document, so always pay for the deeper pixel forensics (ELA/noise/CNN/
+  # photo_region) rather than trust the gate to skip them. Covers every ID
+  # doc type copy_move.py already treats specially (same underlying
+  # weakness), not just the two types validated so far — a driving licence or
+  # voter ID has the identical thin-Stage-1 problem.
+  always_escalate_doc_types:
+    [pan, pan_card, aadhaar, aadhaar_card, aadhar, voter_id, voter_id_card,
+     passport, driving_license, dl, ration_card]
+
+fusion:
+  # Relative weights per signal. Only signals that actually ran are combined;
+  # weights renormalize over the available set, so a missing signal (e.g. no
+  # trained CNN yet) never drags the score toward zero.
+  weights:
+    metadata: 0.10
+    business_rules: 0.23
+    copy_move: 0.17
+    pdf_forensics: 0.15
+    ela: 0.12
+    noise: 0.11
+    # cnn: measured page-level AUC 0.83 on synthetic held-out pages — a real
+    # but WEAK signal; weighted like the other heuristics until real-verdict
+    # retraining earns it more
+    cnn: 0.12
+    # authenticity: the vision-model "is this fabricated?" signal. Weighted like
+    # a strong heuristic so it corroborates well, but capped by its confidence
+    # (below) so it cannot condemn a document alone.
+    authenticity: 0.20
+    # photo_region: targeted photo-vs-rest-of-card ELA/noise comparison (ID
+    # docs only) — catches a photo pasted in from an external source, which
+    # ela/noise/cnn's whole-page analysis structurally under-weights or
+    # excludes. New signal, not yet validated against a real-verdict dataset,
+    # so weighted moderately until it earns more.
+    photo_region: 0.15
+    # patch_cnn: patch detector trained on real forged receipts and ID cards (signals/patch_cnn.py).
+    # It calibrates itself (0 up to the floor measured on genuine documents its models never saw), so
+    # it has no entry under genuine_floor.
+    patch_cnn: 0.15
+  # Genuine floors (fusion.calibrated): per document family and pixel signal, the score that 95% of
+  # GENUINE real documents stay at or below. A signal counts only above its floor (rescaled to 0..1).
+  # Why: the pixel signals were scaled on synthetic pages, where a clean page scores ~0. On real
+  # captures they do not — the CNN scores >= 0.5 on 80% of genuine documents, and ELA / noise /
+  # copy-move reach their maximum on many (repeated digits and logos look like copy-move, scans have
+  # uneven noise). Measured 2026-10-01/02 on development data only (eval/real/calibrate_tampering3.py):
+  #   page: 130 genuine scanned receipts (Find it again!, train + val)
+  #   id:   90 genuine phone photos of an ID card (MIDV-500) + 200 genuine ID templates (SIDTD)
+  # Effect on development data: genuine receipts flagged 78% -> 32%, wrongly HIGH 28% -> 1%;
+  # genuine ID phone photos flagged 51% -> 20%, wrongly HIGH 8% -> 1%; forged receipts flagged 92% -> 65%.
+  # Refit these when labelled production verdicts exist (same script, production documents).
+  genuine_floor:
+    page: {cnn: 0.904, ela: 0.99, noise: 0.99, copy_move: 0.986}
+    id: {cnn: 0.90, ela: 0.99, noise: 0.809, copy_move: 0.15, photo_region: 0.071}
+  # Risk tiers over the fused [0,1] score.
+  tier_medium: 0.30   # score >= this -> MEDIUM
+  tier_high: 0.60     # score >= this -> HIGH
+
+  # Dominant-evidence path: fused = max(weighted average, strongest single
+  # signal x its confidence). Weighted averaging measures corroboration, but
+  # one near-proof finding (verified pixel-identical duplication, failed
+  # checksum, factual PDF re-save) must be able to raise the tier alone —
+  # averaging it against five quiet signals would wash it out.
+  # Confidence = how much a HIGH score from that signal alone is worth.
+  single_signal_confidence:
+    business_rules: 1.00   # deterministic rule failures don't false-positive
+    copy_move: 0.50        # >=0.92 NCC-verified duplication is near-proof
+    pdf_forensics: 0.55    # re-save/editor-producer are factual observations
+    metadata: 0.45         # an editor Software tag alone warrants a look
+    ela: 0.45
+    noise: 0.45
+    cnn: 0.32              # weak signal; only a saturated hit moves the tier
+    # authenticity: capped on purpose. A lone "likely_fabricated" verdict
+    # (score 0.85) x 0.60 = 0.51 -> MEDIUM (review), never HIGH. Reaching HIGH
+    # requires a second signal to corroborate (see corroboration_factor).
+    authenticity: 0.60
+    # photo_region: a strong z-score here is a fairly direct pixel-level
+    # observation (this specific region measurably differs from the rest of
+    # the card), but it's new and unvalidated against real forged/genuine
+    # pairs — capped below business_rules/pdf_forensics until proven.
+    photo_region: 0.55
+    # patch_cnn: evidence is 0.6-1.0 once BOTH of its models put the page above their genuine floor.
+    # x 0.55 = 0.33-0.55: MEDIUM (a look), never HIGH alone. On development data (cross-fitted) such a hit
+    # was 5% of genuine documents by construction, 82-95% of forged ID templates and 32% of forged receipts.
+    patch_cnn: 0.55
+
+  # Corroboration: two INDEPENDENT signals agreeing is stronger evidence than
+  # either alone — fused = max(fused, strongest dominant + factor x second
+  # dominant), capped at 1.0. E.g. a fabricated payslip caught by BOTH the
+  # producer check and the authenticity check escalates to HIGH, while a lone
+  # utility re-save note stays MEDIUM.
+  corroboration_factor: 0.5
+  # Signals that never raise the tier ALONE. Measured on development data, 2026-10-02
+  # (eval/real/calibrate_tampering4.py): ELA and noise saturate on ordinary genuine scans, so a lone
+  # hit - no other signal with evidence - is at least as common on GENUINE real documents as on
+  # forged ones (receipts: ELA 23 genuine vs 15 forged, noise 12 vs 7; ID images: ELA 24 vs 0,
+  # noise 10 vs 3). Such a hit says nothing about forgery. These signals keep their weight in the
+  # average and count in full once another signal backs them (its score x confidence >=
+  # corroboration_min); copy-move and the photo-region check do carry evidence alone and are not listed.
+  # Effect on development data: genuine receipts flagged 32% -> 6%, genuine ID photos 20% -> 3%,
+  # forged receipts flagged 65% -> 48% (the flags lost were the uninformative ones), AUC 0.67 -> 0.71.
+  needs_corroboration: [ela, noise]
+  corroboration_min: 0.10
+
+signals:
+  metadata:
+    # Software names in EXIF/PDF metadata that indicate an editing tool touched
+    # the file. Lowercase substring match.
+    editor_software:
+      [photoshop, gimp, canva, pixlr, paint.net, affinity, lightroom,
+       snapseed, picsart, photopea, inpaint, ilovepdf, sejda, smallpdf,
+       pdfescape, foxit editor, nitro, wondershare, pdfelement]
+    # Missing EXIF alone is only a weak hint (WhatsApp/Telegram strip EXIF).
+    score_missing_exif: 0.15
+    score_editor_found: 0.90
+    score_date_mismatch: 0.40
+
+  business_rules:
+    # Absolute tolerance in currency units when checking arithmetic
+    # (gross - deductions = net, running balance reconciliation).
+    amount_tolerance: 1.0
+
+  copy_move:
+    orb_features: 4000
+    match_ratio: 0.75          # Lowe ratio test
+    min_displacement_px: 24    # ignore near-self matches
+    min_cluster_matches: 8     # consistent-shift matches needed to flag
+    # score = min(1, cluster_matches / saturation_matches)
+    saturation_matches: 40
+
+  pdf_forensics:
+    score_incremental_update: 0.65   # file was saved again after creation
+    score_editor_producer: 0.85
+    # PDF utility (unlock/compress/merge) re-save. Often legitimate (unlocking a
+    # password-protected bank statement) BUT the same tools can also EDIT content
+    # and metadata alone cannot tell which happened — so the document must land
+    # in MEDIUM ("needs a look", with honest wording), never silently pass and
+    # never HIGH on this alone. 0.60 x pdf_forensics confidence 0.55 = 0.33 ≥
+    # tier_medium.
+    score_utility_resave: 0.60
+    score_date_mismatch: 0.30
+    # producer is a developer/scripting PDF library (jsPDF, reportlab, ...).
+    # Legitimate documents from an employer or bank come from their own payroll
+    # / banking systems, not a hand-run script or browser library — fake
+    # salary-slip and statement generators are built on exactly these. Reaches
+    # MEDIUM (review), not HIGH, since some legit apps also use them.
+    score_generation_library: 0.62
+
+  ela:
+    jpeg_quality: 90
+    # Score = mean of top percentile of ELA intensity, normalized.
+    top_percentile: 99.0
+
+  noise:
+    block_size: 64
+    # Fraction of blocks whose noise level is an outlier vs. the page median.
+    outlier_sigma: 2.5
+
+  cnn:
+    input_size: 128
+    # Grad-CAM overlay opacity in artifacts.
+    cam_alpha: 0.45
+
+  photo_region:
+    # Doc types that carry an embedded ID photo worth checking. A document
+    # with no detectable face (bank statement, salary slip) makes this
+    # signal unavailable, not a false "clean". Was [pan, aadhaar] only —
+    # widened to every ID doc type that carries a printed photo, since a
+    # photo-swap is not specific to PAN/Aadhaar (voter ID and driving licence
+    # carry the same attack surface and had zero coverage before this).
+    applicable_doc_types:
+      [pan, pan_card, aadhaar, aadhaar_card, aadhar, voter_id, voter_id_card,
+       driving_license, dl, passport]
+
+storage:
+  db_path: data/tampering.db
+  archive_dir: data/archive
+  models_dir: models
+
+training:
+  synthetic_dir: data/synthetic
+  epochs: 30
+  batch_size: 32
+  lr: 0.001
+  val_group_fraction: 0.25   # fraction of GROUPS (not images) held out
+  seed: 42

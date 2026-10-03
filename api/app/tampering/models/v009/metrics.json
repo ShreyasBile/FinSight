@@ -1,0 +1,13 @@
+{
+  "val_examples": 1386,
+  "accuracy": 0.8997,
+  "precision_tampered": 0.9121,
+  "recall_tampered": 0.7143,
+  "f1_tampered": 0.8011,
+  "confusion": {
+    "tp": 280,
+    "tn": 967,
+    "fp": 27,
+    "fn": 112
+  }
+}

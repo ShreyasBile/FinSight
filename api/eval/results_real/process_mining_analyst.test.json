@@ -1,0 +1,300 @@
+{
+ "agent_id": "process_mining_analyst",
+ "split": "test",
+ "data": {
+  "name": "BPI Challenge 2017 (31,509 loan applications, Dutch bank), 'complete' events",
+  "split": "test",
+  "sample_cases": 2000,
+  "events": 30238,
+  "activities": 24,
+  "reference": "pm4py 2.7.23.8 (separate environment)",
+  "database": "FinSightEvalPM (dropped after the run)"
+ },
+ "metrics": {
+  "figure_agreement": {
+   "value": 1.0,
+   "ci95": [
+    0.9082,
+    1.0
+   ],
+   "k": 38,
+   "n": 38
+  },
+  "top_variant_match": 1.0,
+  "checks": [
+   {
+    "figure": "cases",
+    "analyst": 2000,
+    "pm4py": 2000,
+    "match": true
+   },
+   {
+    "figure": "events",
+    "analyst": 30238,
+    "pm4py": 30238,
+    "match": true
+   },
+   {
+    "figure": "variants",
+    "analyst": 719,
+    "pm4py": 719,
+    "match": true
+   },
+   {
+    "figure": "variant #1 cases",
+    "analyst": 137,
+    "pm4py": 137,
+    "match": true
+   },
+   {
+    "figure": "variant #1 sequence",
+    "analyst": "A_Create Application>A_Submitted>A_Concept>A_Accepted>O_Crea",
+    "pm4py": "A_Create Application>A_Submitted>A_Concept>A_Accepted>O_Crea",
+    "match": true
+   },
+   {
+    "figure": "variant #2 cases",
+    "analyst": 127,
+    "pm4py": 127,
+    "match": true
+   },
+   {
+    "figure": "variant #2 sequence",
+    "analyst": "A_Create Application>A_Submitted>A_Concept>A_Accepted>O_Crea",
+    "pm4py": "A_Create Application>A_Submitted>A_Concept>A_Accepted>O_Crea",
+    "match": true
+   },
+   {
+    "figure": "variant #3 cases",
+    "analyst": 95,
+    "pm4py": 95,
+    "match": true
+   },
+   {
+    "figure": "variant #3 sequence",
+    "analyst": "A_Create Application>A_Concept>A_Accepted>O_Create Offer>O_C",
+    "pm4py": "A_Create Application>A_Concept>A_Accepted>O_Create Offer>O_C",
+    "match": true
+   },
+   {
+    "figure": "variant #4 cases",
+    "analyst": 58,
+    "pm4py": 58,
+    "match": true
+   },
+   {
+    "figure": "variant #4 sequence",
+    "analyst": "A_Create Application>A_Concept>A_Accepted>O_Create Offer>O_C",
+    "pm4py": "A_Create Application>A_Concept>A_Accepted>O_Create Offer>O_C",
+    "match": true
+   },
+   {
+    "figure": "variant #5 cases",
+    "analyst": 39,
+    "pm4py": 39,
+    "match": true
+   },
+   {
+    "figure": "variant #5 sequence",
+    "analyst": "A_Create Application>A_Submitted>A_Concept>A_Accepted>O_Crea",
+    "pm4py": "A_Create Application>A_Submitted>A_Concept>A_Accepted>O_Crea",
+    "match": true
+   },
+   {
+    "figure": "bottleneck #1 edge",
+    "analyst": "A_Complete -> A_Cancelled",
+    "pm4py": "A_Complete -> A_Cancelled",
+    "match": true
+   },
+   {
+    "figure": "bottleneck #1 count",
+    "analyst": 510,
+    "pm4py": 510,
+    "match": true
+   },
+   {
+    "figure": "bottleneck #1 avg wait h",
+    "analyst": 667.862,
+    "pm4py": 667.862,
+    "match": true
+   },
+   {
+    "figure": "bottleneck #1 total wait h",
+    "analyst": 340609.8,
+    "pm4py": 340609.8,
+    "match": true
+   },
+   {
+    "figure": "bottleneck #2 edge",
+    "analyst": "A_Complete -> A_Validating",
+    "pm4py": "A_Complete -> A_Validating",
+    "match": true
+   },
+   {
+    "figure": "bottleneck #2 count",
+    "analyst": 1144,
+    "pm4py": 1144,
+    "match": true
+   },
+   {
+    "figure": "bottleneck #2 avg wait h",
+    "analyst": 211.96,
+    "pm4py": 211.96,
+    "match": true
+   },
+   {
+    "figure": "bottleneck #2 total wait h",
+    "analyst": 242482.7,
+    "pm4py": 242482.7,
+    "match": true
+   },
+   {
+    "figure": "bottleneck #3 edge",
+    "analyst": "A_Concept -> A_Accepted",
+    "pm4py": "A_Concept -> A_Accepted",
+    "match": true
+   },
+   {
+    "figure": "bottleneck #3 count",
+    "analyst": 1998,
+    "pm4py": 1998,
+    "match": true
+   },
+   {
+    "figure": "bottleneck #3 avg wait h",
+    "analyst": 31.573,
+    "pm4py": 31.573,
+    "match": true
+   },
+   {
+    "figure": "bottleneck #3 total wait h",
+    "analyst": 63083.1,
+    "pm4py": 63083.1,
+    "match": true
+   },
+   {
+    "figure": "bottleneck #4 edge",
+    "analyst": "A_Incomplete -> A_Validating",
+    "pm4py": "A_Incomplete -> A_Validating",
+    "match": true
+   },
+   {
+    "figure": "bottleneck #4 count",
+    "analyst": 815,
+    "pm4py": 815,
+    "match": true
+   },
+   {
+    "figure": "bottleneck #4 avg wait h",
+    "analyst": 66.818,
+    "pm4py": 66.818,
+    "match": true
+   },
+   {
+    "figure": "bottleneck #4 total wait h",
+    "analyst": 54456.8,
+    "pm4py": 54456.8,
+    "match": true
+   },
+   {
+    "figure": "bottleneck #5 edge",
+    "analyst": "O_Sent (mail and online) -> A_Cancelled",
+    "pm4py": "O_Sent (mail and online) -> A_Cancelled",
+    "match": true
+   },
+   {
+    "figure": "bottleneck #5 count",
+    "analyst": 75,
+    "pm4py": 75,
+    "match": true
+   },
+   {
+    "figure": "bottleneck #5 avg wait h",
+    "analyst": 683.164,
+    "pm4py": 683.164,
+    "match": true
+   },
+   {
+    "figure": "bottleneck #5 total wait h",
+    "analyst": 51237.3,
+    "pm4py": 51237.3,
+    "match": true
+   },
+   {
+    "figure": "rework #1 repeats (A_Validating)",
+    "analyst": 1106,
+    "pm4py": 1106,
+    "match": true
+   },
+   {
+    "figure": "rework #2 repeats (O_Create Offer)",
+    "analyst": 739,
+    "pm4py": 739,
+    "match": true
+   },
+   {
+    "figure": "rework #3 repeats (O_Created)",
+    "analyst": 739,
+    "pm4py": 739,
+    "match": true
+   },
+   {
+    "figure": "rework #4 repeats (O_Sent (mail and online))",
+    "analyst": 561,
+    "pm4py": 561,
+    "match": true
+   },
+   {
+    "figure": "rework #5 repeats (A_Incomplete)",
+    "analyst": 533,
+    "pm4py": 533,
+    "match": true
+   }
+  ],
+  "analyst_seconds": 1.14,
+  "findings": [
+   "0.0% of 2000 cases follow a conformant path across 719 variants.",
+   "Largest wait: A_Complete \u2192 A_Cancelled, 667.9 h on average over 510 transitions (32.5% of all waiting).",
+   "9 open cases are past their stage target.",
+   "Most repeated step: A_Validating (1106 repeats in 748 cases)."
+  ]
+ },
+ "target": {
+  "metric": "figure_agreement",
+  "target": 1.0,
+  "higher": true,
+  "label": "Analyst figures equal the independent pm4py figures"
+ },
+ "primary_value": 1.0,
+ "rating": "Strong",
+ "secondary": [
+  {
+   "metric": "top_variant_match",
+   "target": 1.0,
+   "higher": true,
+   "label": "Most frequent variant identical",
+   "value": 1.0,
+   "rating": "Strong"
+  }
+ ],
+ "run": {
+  "git_commit": "d990476",
+  "git_dirty": true,
+  "python": "3.13.3",
+  "platform": "Windows-11-10.0.26200-SP0",
+  "cpu": "Intel64 Family 6 Model 183 Stepping 1, GenuineIntel",
+  "gpu": "NVIDIA GeForce RTX 4060 Laptop GPU, 8188 MiB",
+  "llm": {
+   "provider": "ollama",
+   "model": "qwen2.5vl:7b",
+   "temperature": 0.0,
+   "num_ctx": 8192,
+   "timeout_s": 180,
+   "keep_alive": "10m",
+   "effort": "low"
+  },
+  "split_seed": 20261001,
+  "dev_fraction": 0.3,
+  "measured_at": "2026-10-02T00:36:50+00:00"
+ }
+}

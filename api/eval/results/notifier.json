@@ -1,0 +1,35 @@
+{
+ "agent_id": "notifier",
+ "measured_at": "2026-09-25T16:15:16+00:00",
+ "metrics": {
+  "template_accuracy": 1.0,
+  "checks": 8,
+  "external_sends": 0,
+  "half_filled_sent": 0,
+  "sql_application_created": true,
+  "sql_rows_written": 2,
+  "sql_rows_read_back": 2,
+  "sql_error": null,
+  "templates": 9,
+  "events": 6
+ },
+ "target": {
+  "metric": "template_accuracy",
+  "target": 1.0,
+  "higher": true,
+  "label": "Correct template and fields"
+ },
+ "primary_value": 1.0,
+ "rating": "Strong",
+ "secondary": [
+  {
+   "metric": "external_sends",
+   "target": 0,
+   "higher": false,
+   "label": "Messages sent outside the system",
+   "value": 0,
+   "rating": "Strong"
+  }
+ ],
+ "failures": []
+}

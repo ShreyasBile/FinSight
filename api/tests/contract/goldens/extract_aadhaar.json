@@ -1,0 +1,67 @@
+{
+ "body": {
+  "cleaned_preview": "img:f12f2fb2f35dabe6",
+  "confidence": 1.0,
+  "doc_type": "aadhaar",
+  "document_identity": {
+   "fields_ok": true,
+   "ok": true,
+   "rule": "aadhaar"
+  },
+  "fields": [
+   {
+    "flag": "ok",
+    "key": "aadhaar_number",
+    "label": "Aadhaar Number",
+    "value": "XXXX-XXXX-4521"
+   },
+   {
+    "flag": "ok",
+    "key": "full_name",
+    "label": "Full Name",
+    "value": "Rajesh Kumar"
+   },
+   {
+    "flag": "ok",
+    "key": "dob",
+    "label": "Date of Birth",
+    "value": "15/03/1986"
+   },
+   {
+    "flag": "ok",
+    "key": "gender",
+    "label": "Gender",
+    "value": "Male"
+   },
+   {
+    "flag": "ok",
+    "key": "address",
+    "label": "Address",
+    "value": "12, Transport Nagar, Jaipur"
+   },
+   {
+    "flag": "ok",
+    "key": "pincode",
+    "label": "PIN Code",
+    "value": "302001"
+   }
+  ],
+  "needs_review": false,
+  "parsed": {
+   "aadhaar_number": "XXXX-XXXX-4521",
+   "address": "12, Transport Nagar, Jaipur",
+   "dob": "15/03/1986",
+   "full_name": "Rajesh Kumar",
+   "gender": "Male",
+   "pincode": "302001"
+  },
+  "provider": "mock",
+  "raw": "{\"aadhaar_number\": \"XXXX-XXXX-4521\", \"full_name\": \"Rajesh Kumar\", \"dob\": \"15/03/1986\", \"gender\": \"Male\", \"address\": \"12, Transport Nagar, Jaipur\", \"pincode\": \"302001\"}",
+  "tampering": null,
+  "timings": [
+   "extract_ms",
+   "preprocess_ms"
+  ]
+ },
+ "status": 200
+}

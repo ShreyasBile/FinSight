@@ -1,0 +1,106 @@
+{
+ "body": {
+  "cleaned_preview": null,
+  "tampering": {
+   "document_preview": "img:84319ac07abe2afd",
+   "explanations": [
+    "[copy_move] skipped: born-digital PDF — rendered text/labels repeat pixel-identically by construction, so duplication detection is not meaningful",
+    "[metadata] skipped: EXIF does not apply to PDFs (see pdf_forensics)",
+    "[authenticity] skipped: authenticity check disabled",
+    "[ela] skipped: fast-tracked: stage-1 gate found no evidence",
+    "[noise] skipped: fast-tracked: stage-1 gate found no evidence",
+    "[cnn] skipped: fast-tracked: stage-1 gate found no evidence",
+    "[patch_cnn] skipped: fast-tracked: stage-1 gate found no evidence",
+    "[photo_region] skipped: fast-tracked: stage-1 gate found no evidence"
+   ],
+   "fast_tracked": true,
+   "heatmaps": [],
+   "needs_review": false,
+   "plain_explanation": null,
+   "risk_score": 0.0,
+   "risk_tier": "LOW",
+   "signals": [
+    {
+     "available": true,
+     "findings": [
+      "PDF Producer: 'SAP NetWeaver 7.5 PDF Generator'",
+      "PDF Creator: 'SAP HCM Payroll'"
+     ],
+     "name": "pdf_forensics",
+     "score": 0.0,
+     "skip_reason": null
+    },
+    {
+     "available": true,
+     "findings": [
+      "All 2 applicable rules passed"
+     ],
+     "name": "business_rules",
+     "score": 0.0,
+     "skip_reason": null
+    },
+    {
+     "available": false,
+     "findings": [],
+     "name": "copy_move",
+     "score": null,
+     "skip_reason": "born-digital PDF — rendered text/labels repeat pixel-identically by construction, so duplication detection is not meaningful"
+    },
+    {
+     "available": false,
+     "findings": [],
+     "name": "metadata",
+     "score": null,
+     "skip_reason": "EXIF does not apply to PDFs (see pdf_forensics)"
+    },
+    {
+     "available": false,
+     "findings": [],
+     "name": "authenticity",
+     "score": null,
+     "skip_reason": "authenticity check disabled"
+    },
+    {
+     "available": false,
+     "findings": [],
+     "name": "ela",
+     "score": null,
+     "skip_reason": "fast-tracked: stage-1 gate found no evidence"
+    },
+    {
+     "available": false,
+     "findings": [],
+     "name": "noise",
+     "score": null,
+     "skip_reason": "fast-tracked: stage-1 gate found no evidence"
+    },
+    {
+     "available": false,
+     "findings": [],
+     "name": "cnn",
+     "score": null,
+     "skip_reason": "fast-tracked: stage-1 gate found no evidence"
+    },
+    {
+     "available": false,
+     "findings": [],
+     "name": "patch_cnn",
+     "score": null,
+     "skip_reason": "fast-tracked: stage-1 gate found no evidence"
+    },
+    {
+     "available": false,
+     "findings": [],
+     "name": "photo_region",
+     "score": null,
+     "skip_reason": "fast-tracked: stage-1 gate found no evidence"
+    }
+   ],
+   "source_format": "pdf_digital"
+  },
+  "timings": [
+   "tampering_ms"
+  ]
+ },
+ "status": 200
+}

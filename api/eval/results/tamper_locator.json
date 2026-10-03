@@ -1,0 +1,36 @@
+{
+ "agent_id": "tamper_locator",
+ "measured_at": "2026-09-25T17:51:45+00:00",
+ "metrics": {
+  "box_hit_rate": 0.3333,
+  "boxed_rate": 0.3333,
+  "n": 24,
+  "per_attack": {
+   "splice": {
+    "hit": 1.0,
+    "boxed": 1.0,
+    "n": 8
+   },
+   "copy_move": {
+    "hit": 0.0,
+    "boxed": 0.0,
+    "n": 8
+   },
+   "photo_swap": {
+    "hit": 0.0,
+    "boxed": 0.0,
+    "n": 8
+   }
+  }
+ },
+ "target": {
+  "metric": "box_hit_rate",
+  "target": 0.8,
+  "higher": true,
+  "label": "Edited figure boxed (IoU >= 0.5)"
+ },
+ "primary_value": 0.3333,
+ "rating": "Weak",
+ "secondary": [],
+ "note": "hit = a drawn box overlaps the edited region with IoU >= 0.5 or lies inside it"
+}

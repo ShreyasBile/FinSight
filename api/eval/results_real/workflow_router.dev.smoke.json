@@ -1,0 +1,59 @@
+{
+ "agent_id": "workflow_router",
+ "split": "dev",
+ "data": {
+  "name": "lifecycle diagram (all products and statuses) + L&T loan amounts for the Head-approval rule",
+  "split": "dev"
+ },
+ "metrics": {
+  "accuracy": {
+   "value": 1.0,
+   "ci95": [
+    0.9745,
+    1.0
+   ],
+   "k": 147,
+   "n": 147
+  },
+  "head_rule_on_real_amounts": {
+   "value": 1.0,
+   "ci95": [
+    0.9398,
+    1.0
+   ],
+   "k": 60,
+   "n": 60
+  },
+  "transitions": 147
+ },
+ "target": {
+  "metric": "accuracy",
+  "target": 1.0,
+  "higher": true,
+  "label": "Next step matches the lifecycle diagram"
+ },
+ "primary_value": 1.0,
+ "rating": "Strong",
+ "secondary": [],
+ "run": {
+  "git_commit": "d990476",
+  "git_dirty": true,
+  "python": "3.13.3",
+  "platform": "Windows-11-10.0.26200-SP0",
+  "cpu": "Intel64 Family 6 Model 183 Stepping 1, GenuineIntel",
+  "gpu": "NVIDIA GeForce RTX 4060 Laptop GPU, 8188 MiB",
+  "llm": {
+   "provider": "ollama",
+   "model": "qwen2.5vl:7b",
+   "temperature": 0.0,
+   "num_ctx": 8192,
+   "timeout_s": 180,
+   "keep_alive": "0s",
+   "effort": "low"
+  },
+  "split_seed": 20261001,
+  "dev_fraction": 0.3,
+  "measured_at": "2026-10-01T09:28:23+00:00"
+ },
+ "failures": []
+}

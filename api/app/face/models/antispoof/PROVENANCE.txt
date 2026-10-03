@@ -1,0 +1,7 @@
+Source: https://github.com/minivision-ai/Silent-Face-Anti-Spoofing (master), resources/anti_spoof_models/
+License: Apache License 2.0 (LICENSE in this folder)
+Downloaded: 2026-09-25 for the FinSight Liveness agent (plan: Phase 6)
+sha256:
+a5eb02e1843f19b5386b953cc4c9f011c3f985d0ee2bb9819eea9a142099bec0  2.7_80x80_MiniFASNetV2.pth
+84ee1d37d96894d5e82de5a57df044ef80a58be2b218b5ed7cdfd875ec2f5990  4_0_0_80x80_MiniFASNetV1SE.pth
+Loaded with torch.load(weights_only=True) after the hash check (no pickle code execution).

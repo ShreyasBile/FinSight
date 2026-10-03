@@ -1,0 +1,134 @@
+{
+ "agent_id": "fraud_fusion",
+ "split": "dev",
+ "data": {
+  "name": "composite cases from real component outputs: tampering (Find it again! + SIDTD, production path), face pairs (4 benchmarks), Indian names",
+  "split": "dev",
+  "n": 40,
+  "pools": {
+   "tamper_genuine": 9,
+   "tamper_forged": 6,
+   "face_same": 77,
+   "face_different": 78
+  }
+ },
+ "metrics": {
+  "fraud_case_recall": {
+   "value": 1.0,
+   "ci95": [
+    0.8389,
+    1
+   ],
+   "k": 20,
+   "n": 20
+  },
+  "clean_case_false_high": {
+   "value": 0.05,
+   "ci95": [
+    0.0089,
+    0.2361
+   ],
+   "k": 1,
+   "n": 20
+  },
+  "clean_case_flagged": {
+   "value": 1.0,
+   "ci95": [
+    0.8389,
+    1
+   ],
+   "k": 20,
+   "n": 20
+  },
+  "monotonicity": {
+   "value": 1.0,
+   "ci95": [
+    0.8389,
+    1
+   ],
+   "k": 20,
+   "n": 20
+  },
+  "auc": {
+   "value": 0.8838,
+   "ci95": [
+    0.7399,
+    1.0
+   ],
+   "n": 40
+  },
+  "by_case_kind": {
+   "clean": {
+    "flagged": 1.0,
+    "high": 0.05,
+    "n": 20
+   },
+   "forged_document": {
+    "flagged": 1.0,
+    "high": 0.0,
+    "n": 5
+   },
+   "other_persons_face": {
+    "flagged": 1.0,
+    "high": 1.0,
+    "n": 5
+   },
+   "other_persons_name": {
+    "flagged": 1.0,
+    "high": 0.0,
+    "n": 5
+   },
+   "forged_and_face": {
+    "flagged": 1.0,
+    "high": 1.0,
+    "n": 5
+   }
+  }
+ },
+ "target": {
+  "metric": "fraud_case_recall",
+  "target": 0.85,
+  "higher": true,
+  "label": "Cases with a forged document or a different face rated MEDIUM or HIGH"
+ },
+ "primary_value": 1.0,
+ "rating": "Strong",
+ "secondary": [
+  {
+   "metric": "clean_case_false_high",
+   "target": 0.05,
+   "higher": false,
+   "label": "Clean cases rated HIGH",
+   "value": 0.05,
+   "rating": "Strong"
+  },
+  {
+   "metric": "monotonicity",
+   "target": 1.0,
+   "higher": true,
+   "label": "More evidence never lowers the score",
+   "value": 1.0,
+   "rating": "Strong"
+  }
+ ],
+ "run": {
+  "git_commit": "d990476",
+  "git_dirty": true,
+  "python": "3.13.3",
+  "platform": "Windows-11-10.0.26200-SP0",
+  "cpu": "Intel64 Family 6 Model 183 Stepping 1, GenuineIntel",
+  "gpu": "NVIDIA GeForce RTX 4060 Laptop GPU, 8188 MiB",
+  "llm": {
+   "provider": "ollama",
+   "model": "qwen2.5vl:7b",
+   "temperature": 0.0,
+   "num_ctx": 8192,
+   "timeout_s": 180,
+   "keep_alive": "0s",
+   "effort": "low"
+  },
+  "split_seed": 20261001,
+  "dev_fraction": 0.3,
+  "measured_at": "2026-10-01T09:28:26+00:00"
+ }
+}

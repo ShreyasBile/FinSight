@@ -1,0 +1,31 @@
+{
+ "body": {
+  "answer": "Most relevant provision — RBI (Digital Lending) Directions, 2025 · Cooling-off / look-up period:\n\nBorrowers are permitted to exit a digital loan during a cooling-off (look-up) period by repaying the principal and proportionate Annual Percentage Rate without any penalty. The cooling-off period must be at least one day, regardless of loan tenor. The RE may retain a disclosed one-time processing fee.",
+  "citations": [
+   {
+    "category": "Digital Lending",
+    "document_title": "RBI (Digital Lending) Directions, 2025",
+    "score": 10.822,
+    "section_title": "Cooling-off / look-up period",
+    "text": "Borrowers are permitted to exit a digital loan during a cooling-off (look-up) period by repaying the principal and proportionate Annual Percentage Rate without any penalty. The cooling-off period must be at least one day, regardless of loan tenor. The RE may retain a disclosed one-time processing fee."
+   },
+   {
+    "category": "Digital Lending",
+    "document_title": "RBI (Digital Lending) Directions, 2025",
+    "score": 2.674,
+    "section_title": "Fees payable to Lending Service Providers",
+    "text": "Any fees or charges payable to Lending Service Providers in the credit intermediation process must be paid directly by the Regulated Entity and not charged by the LSP to the borrower. The borrower pays only what is disclosed in the Key Facts Statement."
+   },
+   {
+    "category": "Credit Risk",
+    "document_title": "RBI (Regulatory Framework for Microfinance Loans) Directions, 2022",
+    "score": 2.478,
+    "section_title": "Repayment capacity — 50% of household income",
+    "text": "For microfinance loans, the total monthly loan repayment obligations of a household — including principal and interest on all outstanding loans plus the loan under consideration — must not exceed 50 percent of the monthly household income. This is a hard limit on indebtedness."
+   }
+  ],
+  "confidence": "High",
+  "query": "What is the cooling-off period for digital loans?"
+ },
+ "status": 200
+}

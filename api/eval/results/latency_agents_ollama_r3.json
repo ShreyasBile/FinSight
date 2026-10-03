@@ -1,0 +1,16 @@
+{
+ "label": "agents_ollama_r3",
+ "app_dir": "D:\\novacinternship\\finsight\\api",
+ "results": {
+  "extract_pan_photo": {
+   "p50_ms": 15411.8,
+   "p95_ms": 15605.8,
+   "n": 4
+  },
+  "extract_statement_pdf": {
+   "p50_ms": 4786.9,
+   "p95_ms": 4797.6,
+   "n": 4
+  }
+ }
+}

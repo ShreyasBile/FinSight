@@ -1,0 +1,35 @@
+{
+ "agent_id": "cross_verification",
+ "measured_at": "2026-09-25T14:18:14+00:00",
+ "metrics": {
+  "js_parity": 1.0,
+  "cases_compared": 1652,
+  "name_pair_accuracy": 1.0,
+  "n_name_pairs": 30,
+  "per_expected_level": {
+   "match": 1.0,
+   "partial": 1.0,
+   "mismatch": 1.0
+  }
+ },
+ "target": {
+  "metric": "js_parity",
+  "target": 1.0,
+  "higher": true,
+  "label": "Identical to the browser logic"
+ },
+ "primary_value": 1.0,
+ "rating": "Strong",
+ "secondary": [
+  {
+   "metric": "name_pair_accuracy",
+   "target": 0.95,
+   "higher": true,
+   "label": "Labelled Indian name pairs",
+   "value": 1.0,
+   "rating": "Strong"
+  }
+ ],
+ "parity_diffs": [],
+ "name_errors": []
+}

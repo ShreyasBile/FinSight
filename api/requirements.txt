@@ -1,0 +1,102 @@
+# FinSight OCR / document-intelligence service — full dependency set.
+# `pip install -r requirements.txt` reproduces the exact tested environment.
+# Generated from the working venv; direct dependencies (imported by app code)
+# are grouped and annotated first, transitive/pinned deps follow.
+
+# ── Web / API ────────────────────────────────────────────────────────────────
+fastapi==0.115.6
+uvicorn[standard]==0.34.0        # ASGI server ([standard] pulls httptools/watchfiles/websockets)
+python-multipart==0.0.20         # multipart/form-data uploads
+pydantic==2.10.4
+pydantic-settings==2.7.1
+httpx==0.28.1                    # calls to Ollama / Anthropic providers
+
+# ── Documents & images ───────────────────────────────────────────────────────
+pillow==11.1.0
+opencv-python-headless==4.10.0.84
+numpy==2.5.0
+pypdfium2==4.30.1                # PDF render / embedded-scan extraction (pdf_forensics)
+
+# ── OCR (auto-orient, quality gate, PII masking, issue localization) ──────────
+# RapidOCR = PP-OCR mobile models via ONNXRuntime. The Devanagari recognizer for
+# Aadhaar/Hindi lives in app/ocr_models/hindi/ (local files, not a pip package).
+rapidocr-onnxruntime==1.2.3
+onnxruntime==1.27.0
+
+# ── Tampering CNN classifier (signals/cnn_model.py, cnn_classifier.py) ────────
+torch==2.12.1
+
+# ── Application audit store (storage.py → applications.xlsx) ──────────────────
+openpyxl==3.1.5
+reportlab==4.2.5                # credit memo as PDF (memo_export.py)
+python-docx==1.1.2              # credit memo as Word
+
+# ── SQL Server (db.py, lending.py) ───────────────────────────────────────────
+# The lending database behind every borrower/officer screen. Needs a Microsoft
+# ODBC driver installed on the machine as well ("ODBC Driver 17 for SQL Server"
+# or 18) — pip cannot supply that part.
+pyodbc==5.3.0
+
+# ── Config ───────────────────────────────────────────────────────────────────
+pyyaml==6.0.3
+python-dotenv==1.2.2
+
+# ── Optional: background removal (PREPROCESS_SEGMENT=true) ────────────────────
+# Not installed by default — uncomment to enable; first use downloads U2Net.
+# rembg==2.0.59
+
+# ── Transitive dependencies (pinned for a reproducible install) ──────────────
+annotated-types==0.7.0
+anyio==4.14.1
+certifi==2026.6.17
+click==8.4.2
+colorama==0.4.6
+et_xmlfile==2.0.0                # openpyxl
+filelock==3.29.5                 # torch
+flatbuffers==25.12.19            # onnxruntime
+fsspec==2026.6.0                 # torch
+h11==0.16.0
+httpcore==1.0.9
+httptools==0.8.0                 # uvicorn[standard]
+idna==3.18
+Jinja2==3.1.6                    # torch
+MarkupSafe==3.0.3
+mpmath==1.3.0                    # sympy/torch
+networkx==3.6.1                  # torch
+packaging==26.2
+protobuf==7.35.1                 # onnxruntime
+pyclipper==1.4.0                 # rapidocr-onnxruntime
+pydantic_core==2.27.2
+pypdfium2==4.30.1
+python-dotenv==1.2.2
+PyYAML==6.0.3
+shapely==2.1.2                   # rapidocr-onnxruntime
+six==1.17.0
+starlette==0.41.3                # fastapi
+sympy==1.14.0                    # torch
+typing_extensions==4.15.0
+watchfiles==1.2.0                # uvicorn[standard]
+websockets==16.0                 # uvicorn[standard]
+
+# ── Installed but NOT imported by app code (leftovers from the EasyOCR→RapidOCR
+# swap). Kept here so the freeze reproduces exactly; safe to remove if you want
+# a leaner install — nothing in app/ imports them. Removing easyocr also lets
+# you drop its tree: torchvision, scikit-image, imageio, tifffile, lazy-loader,
+# python-bidi, ninja. matplotlib (+ contourpy/cycler/fonttools/kiwisolver/
+# pyparsing/python-dateutil) is likewise unused. ──
+easyocr==1.7.2
+torchvision==0.27.1
+scikit-image==0.26.0
+imageio==2.37.3
+tifffile==2026.6.1
+lazy-loader==0.5
+python-bidi==0.6.11
+ninja==1.13.0
+scipy==1.18.0
+matplotlib==3.11.0
+contourpy==1.3.3
+cycler==0.12.1
+fonttools==4.63.0
+kiwisolver==1.5.0
+pyparsing==3.3.2
+python-dateutil==2.9.0.post0

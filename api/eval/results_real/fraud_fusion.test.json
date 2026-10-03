@@ -1,0 +1,146 @@
+{
+ "agent_id": "fraud_fusion",
+ "split": "test",
+ "data": {
+  "name": "composite cases from real component outputs: tampering (Find it again! + SIDTD, production path), face pairs (4 benchmarks), Indian names",
+  "split": "test",
+  "n": 600,
+  "pools": {
+   "tamper_genuine": 383,
+   "tamper_forged": 235,
+   "face_same": 1968,
+   "face_different": 1969
+  }
+ },
+ "metrics": {
+  "fraud_case_recall": {
+   "value": 0.9667,
+   "ci95": [
+    0.9397,
+    0.9818
+   ],
+   "k": 290,
+   "n": 300
+  },
+  "clean_case_false_high": {
+   "value": 0.0033,
+   "ci95": [
+    0.0006,
+    0.0186
+   ],
+   "k": 1,
+   "n": 300
+  },
+  "clean_case_flagged": {
+   "value": 0.53,
+   "ci95": [
+    0.4735,
+    0.5857
+   ],
+   "k": 159,
+   "n": 300
+  },
+  "monotonicity": {
+   "value": 1.0,
+   "ci95": [
+    0.9874,
+    1.0
+   ],
+   "k": 300,
+   "n": 300
+  },
+  "auc": {
+   "value": 0.905,
+   "ci95": [
+    0.8785,
+    0.9309
+   ],
+   "n": 600
+  },
+  "by_case_kind": {
+   "clean": {
+    "flagged": 0.53,
+    "high": 0.0033,
+    "n": 300
+   },
+   "forged_document": {
+    "flagged": 0.8667,
+    "high": 0.0,
+    "n": 75
+   },
+   "other_persons_face": {
+    "flagged": 1.0,
+    "high": 0.2267,
+    "n": 75
+   },
+   "other_persons_name": {
+    "flagged": 1.0,
+    "high": 0.0267,
+    "n": 75
+   },
+   "forged_and_face": {
+    "flagged": 1.0,
+    "high": 0.32,
+    "n": 75
+   }
+  },
+  "clean_cases_by_document_source": {
+   "findit": {
+    "clean_case_flagged": 0.2433,
+    "clean_case_high": 0.0,
+    "genuine_documents": 183
+   },
+   "sidtd": {
+    "clean_case_flagged": 0.7367,
+    "clean_case_high": 0.0033,
+    "genuine_documents": 200
+   }
+  }
+ },
+ "target": {
+  "metric": "fraud_case_recall",
+  "target": 0.85,
+  "higher": true,
+  "label": "Cases with a forged document or a different face rated MEDIUM or HIGH"
+ },
+ "primary_value": 0.9667,
+ "rating": "Strong",
+ "secondary": [
+  {
+   "metric": "clean_case_false_high",
+   "target": 0.05,
+   "higher": false,
+   "label": "Clean cases rated HIGH",
+   "value": 0.0033,
+   "rating": "Strong"
+  },
+  {
+   "metric": "monotonicity",
+   "target": 1.0,
+   "higher": true,
+   "label": "More evidence never lowers the score",
+   "value": 1.0,
+   "rating": "Strong"
+  }
+ ],
+ "run": {
+  "git_commit": "d990476",
+  "git_dirty": true,
+  "python": "3.13.3",
+  "platform": "Windows-11-10.0.26200-SP0",
+  "cpu": "Intel64 Family 6 Model 183 Stepping 1, GenuineIntel",
+  "gpu": "NVIDIA GeForce RTX 4060 Laptop GPU, 8188 MiB",
+  "llm": {
+   "provider": "ollama",
+   "model": "qwen2.5vl:7b",
+   "temperature": 0.0,
+   "num_ctx": 8192,
+   "timeout_s": 180,
+   "keep_alive": "30m",
+   "effort": "low"
+  },
+  "split_seed": 20261001,
+  "dev_fraction": 0.3,
+  "measured_at": "2026-10-03T20:11:52+00:00"
+ }
+}

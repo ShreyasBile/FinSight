@@ -1,0 +1,40 @@
+{
+ "family": "page",
+ "documents": 769,
+ "forged": 127,
+ "statistic": "excess",
+ "pooled_auc": {
+  "top": 0.6772,
+  "excess": 0.6953
+ },
+ "models": {
+  "A": {
+   "floor": 4.796,
+   "span": 5.771,
+   "auc": 0.6762,
+   "n_forged": 94,
+   "n_genuine": 483,
+   "genuine_p95": 4.796,
+   "other_genuine_p95": 2.013,
+   "forged_above_floor": 0.3191,
+   "genuine_above_floor": 0.0497,
+   "other_genuine_above_floor": 0.0,
+   "flagged_forged_centre_in_edit": 0.7931,
+   "flagged_forged_area_on_edit": 0.8621
+  },
+  "B": {
+   "floor": 6.933,
+   "span": 2.412,
+   "auc": 0.781,
+   "n_forged": 33,
+   "n_genuine": 159,
+   "genuine_p95": 5.469,
+   "other_genuine_p95": 6.933,
+   "forged_above_floor": 0.2727,
+   "genuine_above_floor": 0.0063,
+   "other_genuine_above_floor": 0.025,
+   "flagged_forged_centre_in_edit": 0.7778,
+   "flagged_forged_area_on_edit": 0.8889
+  }
+ }
+}

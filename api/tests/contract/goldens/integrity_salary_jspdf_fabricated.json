@@ -1,0 +1,105 @@
+{
+ "body": {
+  "cleaned_preview": null,
+  "tampering": {
+   "document_preview": "img:018ad347c5b432f1",
+   "explanations": [
+    "Risk driven by two independent signals agreeing: business_rules + pdf_forensics (combined evidence 0.74)",
+    "[pdf_forensics] PDF Producer is a document-generation library ('jsPDF 2.5.1') — genuine documents from an employer or bank are produced by their own systems, not a script or browser library; this is a common trait of fabricated salary slips and statements",
+    "[pdf_forensics] PDF Creator is a document-generation library ('jsPDF') — genuine documents from an employer or bank are produced by their own systems, not a script or browser library; this is a common trait of fabricated salary slips and statements",
+    "[business_rules] FAILED: employee_name 'John Doe' looks like a placeholder, not a real name",
+    "[business_rules] FAILED: employer_name 'ABC Company Pvt Ltd' looks like a placeholder, not a real name",
+    "[copy_move] skipped: born-digital PDF — rendered text/labels repeat pixel-identically by construction, so duplication detection is not meaningful",
+    "[metadata] skipped: EXIF does not apply to PDFs (see pdf_forensics)",
+    "[authenticity] skipped: authenticity check disabled",
+    "[ela] skipped: born-digital PDF — rendered pages carry no JPEG compression history",
+    "[cnn] skipped: born-digital PDF — CNN operates on ELA maps of real compressed images",
+    "[patch_cnn] skipped: born-digital PDF — the patch detector was trained on scans and photos"
+   ],
+   "fast_tracked": false,
+   "heatmaps": [],
+   "needs_review": true,
+   "plain_explanation": null,
+   "risk_score": 0.742,
+   "risk_tier": "HIGH",
+   "signals": [
+    {
+     "available": true,
+     "findings": [
+      "PDF Producer is a document-generation library ('jsPDF 2.5.1') — genuine documents from an employer or bank are produced by their own systems, not a script or browser library; this is a common trait of fabricated salary slips and statements",
+      "PDF Creator is a document-generation library ('jsPDF') — genuine documents from an employer or bank are produced by their own systems, not a script or browser library; this is a common trait of fabricated salary slips and statements"
+     ],
+     "name": "pdf_forensics",
+     "score": 0.62,
+     "skip_reason": null
+    },
+    {
+     "available": true,
+     "findings": [
+      "FAILED: employee_name 'John Doe' looks like a placeholder, not a real name",
+      "FAILED: employer_name 'ABC Company Pvt Ltd' looks like a placeholder, not a real name"
+     ],
+     "name": "business_rules",
+     "score": 0.571,
+     "skip_reason": null
+    },
+    {
+     "available": false,
+     "findings": [],
+     "name": "copy_move",
+     "score": null,
+     "skip_reason": "born-digital PDF — rendered text/labels repeat pixel-identically by construction, so duplication detection is not meaningful"
+    },
+    {
+     "available": false,
+     "findings": [],
+     "name": "metadata",
+     "score": null,
+     "skip_reason": "EXIF does not apply to PDFs (see pdf_forensics)"
+    },
+    {
+     "available": false,
+     "findings": [],
+     "name": "authenticity",
+     "score": null,
+     "skip_reason": "authenticity check disabled"
+    },
+    {
+     "available": true,
+     "findings": [
+      "0/468 background blocks (0.0%) have anomalous noise levels"
+     ],
+     "name": "noise",
+     "score": 0.0,
+     "skip_reason": null
+    },
+    {
+     "available": false,
+     "findings": [],
+     "name": "ela",
+     "score": null,
+     "skip_reason": "born-digital PDF — rendered pages carry no JPEG compression history"
+    },
+    {
+     "available": false,
+     "findings": [],
+     "name": "cnn",
+     "score": null,
+     "skip_reason": "born-digital PDF — CNN operates on ELA maps of real compressed images"
+    },
+    {
+     "available": false,
+     "findings": [],
+     "name": "patch_cnn",
+     "score": null,
+     "skip_reason": "born-digital PDF — the patch detector was trained on scans and photos"
+    }
+   ],
+   "source_format": "pdf_digital"
+  },
+  "timings": [
+   "tampering_ms"
+  ]
+ },
+ "status": 200
+}

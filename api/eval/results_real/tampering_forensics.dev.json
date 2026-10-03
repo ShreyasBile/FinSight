@@ -1,0 +1,267 @@
+{
+ "agent_id": "tampering_forensics",
+ "split": "dev",
+ "data": {
+  "name": "Find it again! (official test) + SIDTD templates (test groups)",
+  "split": "dev",
+  "n": 15,
+  "findit": 6,
+  "sidtd": 9,
+  "path": "production: receipts as vehicle_quotation with extraction; ID cards as pan, forensics only",
+  "leakage": {
+   "checked_against": [
+    "D:\\novacinternship\\document_tampering\\data\\synthetic",
+    "D:\\novacinternship\\document_tampering\\data\\external",
+    "D:\\novacinternship\\document_tampering\\data\\archive"
+   ],
+   "train_files": 1115,
+   "test_items": 15,
+   "identical": 0
+  }
+ },
+ "metrics": {
+  "forged_recall": {
+   "value": 1.0,
+   "ci95": [
+    0.6097,
+    1.0
+   ],
+   "k": 6,
+   "n": 6
+  },
+  "forged_high_rate": {
+   "value": 0.3333,
+   "ci95": [
+    0.0968,
+    0.7
+   ],
+   "k": 2,
+   "n": 6
+  },
+  "genuine_false_high": {
+   "value": 0.4444,
+   "ci95": [
+    0.1888,
+    0.7334
+   ],
+   "k": 4,
+   "n": 9
+  },
+  "genuine_flagged_any": {
+   "value": 1.0,
+   "ci95": [
+    0.7008,
+    1
+   ],
+   "k": 9,
+   "n": 9
+  },
+  "auc": {
+   "value": 0.463,
+   "ci95": [
+    0.1,
+    0.82
+   ],
+   "n": 15
+  },
+  "per_forgery_kind": {
+   "kolourpaint": {
+    "n": 1,
+    "recall": 1.0,
+    "high": 0.0
+   },
+   "inpaint_and_rewrite": {
+    "n": 4,
+    "recall": 1.0,
+    "high": 0.25
+   },
+   "crop_and_replace": {
+    "n": 1,
+    "recall": 1.0,
+    "high": 1.0
+   }
+  },
+  "unreadable": 0,
+  "n_forged": 6,
+  "n_genuine": 9,
+  "by_dataset": {
+   "findit": {
+    "forged_recall": {
+     "value": 1.0,
+     "ci95": [
+      0.2065,
+      1
+     ],
+     "k": 1,
+     "n": 1
+    },
+    "forged_high_rate": {
+     "value": 0.0,
+     "ci95": [
+      0,
+      0.7935
+     ],
+     "k": 0,
+     "n": 1
+    },
+    "genuine_false_high": {
+     "value": 0.8,
+     "ci95": [
+      0.3755,
+      0.9638
+     ],
+     "k": 4,
+     "n": 5
+    },
+    "genuine_flagged_any": {
+     "value": 1.0,
+     "ci95": [
+      0.5655,
+      1
+     ],
+     "k": 5,
+     "n": 5
+    },
+    "auc": {
+     "value": 0.2,
+     "ci95": [
+      0.0,
+      0.6
+     ],
+     "n": 6
+    },
+    "per_forgery_kind": {
+     "kolourpaint": {
+      "n": 1,
+      "recall": 1.0,
+      "high": 0.0
+     }
+    },
+    "unreadable": 0,
+    "n_forged": 1,
+    "n_genuine": 5
+   },
+   "sidtd": {
+    "forged_recall": {
+     "value": 1.0,
+     "ci95": [
+      0.5655,
+      1
+     ],
+     "k": 5,
+     "n": 5
+    },
+    "forged_high_rate": {
+     "value": 0.4,
+     "ci95": [
+      0.1176,
+      0.7693
+     ],
+     "k": 2,
+     "n": 5
+    },
+    "genuine_false_high": {
+     "value": 0.0,
+     "ci95": [
+      0,
+      0.4899
+     ],
+     "k": 0,
+     "n": 4
+    },
+    "genuine_flagged_any": {
+     "value": 1.0,
+     "ci95": [
+      0.5101,
+      1
+     ],
+     "k": 4,
+     "n": 4
+    },
+    "auc": {
+     "value": 0.55,
+     "ci95": [
+      0.1429,
+      1.0
+     ],
+     "n": 9
+    },
+    "per_forgery_kind": {
+     "inpaint_and_rewrite": {
+      "n": 4,
+      "recall": 1.0,
+      "high": 0.25
+     },
+     "crop_and_replace": {
+      "n": 1,
+      "recall": 1.0,
+      "high": 1.0
+     }
+    },
+    "unreadable": 0,
+    "n_forged": 5,
+    "n_genuine": 4
+   }
+  },
+  "latency": {
+   "n": 15,
+   "p50_s": 1.07,
+   "p95_s": 3.34,
+   "mean_s": 1.34
+  }
+ },
+ "target": {
+  "metric": "forged_recall",
+  "target": 0.85,
+  "higher": true,
+  "label": "Forged documents flagged MEDIUM or HIGH"
+ },
+ "primary_value": 1.0,
+ "rating": "Strong",
+ "secondary": [
+  {
+   "metric": "genuine_false_high",
+   "target": 0.1,
+   "higher": false,
+   "label": "Genuine documents wrongly HIGH",
+   "value": 0.4444,
+   "rating": "Weak"
+  },
+  {
+   "metric": "genuine_flagged_any",
+   "target": 0.3,
+   "higher": false,
+   "label": "Genuine documents flagged at all (MEDIUM or HIGH)",
+   "value": 1.0,
+   "rating": "Weak"
+  },
+  {
+   "metric": "auc",
+   "target": 0.85,
+   "higher": true,
+   "label": "ROC-AUC of the fused score",
+   "value": 0.463,
+   "rating": "Weak"
+  }
+ ],
+ "run": {
+  "git_commit": "d990476",
+  "git_dirty": true,
+  "python": "3.13.3",
+  "platform": "Windows-11-10.0.26200-SP0",
+  "cpu": "Intel64 Family 6 Model 183 Stepping 1, GenuineIntel",
+  "gpu": "NVIDIA GeForce RTX 4060 Laptop GPU, 8188 MiB",
+  "llm": {
+   "provider": "ollama",
+   "model": "qwen2.5vl:7b",
+   "temperature": 0.0,
+   "num_ctx": 8192,
+   "timeout_s": 180,
+   "keep_alive": "30m",
+   "effort": "low"
+  },
+  "split_seed": 20261001,
+  "dev_fraction": 0.3,
+  "measured_at": "2026-10-01T04:38:48+00:00"
+ }
+}

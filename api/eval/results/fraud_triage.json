@@ -1,0 +1,30 @@
+{
+ "agent_id": "fraud_triage",
+ "measured_at": "2026-09-25T20:42:59+00:00",
+ "metrics": {
+  "proposal_precision": 1.0,
+  "proposal_recall": 1.0,
+  "proposals": 9,
+  "ring_proposals": 4,
+  "rings_found": 4,
+  "rings_planted": 4,
+  "case_proposals": 5,
+  "cases_found": 5,
+  "cases_planted": 5,
+  "false_ring_proposals": 0,
+  "already_open_reproposed": 0,
+  "links_found": 8,
+  "latency_ms": 70,
+  "population": 31,
+  "same_person_pairs_embedded": 6
+ },
+ "target": {
+  "metric": "proposal_precision",
+  "target": 0.8,
+  "higher": true,
+  "label": "Proposals that are real cases/rings"
+ },
+ "primary_value": 1.0,
+ "rating": "Strong",
+ "secondary": []
+}

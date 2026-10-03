@@ -1,0 +1,71 @@
+{
+ "agent_id": "fraud_fusion",
+ "measured_at": "2026-09-25T20:43:36+00:00",
+ "metrics": {
+  "tier_accuracy_heldout": 0.93,
+  "tier_accuracy_heldout_v1": 0.6025,
+  "tier_accuracy_heldout_weighted_only_calibrated": 0.7875,
+  "calibration_accuracy": 0.885,
+  "monotonicity": 1.0,
+  "selected": {
+   "weights": {
+    "tampering": 0.35,
+    "face": 0.2,
+    "cross_check": 0.2,
+    "validation": 0.15,
+    "dedupe": 0.1,
+    "patterns": 0.1
+   },
+   "tiers": {
+    "medium": 0.2,
+    "high": 0.6
+   },
+   "confidence": {
+    "tampering": 0.59,
+    "face": 0.6,
+    "cross_check": 0.4,
+    "validation": 0.6,
+    "dedupe": 0.5,
+    "patterns": 0.6
+   },
+   "corroboration_factor": 0.1,
+   "face_uncertain": 0.35
+  },
+  "confusion_heldout": {
+   "MEDIUM": {
+    "HIGH": 6,
+    "MEDIUM": 234,
+    "LOW": 3
+   },
+   "HIGH": {
+    "HIGH": 18,
+    "MEDIUM": 17
+   },
+   "LOW": {
+    "LOW": 120,
+    "MEDIUM": 2
+   }
+  },
+  "n_calibration": 400,
+  "n_heldout": 400
+ },
+ "target": {
+  "metric": "tier_accuracy_heldout",
+  "target": 0.9,
+  "higher": true,
+  "label": "Held-out scenario tier accuracy"
+ },
+ "primary_value": 0.93,
+ "rating": "Strong",
+ "secondary": [
+  {
+   "metric": "monotonicity",
+   "target": 1.0,
+   "higher": true,
+   "label": "More evidence never lowers the score",
+   "value": 1.0,
+   "rating": "Strong"
+  }
+ ],
+ "note": "Labels come from a written expert policy (eval/agents/case_eval.py::expert_tier), not from real fraud outcomes; calibration used only the calibration split."
+}

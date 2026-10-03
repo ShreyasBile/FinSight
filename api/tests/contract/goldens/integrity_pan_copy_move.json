@@ -1,0 +1,141 @@
+{
+ "body": {
+  "cleaned_preview": null,
+  "tampering": {
+   "document_preview": "img:7334b0e9ea48d27e",
+   "explanations": [
+    "Risk driven by two independent signals agreeing: copy_move + ela (combined evidence 0.72)",
+    "[copy_move] VERIFIED duplication: 662 keypoint pairs at one displacement (~+0, -312) px and the two regions are pixel-identical (correlation 1.00) — content was copied within this document",
+    "[pdf_forensics] skipped: not a PDF",
+    "[authenticity] skipped: authenticity check disabled",
+    "[ela] 36 block(s) with anomalous error level (max z=21.6 vs page median)",
+    "[ela] A localized region compresses very differently from the rest of the page",
+    "[photo_region] skipped: no detectable photo/face on this document"
+   ],
+   "fast_tracked": false,
+   "heatmaps": [
+    {
+     "caption": "The highlighted regions are duplicated — the same content appears in two places.",
+     "image": "img:a36897c1716cc32c",
+     "signal": "copy_move",
+     "trust": "precise"
+    },
+    {
+     "caption": "Warm colours mark areas the model found unusual. This is a supporting hint, not proof.",
+     "image": "img:a2415a0dbd6d13f5",
+     "signal": "cnn",
+     "trust": "supporting"
+    },
+    {
+     "caption": "Brighter areas compress differently from the rest of the page.",
+     "image": "img:19d780a74ceb4f3e",
+     "signal": "ela",
+     "trust": "supporting"
+    },
+    {
+     "caption": "Highlighted blocks have a different noise texture from the rest of the page.",
+     "image": "img:19836c6d1759332e",
+     "signal": "noise",
+     "trust": "supporting"
+    }
+   ],
+   "needs_review": true,
+   "plain_explanation": null,
+   "risk_score": 0.725,
+   "risk_tier": "HIGH",
+   "signals": [
+    {
+     "available": true,
+     "findings": [
+      "No EXIF metadata at all (weak signal — messaging apps strip EXIF from genuine photos too)"
+     ],
+     "name": "metadata",
+     "score": 0.15,
+     "skip_reason": null
+    },
+    {
+     "available": true,
+     "findings": [
+      "All 2 applicable rules passed"
+     ],
+     "name": "business_rules",
+     "score": 0.0,
+     "skip_reason": null
+    },
+    {
+     "available": true,
+     "findings": [
+      "VERIFIED duplication: 662 keypoint pairs at one displacement (~+0, -312) px and the two regions are pixel-identical (correlation 1.00) — content was copied within this document"
+     ],
+     "name": "copy_move",
+     "score": 1.0,
+     "skip_reason": null
+    },
+    {
+     "available": false,
+     "findings": [],
+     "name": "pdf_forensics",
+     "score": null,
+     "skip_reason": "not a PDF"
+    },
+    {
+     "available": false,
+     "findings": [],
+     "name": "authenticity",
+     "score": null,
+     "skip_reason": "authenticity check disabled"
+    },
+    {
+     "available": true,
+     "findings": [
+      "36 block(s) with anomalous error level (max z=21.6 vs page median)",
+      "A localized region compresses very differently from the rest of the page"
+     ],
+     "name": "ela",
+     "score": 1.0,
+     "skip_reason": null
+    },
+    {
+     "available": true,
+     "findings": [
+      "29/135 background blocks (21.5%) have anomalous noise levels",
+      "Noise texture is inconsistent across the page — possible content from a different source"
+     ],
+     "name": "noise",
+     "score": 0.674,
+     "skip_reason": null
+    },
+    {
+     "available": true,
+     "findings": [
+      "Model v009: 77 patches scanned, hottest 0.575 -> evidence 0.69 (0 patches over 0.90)"
+     ],
+     "name": "cnn",
+     "score": 0.689,
+     "skip_reason": null
+    },
+    {
+     "available": true,
+     "findings": [
+      "No area stands out as edited (models trained on real forged ID cards)"
+     ],
+     "name": "patch_cnn",
+     "score": 0.0,
+     "skip_reason": null
+    },
+    {
+     "available": false,
+     "findings": [],
+     "name": "photo_region",
+     "score": null,
+     "skip_reason": "no detectable photo/face on this document"
+    }
+   ],
+   "source_format": "camera_image"
+  },
+  "timings": [
+   "tampering_ms"
+  ]
+ },
+ "status": 200
+}

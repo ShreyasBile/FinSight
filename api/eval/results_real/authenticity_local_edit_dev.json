@@ -1,0 +1,22 @@
+{
+ "receipts_forged": {
+  "n": 33,
+  "yes": 29,
+  "yes_with_quote": 29
+ },
+ "receipts_genuine": {
+  "n": 40,
+  "yes": 29,
+  "yes_with_quote": 29
+ },
+ "ids_forged": {
+  "n": 20,
+  "yes": 20,
+  "yes_with_quote": 20
+ },
+ "ids_genuine": {
+  "n": 20,
+  "yes": 20,
+  "yes_with_quote": 20
+ }
+}

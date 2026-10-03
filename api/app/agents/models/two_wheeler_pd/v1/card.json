@@ -1,0 +1,55 @@
+{
+ "name": "two_wheeler_pd",
+ "version": "v1",
+ "trained_on": "L&T Vehicle Loan Default, train.csv, DEV split only (seed 20261001, dev fraction 0.3); the test split was not read",
+ "rows": 70144,
+ "default_rate": 0.2169,
+ "features": {
+  "loan_amount": 1,
+  "ltv": 1,
+  "age": 0,
+  "salaried": 0,
+  "cibil": -1,
+  "has_bureau": 0,
+  "bureau_accounts": 0,
+  "overdue_accounts": 1,
+  "recent_delinquency": 1,
+  "utilization": 1,
+  "history_years": 0,
+  "existing_emi": 1,
+  "enquiries": 1
+ },
+ "estimator": "sklearn HistGradientBoostingClassifier",
+ "params": {
+  "max_iter": 400,
+  "learning_rate": 0.04,
+  "max_leaf_nodes": 31,
+  "min_samples_leaf": 80,
+  "l2_regularization": 1.0,
+  "random_state": 0
+ },
+ "cv5_auc_dev": 0.6267,
+ "blend": {
+  "weight": 0.75,
+  "scale": 28.8583,
+  "max_points": 25.0,
+  "selection": "smallest weight within 0.002 of the best dev AUC",
+  "base_rate": 0.2169,
+  "dev_auc_by_weight": {
+   "0.0": 0.5798,
+   "0.25": 0.6063,
+   "0.5": 0.6117,
+   "0.75": 0.6138,
+   "1.0": 0.6142,
+   "1.5": 0.6147,
+   "2.0": 0.614
+  }
+ },
+ "use": "Risk Scoring agent, TWO_WHEELER product only: overall = rule score + weight * scale * (logit(p) - logit(base_rate)), then FinSight's knock-out rules",
+ "limits": [
+  "Indian two-wheeler loans from one lender (L&T, ~2018); other products are unchanged",
+  "no income or tenure in the training data \u2014 those still come only from the rule engine",
+  "probability is relative risk, not a calibrated PD for a different portfolio"
+ ],
+ "sklearn": "1.7.2"
+}

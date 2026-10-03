@@ -1,0 +1,53 @@
+# FinSight agentic build — direct dependencies only; transitive versions are
+# pinned by requirements-agents.lock.txt (pip freeze of the verified venv).
+# Install:  python -m pip install -r requirements-agents.txt
+#
+# Differences from requirements.txt:
+#   * pydantic / pydantic-settings bumped — crewai needs pydantic>=2.11.9,<2.13
+#   * crewai added (tool-first agents + Flows); [anthropic] = native Claude lane
+#   * EasyOCR-era leftovers (easyocr, torchvision, scikit-image, matplotlib)
+#     dropped — nothing in app/ imports them
+#   * risk-scoring ML stack added at the versions the vendored models were
+#     trained with (xgboost/scikit-learn pickles are version-sensitive)
+
+# ── Web / API ────────────────────────────────────────────────────────────────
+fastapi==0.115.6
+uvicorn[standard]==0.34.0
+python-multipart==0.0.20
+pydantic>=2.11.9,<2.13
+pydantic-settings>=2.14.2,<3
+httpx==0.28.1
+
+# ── Documents & images ───────────────────────────────────────────────────────
+pillow==11.1.0
+opencv-python-headless==4.10.0.84
+numpy==2.5.0
+pypdfium2==4.30.1
+
+# ── OCR ──────────────────────────────────────────────────────────────────────
+rapidocr-onnxruntime==1.2.3
+onnxruntime==1.27.0
+
+# ── Tampering CNN ────────────────────────────────────────────────────────────
+torch==2.12.1
+
+# ── Storage / DB / config ────────────────────────────────────────────────────
+openpyxl==3.1.5
+pyodbc==5.3.0
+pyyaml==6.0.3
+python-dotenv==1.2.2
+
+# ── Agents ───────────────────────────────────────────────────────────────────
+crewai[anthropic]==1.15.22
+
+# ── Risk scoring (vendored risk engine + XGBoost overlay) ─────────────────────
+xgboost==3.3.0
+scikit-learn==1.7.2
+pandas==2.3.2
+joblib==1.5.2
+
+# ── Tests / evaluation ───────────────────────────────────────────────────────
+pytest
+pytest-asyncio
+pytest-timeout
+respx

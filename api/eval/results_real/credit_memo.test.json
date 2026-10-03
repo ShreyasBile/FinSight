@@ -1,0 +1,119 @@
+{
+ "agent_id": "credit_memo",
+ "split": "test",
+ "data": {
+  "name": "credit memos written for real L&T loans (complete-evidence setting); exports rendered with the download endpoint's renderers",
+  "split": "test",
+  "n_exports": 12
+ },
+ "metrics": {
+  "grounded_rate": {
+   "value": 1.0,
+   "ci95": [
+    0.969,
+    1
+   ],
+   "k": 120,
+   "n": 120
+  },
+  "section_grounded_rate": {
+   "value": 1.0,
+   "ci95": [
+    0.9947,
+    1.0
+   ],
+   "k": 720,
+   "n": 720
+  },
+  "section_completeness": {
+   "value": 1.0,
+   "ci95": [
+    0.969,
+    1
+   ],
+   "k": 120,
+   "n": 120
+  },
+  "final_memo_grounded": {
+   "value": 1.0,
+   "ci95": [
+    0.969,
+    1
+   ],
+   "k": 120,
+   "n": 120
+  },
+  "export_valid": {
+   "value": 1.0,
+   "ci95": [
+    0.7575,
+    1
+   ],
+   "k": 12,
+   "n": 12
+  },
+  "export_detail": {
+   "pdf": {
+    "opens": 12,
+    "logo": 12,
+    "ids_masked": 12,
+    "sections": 12
+   },
+   "docx": {
+    "opens": 12,
+    "logo": 12,
+    "ids_masked": 12,
+    "sections": 12
+   }
+  },
+  "llm_memos": 120,
+  "memos": 120,
+  "sections_replaced_by_template": {}
+ },
+ "target": {
+  "metric": "grounded_rate",
+  "target": 0.95,
+  "higher": true,
+  "label": "Memos citing only real figures"
+ },
+ "primary_value": 1.0,
+ "rating": "Strong",
+ "secondary": [
+  {
+   "metric": "section_completeness",
+   "target": 1.0,
+   "higher": true,
+   "label": "All required sections present",
+   "value": 1.0,
+   "rating": "Strong"
+  },
+  {
+   "metric": "export_valid",
+   "target": 1.0,
+   "higher": true,
+   "label": "PDF and Word exports open, carry the logo, IDs masked",
+   "value": 1.0,
+   "rating": "Strong"
+  }
+ ],
+ "run": {
+  "git_commit": "d990476",
+  "git_dirty": true,
+  "python": "3.13.3",
+  "platform": "Windows-11-10.0.26200-SP0",
+  "cpu": "Intel64 Family 6 Model 183 Stepping 1, GenuineIntel",
+  "gpu": "NVIDIA GeForce RTX 4060 Laptop GPU, 8188 MiB",
+  "llm": {
+   "provider": "ollama",
+   "model": "qwen2.5vl:7b",
+   "temperature": 0.0,
+   "num_ctx": 8192,
+   "timeout_s": 180,
+   "keep_alive": "10m",
+   "effort": "low"
+  },
+  "split_seed": 20261001,
+  "dev_fraction": 0.3,
+  "measured_at": "2026-10-02T05:56:18+00:00"
+ }
+}

@@ -1,0 +1,182 @@
+{
+ "agent_id": "cross_verification",
+ "split": "dev",
+ "data": {
+  "name": "real Indian first names (Kaggle list, split by name) + common surnames, labelled variant pairs; PAN-card names as read by the extraction model",
+  "split": "dev",
+  "acceptable_levels": {
+   "exact_case": [
+    "match"
+   ],
+   "honorific": [
+    "match"
+   ],
+   "initials": [
+    "match"
+   ],
+   "middle_omitted": [
+    "match"
+   ],
+   "surname_first": [
+    "match"
+   ],
+   "punctuation_spacing": [
+    "match"
+   ],
+   "married_surname": [
+    "mismatch",
+    "partial"
+   ],
+   "spelling_variant": [
+    "match",
+    "partial"
+   ],
+   "different_person": [
+    "mismatch"
+   ],
+   "same_surname_other_person": [
+    "mismatch"
+   ],
+   "fathers_document": [
+    "mismatch",
+    "partial"
+   ]
+  }
+ },
+ "metrics": {
+  "name_pair_accuracy": {
+   "value": 1.0,
+   "ci95": [
+    0.9977,
+    1
+   ],
+   "k": 1650,
+   "n": 1650
+  },
+  "js_parity": {
+   "value": 1.0,
+   "ci95": [
+    0.9977,
+    1
+   ],
+   "k": 1650,
+   "n": 1650
+  },
+  "extracted_name_match": null,
+  "per_category": {
+   "exact_case": {
+    "accuracy": 1.0,
+    "levels": {
+     "match": 150
+    }
+   },
+   "honorific": {
+    "accuracy": 1.0,
+    "levels": {
+     "match": 150
+    }
+   },
+   "initials": {
+    "accuracy": 1.0,
+    "levels": {
+     "match": 150
+    }
+   },
+   "middle_omitted": {
+    "accuracy": 1.0,
+    "levels": {
+     "match": 150
+    }
+   },
+   "surname_first": {
+    "accuracy": 1.0,
+    "levels": {
+     "match": 150
+    }
+   },
+   "punctuation_spacing": {
+    "accuracy": 1.0,
+    "levels": {
+     "match": 150
+    }
+   },
+   "married_surname": {
+    "accuracy": 1.0,
+    "levels": {
+     "partial": 150
+    }
+   },
+   "spelling_variant": {
+    "accuracy": 1.0,
+    "levels": {
+     "partial": 150
+    }
+   },
+   "different_person": {
+    "accuracy": 1.0,
+    "levels": {
+     "mismatch": 150
+    }
+   },
+   "same_surname_other_person": {
+    "accuracy": 1.0,
+    "levels": {
+     "mismatch": 150
+    }
+   },
+   "fathers_document": {
+    "accuracy": 1.0,
+    "levels": {
+     "partial": 150
+    }
+   }
+  },
+  "n_pairs": 1650
+ },
+ "target": {
+  "metric": "name_pair_accuracy",
+  "target": 0.95,
+  "higher": true,
+  "label": "Labelled name pairs judged correctly"
+ },
+ "primary_value": 1.0,
+ "rating": "Strong",
+ "secondary": [
+  {
+   "metric": "js_parity",
+   "target": 1.0,
+   "higher": true,
+   "label": "Identical to the browser logic",
+   "value": 1.0,
+   "rating": "Strong"
+  },
+  {
+   "metric": "extracted_name_match",
+   "target": 0.95,
+   "higher": true,
+   "label": "Name read off a PAN card matches its label",
+   "value": null,
+   "rating": "Not measured"
+  }
+ ],
+ "run": {
+  "git_commit": "d990476",
+  "git_dirty": true,
+  "python": "3.13.3",
+  "platform": "Windows-11-10.0.26200-SP0",
+  "cpu": "Intel64 Family 6 Model 183 Stepping 1, GenuineIntel",
+  "gpu": "NVIDIA GeForce RTX 4060 Laptop GPU, 8188 MiB",
+  "llm": {
+   "provider": "ollama",
+   "model": "qwen2.5vl:7b",
+   "temperature": 0.0,
+   "num_ctx": 8192,
+   "timeout_s": 180,
+   "keep_alive": "30m",
+   "effort": "low"
+  },
+  "split_seed": 20261001,
+  "dev_fraction": 0.3,
+  "measured_at": "2026-10-02T06:37:20+00:00"
+ }
+}

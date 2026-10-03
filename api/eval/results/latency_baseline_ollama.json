@@ -1,0 +1,16 @@
+{
+ "label": "baseline_ollama",
+ "app_dir": "D:/novacinternship/finsight-baseline/api",
+ "results": {
+  "extract_pan_photo": {
+   "p50_ms": 15189.7,
+   "p95_ms": 15783.5,
+   "n": 5
+  },
+  "extract_statement_pdf": {
+   "p50_ms": 5187.9,
+   "p95_ms": 5211.6,
+   "n": 5
+  }
+ }
+}

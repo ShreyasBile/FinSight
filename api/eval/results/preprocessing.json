@@ -1,0 +1,90 @@
+{
+ "agent_id": "preprocessing",
+ "measured_at": "2026-09-25T14:15:44+00:00",
+ "metrics": {
+  "field_text_recall_after": 0.9958,
+  "field_text_recall_before": 0.9958,
+  "recall_gain": 0.0,
+  "n_images": 60,
+  "reverted": 9,
+  "p50_s": 5.72,
+  "p95_s": 7.86,
+  "per_variant": {
+   "rot90": {
+    "before": 1.0,
+    "after": 0.95,
+    "n": 5
+   },
+   "desk": {
+    "before": 1.0,
+    "after": 1.0,
+    "n": 10
+   },
+   "desk_rot": {
+    "before": 1.0,
+    "after": 1.0,
+    "n": 10
+   },
+   "blur": {
+    "before": 0.975,
+    "after": 1.0,
+    "n": 10
+   },
+   "dark": {
+    "before": 1.0,
+    "after": 1.0,
+    "n": 10
+   },
+   "glare": {
+    "before": 1.0,
+    "after": 1.0,
+    "n": 10
+   },
+   "rot180": {
+    "before": 1.0,
+    "after": 1.0,
+    "n": 1
+   },
+   "rot270": {
+    "before": 1.0,
+    "after": 1.0,
+    "n": 4
+   }
+  },
+  "stage_p50_ms": {
+   "[Stage 0.5]": 0,
+   "[Stage 0]": 4,
+   "[Stage 1.5]": 1236,
+   "[Stage 1]": 0,
+   "[Stage 2]": 39,
+   "[Stage 3]": 13,
+   "[Stage 4]": 2779
+  }
+ },
+ "target": {
+  "metric": "field_text_recall_after",
+  "target": 0.85,
+  "higher": true,
+  "label": "Field text readable after cleanup (degraded cards)"
+ },
+ "primary_value": 0.9958,
+ "rating": "Strong",
+ "secondary": [
+  {
+   "metric": "recall_gain",
+   "target": 0.1,
+   "higher": true,
+   "label": "OCR recall gain vs raw image",
+   "value": 0.0,
+   "rating": "Weak"
+  },
+  {
+   "metric": "p50_s",
+   "target": 10.0,
+   "higher": false,
+   "label": "Median time per image (s)",
+   "value": 5.72,
+   "rating": "Strong"
+  }
+ ]
+}

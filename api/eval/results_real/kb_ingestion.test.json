@@ -1,0 +1,93 @@
+{
+ "agent_id": "kb_ingestion",
+ "split": "test",
+ "data": {
+  "name": "ObliQA corpus (40 ADGM regulations) ingested through the KB Ingestion agent",
+  "split": "test",
+  "n_questions": 1000,
+  "gold_passages": 891,
+  "recall_at_5": "the gold passage's DOCUMENT among the top-5 chunks",
+  "section_recall_at_5": "the gold passage ITSELF inside a top-5 chunk"
+ },
+ "metrics": {
+  "recall_at_5": {
+   "value": 0.927,
+   "ci95": [
+    0.9092,
+    0.9415
+   ],
+   "k": 927,
+   "n": 1000
+  },
+  "section_recall_at_5": {
+   "value": 0.744,
+   "ci95": [
+    0.7161,
+    0.7701
+   ],
+   "k": 744,
+   "n": 1000
+  },
+  "passage_integrity": {
+   "value": 0.9618,
+   "ci95": [
+    0.9471,
+    0.9726
+   ],
+   "k": 857,
+   "n": 891
+  },
+  "documents_ingested": 40,
+  "chunks": 7968,
+  "ingest_latency": {
+   "n": 40,
+   "p50_s": 0.49,
+   "p95_s": 1.47,
+   "mean_s": 0.57
+  },
+  "retrieval_latency": {
+   "n": 1000,
+   "p50_s": 0.13,
+   "p95_s": 0.21,
+   "mean_s": 0.14
+  }
+ },
+ "target": {
+  "metric": "recall_at_5",
+  "target": 0.85,
+  "higher": true,
+  "label": "Gold paragraph's document in top 5"
+ },
+ "primary_value": 0.927,
+ "rating": "Strong",
+ "secondary": [
+  {
+   "metric": "section_recall_at_5",
+   "target": 0.7,
+   "higher": true,
+   "label": "Gold paragraph itself in top 5",
+   "value": 0.744,
+   "rating": "Strong"
+  }
+ ],
+ "run": {
+  "git_commit": "d990476",
+  "git_dirty": true,
+  "python": "3.13.3",
+  "platform": "Windows-11-10.0.26200-SP0",
+  "cpu": "Intel64 Family 6 Model 183 Stepping 1, GenuineIntel",
+  "gpu": "NVIDIA GeForce RTX 4060 Laptop GPU, 8188 MiB",
+  "llm": {
+   "provider": "ollama",
+   "model": "qwen2.5vl:7b",
+   "temperature": 0.0,
+   "num_ctx": 8192,
+   "timeout_s": 180,
+   "keep_alive": "10m",
+   "effort": "low"
+  },
+  "split_seed": 20261001,
+  "dev_fraction": 0.3,
+  "measured_at": "2026-10-02T05:59:22+00:00"
+ }
+}

@@ -1,0 +1,120 @@
+{
+ "agent_id": "rule_authoring",
+ "split": "test",
+ "data": {
+  "name": "ObliQA obligation passages in ADGM documents (third-party labels)",
+  "split": "test",
+  "documents": [
+   "ADGM GLO \u2014 GLO_VER19.181223",
+   "ADGM Guidance \\'96 Disclosure Requirements for Petroleum Reporting Entities \u2014 Guidance - Disclosure Requirements for Petroleum Reporting Entities_VER01.280922",
+   "ADGM Guiding Principles for the Financial Services Regulatory Authority\\'92s Approach to Virtual Asset Regulation and Supervision \u2014 Draft Guidance - FSRA Guiding Principles for Virtual Assets Regulation and Supervision (IA)"
+  ],
+  "chunks": 157,
+  "gold": "passages any ObliQA question (train, dev or test) is built on",
+  "recovered": "a candidate rule was drafted from a chunk containing the obligation passage"
+ },
+ "metrics": {
+  "obligation_recall": {
+   "value": 0.837,
+   "ci95": [
+    0.7483,
+    0.8986
+   ],
+   "k": 77,
+   "n": 92
+  },
+  "precision": {
+   "value": 0.462,
+   "ci95": [
+    0.3861,
+    0.5397
+   ],
+   "k": 73,
+   "n": 158
+  },
+  "valid_condition_rate": {
+   "value": 1.0,
+   "ci95": [
+    0.9763,
+    1.0
+   ],
+   "k": 158,
+   "n": 158
+  },
+  "per_document": [
+   {
+    "document": "ADGM GLO \u2014 GLO_VER19.181223",
+    "chunks": 30,
+    "gold_obligations": 1,
+    "recovered": 1,
+    "candidates": 40,
+    "seconds": 323.1,
+    "method": "llm+heuristic"
+   },
+   {
+    "document": "ADGM Guidance \\'96 Disclosure Requirements for Petroleum Reporting Entities \u2014 Guidance - Disclosure Requirements for Petroleum Reporting Entities_VER01.280922",
+    "chunks": 103,
+    "gold_obligations": 75,
+    "recovered": 62,
+    "candidates": 99,
+    "seconds": 951.8,
+    "method": "llm+heuristic"
+   },
+   {
+    "document": "ADGM Guiding Principles for the Financial Services Regulatory Authority\\'92s Approach to Virtual Asset Regulation and Supervision \u2014 Draft Guidance - FSRA Guiding Principles for Virtual Assets Regulation and Supervision (IA)",
+    "chunks": 24,
+    "gold_obligations": 16,
+    "recovered": 14,
+    "candidates": 19,
+    "seconds": 76.5,
+    "method": "llm+heuristic"
+   }
+  ]
+ },
+ "target": {
+  "metric": "obligation_recall",
+  "target": 0.7,
+  "higher": true,
+  "label": "Annotated obligations recovered as candidates"
+ },
+ "primary_value": 0.837,
+ "rating": "Strong",
+ "secondary": [
+  {
+   "metric": "valid_condition_rate",
+   "target": 0.9,
+   "higher": true,
+   "label": "Candidates with a well-formed condition",
+   "value": 1.0,
+   "rating": "Strong"
+  },
+  {
+   "metric": "precision",
+   "target": 0.6,
+   "higher": true,
+   "label": "Candidates that match a real obligation",
+   "value": 0.462,
+   "rating": "Weak"
+  }
+ ],
+ "run": {
+  "git_commit": "d990476",
+  "git_dirty": true,
+  "python": "3.13.3",
+  "platform": "Windows-11-10.0.26200-SP0",
+  "cpu": "Intel64 Family 6 Model 183 Stepping 1, GenuineIntel",
+  "gpu": "NVIDIA GeForce RTX 4060 Laptop GPU, 8188 MiB",
+  "llm": {
+   "provider": "ollama",
+   "model": "qwen2.5vl:7b",
+   "temperature": 0.0,
+   "num_ctx": 8192,
+   "timeout_s": 180,
+   "keep_alive": "10m",
+   "effort": "low"
+  },
+  "split_seed": 20261001,
+  "dev_fraction": 0.3,
+  "measured_at": "2026-10-02T06:35:11+00:00"
+ }
+}

@@ -1,0 +1,36 @@
+{
+ "label": "agents",
+ "app_dir": "D:\\novacinternship\\finsight\\api",
+ "results": {
+  "extract_pan_photo": {
+   "p50_ms": 4130.9,
+   "p95_ms": 4520.8,
+   "n": 12
+  },
+  "extract_statement_pdf": {
+   "p50_ms": 33.0,
+   "p95_ms": 51.5,
+   "n": 12
+  },
+  "integrity_pdf": {
+   "p50_ms": 69.8,
+   "p95_ms": 218.1,
+   "n": 12
+  },
+  "integrity_photo": {
+   "p50_ms": 1190.8,
+   "p95_ms": 1232.4,
+   "n": 12
+  },
+  "mask_pan": {
+   "p50_ms": 850.3,
+   "p95_ms": 1121.0,
+   "n": 12
+  },
+  "face_verify": {
+   "p50_ms": 641.4,
+   "p95_ms": 659.4,
+   "n": 12
+  }
+ }
+}

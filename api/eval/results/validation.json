@@ -1,0 +1,34 @@
+{
+ "agent_id": "validation",
+ "measured_at": "2026-09-25T14:06:42+00:00",
+ "metrics": {
+  "accuracy": 1.0,
+  "n": 1487,
+  "per_validator": {
+   "pan_number": 1.0,
+   "aadhaar_number": 1.0,
+   "ifsc": 1.0,
+   "gstin": 1.0,
+   "cibil_score": 1.0
+  },
+  "error_detection": {
+   "precision": 1.0,
+   "recall": 1.0,
+   "f1": 1.0,
+   "tp": 732,
+   "fp": 0,
+   "fn": 0
+  },
+  "ms_per_field": 0.004
+ },
+ "target": {
+  "metric": "accuracy",
+  "target": 1.0,
+  "higher": true,
+  "label": "Correct ok/error flag on generated IDs"
+ },
+ "primary_value": 1.0,
+ "rating": "Strong",
+ "secondary": [],
+ "failures": []
+}

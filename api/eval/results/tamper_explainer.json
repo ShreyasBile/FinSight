@@ -1,0 +1,32 @@
+{
+ "agent_id": "tamper_explainer",
+ "measured_at": "2026-09-25T17:51:10+00:00",
+ "metrics": {
+  "grounded_rate": 0.9,
+  "tier_unchanged": 1.0,
+  "produced_rate": 1.0,
+  "sentences_dropped": 4,
+  "n": 40,
+  "p50_s": 11.38,
+  "p95_s": 12.94
+ },
+ "target": {
+  "metric": "grounded_rate",
+  "target": 0.95,
+  "higher": true,
+  "label": "Explanations citing only real figures"
+ },
+ "primary_value": 0.9,
+ "rating": "Acceptable",
+ "secondary": [
+  {
+   "metric": "tier_unchanged",
+   "target": 1.0,
+   "higher": true,
+   "label": "Risk tier never changed",
+   "value": 1.0,
+   "rating": "Strong"
+  }
+ ],
+ "model": "ollama qwen2.5vl:7b (local), vision on"
+}

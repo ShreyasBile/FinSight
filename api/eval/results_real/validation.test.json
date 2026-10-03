@@ -1,0 +1,105 @@
+{
+ "agent_id": "validation",
+ "split": "test",
+ "data": {
+  "name": "Razorpay IFSC register (all real codes) + mutations; PAN formats from the PAN set; generated Aadhaar (Verhoeff) and GSTIN + mutations; IFSCs printed on the Indian statement set",
+  "split": "test",
+  "note": "the validator checks FORMAT (and the Aadhaar checksum); whether a branch exists is not checked \u2014 statement_ifsc_in_real_register shows what that would add"
+ },
+ "metrics": {
+  "accuracy": {
+   "value": 1.0,
+   "ci95": [
+    0.9997,
+    1.0
+   ],
+   "k": 12953,
+   "n": 12953
+  },
+  "real_ifsc_accepted": {
+   "value": 1.0,
+   "ci95": [
+    1.0,
+    1.0
+   ],
+   "k": 183214,
+   "n": 183214
+  },
+  "per_family": {
+   "aadhaar_one_digit": 1.0,
+   "aadhaar_transposition": 1.0,
+   "aadhaar_valid": 1.0,
+   "gstin": 1.0,
+   "gstin_14th_not_z": 1.0,
+   "ifsc_5th_not_zero": 1.0,
+   "ifsc_digit_in_bank_code": 1.0,
+   "ifsc_long": 1.0,
+   "ifsc_lowercase": 1.0,
+   "ifsc_real": 1.0,
+   "ifsc_short": 1.0,
+   "pan_digit_to_letter": 1.0,
+   "pan_letter_to_digit": 1.0,
+   "pan_real_format": 1.0
+  },
+  "statement_ifsc_format_ok": {
+   "value": 1.0,
+   "ci95": [
+    0.9766,
+    1
+   ],
+   "k": 160,
+   "n": 160
+  },
+  "statement_ifsc_in_real_register": {
+   "value": 0.0,
+   "ci95": [
+    0,
+    0.0234
+   ],
+   "k": 0,
+   "n": 160
+  },
+  "n_cases": 12953,
+  "n_real_ifsc": 183214
+ },
+ "target": {
+  "metric": "accuracy",
+  "target": 1.0,
+  "higher": true,
+  "label": "Correct ok / error flag"
+ },
+ "primary_value": 1.0,
+ "rating": "Strong",
+ "secondary": [
+  {
+   "metric": "real_ifsc_accepted",
+   "target": 1.0,
+   "higher": true,
+   "label": "Every real IFSC code accepted",
+   "value": 1.0,
+   "rating": "Strong"
+  }
+ ],
+ "run": {
+  "git_commit": "d990476",
+  "git_dirty": true,
+  "python": "3.13.3",
+  "platform": "Windows-11-10.0.26200-SP0",
+  "cpu": "Intel64 Family 6 Model 183 Stepping 1, GenuineIntel",
+  "gpu": "NVIDIA GeForce RTX 4060 Laptop GPU, 8188 MiB",
+  "llm": {
+   "provider": "ollama",
+   "model": "qwen2.5vl:7b",
+   "temperature": 0.0,
+   "num_ctx": 8192,
+   "timeout_s": 180,
+   "keep_alive": "0s",
+   "effort": "low"
+  },
+  "split_seed": 20261001,
+  "dev_fraction": 0.3,
+  "measured_at": "2026-10-01T10:48:15+00:00"
+ },
+ "failures": [],
+ "real_ifsc_rejected": []
+}

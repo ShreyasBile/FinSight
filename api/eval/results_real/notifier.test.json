@@ -1,0 +1,62 @@
+{
+ "agent_id": "notifier",
+ "split": "test",
+ "data": {
+  "name": "every notification event with real L&T loan amounts (and x8 for Head-approval amounts); amounts checked against an independent Indian digit-grouping formatter",
+  "split": "test"
+ },
+ "metrics": {
+  "template_accuracy": {
+   "value": 1.0,
+   "ci95": [
+    0.9962,
+    1
+   ],
+   "k": 1000,
+   "n": 1000
+  },
+  "external_sends": 0,
+  "checks": 1000,
+  "events_covered": 16,
+  "events_without_expectation": []
+ },
+ "target": {
+  "metric": "template_accuracy",
+  "target": 1.0,
+  "higher": true,
+  "label": "Correct template and fields"
+ },
+ "primary_value": 1.0,
+ "rating": "Strong",
+ "secondary": [
+  {
+   "metric": "external_sends",
+   "target": 0,
+   "higher": false,
+   "label": "Messages sent outside the system",
+   "value": 0,
+   "rating": "Strong"
+  }
+ ],
+ "run": {
+  "git_commit": "d990476",
+  "git_dirty": true,
+  "python": "3.13.3",
+  "platform": "Windows-11-10.0.26200-SP0",
+  "cpu": "Intel64 Family 6 Model 183 Stepping 1, GenuineIntel",
+  "gpu": "NVIDIA GeForce RTX 4060 Laptop GPU, 8188 MiB",
+  "llm": {
+   "provider": "ollama",
+   "model": "qwen2.5vl:7b",
+   "temperature": 0.0,
+   "num_ctx": 8192,
+   "timeout_s": 180,
+   "keep_alive": "0s",
+   "effort": "low"
+  },
+  "split_seed": 20261001,
+  "dev_fraction": 0.3,
+  "measured_at": "2026-10-01T10:49:23+00:00"
+ },
+ "failures": []
+}

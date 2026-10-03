@@ -1,0 +1,110 @@
+{
+ "agent_id": "dedupe",
+ "split": "dev",
+ "data": {
+  "name": "LFW View 2 (identity-disjoint folds): index from folds 1-2, new applicants from folds 3",
+  "split": "dev",
+  "n_index": 1620,
+  "n_probes": 850,
+  "planted": {
+   "repeat_applicant": 100,
+   "same_face_different_id": 100,
+   "same_id_different_face": 100,
+   "same_file_reused": 50
+  },
+  "n_new_genuine": 500,
+  "note": "an alert on a new applicant is false by construction (different folds = different people)"
+ },
+ "metrics": {
+  "recall": {
+   "value": 0.9857,
+   "ci95": [
+    0.967,
+    0.9939
+   ],
+   "k": 345,
+   "n": 350
+  },
+  "recall_by_kind": {
+   "repeat_applicant": {
+    "found": 1.0,
+    "n": 100
+   },
+   "same_face_different_id": {
+    "found": 0.98,
+    "n": 100
+   },
+   "same_id_different_face": {
+    "found": 0.97,
+    "n": 100
+   },
+   "same_file_reused": {
+    "found": 1.0,
+    "n": 50
+   }
+  },
+  "false_alert_rate": {
+   "value": 0.5,
+   "ci95": [
+    0.4563,
+    0.5437
+   ],
+   "k": 250,
+   "n": 500
+  },
+  "false_floor_alert_rate": {
+   "value": 0.5,
+   "ci95": [
+    0.4563,
+    0.5437
+   ],
+   "k": 250,
+   "n": 500
+  },
+  "false_alert_kinds": {
+   "same_face_different_id": 593
+  },
+  "false_hits_per_new_applicant": 1.186,
+  "extra_hits_on_planted": 970,
+  "no_face_found": 0,
+  "face_match_threshold": 0.363
+ },
+ "target": {
+  "metric": "recall",
+  "target": 0.95,
+  "higher": true,
+  "label": "Planted duplicates found with the right kind"
+ },
+ "primary_value": 0.9857,
+ "rating": "Strong",
+ "secondary": [
+  {
+   "metric": "false_alert_rate",
+   "target": 0.01,
+   "higher": false,
+   "label": "New genuine applicants given a duplicate alert (index of 1,000)",
+   "value": 0.5,
+   "rating": "Weak"
+  }
+ ],
+ "run": {
+  "git_commit": "d990476",
+  "git_dirty": true,
+  "python": "3.13.3",
+  "platform": "Windows-11-10.0.26200-SP0",
+  "cpu": "Intel64 Family 6 Model 183 Stepping 1, GenuineIntel",
+  "gpu": "NVIDIA GeForce RTX 4060 Laptop GPU, 8188 MiB",
+  "llm": {
+   "provider": "ollama",
+   "model": "qwen2.5vl:7b",
+   "temperature": 0.0,
+   "num_ctx": 8192,
+   "timeout_s": 180,
+   "keep_alive": "0s",
+   "effort": "low"
+  },
+  "split_seed": 20261001,
+  "dev_fraction": 0.3,
+  "measured_at": "2026-10-01T08:47:36+00:00"
+ }
+}

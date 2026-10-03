@@ -1,0 +1,87 @@
+{
+ "agent_id": "policy_check",
+ "measured_at": "2026-09-25T14:18:15+00:00",
+ "metrics": {
+  "rule_accuracy": 1.0,
+  "baseline_status": "PASS",
+  "missing_field_never_passes": 1.0,
+  "evidence_builder_ok": 1.0,
+  "n_rules": 13
+ },
+ "target": {
+  "metric": "rule_accuracy",
+  "target": 1.0,
+  "higher": true,
+  "label": "Violations detected one at a time"
+ },
+ "primary_value": 1.0,
+ "rating": "Strong",
+ "secondary": [],
+ "per_rule": [
+  {
+   "rule": "KYC_001",
+   "status": "FAIL",
+   "isolated": true
+  },
+  {
+   "rule": "KYC_002",
+   "status": "FAIL",
+   "isolated": true
+  },
+  {
+   "rule": "DL_KFS_001",
+   "status": "FAIL",
+   "isolated": true
+  },
+  {
+   "rule": "DL_KFS_002",
+   "status": "FAIL",
+   "isolated": true
+  },
+  {
+   "rule": "DL_COOL_001",
+   "status": "FAIL",
+   "isolated": true
+  },
+  {
+   "rule": "DL_DISB_001",
+   "status": "FAIL",
+   "isolated": true
+  },
+  {
+   "rule": "DL_CONSENT_001",
+   "status": "FAIL",
+   "isolated": true
+  },
+  {
+   "rule": "PENAL_001",
+   "status": "FAIL",
+   "isolated": true
+  },
+  {
+   "rule": "POL_FOIR_001",
+   "status": "WARNING",
+   "isolated": true
+  },
+  {
+   "rule": "POL_CREDIT_001",
+   "status": "WARNING",
+   "isolated": true
+  },
+  {
+   "rule": "RISK_TAMPER_001",
+   "status": "FAIL",
+   "isolated": true
+  },
+  {
+   "rule": "RISK_FRAUD_001",
+   "status": "WARNING",
+   "isolated": true
+  },
+  {
+   "rule": "FACE_001",
+   "status": "FAIL",
+   "isolated": true
+  }
+ ]
+}

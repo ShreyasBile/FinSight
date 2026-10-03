@@ -1,0 +1,132 @@
+{
+ "agent_id": "fraud_patterns",
+ "measured_at": "2026-09-25T20:40:19+00:00",
+ "metrics": {
+  "macro_f1": 1.0,
+  "macro_f1_on_true_rows": 1.0,
+  "parse_accuracy": 0.9983,
+  "n_statements": 54,
+  "per_pattern": {
+   "cash_cycling": {
+    "precision": 1.0,
+    "recall": 1.0,
+    "f1": 1.0,
+    "tp": 6,
+    "fp": 0,
+    "fn": 0
+   },
+   "sudden_deposit": {
+    "precision": 1.0,
+    "recall": 1.0,
+    "f1": 1.0,
+    "tp": 18,
+    "fp": 0,
+    "fn": 0
+   },
+   "window_dressing": {
+    "precision": 1.0,
+    "recall": 1.0,
+    "f1": 1.0,
+    "tp": 6,
+    "fp": 0,
+    "fn": 0
+   },
+   "income_mismatch": {
+    "precision": 1.0,
+    "recall": 1.0,
+    "f1": 1.0,
+    "tp": 12,
+    "fp": 0,
+    "fn": 0
+   },
+   "gst_inflation": {
+    "precision": 1.0,
+    "recall": 1.0,
+    "f1": 1.0,
+    "tp": 6,
+    "fp": 0,
+    "fn": 0
+   }
+  },
+  "per_pattern_true_rows": {
+   "cash_cycling": {
+    "precision": 1.0,
+    "recall": 1.0,
+    "f1": 1.0,
+    "tp": 6,
+    "fp": 0,
+    "fn": 0
+   },
+   "sudden_deposit": {
+    "precision": 1.0,
+    "recall": 1.0,
+    "f1": 1.0,
+    "tp": 18,
+    "fp": 0,
+    "fn": 0
+   },
+   "window_dressing": {
+    "precision": 1.0,
+    "recall": 1.0,
+    "f1": 1.0,
+    "tp": 6,
+    "fp": 0,
+    "fn": 0
+   },
+   "income_mismatch": {
+    "precision": 1.0,
+    "recall": 1.0,
+    "f1": 1.0,
+    "tp": 12,
+    "fp": 0,
+    "fn": 0
+   },
+   "gst_inflation": {
+    "precision": 1.0,
+    "recall": 1.0,
+    "f1": 1.0,
+    "tp": 6,
+    "fp": 0,
+    "fn": 0
+   }
+  },
+  "clean_false_flag_rate": 0.0,
+  "per_variant": {
+   "pdf": {
+    "row_accuracy": 1.0,
+    "docs_parsed_exactly": 1.0,
+    "docs": 36,
+    "mean_reconciled_share": 1.0,
+    "parse_p50": 0.0,
+    "parse_p95": 0.01
+   },
+   "photo": {
+    "row_accuracy": 0.9949,
+    "docs_parsed_exactly": 0.9444,
+    "docs": 18,
+    "mean_reconciled_share": 0.9947,
+    "parse_p50": 23.48,
+    "parse_p95": 51.31
+   }
+  }
+ },
+ "target": {
+  "metric": "macro_f1",
+  "target": 0.85,
+  "higher": true,
+  "label": "Pattern detection F1"
+ },
+ "primary_value": 1.0,
+ "rating": "Strong",
+ "secondary": [
+  {
+   "metric": "parse_accuracy",
+   "target": 0.95,
+   "higher": true,
+   "label": "Transactions parsed from statements",
+   "value": 0.9983,
+   "rating": "Strong"
+  }
+ ],
+ "failures": []
+}

@@ -1,0 +1,36 @@
+{
+ "agent_id": "risk_scoring",
+ "measured_at": "2026-09-29T18:28:58+00:00",
+ "metrics": {
+  "auc": 0.7714,
+  "auc_rule_engine": 0.6752,
+  "auc_ml_overlay": 0.7714,
+  "auc_ml_blended_score": 0.7312,
+  "auc_ml_training_feature_mapping": 0.7714,
+  "monotonicity_violations": 0,
+  "monotonicity_checks": 750,
+  "held_out_sample": 1500,
+  "default_rate": 0.088,
+  "p50_ms": 10.0,
+  "note": "No CIBIL score in this dataset: the rule engine's credit-history dimension is scored as missing; the ML overlay is the model the sibling project trained on this data's other 80%."
+ },
+ "target": {
+  "metric": "auc",
+  "target": 0.75,
+  "higher": true,
+  "label": "ROC-AUC on held-out loans"
+ },
+ "primary_value": 0.7714,
+ "rating": "Strong",
+ "secondary": [
+  {
+   "metric": "monotonicity_violations",
+   "target": 0,
+   "higher": false,
+   "label": "Monotonicity violations",
+   "value": 0,
+   "rating": "Strong"
+  }
+ ],
+ "monotonicity_examples": []
+}

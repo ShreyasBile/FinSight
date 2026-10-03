@@ -1,0 +1,28 @@
+{
+ "agent_id": "income_analysis",
+ "measured_at": "2026-09-25T16:47:17+00:00",
+ "metrics": {
+  "f1": 1.0,
+  "precision": 1.0,
+  "recall": 1.0,
+  "true_negatives": 40,
+  "per_scenario_flag_rate": {
+   "consistent": 0.0,
+   "consistent_noise5": 0.0,
+   "payslip_inflated_40": 1.0,
+   "itr_underdeclared_50": 1.0,
+   "salary_credit_low_60": 1.0,
+   "form16_low_30": 1.0
+  },
+  "cases": 120
+ },
+ "target": {
+  "metric": "f1",
+  "target": 0.9,
+  "higher": true,
+  "label": "Income-mismatch detection F1"
+ },
+ "primary_value": 1.0,
+ "rating": "Strong",
+ "secondary": []
+}

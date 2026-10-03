@@ -1,0 +1,122 @@
+{
+ "agent_id": "regulatory_qa",
+ "measured_at": "2026-09-25T20:27:57+00:00",
+ "metrics": {
+  "hit_at_5": 1.0,
+  "hit_at_1": 0.8,
+  "questions": 40,
+  "grounded_answer_rate": 1.0,
+  "synthesis_kept_rate": 1.0,
+  "citation_accuracy": 1.0,
+  "insufficient_answers": 0,
+  "synthesis_attempts": 12,
+  "retrieval_p50_ms": 0.0,
+  "synthesis_p50_s": 5.08,
+  "synthesis_p95_s": 14.59
+ },
+ "target": {
+  "metric": "hit_at_5",
+  "target": 0.85,
+  "higher": true,
+  "label": "Gold passage in top 5"
+ },
+ "primary_value": 1.0,
+ "rating": "Strong",
+ "secondary": [
+  {
+   "metric": "grounded_answer_rate",
+   "target": 0.9,
+   "higher": true,
+   "label": "Synthesised answers fully grounded",
+   "value": 1.0,
+   "rating": "Strong"
+  }
+ ],
+ "failures": [],
+ "samples": [
+  {
+   "q": "Can a lending service provider's pool account be used to route the disbursal?",
+   "synthesized": true,
+   "grounded": true,
+   "answer": "No, a lending service provider's pool account cannot be used to route the disbursal. According to RBI (Digital Lending) Directions, 2025, all loan disbursals and repayments must be executed only between the bank account of the borrower and the Regulated Entity",
+   "warnings": []
+  },
+  {
+   "q": "Can the LSP charge the borrower directly for its services?",
+   "synthesized": true,
+   "grounded": true,
+   "answer": "According to the RBI (Digital Lending) Directions, 2025, any fees or charges payable to Lending Service Providers in the credit intermediation process must be paid directly by the Regulated Entity and not charged by the LSP to the borrower. The borrower pays o",
+   "warnings": []
+  },
+  {
+   "q": "Is the processing fee refundable if the borrower exits early?",
+   "synthesized": true,
+   "grounded": true,
+   "answer": "According to the RBI (Digital Lending) Directions, 2025, borrowers are permitted to exit a digital loan during a cooling-off (look-up) period by repaying the principal and proportionate Annual Percentage Rate without any penalty. The RE may retain a disclosed ",
+   "warnings": []
+  },
+  {
+   "q": "Can biometric data be stored by the lending app?",
+   "synthesized": true,
+   "grounded": true,
+   "answer": "According to the RBI (Digital Lending) Directions, 2025, biometric data may not be stored by Digital Lending Apps except as allowed by law. This regulation ensures that borrower consent is obtained and data minimisation is followed.\n\nSources: [1]",
+   "warnings": []
+  },
+  {
+   "q": "What must an app that works with several lenders tell the borrower?",
+   "synthesized": true,
+   "grounded": true,
+   "answer": "An app that works with several lenders must disclose upfront the names of all Regulated Entities with which it has arrangements. It must also present available loan offers to the borrower in a consistent, unbiased manner without steering.\n\nSources: [1]",
+   "warnings": []
+  },
+  {
+   "q": "Which loans does the KFS requirement apply to and from when?",
+   "synthesized": true,
+   "grounded": true,
+   "answer": "The Key Facts Statement (KFS) requirement applies to all retail and MSME term loans sanctioned on or after 1 October 2024.\n\nSources: [1]",
+   "warnings": []
+  },
+  {
+   "q": "Are insurance charges part of the annual percentage rate?",
+   "synthesized": true,
+   "grounded": true,
+   "answer": "Yes, insurance charges are part of the Annual Percentage Rate (APR). According to the Key Facts Statement (KFS) for Loans & Advances, all inclusive APR must be disclosed, including charges recovered on behalf of third parties, such as insurance and legal charg",
+   "warnings": []
+  },
+  {
+   "q": "Can penalties for breaching loan terms be added to the interest rate?",
+   "synthesized": true,
+   "grounded": true,
+   "answer": "Penalties for breaching loan terms must be levied as 'penal charges' and not as 'penal interest' added to the rate of interest. This ensures that no further interest is computed on the penal charges, as per the Fair Lending Practice.\n\nSources: [1]",
+   "warnings": []
+  },
+  {
+   "q": "Where must the amount of penal charges be disclosed?",
+   "synthesized": true,
+   "grounded": true,
+   "answer": "The amount of penal charges must be disclosed to the borrower in the loan agreement and the Key Facts Statement, as per passage [2].\n\nSources: [2]",
+   "warnings": []
+  },
+  {
+   "q": "Can a microfinance loan require collateral?",
+   "synthesized": true,
+   "grounded": true,
+   "answer": "According to the RBI (Regulatory Framework for Microfinance Loans) Directions, 2022, microfinance loans are required to be collateral-free. Therefore, a microfinance loan cannot require collateral.\n\nSources: [1]",
+   "warnings": []
+  },
+  {
+   "q": "Is PAN mandatory during customer due diligence?",
+   "synthesized": true,
+   "grounded": true,
+   "answer": "Yes, PAN is mandatory during customer due diligence as per the Master Direction \u2013 Know Your Customer (KYC) Direction, 2016. This regulation requires Regulated Entities to obtain an Officially Valid Document, which includes PAN or Form 60.\n\nSources: [1]",
+   "warnings": []
+  },
+  {
+   "q": "Who conducts the video customer identification process?",
+   "synthesized": true,
+   "grounded": true,
+   "answer": "The video customer identification process (V-CIP) is conducted by a trained official of the Regulated Entity (RE) to establish customer identity for remote onboarding. This process involves a consent-based, real-time audio-visual interaction that must be recor",
+   "warnings": []
+  }
+ ]
+}

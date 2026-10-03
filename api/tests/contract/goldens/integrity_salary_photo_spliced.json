@@ -1,0 +1,118 @@
+{
+ "body": {
+  "cleaned_preview": null,
+  "tampering": {
+   "document_preview": "img:e8e4ac940a6f7c48",
+   "explanations": [
+    "Risk driven by two independent signals agreeing: business_rules + copy_move (combined evidence 0.92)",
+    "[business_rules] FAILED: Net salary 127,647 is higher than gross salary 72,700 — net pay can never exceed gross pay",
+    "[copy_move] VERIFIED duplication: 82 keypoint pairs at one displacement (~-64, -192) px and the two regions are pixel-identical (correlation 0.99) — content was copied within this document",
+    "[pdf_forensics] skipped: not a PDF",
+    "[authenticity] skipped: authenticity check disabled",
+    "[ela] skipped: recompression difference too small (max 5/255) — source is near-lossless, ELA map would be amplified noise",
+    "[cnn] skipped: no ELA map produced",
+    "[photo_region] skipped: doc_type='salary_slip' has no ID photo to check"
+   ],
+   "fast_tracked": false,
+   "heatmaps": [
+    {
+     "caption": "The highlighted regions are duplicated — the same content appears in two places.",
+     "image": "img:549b668a5a809e88",
+     "signal": "copy_move",
+     "trust": "precise"
+    }
+   ],
+   "needs_review": true,
+   "plain_explanation": null,
+   "risk_score": 0.917,
+   "risk_tier": "HIGH",
+   "signals": [
+    {
+     "available": true,
+     "findings": [
+      "No EXIF metadata at all (weak signal — messaging apps strip EXIF from genuine photos too)"
+     ],
+     "name": "metadata",
+     "score": 0.15,
+     "skip_reason": null
+    },
+    {
+     "available": true,
+     "findings": [
+      "FAILED: Net salary 127,647 is higher than gross salary 72,700 — net pay can never exceed gross pay"
+     ],
+     "name": "business_rules",
+     "score": 0.667,
+     "skip_reason": null
+    },
+    {
+     "available": true,
+     "findings": [
+      "VERIFIED duplication: 82 keypoint pairs at one displacement (~-64, -192) px and the two regions are pixel-identical (correlation 0.99) — content was copied within this document"
+     ],
+     "name": "copy_move",
+     "score": 1.0,
+     "skip_reason": null
+    },
+    {
+     "available": false,
+     "findings": [],
+     "name": "pdf_forensics",
+     "score": null,
+     "skip_reason": "not a PDF"
+    },
+    {
+     "available": false,
+     "findings": [],
+     "name": "authenticity",
+     "score": null,
+     "skip_reason": "authenticity check disabled"
+    },
+    {
+     "available": false,
+     "findings": [],
+     "name": "ela",
+     "score": null,
+     "skip_reason": "recompression difference too small (max 5/255) — source is near-lossless, ELA map would be amplified noise"
+    },
+    {
+     "available": true,
+     "findings": [
+      "7/513 background blocks (1.4%) have anomalous noise levels"
+     ],
+     "name": "noise",
+     "score": 0.091,
+     "skip_reason": null
+    },
+    {
+     "available": false,
+     "findings": [],
+     "name": "cnn",
+     "score": null,
+     "skip_reason": "no ELA map produced"
+    },
+    {
+     "available": true,
+     "findings": [
+      "No area stands out as edited (models trained on real forged receipts)"
+     ],
+     "name": "patch_cnn",
+     "score": 0.0,
+     "skip_reason": null
+    },
+    {
+     "available": false,
+     "findings": [],
+     "name": "photo_region",
+     "score": null,
+     "skip_reason": "doc_type='salary_slip' has no ID photo to check"
+    }
+   ],
+   "source_format": "camera_image"
+  },
+  "timings": [
+   "tampering_ms"
+  ]
+ },
+ "status": 200
+}

@@ -1,0 +1,35 @@
+{
+ "agent_id": "liveness",
+ "measured_at": "2026-09-25T16:28:00+00:00",
+ "metrics": {
+  "acer": 0.2778,
+  "apcer": 0.4444,
+  "bpcer": 0.1111,
+  "threshold_calibrated": 0.05,
+  "acer_at_default_0_5": 0.2222,
+  "apcer_at_default": 0.0556,
+  "bpcer_at_default": 0.3889,
+  "attack_pass_rate": {
+   "print": 0.4444,
+   "screen": 0.4444
+  },
+  "no_face_detected": 6,
+  "id_match_rate": 1.0,
+  "impostor_rejected_rate": 1.0,
+  "people": 40,
+  "test_live": 18,
+  "test_attacks": 36,
+  "p50_s": 0.22,
+  "p95_s": 3.84
+ },
+ "target": {
+  "metric": "acer",
+  "target": 0.1,
+  "higher": false,
+  "label": "Average classification error (APCER+BPCER)/2"
+ },
+ "primary_value": 0.2778,
+ "rating": "Weak",
+ "secondary": [],
+ "data": "LFW full-frame photos (public) as bona fide captures; print and screen attacks SIMULATED from the same photos \u2014 a proxy, not a certified PAD test"
+}

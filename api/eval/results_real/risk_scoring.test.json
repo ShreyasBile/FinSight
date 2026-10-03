@@ -1,0 +1,200 @@
+{
+ "agent_id": "risk_scoring",
+ "split": "test",
+ "data": {
+  "name": "L&T Vehicle Loan Default (train.csv, labelled) + Berka",
+  "source": "Kaggle; see DATASETS.md",
+  "split": "test",
+  "n": 5000,
+  "population": 163010,
+  "mapping": {
+   "loan_amount": "disbursed_amount",
+   "collateral.value": "asset_cost (so LTV = disbursed / asset cost)",
+   "credit_score": "PERFORM_CNS.SCORE when >= 300 (0 = no bureau history and 11-18 = 'Not Scored' codes -> not provided)",
+   "bureau.default_count": "PRI.OVERDUE.ACCTS + SEC.OVERDUE.ACCTS (accounts currently overdue)",
+   "bureau.dpd_days": "30 if DELINQUENT.ACCTS.IN.LAST.SIX.MONTHS > 0 else 0",
+   "bureau.credit_utilization": "100 * PRI.CURRENT.BALANCE / PRI.SANCTIONED.AMOUNT",
+   "bureau.total_accounts": "PRI.NO.OF.ACCTS + SEC.NO.OF.ACCTS",
+   "bureau.credit_history_years": "CREDIT.HISTORY.LENGTH",
+   "bureau.enquiry_count": "NO.OF_INQUIRIES",
+   "applicant.age": "Date.of.Birth at DisbursalDate",
+   "existing_emi": "PRIMARY.INSTAL.AMT + SEC.INSTAL.AMT",
+   "employment_type": "Employment.Type",
+   "documents": "pan / aadhaar present when PAN_flag / Aadhar_flag = 1",
+   "not available (defaulted by the agent)": "monthly income, tenure"
+  },
+  "ceiling_model": {
+   "n_train": 70144,
+   "model": "sklearn HistGradientBoostingClassifier(max_iter=300, lr=0.05, leaves=31, l2=1.0), all L&T features, fitted on the dev split"
+  },
+  "leakage": "the agent's ML overlay was trained on a different dataset (projects/risk analysis 2); no L&T or Berka row was used to build or tune the agent"
+ },
+ "metrics": {
+  "auc_vs_trained_ceiling": {
+   "value": 0.8346,
+   "ci95": [
+    0.7369,
+    0.9318
+   ],
+   "n": 5000
+  },
+  "auc": {
+   "value": 0.6206,
+   "ci95": [
+    0.6018,
+    0.6383
+   ],
+   "n": 5000
+  },
+  "auc_trained_ceiling": {
+   "value": 0.6445,
+   "ci95": [
+    0.6254,
+    0.6626
+   ],
+   "n": 5000
+  },
+  "auc_ml_overlay": {
+   "value": 0.5149,
+   "ci95": [
+    0.5052,
+    0.5251
+   ],
+   "n": 5000
+  },
+  "grade_default_rate_monotone": 0.0,
+  "default_rate_by_grade": {
+   "A+": {
+    "n": 251,
+    "default_rate": 0.0837
+   },
+   "A": {
+    "n": 570,
+    "default_rate": 0.1035
+   },
+   "B+": {
+    "n": 905,
+    "default_rate": 0.1514
+   },
+   "B": {
+    "n": 1209,
+    "default_rate": 0.2374
+   },
+   "C+": {
+    "n": 1339,
+    "default_rate": 0.2741
+   },
+   "C": {
+    "n": 202,
+    "default_rate": 0.3168
+   },
+   "D": {
+    "n": 524,
+    "default_rate": 0.3015
+   }
+  },
+  "default_rate_by_advisory": {
+   "approve_recommended": {
+    "n": 863,
+    "default_rate": 0.1402
+   },
+   "refer_to_officer": {
+    "n": 3613,
+    "default_rate": 0.2253
+   },
+   "decline_review_recommended": {
+    "n": 524,
+    "default_rate": 0.3015
+   }
+  },
+  "monotonicity_violations": 0,
+  "monotonicity_checks": 895,
+  "monotonicity_examples": [],
+  "base_default_rate": 0.2186,
+  "inputs_defaulted_top": {
+   "tenure_months,monthly_income,years_in_job,cibil_score": 2804,
+   "tenure_months,monthly_income,years_in_job": 2196
+  },
+  "berka": {
+   "auc": {
+    "value": 0.5943,
+    "ci95": [
+     0.5281,
+     0.6661
+    ],
+    "n": 486
+   },
+   "auc_ml_overlay": {
+    "value": 0.6312,
+    "ci95": [
+     0.5487,
+     0.7108
+    ],
+    "n": 486
+   },
+   "n": 486,
+   "defaults": 54,
+   "note": "income = average monthly credits in the 12 months before the loan; amounts in CZK (1990s), so absolute thresholds are not comparable \u2014 ranking (AUC) is"
+  },
+  "latency": {
+   "n": 5000,
+   "p50_s": 0.02,
+   "p95_s": 0.02,
+   "mean_s": 0.02
+  }
+ },
+ "target": {
+  "metric": "auc_vs_trained_ceiling",
+  "target": 0.75,
+  "higher": true,
+  "label": "Skill vs a model trained on L&T: (AUC-0.5)/(ceiling-0.5)"
+ },
+ "primary_value": 0.8346,
+ "rating": "Strong",
+ "secondary": [
+  {
+   "metric": "auc",
+   "target": 0.62,
+   "higher": true,
+   "label": "ROC-AUC on L&T test split",
+   "value": 0.6206,
+   "rating": "Strong"
+  },
+  {
+   "metric": "grade_default_rate_monotone",
+   "target": 1.0,
+   "higher": true,
+   "label": "Default rate rises with each risk grade",
+   "value": 0.0,
+   "rating": "Weak"
+  },
+  {
+   "metric": "monotonicity_violations",
+   "target": 0,
+   "higher": false,
+   "label": "Worse inputs never lower the score",
+   "value": 0,
+   "rating": "Strong"
+  }
+ ],
+ "run": {
+  "git_commit": "d990476",
+  "git_dirty": true,
+  "python": "3.13.3",
+  "platform": "Windows-11-10.0.26200-SP0",
+  "cpu": "Intel64 Family 6 Model 183 Stepping 1, GenuineIntel",
+  "gpu": "NVIDIA GeForce RTX 4060 Laptop GPU, 8188 MiB",
+  "llm": {
+   "provider": "ollama",
+   "model": "qwen2.5vl:7b",
+   "temperature": 0.0,
+   "num_ctx": 8192,
+   "timeout_s": 180,
+   "keep_alive": "30m",
+   "effort": "low"
+  },
+  "split_seed": 20261001,
+  "dev_fraction": 0.3,
+  "measured_at": "2026-10-01T01:02:42+00:00"
+ }
+}

@@ -1,0 +1,46 @@
+{
+ "agent_id": "workflow_router",
+ "measured_at": "2026-09-25T22:15:31+00:00",
+ "metrics": {
+  "accuracy": 1.0,
+  "transitions": 111,
+  "products": 12,
+  "guards_passed": "6/6"
+ },
+ "target": {
+  "metric": "accuracy",
+  "target": 1.0,
+  "higher": true,
+  "label": "Next step matches the lifecycle diagram"
+ },
+ "primary_value": 1.0,
+ "rating": "Strong",
+ "secondary": [],
+ "failures": [],
+ "guards": [
+  {
+   "check": "wrong document blocks documentsVerified",
+   "ok": true
+  },
+  {
+   "check": "fraud HIGH blocks the offer",
+   "ok": true
+  },
+  {
+   "check": "amount above Rs 5 lakh needs the Head",
+   "ok": true
+  },
+  {
+   "check": "disbursed is terminal",
+   "ok": true
+  },
+  {
+   "check": "rejected is terminal",
+   "ok": true
+  },
+  {
+   "check": "cancelled is terminal",
+   "ok": true
+  }
+ ]
+}

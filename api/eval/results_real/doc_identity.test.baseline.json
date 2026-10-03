@@ -1,0 +1,189 @@
+{
+ "agent_id": "doc_identity",
+ "split": "test",
+ "data": {
+  "name": "wrong: RVL-CDIP (16 classes), SROIE receipts, SIDTD foreign IDs, PAN cards and statements under another type; right: PAN cards, statements, synthetic Aadhaar cards under their own type",
+  "split": "test",
+  "n_wrong": 196,
+  "n_right": 258
+ },
+ "metrics": {
+  "wrong_doc_recall": {
+   "value": 0.9031,
+   "ci95": [
+    0.8536,
+    0.9371
+   ],
+   "k": 177,
+   "n": 196
+  },
+  "false_block_rate": {
+   "value": 0.1163,
+   "ci95": [
+    0.0827,
+    0.1611
+   ],
+   "k": 30,
+   "n": 258
+  },
+  "caught_by_source": {
+   "bank_statement": {
+    "rate": 1.0,
+    "n": 20
+   },
+   "pan_card": {
+    "rate": 1.0,
+    "n": 20
+   },
+   "rvl": {
+    "rate": 0.9792,
+    "n": 96
+   },
+   "sidtd_foreign_id": {
+    "rate": 0.7667,
+    "n": 30
+   },
+   "sroie_receipt": {
+    "rate": 0.6667,
+    "n": 30
+   }
+  },
+  "caught_by_rvl_class": {
+   "rvl:advertisement": {
+    "rate": 1.0,
+    "n": 6
+   },
+   "rvl:budget": {
+    "rate": 1.0,
+    "n": 6
+   },
+   "rvl:email": {
+    "rate": 1.0,
+    "n": 6
+   },
+   "rvl:file_folder": {
+    "rate": 1.0,
+    "n": 6
+   },
+   "rvl:form": {
+    "rate": 1.0,
+    "n": 6
+   },
+   "rvl:handwritten": {
+    "rate": 1.0,
+    "n": 6
+   },
+   "rvl:invoice": {
+    "rate": 1.0,
+    "n": 6
+   },
+   "rvl:letter": {
+    "rate": 1.0,
+    "n": 6
+   },
+   "rvl:memo": {
+    "rate": 1.0,
+    "n": 6
+   },
+   "rvl:news_article": {
+    "rate": 0.8333,
+    "n": 6
+   },
+   "rvl:presentation": {
+    "rate": 1.0,
+    "n": 6
+   },
+   "rvl:questionnaire": {
+    "rate": 1.0,
+    "n": 6
+   },
+   "rvl:resume": {
+    "rate": 1.0,
+    "n": 6
+   },
+   "rvl:scientific_publication": {
+    "rate": 1.0,
+    "n": 6
+   },
+   "rvl:scientific_report": {
+    "rate": 0.8333,
+    "n": 6
+   },
+   "rvl:specification": {
+    "rate": 1.0,
+    "n": 6
+   }
+  },
+  "caught_by_asked_type": {
+   "aadhaar": {
+    "rate": 1.0,
+    "n": 49
+   },
+   "bank_statement": {
+    "rate": 0.7727,
+    "n": 44
+   },
+   "pan": {
+    "rate": 0.7805,
+    "n": 41
+   },
+   "salary_slip": {
+    "rate": 1.0,
+    "n": 62
+   }
+  },
+  "blocked_by_source": {
+   "aadhaar_card": {
+    "rate": 0.0,
+    "n": 48
+   },
+   "bank_statement": {
+    "rate": 0.2,
+    "n": 60
+   },
+   "pan_card": {
+    "rate": 0.12,
+    "n": 150
+   }
+  },
+  "failed_runs": 0
+ },
+ "target": {
+  "metric": "wrong_doc_recall",
+  "target": 0.9,
+  "higher": true,
+  "label": "Wrong uploads caught"
+ },
+ "primary_value": 0.9031,
+ "rating": "Strong",
+ "secondary": [
+  {
+   "metric": "false_block_rate",
+   "target": 0.05,
+   "higher": false,
+   "label": "Correct uploads wrongly blocked",
+   "value": 0.1163,
+   "rating": "Weak"
+  }
+ ],
+ "run": {
+  "git_commit": "d990476",
+  "git_dirty": true,
+  "python": "3.13.3",
+  "platform": "Windows-11-10.0.26200-SP0",
+  "cpu": "Intel64 Family 6 Model 183 Stepping 1, GenuineIntel",
+  "gpu": "NVIDIA GeForce RTX 4060 Laptop GPU, 8188 MiB",
+  "llm": {
+   "provider": "ollama",
+   "model": "qwen2.5vl:7b",
+   "temperature": 0.0,
+   "num_ctx": 8192,
+   "timeout_s": 180,
+   "keep_alive": "10m",
+   "effort": "low"
+  },
+  "split_seed": 20261001,
+  "dev_fraction": 0.3,
+  "measured_at": "2026-10-02T05:07:11+00:00"
+ }
+}

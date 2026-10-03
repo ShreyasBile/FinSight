@@ -1,0 +1,15 @@
+{
+ "body": {
+  "complete": true,
+  "labels": [
+   "Aadhaar"
+  ],
+  "masked_count": 1,
+  "masked_image": "img:b4ac0458bada828d",
+  "timings": [
+   "mask_ms"
+  ],
+  "withheld": false
+ },
+ "status": 200
+}

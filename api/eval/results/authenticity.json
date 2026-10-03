@@ -1,0 +1,48 @@
+{
+ "agent_id": "authenticity",
+ "measured_at": "2026-09-25T17:40:41+00:00",
+ "metrics": {
+  "fabricated_recall": 0.8947,
+  "genuine_false_flag": 0.0,
+  "cap_respected": 1.0,
+  "lone_authenticity_cases": 0,
+  "ran_rate": 1.0,
+  "per_format": {
+   "pdf": 1.0,
+   "photo": 0.8
+  },
+  "real_fabricated_flagged": 1,
+  "real_fabricated_n": 3,
+  "real_genuine_flagged": 0,
+  "real_genuine_n": 1,
+  "n_fabricated": 19,
+  "n_genuine": 33
+ },
+ "target": {
+  "metric": "fabricated_recall",
+  "target": 0.7,
+  "higher": true,
+  "label": "Fabricated documents flagged"
+ },
+ "primary_value": 0.8947,
+ "rating": "Strong",
+ "secondary": [
+  {
+   "metric": "genuine_false_flag",
+   "target": 0.1,
+   "higher": false,
+   "label": "Genuine documents flagged",
+   "value": 0.0,
+   "rating": "Strong"
+  },
+  {
+   "metric": "cap_respected",
+   "target": 1.0,
+   "higher": true,
+   "label": "A lone authenticity flag never reaches HIGH",
+   "value": 1.0,
+   "rating": "Strong"
+  }
+ ],
+ "model": "ollama qwen2.5vl:7b (local) + deterministic placeholder scan"
+}

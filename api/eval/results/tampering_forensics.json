@@ -1,0 +1,236 @@
+{
+ "agent_id": "tampering_forensics",
+ "measured_at": "2026-09-25T17:40:41+00:00",
+ "metrics": {
+  "forged_recall": 1.0,
+  "forged_high_rate": 0.7639,
+  "genuine_false_high": 0.1667,
+  "genuine_flagged_any": 0.6667,
+  "auc": 0.8193,
+  "utility_resave_is_medium": 1.0,
+  "per_attack": {
+   "splice": {
+    "recall": 1.0,
+    "high": 1.0,
+    "n": 8
+   },
+   "copy_move": {
+    "recall": 1.0,
+    "high": 1.0,
+    "n": 8
+   },
+   "photo_swap": {
+    "recall": 1.0,
+    "high": 0.875,
+    "n": 8
+   },
+   "fabricated": {
+    "recall": 1.0,
+    "high": 1.0,
+    "n": 16
+   },
+   "arithmetic": {
+    "recall": 1.0,
+    "high": 1.0,
+    "n": 16
+   },
+   "pdf_edit": {
+    "recall": 1.0,
+    "high": 0.0,
+    "n": 8
+   },
+   "pdf_utility": {
+    "recall": 1.0,
+    "high": 0.0,
+    "n": 8
+   }
+  },
+  "genuine_tiers": {
+   "pan_genuine": {
+    "n": 8,
+    "low": 0,
+    "medium": 7,
+    "high": 1
+   },
+   "aadhaar_genuine": {
+    "n": 8,
+    "low": 0,
+    "medium": 2,
+    "high": 6
+   },
+   "salary_photo_genuine": {
+    "n": 8,
+    "low": 0,
+    "medium": 8,
+    "high": 0
+   },
+   "statement_photo_genuine": {
+    "n": 8,
+    "low": 0,
+    "medium": 7,
+    "high": 1
+   },
+   "salary_pdf_genuine": {
+    "n": 8,
+    "low": 8,
+    "medium": 0,
+    "high": 0
+   },
+   "statement_pdf_genuine": {
+    "n": 8,
+    "low": 8,
+    "medium": 0,
+    "high": 0
+   }
+  },
+  "real_documents": {
+   "genuine": {
+    "LOW": 3,
+    "MEDIUM": 5,
+    "HIGH": 3
+   },
+   "fabricated": {
+    "LOW": 1,
+    "MEDIUM": 0,
+    "HIGH": 2
+   },
+   "by_type": [
+    {
+     "doc_type": "salary_slip",
+     "label": "fabricated",
+     "tier": "HIGH",
+     "score": 0.6805,
+     "note": "developer-made payslip"
+    },
+    {
+     "doc_type": "bank_statement",
+     "label": "genuine",
+     "tier": "MEDIUM",
+     "score": 0.33,
+     "note": "unlocked (utility re-save)"
+    },
+    {
+     "doc_type": "pan",
+     "label": "genuine",
+     "tier": "MEDIUM",
+     "score": 0.3088,
+     "note": ""
+    },
+    {
+     "doc_type": "aadhaar",
+     "label": "genuine",
+     "tier": "LOW",
+     "score": 0.1877,
+     "note": "phone screenshot"
+    },
+    {
+     "doc_type": "aadhaar",
+     "label": "genuine",
+     "tier": "LOW",
+     "score": 0.2875,
+     "note": ""
+    },
+    {
+     "doc_type": "aadhaar",
+     "label": "genuine",
+     "tier": "MEDIUM",
+     "score": 0.3119,
+     "note": ""
+    },
+    {
+     "doc_type": "vehicle_quotation",
+     "label": "genuine",
+     "tier": "LOW",
+     "score": 0.0675,
+     "note": ""
+    },
+    {
+     "doc_type": "aadhaar",
+     "label": "genuine",
+     "tier": "HIGH",
+     "score": 0.6916,
+     "note": ""
+    },
+    {
+     "doc_type": "bank_statement",
+     "label": "fabricated",
+     "tier": "LOW",
+     "score": 0.0675,
+     "note": "developer-made statement (fictional holder)"
+    },
+    {
+     "doc_type": "bank_statement",
+     "label": "fabricated",
+     "tier": "HIGH",
+     "score": 1.0,
+     "note": "developer-made statement (fictional holder)"
+    },
+    {
+     "doc_type": "aadhaar",
+     "label": "genuine",
+     "tier": "MEDIUM",
+     "score": 0.3508,
+     "note": "stored application"
+    },
+    {
+     "doc_type": "pan",
+     "label": "genuine",
+     "tier": "MEDIUM",
+     "score": 0.3838,
+     "note": "stored application"
+    },
+    {
+     "doc_type": "aadhaar",
+     "label": "genuine",
+     "tier": "HIGH",
+     "score": 0.7525,
+     "note": "stored application"
+    },
+    {
+     "doc_type": "pan",
+     "label": "genuine",
+     "tier": "HIGH",
+     "score": 0.7525,
+     "note": "stored application"
+    }
+   ]
+  },
+  "external_pairs": {
+   "forged_recall": 1.0,
+   "genuine_flagged": 1.0,
+   "auc": 0.3457,
+   "n": 90
+  },
+  "n_forged": 72,
+  "n_genuine": 48,
+  "p50_s": 11.41,
+  "p95_s": 18.62
+ },
+ "target": {
+  "metric": "forged_recall",
+  "target": 0.85,
+  "higher": true,
+  "label": "Forged documents flagged MEDIUM or HIGH"
+ },
+ "primary_value": 1.0,
+ "rating": "Strong",
+ "secondary": [
+  {
+   "metric": "genuine_false_high",
+   "target": 0.1,
+   "higher": false,
+   "label": "Genuine documents wrongly HIGH",
+   "value": 0.1667,
+   "rating": "Weak"
+  },
+  {
+   "metric": "auc",
+   "target": 0.85,
+   "higher": true,
+   "label": "ROC-AUC of fused score",
+   "value": 0.8193,
+   "rating": "Acceptable"
+  }
+ ],
+ "data": "120 camera-simulated synthetic documents (8 identities); 14 real documents (labelled by inspection); 90 external original/tampered paystub + statement images"
+}

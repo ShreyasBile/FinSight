@@ -1,0 +1,408 @@
+{
+ "body": [
+  {
+   "applies_when": null,
+   "category": "Digital Lending",
+   "condition": {
+    "all": [
+     {
+      "field": "customer.consent.data_collection",
+      "op": "eq",
+      "value": true
+     },
+     {
+      "field": "customer.consent.credit_bureau_pull",
+      "op": "eq",
+      "value": true
+     }
+    ]
+   },
+   "id": 7,
+   "is_active": 1,
+   "origin": "seed",
+   "regulation": "RBI (Digital Lending) Directions, 2025 / Credit Information Reporting, 2025",
+   "regulation_ref": "Consent and data minimisation",
+   "remediation": "Capture explicit, revocable borrower consent for data collection and for pulling the credit report.",
+   "required_fields": [
+    "customer.consent.data_collection",
+    "customer.consent.credit_bureau_pull"
+   ],
+   "rule_id": "DL_CONSENT_001",
+   "rule_name": "Explicit borrower consent for data collection and credit-bureau pull",
+   "rule_type": "mandatory",
+   "source_chunk_id": null,
+   "source_document_id": null
+  },
+  {
+   "applies_when": {
+    "field": "application.stage",
+    "op": "in",
+    "value": [
+     "offer",
+     "sanction",
+     "disbursal"
+    ]
+   },
+   "category": "Digital Lending",
+   "condition": {
+    "field": "loan_terms.cooling_off_period_days",
+    "op": "gte",
+    "value": 1
+   },
+   "id": 5,
+   "is_active": 1,
+   "origin": "seed",
+   "regulation": "RBI (Digital Lending) Directions, 2025",
+   "regulation_ref": "Cooling-off / look-up period (>= 1 day)",
+   "remediation": "Offer a cooling-off period of at least one day during which the borrower can exit without penalty.",
+   "required_fields": [
+    "loan_terms.cooling_off_period_days"
+   ],
+   "rule_id": "DL_COOL_001",
+   "rule_name": "Cooling-off period of at least 1 day offered",
+   "rule_type": "mandatory",
+   "source_chunk_id": null,
+   "source_document_id": null
+  },
+  {
+   "applies_when": {
+    "field": "application.stage",
+    "op": "in",
+    "value": [
+     "offer",
+     "sanction",
+     "disbursal"
+    ]
+   },
+   "category": "Digital Lending",
+   "condition": {
+    "field": "loan_terms.disbursal_to_borrower_account",
+    "op": "eq",
+    "value": true
+   },
+   "id": 6,
+   "is_active": 1,
+   "origin": "seed",
+   "regulation": "RBI (Digital Lending) Directions, 2025",
+   "regulation_ref": "Disbursement & repayment flow",
+   "remediation": "Route disbursal and repayment only between the borrower's account and the RE; remove any LSP pool account from the fund flow.",
+   "required_fields": [
+    "loan_terms.disbursal_to_borrower_account"
+   ],
+   "rule_id": "DL_DISB_001",
+   "rule_name": "Disbursal directly to borrower's bank account (no LSP pass-through)",
+   "rule_type": "mandatory",
+   "source_chunk_id": null,
+   "source_document_id": null
+  },
+  {
+   "applies_when": {
+    "field": "application.stage",
+    "op": "in",
+    "value": [
+     "offer",
+     "sanction",
+     "disbursal"
+    ]
+   },
+   "category": "Digital Lending",
+   "condition": {
+    "all": [
+     {
+      "field": "loan_terms.kfs_provided",
+      "op": "eq",
+      "value": true
+     },
+     {
+      "field": "loan_terms.apr_disclosed",
+      "op": "eq",
+      "value": true
+     }
+    ]
+   },
+   "id": 3,
+   "is_active": 1,
+   "origin": "seed",
+   "regulation": "KFS for Loans & Advances (2024) / Digital Lending Directions, 2025",
+   "regulation_ref": "KFS before contract execution + APR disclosure",
+   "remediation": "Generate and share the KFS (including APR and amortisation schedule) before executing the loan contract.",
+   "required_fields": [
+    "loan_terms.kfs_provided",
+    "loan_terms.apr_disclosed"
+   ],
+   "rule_id": "DL_KFS_001",
+   "rule_name": "Key Facts Statement provided with APR before contract",
+   "rule_type": "mandatory",
+   "source_chunk_id": null,
+   "source_document_id": null
+  },
+  {
+   "applies_when": {
+    "field": "application.stage",
+    "op": "in",
+    "value": [
+     "offer",
+     "sanction",
+     "disbursal"
+    ]
+   },
+   "category": "Digital Lending",
+   "condition": {
+    "field": "loan_terms.all_fees_in_kfs",
+    "op": "eq",
+    "value": true
+   },
+   "id": 4,
+   "is_active": 1,
+   "origin": "seed",
+   "regulation": "KFS for Loans & Advances (2024)",
+   "regulation_ref": "No charges outside the KFS",
+   "remediation": "Ensure every fee charged to the borrower is itemised in the KFS.",
+   "required_fields": [
+    "loan_terms.all_fees_in_kfs"
+   ],
+   "rule_id": "DL_KFS_002",
+   "rule_name": "No fees levied outside the Key Facts Statement",
+   "rule_type": "mandatory",
+   "source_chunk_id": null,
+   "source_document_id": null
+  },
+  {
+   "applies_when": {
+    "field": "risk.face_match_score",
+    "op": "exists"
+   },
+   "category": "Fraud Risk",
+   "condition": {
+    "field": "risk.face_match_score",
+    "op": "gte",
+    "value": 0.363
+   },
+   "id": 14,
+   "is_active": 1,
+   "origin": "seed",
+   "regulation": "Internal fraud-control policy (FinSight face module) / KYC identity assurance",
+   "regulation_ref": "Face match score >= 0.363 (SFace cosine)",
+   "remediation": "Face match below threshold — re-verify identity via V-CIP before approval.",
+   "required_fields": [
+    "risk.face_match_score"
+   ],
+   "rule_id": "FACE_001",
+   "rule_name": "Face match between selfie and ID verified",
+   "rule_type": "mandatory",
+   "source_chunk_id": null,
+   "source_document_id": null
+  },
+  {
+   "applies_when": null,
+   "category": "KYC",
+   "condition": {
+    "all": [
+     {
+      "field": "customer.kyc_status",
+      "op": "eq",
+      "value": "complete"
+     },
+     {
+      "field": "customer.ovd_verified",
+      "op": "eq",
+      "value": true
+     }
+    ]
+   },
+   "id": 1,
+   "is_active": 1,
+   "origin": "seed",
+   "regulation": "Master Direction – KYC Direction, 2016",
+   "regulation_ref": "CDD / OVD verification",
+   "remediation": "Complete Customer Due Diligence and verify at least one OVD before disbursal.",
+   "required_fields": [
+    "customer.kyc_status",
+    "customer.ovd_verified"
+   ],
+   "rule_id": "KYC_001",
+   "rule_name": "KYC completed with a verified Officially Valid Document",
+   "rule_type": "mandatory",
+   "source_chunk_id": null,
+   "source_document_id": null
+  },
+  {
+   "applies_when": null,
+   "category": "KYC",
+   "condition": {
+    "field": "customer.pan_available",
+    "op": "eq",
+    "value": true
+   },
+   "id": 2,
+   "is_active": 1,
+   "origin": "seed",
+   "regulation": "Master Direction – KYC Direction, 2016",
+   "regulation_ref": "Mandatory PAN/Form 60",
+   "remediation": "Obtain PAN or a valid Form 60 declaration from the borrower.",
+   "required_fields": [
+    "customer.pan_available"
+   ],
+   "rule_id": "KYC_002",
+   "rule_name": "PAN (or Form 60) available",
+   "rule_type": "mandatory",
+   "source_chunk_id": null,
+   "source_document_id": null
+  },
+  {
+   "applies_when": {
+    "field": "loan_type",
+    "op": "eq",
+    "value": "microfinance_loan"
+   },
+   "category": "Credit Risk",
+   "condition": {
+    "expr": "(customer.existing_emi + customer.proposed_emi) / customer.monthly_household_income",
+    "op": "lte",
+    "value": 0.5
+   },
+   "id": 9,
+   "is_active": 1,
+   "origin": "seed",
+   "regulation": "RBI (Regulatory Framework for Microfinance Loans) Directions, 2022",
+   "regulation_ref": "Repayment capacity — 50% of household income",
+   "remediation": "Reduce the loan amount/EMI so that total household repayment obligations stay within 50% of monthly household income.",
+   "required_fields": [
+    "customer.existing_emi",
+    "customer.proposed_emi",
+    "customer.monthly_household_income"
+   ],
+   "rule_id": "MFI_FOIR_001",
+   "rule_name": "Household repayment obligations within 50% of household income",
+   "rule_type": "mandatory",
+   "source_chunk_id": null,
+   "source_document_id": null
+  },
+  {
+   "applies_when": {
+    "field": "application.stage",
+    "op": "in",
+    "value": [
+     "offer",
+     "sanction",
+     "disbursal"
+    ]
+   },
+   "category": "Fair Practices",
+   "condition": {
+    "field": "loan_terms.penal_charge_is_interest",
+    "op": "eq",
+    "value": false
+   },
+   "id": 8,
+   "is_active": 1,
+   "origin": "seed",
+   "regulation": "Fair Lending Practice – Penal Charges in Loan Accounts (2024)",
+   "regulation_ref": "Penal charges, not penal interest",
+   "remediation": "Convert any penal-interest component to a fixed penal charge with no capitalisation.",
+   "required_fields": [
+    "loan_terms.penal_charge_is_interest"
+   ],
+   "rule_id": "PENAL_001",
+   "rule_name": "Penalty levied as penal charges, not penal interest",
+   "rule_type": "mandatory",
+   "source_chunk_id": null,
+   "source_document_id": null
+  },
+  {
+   "applies_when": null,
+   "category": "Credit Risk",
+   "condition": {
+    "field": "customer.credit_score",
+    "op": "gte",
+    "value": 650
+   },
+   "id": 11,
+   "is_active": 1,
+   "origin": "seed",
+   "regulation": "Internal NBFC underwriting policy",
+   "regulation_ref": "Minimum credit score",
+   "remediation": "Sub-650 credit score; route to manual underwriting.",
+   "required_fields": [
+    "customer.credit_score"
+   ],
+   "rule_id": "POL_CREDIT_001",
+   "rule_name": "Credit score at or above 650 (underwriting policy)",
+   "rule_type": "internal_policy",
+   "source_chunk_id": null,
+   "source_document_id": null
+  },
+  {
+   "applies_when": null,
+   "category": "Credit Risk",
+   "condition": {
+    "expr": "(customer.existing_emi + customer.proposed_emi) / customer.monthly_income",
+    "op": "lte",
+    "value": 0.5
+   },
+   "id": 10,
+   "is_active": 1,
+   "origin": "seed",
+   "regulation": "Internal NBFC underwriting policy",
+   "regulation_ref": "Fixed Obligation to Income Ratio",
+   "remediation": "Fixed obligations exceed half of income; consider a lower loan amount or longer tenor.",
+   "required_fields": [
+    "customer.existing_emi",
+    "customer.proposed_emi",
+    "customer.monthly_income"
+   ],
+   "rule_id": "POL_FOIR_001",
+   "rule_name": "FOIR within 50% of monthly income (underwriting policy)",
+   "rule_type": "internal_policy",
+   "source_chunk_id": null,
+   "source_document_id": null
+  },
+  {
+   "applies_when": null,
+   "category": "Fraud Risk",
+   "condition": {
+    "field": "risk.fraud_score",
+    "op": "lt",
+    "value": 50
+   },
+   "id": 13,
+   "is_active": 1,
+   "origin": "seed",
+   "regulation": "Internal fraud-control policy (FinSight fraud module)",
+   "regulation_ref": "Fraud score < 50",
+   "remediation": "Elevated fraud score; corroborate with additional checks.",
+   "required_fields": [
+    "risk.fraud_score"
+   ],
+   "rule_id": "RISK_FRAUD_001",
+   "rule_name": "Overall fraud score within acceptable range",
+   "rule_type": "internal_policy",
+   "source_chunk_id": null,
+   "source_document_id": null
+  },
+  {
+   "applies_when": null,
+   "category": "Fraud Risk",
+   "condition": {
+    "field": "risk.tamper_score",
+    "op": "lt",
+    "value": 50
+   },
+   "id": 12,
+   "is_active": 1,
+   "origin": "seed",
+   "regulation": "Internal fraud-control policy (FinSight tamper module)",
+   "regulation_ref": "Tamper score < 50",
+   "remediation": "High tamper score — hold for forensic manual review before any approval.",
+   "required_fields": [
+    "risk.tamper_score"
+   ],
+   "rule_id": "RISK_TAMPER_001",
+   "rule_name": "Document tamper score below rejection threshold",
+   "rule_type": "mandatory",
+   "source_chunk_id": null,
+   "source_document_id": null
+  }
+ ],
+ "status": 200
+}

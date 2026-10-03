@@ -1,0 +1,484 @@
+{
+ "agent_id": "tampering_forensics",
+ "split": "test",
+ "data": {
+  "name": "Find it again! (official test) + SIDTD templates (test groups); MIDV-500 genuine ID photos as an extra genuine set",
+  "split": "test",
+  "n": 618,
+  "findit": 218,
+  "sidtd": 400,
+  "path": "production: receipts as vehicle_quotation with extraction; ID cards as pan, forensics only",
+  "leakage": {
+   "checked_against": [
+    "D:\\novacinternship\\document_tampering\\data\\synthetic",
+    "D:\\novacinternship\\document_tampering\\data\\external",
+    "D:\\novacinternship\\document_tampering\\data\\archive"
+   ],
+   "train_files": 1115,
+   "test_items": 618,
+   "identical": 0
+  }
+ },
+ "metrics": {
+  "forged_recall": {
+   "value": 0.8894,
+   "ci95": [
+    0.8428,
+    0.9234
+   ],
+   "k": 209,
+   "n": 235
+  },
+  "forged_high_rate": {
+   "value": 0.1489,
+   "ci95": [
+    0.1091,
+    0.2001
+   ],
+   "k": 35,
+   "n": 235
+  },
+  "genuine_false_high": {
+   "value": 0.0078,
+   "ci95": [
+    0.0027,
+    0.0228
+   ],
+   "k": 3,
+   "n": 383
+  },
+  "genuine_flagged_any": {
+   "value": 0.2402,
+   "ci95": [
+    0.2001,
+    0.2854
+   ],
+   "k": 92,
+   "n": 383
+  },
+  "auc": {
+   "value": 0.9108,
+   "ci95": [
+    0.8824,
+    0.9357
+   ],
+   "n": 618
+  },
+  "per_forgery_kind": {
+   "paint": {
+    "n": 18,
+    "recall": 0.3889,
+    "high": 0.1111
+   },
+   "gimp": {
+    "n": 13,
+    "recall": 0.8462,
+    "high": 0.3846
+   },
+   "aper\u00e7u": {
+    "n": 3,
+    "recall": 0.3333,
+    "high": 0.3333
+   },
+   "paint3d": {
+    "n": 1,
+    "recall": 0.0,
+    "high": 0.0
+   },
+   "inpaint_and_rewrite": {
+    "n": 176,
+    "recall": 0.9545,
+    "high": 0.1193
+   },
+   "crop_and_replace": {
+    "n": 24,
+    "recall": 0.9167,
+    "high": 0.25
+   }
+  },
+  "unreadable": 0,
+  "failed": 0,
+  "n_forged": 235,
+  "n_genuine": 383,
+  "by_dataset": {
+   "findit": {
+    "forged_recall": {
+     "value": 0.5429,
+     "ci95": [
+      0.3819,
+      0.6953
+     ],
+     "k": 19,
+     "n": 35
+    },
+    "forged_high_rate": {
+     "value": 0.2286,
+     "ci95": [
+      0.1207,
+      0.3902
+     ],
+     "k": 8,
+     "n": 35
+    },
+    "genuine_false_high": {
+     "value": 0.0109,
+     "ci95": [
+      0.003,
+      0.039
+     ],
+     "k": 2,
+     "n": 183
+    },
+    "genuine_flagged_any": {
+     "value": 0.0328,
+     "ci95": [
+      0.0151,
+      0.0697
+     ],
+     "k": 6,
+     "n": 183
+    },
+    "auc": {
+     "value": 0.752,
+     "ci95": [
+      0.6563,
+      0.8475
+     ],
+     "n": 218
+    },
+    "per_forgery_kind": {
+     "paint": {
+      "n": 18,
+      "recall": 0.3889,
+      "high": 0.1111
+     },
+     "gimp": {
+      "n": 13,
+      "recall": 0.8462,
+      "high": 0.3846
+     },
+     "aper\u00e7u": {
+      "n": 3,
+      "recall": 0.3333,
+      "high": 0.3333
+     },
+     "paint3d": {
+      "n": 1,
+      "recall": 0.0,
+      "high": 0.0
+     }
+    },
+    "unreadable": 0,
+    "failed": 0,
+    "n_forged": 35,
+    "n_genuine": 183
+   },
+   "sidtd": {
+    "forged_recall": {
+     "value": 0.95,
+     "ci95": [
+      0.9104,
+      0.9726
+     ],
+     "k": 190,
+     "n": 200
+    },
+    "forged_high_rate": {
+     "value": 0.135,
+     "ci95": [
+      0.0945,
+      0.1893
+     ],
+     "k": 27,
+     "n": 200
+    },
+    "genuine_false_high": {
+     "value": 0.005,
+     "ci95": [
+      0.0009,
+      0.0278
+     ],
+     "k": 1,
+     "n": 200
+    },
+    "genuine_flagged_any": {
+     "value": 0.43,
+     "ci95": [
+      0.3633,
+      0.4993
+     ],
+     "k": 86,
+     "n": 200
+    },
+    "auc": {
+     "value": 0.9381,
+     "ci95": [
+      0.9116,
+      0.9617
+     ],
+     "n": 400
+    },
+    "per_forgery_kind": {
+     "inpaint_and_rewrite": {
+      "n": 176,
+      "recall": 0.9545,
+      "high": 0.1193
+     },
+     "crop_and_replace": {
+      "n": 24,
+      "recall": 0.9167,
+      "high": 0.25
+     }
+    },
+    "unreadable": 0,
+    "failed": 0,
+    "n_forged": 200,
+    "n_genuine": 200
+   }
+  },
+  "as_originally_configured": {
+   "forged_recall": {
+    "value": 0.7489,
+    "ci95": [
+     0.6898,
+     0.8001
+    ],
+    "k": 176,
+    "n": 235
+   },
+   "forged_high_rate": {
+    "value": 0.1702,
+    "ci95": [
+     0.1276,
+     0.2235
+    ],
+    "k": 40,
+    "n": 235
+   },
+   "genuine_false_high": {
+    "value": 0.1697,
+    "ci95": [
+     0.1354,
+     0.2105
+    ],
+    "k": 65,
+    "n": 383
+   },
+   "genuine_flagged_any": {
+    "value": 0.8355,
+    "ci95": [
+     0.7951,
+     0.8693
+    ],
+    "k": 320,
+    "n": 383
+   },
+   "auc": {
+    "value": 0.3645,
+    "ci95": [
+     0.3139,
+     0.4115
+    ],
+    "n": 618
+   },
+   "unreadable": 0,
+   "failed": 0,
+   "n_forged": 235,
+   "n_genuine": 383,
+   "by_dataset": {
+    "findit": {
+     "forged_recall": {
+      "value": 0.8,
+      "ci95": [
+       0.6411,
+       0.8996
+      ],
+      "k": 28,
+      "n": 35
+     },
+     "genuine_false_high": {
+      "value": 0.2678,
+      "ci95": [
+       0.2089,
+       0.3362
+      ],
+      "k": 49,
+      "n": 183
+     },
+     "genuine_flagged_any": {
+      "value": 0.8197,
+      "ci95": [
+       0.7576,
+       0.8686
+      ],
+      "k": 150,
+      "n": 183
+     },
+     "auc": {
+      "value": 0.5922,
+      "ci95": [
+       0.4691,
+       0.7018
+      ],
+      "n": 218
+     }
+    },
+    "sidtd": {
+     "forged_recall": {
+      "value": 0.74,
+      "ci95": [
+       0.6751,
+       0.7959
+      ],
+      "k": 148,
+      "n": 200
+     },
+     "genuine_false_high": {
+      "value": 0.08,
+      "ci95": [
+       0.0498,
+       0.126
+      ],
+      "k": 16,
+      "n": 200
+     },
+     "genuine_flagged_any": {
+      "value": 0.85,
+      "ci95": [
+       0.7939,
+       0.8929
+      ],
+      "k": 170,
+      "n": 200
+     },
+     "auc": {
+      "value": 0.3352,
+      "ci95": [
+       0.2792,
+       0.3904
+      ],
+      "n": 400
+     }
+    }
+   }
+  },
+  "genuine_id_photos": {
+   "flagged_any": {
+    "value": 0.0048,
+    "ci95": [
+     0.0009,
+     0.0269
+    ],
+    "k": 1,
+    "n": 207
+   },
+   "false_high": {
+    "value": 0.0048,
+    "ci95": [
+     0.0009,
+     0.0269
+    ],
+    "k": 1,
+    "n": 207
+   },
+   "n": 207,
+   "as_originally_configured": {
+    "flagged_any": {
+     "value": 0.6618,
+     "ci95": [
+      0.595,
+      0.7228
+     ],
+     "k": 137,
+     "n": 207
+    },
+    "false_high": {
+     "value": 0.0193,
+     "ci95": [
+      0.0075,
+      0.0486
+     ],
+     "k": 4,
+     "n": 207
+    },
+    "n": 207
+   }
+  },
+  "tier_changed_by_calibration": 309,
+  "genuine_floor": {
+   "page": {
+    "cnn": 0.904,
+    "ela": 0.99,
+    "noise": 0.99,
+    "copy_move": 0.986
+   },
+   "id": {
+    "cnn": 0.9,
+    "ela": 0.99,
+    "noise": 0.809,
+    "copy_move": 0.15,
+    "photo_region": 0.071
+   }
+  },
+  "latency": {
+   "n": 618,
+   "p50_s": 0.95,
+   "p95_s": 2.74,
+   "mean_s": 1.93
+  }
+ },
+ "target": {
+  "metric": "forged_recall",
+  "target": 0.85,
+  "higher": true,
+  "label": "Forged documents flagged MEDIUM or HIGH"
+ },
+ "primary_value": 0.8894,
+ "rating": "Strong",
+ "secondary": [
+  {
+   "metric": "genuine_false_high",
+   "target": 0.1,
+   "higher": false,
+   "label": "Genuine documents wrongly HIGH",
+   "value": 0.0078,
+   "rating": "Strong"
+  },
+  {
+   "metric": "genuine_flagged_any",
+   "target": 0.3,
+   "higher": false,
+   "label": "Genuine documents flagged at all (MEDIUM or HIGH)",
+   "value": 0.2402,
+   "rating": "Strong"
+  },
+  {
+   "metric": "auc",
+   "target": 0.85,
+   "higher": true,
+   "label": "ROC-AUC of the fused score",
+   "value": 0.9108,
+   "rating": "Strong"
+  }
+ ],
+ "run": {
+  "git_commit": "d990476",
+  "git_dirty": true,
+  "python": "3.13.3",
+  "platform": "Windows-11-10.0.26200-SP0",
+  "cpu": "Intel64 Family 6 Model 183 Stepping 1, GenuineIntel",
+  "gpu": "NVIDIA GeForce RTX 4060 Laptop GPU, 8188 MiB",
+  "llm": {
+   "provider": "ollama",
+   "model": "qwen2.5vl:7b",
+   "temperature": 0.0,
+   "num_ctx": 8192,
+   "timeout_s": 180,
+   "keep_alive": "30m",
+   "effort": "low"
+  },
+  "split_seed": 20261001,
+  "dev_fraction": 0.3,
+  "measured_at": "2026-10-03T19:43:29+00:00"
+ }
+}

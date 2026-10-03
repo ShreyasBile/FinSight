@@ -1,0 +1,25 @@
+{
+ "weights_version": "v2",
+ "tiers": {
+  "medium": 0.2,
+  "high": 0.6
+ },
+ "weights": {
+  "tampering": 0.35,
+  "face": 0.2,
+  "cross_check": 0.2,
+  "validation": 0.15,
+  "dedupe": 0.1,
+  "patterns": 0.1
+ },
+ "face_uncertain": 0.35,
+ "confidence": {
+  "tampering": 0.59,
+  "face": 0.6,
+  "cross_check": 0.4,
+  "validation": 0.6,
+  "dedupe": 0.5,
+  "patterns": 0.6
+ },
+ "corroboration_factor": 0.1
+}

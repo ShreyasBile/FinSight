@@ -1,0 +1,167 @@
+{
+ "agent_id": "preprocessing",
+ "split": "test",
+ "data": {
+  "name": "MIDV-500 phone frames (outline truth) + SROIE receipts and FUNSD forms (word truth)",
+  "split": "test",
+  "n_frames": 207,
+  "n_timed": 60,
+  "n_scans": 150,
+  "backgrounds": {
+   "C": "clutter",
+   "H": "in hand",
+   "K": "keyboard",
+   "P": "partly out of frame",
+   "T": "table"
+  },
+  "note": "outline = the quadrilateral Stage 2 of the cleanup selects; found=False means it fell back to deskew"
+ },
+ "metrics": {
+  "card_located_rate": {
+   "value": 0.6908,
+   "ci95": [
+    0.6249,
+    0.7498
+   ],
+   "k": 143,
+   "n": 207
+  },
+  "card_found_any": {
+   "value": 0.744,
+   "ci95": [
+    0.6804,
+    0.7986
+   ],
+   "k": 154,
+   "n": 207
+  },
+  "mean_iou_when_found": 0.9444,
+  "wrong_outline_rate": {
+   "value": 0.0242,
+   "ci95": [
+    0.0104,
+    0.0553
+   ],
+   "k": 5,
+   "n": 207
+  },
+  "by_background": {
+   "C": {
+    "located": 0.5128,
+    "n": 39
+   },
+   "H": {
+    "located": 0.7167,
+    "n": 60
+   },
+   "K": {
+    "located": 1.0,
+    "n": 38
+   },
+   "P": {
+    "located": 0.0667,
+    "n": 30
+   },
+   "T": {
+    "located": 1.0,
+    "n": 40
+   }
+  },
+  "scan_harm_rate": {
+   "value": 0.06,
+   "ci95": [
+    0.0319,
+    0.1101
+   ],
+   "k": 9,
+   "n": 150
+  },
+  "ocr_recall_before": 0.8903,
+  "ocr_recall_after": 0.8924,
+  "ocr_recall_gain": {
+   "value": 0.0021,
+   "ci95": [
+    -0.0009,
+    0.0052
+   ],
+   "n": 150
+  },
+  "reverted_rate": {
+   "value": 0.6133,
+   "ci95": [
+    0.5335,
+    0.6875
+   ],
+   "k": 92,
+   "n": 150
+  },
+  "by_scan_set": {
+   "sroie": {
+    "before": 0.8703,
+    "after": 0.8714,
+    "n": 100
+   },
+   "funsd": {
+    "before": 0.9304,
+    "after": 0.9345,
+    "n": 50
+   }
+  },
+  "p50_s": 37.38,
+  "p95_s": 96.74
+ },
+ "target": {
+  "metric": "card_located_rate",
+  "target": 0.8,
+  "higher": true,
+  "label": "Phone frames: card outline found (IoU >= 0.85 with the true outline)"
+ },
+ "primary_value": 0.6908,
+ "rating": "Weak",
+ "secondary": [
+  {
+   "metric": "scan_harm_rate",
+   "target": 0.05,
+   "higher": false,
+   "label": "Real scans that read worse after cleanup (word recall -2 pts or more)",
+   "value": 0.06,
+   "rating": "Acceptable"
+  },
+  {
+   "metric": "ocr_recall_gain",
+   "target": 0.0,
+   "higher": true,
+   "label": "Word recall after minus before, real scans",
+   "value": 0.0021,
+   "rating": "Strong"
+  },
+  {
+   "metric": "p50_s",
+   "target": 10.0,
+   "higher": false,
+   "label": "Median cleanup time per image (s)",
+   "value": 37.38,
+   "rating": "Weak"
+  }
+ ],
+ "run": {
+  "git_commit": "d990476",
+  "git_dirty": true,
+  "python": "3.13.3",
+  "platform": "Windows-11-10.0.26200-SP0",
+  "cpu": "Intel64 Family 6 Model 183 Stepping 1, GenuineIntel",
+  "gpu": "NVIDIA GeForce RTX 4060 Laptop GPU, 8188 MiB",
+  "llm": {
+   "provider": "ollama",
+   "model": "qwen2.5vl:7b",
+   "temperature": 0.0,
+   "num_ctx": 8192,
+   "timeout_s": 180,
+   "keep_alive": "30m",
+   "effort": "low"
+  },
+  "split_seed": 20261001,
+  "dev_fraction": 0.3,
+  "measured_at": "2026-10-03T16:31:07+00:00"
+ }
+}

@@ -1,0 +1,92 @@
+{
+ "agent_id": "income_analysis",
+ "split": "dev",
+ "data": {
+  "name": "Berka real accounts, 3-month windows; payslip declared consistent (+-3%) or inflated (1.5-3x)",
+  "split": "dev",
+  "scale": "amounts x2.5"
+ },
+ "metrics": {
+  "f1": 1.0,
+  "f1_ci95": [
+   1.0,
+   1.0
+  ],
+  "recall": {
+   "value": 1.0,
+   "ci95": [
+    0.7961,
+    1
+   ],
+   "k": 15,
+   "n": 15
+  },
+  "false_mismatch_rate": {
+   "value": 0.0,
+   "ci95": [
+    0,
+    0.2039
+   ],
+   "k": 0,
+   "n": 15
+  },
+  "by_evidence": {
+   "salary_credits_on_statement": {
+    "f1": 1.0,
+    "n": 6
+   },
+   "all_credits_only": {
+    "f1": 1.0,
+    "n": 24
+   }
+  },
+  "lends_on_evidenced_figure": {
+   "value": 1.0,
+   "ci95": [
+    0.7961,
+    1
+   ],
+   "k": 15,
+   "n": 15
+  },
+  "n": 30
+ },
+ "target": {
+  "metric": "f1",
+  "target": 0.9,
+  "higher": true,
+  "label": "Income-mismatch detection F1"
+ },
+ "primary_value": 1.0,
+ "rating": "Strong",
+ "secondary": [
+  {
+   "metric": "false_mismatch_rate",
+   "target": 0.1,
+   "higher": false,
+   "label": "Consistent declarations flagged",
+   "value": 0.0,
+   "rating": "Strong"
+  }
+ ],
+ "run": {
+  "git_commit": "d990476",
+  "git_dirty": true,
+  "python": "3.13.3",
+  "platform": "Windows-11-10.0.26200-SP0",
+  "cpu": "Intel64 Family 6 Model 183 Stepping 1, GenuineIntel",
+  "gpu": "NVIDIA GeForce RTX 4060 Laptop GPU, 8188 MiB",
+  "llm": {
+   "provider": "ollama",
+   "model": "qwen2.5vl:7b",
+   "temperature": 0.0,
+   "num_ctx": 8192,
+   "timeout_s": 180,
+   "keep_alive": "0s",
+   "effort": "low"
+  },
+  "split_seed": 20261001,
+  "dev_fraction": 0.3,
+  "measured_at": "2026-10-01T08:40:26+00:00"
+ }
+}

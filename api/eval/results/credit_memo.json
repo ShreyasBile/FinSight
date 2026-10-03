@@ -1,0 +1,113 @@
+{
+ "agent_id": "credit_memo",
+ "measured_at": "2026-09-25T20:25:03+00:00",
+ "metrics": {
+  "grounded_rate": 1.0,
+  "section_grounded_rate": 1.0,
+  "section_completeness": 1.0,
+  "final_memo_grounded": 1.0,
+  "llm_memos": 16,
+  "memos": 16,
+  "head_condition_present": "1/1"
+ },
+ "target": {
+  "metric": "grounded_rate",
+  "target": 0.95,
+  "higher": true,
+  "label": "Memos citing only real figures"
+ },
+ "primary_value": 1.0,
+ "rating": "Strong",
+ "secondary": [
+  {
+   "metric": "section_completeness",
+   "target": 1.0,
+   "higher": true,
+   "label": "All required sections present",
+   "value": 1.0,
+   "rating": "Strong"
+  }
+ ],
+ "memos": [
+  {
+   "case": "clean",
+   "source": "llm",
+   "replaced": []
+  },
+  {
+   "case": "clean_large_amount",
+   "source": "llm",
+   "replaced": []
+  },
+  {
+   "case": "clean_home",
+   "source": "llm",
+   "replaced": []
+  },
+  {
+   "case": "fraud_high",
+   "source": "llm",
+   "replaced": []
+  },
+  {
+   "case": "risk_decline",
+   "source": "llm",
+   "replaced": []
+  },
+  {
+   "case": "wrong_document",
+   "source": "llm",
+   "replaced": []
+  },
+  {
+   "case": "policy_needs_info",
+   "source": "llm",
+   "replaced": []
+  },
+  {
+   "case": "fraud_medium",
+   "source": "llm",
+   "replaced": []
+  },
+  {
+   "case": "risk_refer",
+   "source": "llm",
+   "replaced": []
+  },
+  {
+   "case": "policy_fail",
+   "source": "llm",
+   "replaced": []
+  },
+  {
+   "case": "policy_warn",
+   "source": "llm",
+   "replaced": []
+  },
+  {
+   "case": "income_mismatch",
+   "source": "llm",
+   "replaced": []
+  },
+  {
+   "case": "cross_check",
+   "source": "llm",
+   "replaced": []
+  },
+  {
+   "case": "face_uncertain",
+   "source": "llm",
+   "replaced": []
+  },
+  {
+   "case": "face_mismatch",
+   "source": "llm",
+   "replaced": []
+  },
+  {
+   "case": "tamper_medium_only",
+   "source": "llm",
+   "replaced": []
+  }
+ ]
+}

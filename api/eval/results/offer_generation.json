@@ -1,0 +1,20 @@
+{
+ "agent_id": "offer_generation",
+ "measured_at": "2026-09-25T16:47:20+00:00",
+ "metrics": {
+  "emi_exact": 1.0,
+  "offers": 864,
+  "foir_cap_respected": 1.0,
+  "capped_offers": 162
+ },
+ "target": {
+  "metric": "emi_exact",
+  "target": 1.0,
+  "higher": true,
+  "label": "EMI equal to the formula"
+ },
+ "primary_value": 1.0,
+ "rating": "Strong",
+ "secondary": [],
+ "failures": []
+}

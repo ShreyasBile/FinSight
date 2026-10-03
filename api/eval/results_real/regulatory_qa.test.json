@@ -1,0 +1,137 @@
+{
+ "agent_id": "regulatory_qa",
+ "split": "test",
+ "data": {
+  "name": "ObliQA (40 ADGM regulations; official test file)",
+  "split": "test",
+  "n_questions": 1000,
+  "n_synthesis": 30,
+  "criterion": "a gold passage's full text lies inside a retrieved chunk of the same document"
+ },
+ "metrics": {
+  "obliqa_recall_at_10": {
+   "value": 0.794,
+   "ci95": [
+    0.7678,
+    0.8179
+   ],
+   "k": 794,
+   "n": 1000
+  },
+  "obliqa_recall_at_5": {
+   "value": 0.744,
+   "ci95": [
+    0.7161,
+    0.7701
+   ],
+   "k": 744,
+   "n": 1000
+  },
+  "obliqa_hit_at_1": {
+   "value": 0.551,
+   "ci95": [
+    0.52,
+    0.5816
+   ],
+   "k": 551,
+   "n": 1000
+  },
+  "obliqa_mrr_at_10": {
+   "value": 0.6331,
+   "ci95": [
+    0.6071,
+    0.6586
+   ],
+   "n": 1000
+  },
+  "obliqa_passage_recall_at_10": {
+   "value": 0.6471,
+   "ci95": [
+    0.6209,
+    0.6725
+   ],
+   "k": 851,
+   "n": 1315
+  },
+  "retrieval_latency": {
+   "n": 1000,
+   "p50_s": 0.09,
+   "p95_s": 0.19,
+   "mean_s": 0.11
+  },
+  "index_chunks": 7986,
+  "grounded_answer_rate": {
+   "value": 1.0,
+   "ci95": [
+    0.8865,
+    1
+   ],
+   "k": 30,
+   "n": 30
+  },
+  "synthesis_kept_rate": {
+   "value": 1.0,
+   "ci95": [
+    0.8865,
+    1
+   ],
+   "k": 30,
+   "n": 30
+  },
+  "citation_accuracy": {
+   "value": 0.7667,
+   "ci95": [
+    0.5907,
+    0.8821
+   ],
+   "k": 23,
+   "n": 30
+  }
+ },
+ "target": {
+  "metric": "obliqa_recall_at_10",
+  "target": 0.7,
+  "higher": true,
+  "label": "ObliQA: a gold passage in top 10"
+ },
+ "primary_value": 0.794,
+ "rating": "Strong",
+ "secondary": [
+  {
+   "metric": "rbi_hit_at_5",
+   "target": 0.85,
+   "higher": true,
+   "label": "RBI set: gold paragraph in top 5",
+   "value": null,
+   "rating": "Not measured"
+  },
+  {
+   "metric": "grounded_answer_rate",
+   "target": 0.9,
+   "higher": true,
+   "label": "Synthesised answers fully grounded",
+   "value": 1.0,
+   "rating": "Strong"
+  }
+ ],
+ "run": {
+  "git_commit": "d990476",
+  "git_dirty": true,
+  "python": "3.13.3",
+  "platform": "Windows-11-10.0.26200-SP0",
+  "cpu": "Intel64 Family 6 Model 183 Stepping 1, GenuineIntel",
+  "gpu": "NVIDIA GeForce RTX 4060 Laptop GPU, 8188 MiB",
+  "llm": {
+   "provider": "ollama",
+   "model": "qwen2.5vl:7b",
+   "temperature": 0.0,
+   "num_ctx": 8192,
+   "timeout_s": 180,
+   "keep_alive": "10m",
+   "effort": "low"
+  },
+  "split_seed": 20261001,
+  "dev_fraction": 0.3,
+  "measured_at": "2026-10-02T06:12:35+00:00"
+ }
+}

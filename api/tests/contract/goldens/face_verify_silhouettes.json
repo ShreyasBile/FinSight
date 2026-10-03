@@ -1,0 +1,25 @@
+{
+ "body": {
+  "documents": [
+   {
+    "doc_type": "pan",
+    "error": null,
+    "face_count": 0,
+    "faces": []
+   },
+   {
+    "doc_type": "aadhaar",
+    "error": null,
+    "face_count": 0,
+    "faces": []
+   }
+  ],
+  "overall": "insufficient",
+  "pairs": [],
+  "summary": "No document contained a detectable face.",
+  "timings": [
+   "face_ms"
+  ]
+ },
+ "status": 200
+}

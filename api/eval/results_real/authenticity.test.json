@@ -1,0 +1,163 @@
+{
+ "agent_id": "authenticity",
+ "split": "test",
+ "data": {
+  "name": "Find it again! (official test) + SIDTD templates (test groups)",
+  "split": "test",
+  "n": 418,
+  "path": "truthful: documents described as what they are (evaluation-only label override)",
+  "labels": {
+   "receipt": "retail purchase receipt issued by a shop or restaurant",
+   "id_card_eu": "identity card or passport issued by a European government"
+  }
+ },
+ "metrics": {
+  "forged_recall": {
+   "value": 0.1119,
+   "ci95": [
+    0.069,
+    0.1765
+   ],
+   "k": 15,
+   "n": 134
+  },
+  "genuine_false_flag": {
+   "value": 0.0353,
+   "ci95": [
+    0.0193,
+    0.0638
+   ],
+   "k": 10,
+   "n": 283
+  },
+  "auc": {
+   "value": 0.5382,
+   "ci95": [
+    0.5078,
+    0.5683
+   ],
+   "n": 417
+  },
+  "by_dataset": {
+   "findit": {
+    "forged_recall": {
+     "value": 0.0571,
+     "ci95": [
+      0.0158,
+      0.1861
+     ],
+     "k": 2,
+     "n": 35
+    },
+    "genuine_false_flag": {
+     "value": 0.0,
+     "ci95": [
+      0,
+      0.0206
+     ],
+     "k": 0,
+     "n": 183
+    },
+    "auc": {
+     "value": 0.5286,
+     "ci95": [
+      0.5,
+      0.5735
+     ],
+     "n": 218
+    }
+   },
+   "sidtd": {
+    "forged_recall": {
+     "value": 0.1313,
+     "ci95": [
+      0.0784,
+      0.2118
+     ],
+     "k": 13,
+     "n": 99
+    },
+    "genuine_false_flag": {
+     "value": 0.1,
+     "ci95": [
+      0.0552,
+      0.1744
+     ],
+     "k": 10,
+     "n": 100
+    },
+    "auc": {
+     "value": 0.5157,
+     "ci95": [
+      0.4695,
+      0.5594
+     ],
+     "n": 199
+    }
+   }
+  },
+  "cap_respected": 1.0,
+  "lone_authenticity_cases": 0,
+  "ran_rate": {
+   "value": 0.9976,
+   "ci95": [
+    0.9866,
+    0.9996
+   ],
+   "k": 417,
+   "n": 418
+  },
+  "latency": {
+   "n": 418,
+   "p50_s": 11.27,
+   "p95_s": 37.45,
+   "mean_s": 13.24
+  }
+ },
+ "target": {
+  "metric": "forged_recall",
+  "target": 0.7,
+  "higher": true,
+  "label": "Forged documents flagged by the authenticity check"
+ },
+ "primary_value": 0.1119,
+ "rating": "Weak",
+ "secondary": [
+  {
+   "metric": "genuine_false_flag",
+   "target": 0.1,
+   "higher": false,
+   "label": "Genuine documents flagged",
+   "value": 0.0353,
+   "rating": "Strong"
+  },
+  {
+   "metric": "cap_respected",
+   "target": 1.0,
+   "higher": true,
+   "label": "A lone authenticity flag never reaches HIGH",
+   "value": 1.0,
+   "rating": "Strong"
+  }
+ ],
+ "run": {
+  "git_commit": "d990476",
+  "git_dirty": true,
+  "python": "3.13.3",
+  "platform": "Windows-11-10.0.26200-SP0",
+  "cpu": "Intel64 Family 6 Model 183 Stepping 1, GenuineIntel",
+  "gpu": "NVIDIA GeForce RTX 4060 Laptop GPU, 8188 MiB",
+  "llm": {
+   "provider": "ollama",
+   "model": "qwen2.5vl:7b",
+   "temperature": 0.0,
+   "num_ctx": 8192,
+   "timeout_s": 180,
+   "keep_alive": "0s",
+   "effort": "low"
+  },
+  "split_seed": 20261001,
+  "dev_fraction": 0.3,
+  "measured_at": "2026-10-01T08:39:39+00:00"
+ }
+}

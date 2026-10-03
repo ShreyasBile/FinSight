@@ -1,0 +1,83 @@
+{
+ "agent_id": "tamper_explainer",
+ "split": "dev",
+ "data": {
+  "name": "flagged documents of the production run (Find it again! + SIDTD)",
+  "split": "dev",
+  "n": 3
+ },
+ "metrics": {
+  "grounded_rate": {
+   "value": 1.0,
+   "ci95": [
+    0.4385,
+    1
+   ],
+   "k": 3,
+   "n": 3
+  },
+  "tier_unchanged": {
+   "value": 1.0,
+   "ci95": [
+    0.4385,
+    1
+   ],
+   "k": 3,
+   "n": 3
+  },
+  "produced_rate": {
+   "value": 1.0,
+   "ci95": [
+    0.4385,
+    1
+   ],
+   "k": 3,
+   "n": 3
+  },
+  "sentences_dropped": 0,
+  "latency": {
+   "n": 3,
+   "p50_s": 3.81,
+   "p95_s": 4.32,
+   "mean_s": 3.87
+  }
+ },
+ "target": {
+  "metric": "grounded_rate",
+  "target": 0.95,
+  "higher": true,
+  "label": "Explanations citing only real figures"
+ },
+ "primary_value": 1.0,
+ "rating": "Strong",
+ "secondary": [
+  {
+   "metric": "tier_unchanged",
+   "target": 1.0,
+   "higher": true,
+   "label": "Risk tier never changed",
+   "value": 1.0,
+   "rating": "Strong"
+  }
+ ],
+ "run": {
+  "git_commit": "d990476",
+  "git_dirty": true,
+  "python": "3.13.3",
+  "platform": "Windows-11-10.0.26200-SP0",
+  "cpu": "Intel64 Family 6 Model 183 Stepping 1, GenuineIntel",
+  "gpu": "NVIDIA GeForce RTX 4060 Laptop GPU, 8188 MiB",
+  "llm": {
+   "provider": "ollama",
+   "model": "qwen2.5vl:7b",
+   "temperature": 0.0,
+   "num_ctx": 8192,
+   "timeout_s": 180,
+   "keep_alive": "30m",
+   "effort": "low"
+  },
+  "split_seed": 20261001,
+  "dev_fraction": 0.3,
+  "measured_at": "2026-10-01T04:41:28+00:00"
+ }
+}

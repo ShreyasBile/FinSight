@@ -1,0 +1,72 @@
+{
+ "rule": "floor = 95th percentile of genuine development scores, per family and pixel signal",
+ "dev_counts": {
+  "findit": 258,
+  "sidtd": 400,
+  "midv": 90
+ },
+ "genuine_floor": {
+  "page": {
+   "cnn": 0.904,
+   "ela": 0.99,
+   "noise": 0.99,
+   "copy_move": 0.986
+  },
+  "id": {
+   "cnn": 0.9,
+   "ela": 0.99,
+   "noise": 0.809,
+   "copy_move": 0.15,
+   "photo_region": 0.071
+  }
+ },
+ "before_on_dev": {
+  "findit": {
+   "forged_recall": 0.921875,
+   "forged_high": 0.609375,
+   "genuine_flagged": 0.7846153846153846,
+   "genuine_high": 0.27692307692307694,
+   "auc": 0.7227
+  },
+  "sidtd": {
+   "forged_recall": 0.76,
+   "forged_high": 0.105,
+   "genuine_flagged": 0.885,
+   "genuine_high": 0.06,
+   "auc": 0.3011
+  },
+  "midv_genuine_photos": {
+   "genuine_flagged": 0.5111111111111111,
+   "genuine_high": 0.07777777777777778,
+   "n": 90
+  }
+ },
+ "after_on_dev": {
+  "findit": {
+   "forged_recall": 0.6484375,
+   "forged_high": 0.2265625,
+   "genuine_flagged": 0.3153846153846154,
+   "genuine_high": 0.007692307692307693,
+   "auc": 0.6694
+  },
+  "sidtd": {
+   "forged_recall": 0.115,
+   "forged_high": 0.0,
+   "genuine_flagged": 0.52,
+   "genuine_high": 0.01,
+   "auc": 0.3456
+  },
+  "midv_genuine_photos": {
+   "genuine_flagged": 0.2,
+   "genuine_high": 0.011111111111111112,
+   "n": 90
+  }
+ },
+ "unchanged": [
+  "weights",
+  "single_signal_confidence",
+  "corroboration_factor",
+  "tier_medium",
+  "tier_high"
+ ]
+}

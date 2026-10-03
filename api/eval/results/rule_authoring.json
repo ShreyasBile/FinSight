@@ -1,0 +1,150 @@
+{
+ "agent_id": "rule_authoring",
+ "measured_at": "2026-09-25T20:19:54+00:00",
+ "metrics": {
+  "obligation_recall": 0.8889,
+  "gold_rules": 9,
+  "recovered": [
+   "KYC_001",
+   "DL_KFS_001",
+   "DL_KFS_002",
+   "DL_COOL_001",
+   "DL_DISB_001",
+   "DL_CONSENT_001",
+   "PENAL_001",
+   "MFI_FOIR_001"
+  ],
+  "missing": [
+   "KYC_002"
+  ],
+  "candidates": 18,
+  "valid_condition_rate": 1.0,
+  "field_mapped_rate": 0.7778,
+  "methods": {
+   "llm": 6
+  },
+  "documents": 6,
+  "p50_s_per_document": 15.41,
+  "p95_s_per_document": 30.8
+ },
+ "target": {
+  "metric": "obligation_recall",
+  "target": 0.7,
+  "higher": true,
+  "label": "Known rules recovered as candidates"
+ },
+ "primary_value": 0.8889,
+ "rating": "Strong",
+ "secondary": [
+  {
+   "metric": "valid_condition_rate",
+   "target": 0.9,
+   "higher": true,
+   "label": "Candidates with a well-formed condition",
+   "value": 1.0,
+   "rating": "Strong"
+  }
+ ],
+ "samples": [
+  {
+   "proposed_rule_name": "Direct Loan Disbursement and Repayment",
+   "proposed_condition": {
+    "field": "loan_terms.direct_disbursement",
+    "op": "eq",
+    "value": "true"
+   },
+   "_section": "Disbursement and repayment flow",
+   "needs_field_mapping": false
+  },
+  {
+   "proposed_rule_name": "Direct Payment of Fees by Regulated Entity",
+   "proposed_condition": {
+    "field": "loan_terms.fees_payment_method",
+    "op": "eq",
+    "value": "direct"
+   },
+   "_section": "Fees payable to Lending Service Providers",
+   "needs_field_mapping": false
+  },
+  {
+   "proposed_rule_name": "Minimum Cooling-Off Period",
+   "proposed_condition": {
+    "field": "loan_terms.cooling_off_period_days",
+    "op": "gte",
+    "value": 1
+   },
+   "_section": "Cooling-off / look-up period",
+   "needs_field_mapping": false
+  },
+  {
+   "proposed_rule_name": "Data Collection Must Be Need-Based",
+   "proposed_condition": {
+    "field": "loan_terms.data_collection_necessity",
+    "op": "eq",
+    "value": "need-based"
+   },
+   "_section": "Borrower consent and data minimisation",
+   "needs_field_mapping": false
+  },
+  {
+   "proposed_rule_name": "Regulated Entity must use LSP or RE acting as LSP",
+   "proposed_condition": {
+    "field": "loan_terms.default_loss_guarantee_parties",
+    "op": "eq",
+    "value": "LSP or another RE acting as LSP"
+   },
+   "_section": "Default Loss Guarantee (DLG)",
+   "needs_field_mapping": false
+  },
+  {
+   "proposed_rule_name": "Disclose Regulated Entities upfront",
+   "proposed_condition": {
+    "field": "REVIEW.map_to_application_field",
+    "op": "eq",
+    "value": true
+   },
+   "_section": "Multi-lender platform disclosure",
+   "needs_field_mapping": true
+  },
+  {
+   "proposed_rule_name": "Provide Key Facts Statement",
+   "proposed_condition": {
+    "field": "loan_terms.key_facts_statement",
+    "op": "eq",
+    "value": "true"
+   },
+   "_section": "KFS before contract execution",
+   "needs_field_mapping": false
+  },
+  {
+   "proposed_rule_name": "Include APR, computation sheet, amortisation schedule",
+   "proposed_condition": {
+    "field": "loan_terms.annual_percentage_rate",
+    "op": "eq",
+    "value": "all-inclusive Annual Percentage Rate"
+   },
+   "_section": "Annual Percentage Rate (APR) disclosure",
+   "needs_field_mapping": false
+  },
+  {
+   "proposed_rule_name": "Explicit consent for additional fees",
+   "proposed_condition": {
+    "field": "loan_terms.additional_fees_consent",
+    "op": "eq",
+    "value": "true"
+   },
+   "_section": "No charges outside the KFS",
+   "needs_field_mapping": false
+  },
+  {
+   "proposed_rule_name": "No Capitalization of Penal Charges",
+   "proposed_condition": {
+    "field": "REVIEW.map_to_application_field",
+    "op": "eq",
+    "value": true
+   },
+   "_section": "Penal charges, not penal interest",
+   "needs_field_mapping": true
+  }
+ ]
+}

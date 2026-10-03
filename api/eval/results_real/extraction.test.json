@@ -1,0 +1,283 @@
+{
+ "agent_id": "extraction",
+ "split": "test",
+ "data": {
+  "name": "PAN cards (synthetic, labelled) + Indian bank statements (synthetic data, digital/scanned PDFs) + SROIE real receipts (evaluation-only receipt prompt)",
+  "split": "test",
+  "n_pan": 150,
+  "n_statements": 60,
+  "n_receipts": 100,
+  "matching": "numbers within 0.5% (min Rs 1); dates by value; names, bank, company and address by >= 80% token overlap; account number by last 4 digits (the prompt asks for a masked number); totals accept the sum with or without failed transactions",
+  "code_version": "v2"
+ },
+ "metrics": {
+  "field_accuracy": {
+   "value": 0.9437,
+   "ci95": [
+    0.9273,
+    0.9566
+   ],
+   "k": 906,
+   "n": 960
+  },
+  "doc_all_correct": {
+   "value": 0.8714,
+   "ci95": [
+    0.8194,
+    0.9101
+   ],
+   "k": 183,
+   "n": 210
+  },
+  "per_field": {
+   "pan_number": 0.8333,
+   "full_name": 0.96,
+   "father_name": 0.9533,
+   "dob": 0.9,
+   "account_holder": 0.9833,
+   "bank_name": 1.0,
+   "account_number": 1.0,
+   "ifsc": 1.0,
+   "opening_balance": 1.0,
+   "closing_balance": 1.0
+  },
+  "n_docs": 210,
+  "receipt_field_accuracy": {
+   "value": 0.8875,
+   "ci95": [
+    0.8528,
+    0.9149
+   ],
+   "k": 355,
+   "n": 400
+  },
+  "json_ok_rate": {
+   "value": 1.0,
+   "ci95": [
+    0.9878,
+    1
+   ],
+   "k": 310,
+   "n": 310
+  },
+  "scanned_statement_field_accuracy": {
+   "value": 1.0,
+   "ci95": [
+    0.981,
+    1
+   ],
+   "k": 198,
+   "n": 198
+  },
+  "by_set": {
+   "pan_cards": {
+    "field_accuracy": {
+     "value": 0.9117,
+     "ci95": [
+      0.8863,
+      0.9318
+     ],
+     "k": 547,
+     "n": 600
+    },
+    "doc_all_correct": {
+     "value": 0.8267,
+     "ci95": [
+      0.7581,
+      0.8789
+     ],
+     "k": 124,
+     "n": 150
+    },
+    "per_field": {
+     "pan_number": 0.8333,
+     "full_name": 0.96,
+     "father_name": 0.9533,
+     "dob": 0.9
+    },
+    "n_docs": 150
+   },
+   "statements_printed": {
+    "field_accuracy": {
+     "value": 0.9972,
+     "ci95": [
+      0.9844,
+      0.9995
+     ],
+     "k": 359,
+     "n": 360
+    },
+    "doc_all_correct": {
+     "value": 0.9833,
+     "ci95": [
+      0.9114,
+      0.9971
+     ],
+     "k": 59,
+     "n": 60
+    },
+    "per_field": {
+     "account_holder": 0.9833,
+     "bank_name": 1.0,
+     "account_number": 1.0,
+     "ifsc": 1.0,
+     "opening_balance": 1.0,
+     "closing_balance": 1.0
+    },
+    "n_docs": 60
+   },
+   "statements_computed": {
+    "field_accuracy": {
+     "value": 0.5,
+     "ci95": [
+      0.4277,
+      0.5723
+     ],
+     "k": 90,
+     "n": 180
+    },
+    "doc_all_correct": {
+     "value": 0.25,
+     "ci95": [
+      0.1578,
+      0.3723
+     ],
+     "k": 15,
+     "n": 60
+    },
+    "per_field": {
+     "statement_period": 1.0,
+     "total_credits": 0.25,
+     "total_debits": 0.25
+    },
+    "n_docs": 60
+   },
+   "statements_digital": {
+    "field_accuracy": {
+     "value": 0.9938,
+     "ci95": [
+      0.9659,
+      0.9989
+     ],
+     "k": 161,
+     "n": 162
+    },
+    "doc_all_correct": {
+     "value": 0.963,
+     "ci95": [
+      0.8172,
+      0.9934
+     ],
+     "k": 26,
+     "n": 27
+    },
+    "per_field": {
+     "account_holder": 0.963,
+     "bank_name": 1.0,
+     "account_number": 1.0,
+     "ifsc": 1.0,
+     "opening_balance": 1.0,
+     "closing_balance": 1.0
+    },
+    "n_docs": 27
+   },
+   "receipts_sroie": {
+    "field_accuracy": {
+     "value": 0.8875,
+     "ci95": [
+      0.8528,
+      0.9149
+     ],
+     "k": 355,
+     "n": 400
+    },
+    "doc_all_correct": {
+     "value": 0.61,
+     "ci95": [
+      0.512,
+      0.6998
+     ],
+     "k": 61,
+     "n": 100
+    },
+    "per_field": {
+     "company": 0.94,
+     "date": 0.66,
+     "address": 0.96,
+     "total": 0.99
+    },
+    "n_docs": 100
+   }
+  },
+  "failed_runs": 0,
+  "latency": {
+   "n": 310,
+   "p50_s": 29.78,
+   "p95_s": 57.71,
+   "mean_s": 33.2
+  }
+ },
+ "target": {
+  "metric": "field_accuracy",
+  "target": 0.9,
+  "higher": true,
+  "label": "Printed fields read correctly (PAN cards + bank statements)"
+ },
+ "primary_value": 0.9437,
+ "rating": "Strong",
+ "secondary": [
+  {
+   "metric": "receipt_field_accuracy",
+   "target": 0.85,
+   "higher": true,
+   "label": "Real scanned receipts (SROIE), evaluation-only receipt prompt",
+   "value": 0.8875,
+   "rating": "Strong"
+  },
+  {
+   "metric": "json_ok_rate",
+   "target": 0.98,
+   "higher": true,
+   "label": "Valid JSON returned",
+   "value": 1.0,
+   "rating": "Strong"
+  },
+  {
+   "metric": "doc_all_correct",
+   "target": 0.6,
+   "higher": true,
+   "label": "Documents with every printed field correct",
+   "value": 0.8714,
+   "rating": "Strong"
+  },
+  {
+   "metric": "scanned_statement_field_accuracy",
+   "target": 0.85,
+   "higher": true,
+   "label": "Scanned bank statements: printed fields correct",
+   "value": 1.0,
+   "rating": "Strong"
+  }
+ ],
+ "run": {
+  "git_commit": "d990476",
+  "git_dirty": true,
+  "python": "3.13.3",
+  "platform": "Windows-11-10.0.26200-SP0",
+  "cpu": "Intel64 Family 6 Model 183 Stepping 1, GenuineIntel",
+  "gpu": "NVIDIA GeForce RTX 4060 Laptop GPU, 8188 MiB",
+  "llm": {
+   "provider": "ollama",
+   "model": "qwen2.5vl:7b",
+   "temperature": 0.0,
+   "num_ctx": 8192,
+   "timeout_s": 180,
+   "keep_alive": "10m",
+   "effort": "low"
+  },
+  "split_seed": 20261001,
+  "dev_fraction": 0.3,
+  "measured_at": "2026-10-02T07:33:28+00:00"
+ },
+ "model": "ollama qwen2.5vl:7b (local)"
+}

@@ -1,0 +1,175 @@
+{
+ "body": {
+  "application_id": "APP-CONTRACT-1",
+  "auto_approval_allowed": true,
+  "checks": [
+   {
+    "category": "KYC",
+    "evidence": "Satisfied: KYC completed with a verified Officially Valid Document",
+    "regulation": "Master Direction – KYC Direction, 2016",
+    "regulation_ref": "CDD / OVD verification",
+    "remediation": "Complete Customer Due Diligence and verify at least one OVD before disbursal.",
+    "rule_id": "KYC_001",
+    "rule_name": "KYC completed with a verified Officially Valid Document",
+    "rule_type": "mandatory",
+    "status": "PASS"
+   },
+   {
+    "category": "KYC",
+    "evidence": "Satisfied: PAN (or Form 60) available",
+    "regulation": "Master Direction – KYC Direction, 2016",
+    "regulation_ref": "Mandatory PAN/Form 60",
+    "remediation": "Obtain PAN or a valid Form 60 declaration from the borrower.",
+    "rule_id": "KYC_002",
+    "rule_name": "PAN (or Form 60) available",
+    "rule_type": "mandatory",
+    "status": "PASS"
+   },
+   {
+    "category": "Digital Lending",
+    "evidence": "Satisfied: Key Facts Statement provided with APR before contract",
+    "regulation": "KFS for Loans & Advances (2024) / Digital Lending Directions, 2025",
+    "regulation_ref": "KFS before contract execution + APR disclosure",
+    "remediation": "Generate and share the KFS (including APR and amortisation schedule) before executing the loan contract.",
+    "rule_id": "DL_KFS_001",
+    "rule_name": "Key Facts Statement provided with APR before contract",
+    "rule_type": "mandatory",
+    "status": "PASS"
+   },
+   {
+    "category": "Digital Lending",
+    "evidence": "Satisfied: No fees levied outside the Key Facts Statement",
+    "regulation": "KFS for Loans & Advances (2024)",
+    "regulation_ref": "No charges outside the KFS",
+    "remediation": "Ensure every fee charged to the borrower is itemised in the KFS.",
+    "rule_id": "DL_KFS_002",
+    "rule_name": "No fees levied outside the Key Facts Statement",
+    "rule_type": "mandatory",
+    "status": "PASS"
+   },
+   {
+    "category": "Digital Lending",
+    "evidence": "Satisfied: Cooling-off period of at least 1 day offered",
+    "regulation": "RBI (Digital Lending) Directions, 2025",
+    "regulation_ref": "Cooling-off / look-up period (>= 1 day)",
+    "remediation": "Offer a cooling-off period of at least one day during which the borrower can exit without penalty.",
+    "rule_id": "DL_COOL_001",
+    "rule_name": "Cooling-off period of at least 1 day offered",
+    "rule_type": "mandatory",
+    "status": "PASS"
+   },
+   {
+    "category": "Digital Lending",
+    "evidence": "Satisfied: Disbursal directly to borrower's bank account (no LSP pass-through)",
+    "regulation": "RBI (Digital Lending) Directions, 2025",
+    "regulation_ref": "Disbursement & repayment flow",
+    "remediation": "Route disbursal and repayment only between the borrower's account and the RE; remove any LSP pool account from the fund flow.",
+    "rule_id": "DL_DISB_001",
+    "rule_name": "Disbursal directly to borrower's bank account (no LSP pass-through)",
+    "rule_type": "mandatory",
+    "status": "PASS"
+   },
+   {
+    "category": "Digital Lending",
+    "evidence": "Satisfied: Explicit borrower consent for data collection and credit-bureau pull",
+    "regulation": "RBI (Digital Lending) Directions, 2025 / Credit Information Reporting, 2025",
+    "regulation_ref": "Consent and data minimisation",
+    "remediation": "Capture explicit, revocable borrower consent for data collection and for pulling the credit report.",
+    "rule_id": "DL_CONSENT_001",
+    "rule_name": "Explicit borrower consent for data collection and credit-bureau pull",
+    "rule_type": "mandatory",
+    "status": "PASS"
+   },
+   {
+    "category": "Fair Practices",
+    "evidence": "Satisfied: Penalty levied as penal charges, not penal interest",
+    "regulation": "Fair Lending Practice – Penal Charges in Loan Accounts (2024)",
+    "regulation_ref": "Penal charges, not penal interest",
+    "remediation": "Convert any penal-interest component to a fixed penal charge with no capitalisation.",
+    "rule_id": "PENAL_001",
+    "rule_name": "Penalty levied as penal charges, not penal interest",
+    "rule_type": "mandatory",
+    "status": "PASS"
+   },
+   {
+    "category": "Credit Risk",
+    "evidence": "Rule does not apply to this application type.",
+    "regulation": "RBI (Regulatory Framework for Microfinance Loans) Directions, 2022",
+    "regulation_ref": "Repayment capacity — 50% of household income",
+    "remediation": "",
+    "rule_id": "MFI_FOIR_001",
+    "rule_name": "Household repayment obligations within 50% of household income",
+    "rule_type": "mandatory",
+    "status": "NOT_APPLICABLE"
+   },
+   {
+    "category": "Credit Risk",
+    "evidence": "Satisfied: FOIR within 50% of monthly income (underwriting policy)",
+    "regulation": "Internal NBFC underwriting policy",
+    "regulation_ref": "Fixed Obligation to Income Ratio",
+    "remediation": "Fixed obligations exceed half of income; consider a lower loan amount or longer tenor.",
+    "rule_id": "POL_FOIR_001",
+    "rule_name": "FOIR within 50% of monthly income (underwriting policy)",
+    "rule_type": "internal_policy",
+    "status": "PASS"
+   },
+   {
+    "category": "Credit Risk",
+    "evidence": "Satisfied: Credit score at or above 650 (underwriting policy)",
+    "regulation": "Internal NBFC underwriting policy",
+    "regulation_ref": "Minimum credit score",
+    "remediation": "Sub-650 credit score; route to manual underwriting.",
+    "rule_id": "POL_CREDIT_001",
+    "rule_name": "Credit score at or above 650 (underwriting policy)",
+    "rule_type": "internal_policy",
+    "status": "PASS"
+   },
+   {
+    "category": "Fraud Risk",
+    "evidence": "Satisfied: Document tamper score below rejection threshold",
+    "regulation": "Internal fraud-control policy (FinSight tamper module)",
+    "regulation_ref": "Tamper score < 50",
+    "remediation": "High tamper score — hold for forensic manual review before any approval.",
+    "rule_id": "RISK_TAMPER_001",
+    "rule_name": "Document tamper score below rejection threshold",
+    "rule_type": "mandatory",
+    "status": "PASS"
+   },
+   {
+    "category": "Fraud Risk",
+    "evidence": "Satisfied: Overall fraud score within acceptable range",
+    "regulation": "Internal fraud-control policy (FinSight fraud module)",
+    "regulation_ref": "Fraud score < 50",
+    "remediation": "Elevated fraud score; corroborate with additional checks.",
+    "rule_id": "RISK_FRAUD_001",
+    "rule_name": "Overall fraud score within acceptable range",
+    "rule_type": "internal_policy",
+    "status": "PASS"
+   },
+   {
+    "category": "Fraud Risk",
+    "evidence": "Rule does not apply to this application type.",
+    "regulation": "Internal fraud-control policy (FinSight face module) / KYC identity assurance",
+    "regulation_ref": "Face match score >= 0.363 (SFace cosine)",
+    "remediation": "",
+    "rule_id": "FACE_001",
+    "rule_name": "Face match between selfie and ID verified",
+    "rule_type": "mandatory",
+    "status": "NOT_APPLICABLE"
+   }
+  ],
+  "loan_type": "personal_loan",
+  "manual_review_required": false,
+  "overall_status": "PASS",
+  "recommendation": "All regulatory and policy checks passed.",
+  "summary": {
+   "failed": 0,
+   "inconclusive": 0,
+   "not_applicable": 2,
+   "passed": 12,
+   "total_rules_evaluated": 12,
+   "warnings": 0
+  }
+ },
+ "status": 200
+}

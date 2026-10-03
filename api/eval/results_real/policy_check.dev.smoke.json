@@ -1,0 +1,117 @@
+{
+ "agent_id": "policy_check",
+ "split": "dev",
+ "data": {
+  "name": "L&T vehicle loans (real inputs: bureau score, EMIs, documents) through build_context + the rules engine; rules = the seeded set + the live knowledge base's active rules",
+  "split": "dev",
+  "n_loans": 30,
+  "n_contexts": 60,
+  "n_rules": 30,
+  "variants": {
+   "as_applied": "only what L&T records (no KFS, consent or income)",
+   "with_offer_terms": "plus deterministic offer terms / consent / income, so every rule is exercised both ways (labelled as constructed, not real)"
+  }
+ },
+ "metrics": {
+  "rule_accuracy": {
+   "value": 1.0,
+   "ci95": [
+    0.9979,
+    1
+   ],
+   "k": 1800,
+   "n": 1800
+  },
+  "overall_status_accuracy": {
+   "value": 1.0,
+   "ci95": [
+    0.9398,
+    1.0
+   ],
+   "k": 60,
+   "n": 60
+  },
+  "no_false_pass": 1.0,
+  "false_passes": 0,
+  "rules_well_formed": {
+   "value": 0.9375,
+   "ci95": [
+    0.7167,
+    0.9889
+   ],
+   "k": 15,
+   "n": 16
+  },
+  "malformed_live_rules": [
+   "on"
+  ],
+  "status_counts": {
+   "FAIL": 196,
+   "INCONCLUSIVE": 980,
+   "NOT_APPLICABLE": 240,
+   "WARNING": 39,
+   "PASS": 345
+  },
+  "default_rate_by_credit_rule": {
+   "WARNING": {
+    "default_rate": 0.3333,
+    "n": 6
+   },
+   "INCONCLUSIVE": {
+    "default_rate": 0.2353,
+    "n": 17
+   },
+   "PASS": {
+    "default_rate": 0.1429,
+    "n": 7
+   }
+  }
+ },
+ "target": {
+  "metric": "rule_accuracy",
+  "target": 1.0,
+  "higher": true,
+  "label": "Rule verdicts equal the independent implementation"
+ },
+ "primary_value": 1.0,
+ "rating": "Strong",
+ "secondary": [
+  {
+   "metric": "no_false_pass",
+   "target": 1.0,
+   "higher": true,
+   "label": "Missing evidence never passes",
+   "value": 1.0,
+   "rating": "Strong"
+  },
+  {
+   "metric": "rules_well_formed",
+   "target": 1.0,
+   "higher": true,
+   "label": "Active rules carry a name and a regulation reference",
+   "value": 0.9375,
+   "rating": "Acceptable"
+  }
+ ],
+ "run": {
+  "git_commit": "d990476",
+  "git_dirty": true,
+  "python": "3.13.3",
+  "platform": "Windows-11-10.0.26200-SP0",
+  "cpu": "Intel64 Family 6 Model 183 Stepping 1, GenuineIntel",
+  "gpu": "NVIDIA GeForce RTX 4060 Laptop GPU, 8188 MiB",
+  "llm": {
+   "provider": "ollama",
+   "model": "qwen2.5vl:7b",
+   "temperature": 0.0,
+   "num_ctx": 8192,
+   "timeout_s": 180,
+   "keep_alive": "0s",
+   "effort": "low"
+  },
+  "split_seed": 20261001,
+  "dev_fraction": 0.3,
+  "measured_at": "2026-10-01T08:40:23+00:00"
+ },
+ "disagreements": []
+}

@@ -1,0 +1,76 @@
+{
+ "dev_n": 658,
+ "optimised_on": "findit",
+ "constraints_met": true,
+ "current_on_dev": {
+  "forged_recall": 0.823170731707317,
+  "forged_high": 0.3018292682926829,
+  "genuine_flagged": 0.8454545454545455,
+  "genuine_high": 0.14545454545454545,
+  "auc": 0.492
+ },
+ "current_by_dataset": {
+  "findit": {
+   "forged_recall": 0.921875,
+   "forged_high": 0.609375,
+   "genuine_flagged": 0.7846153846153846,
+   "genuine_high": 0.27692307692307694,
+   "auc": 0.7227
+  },
+  "sidtd": {
+   "forged_recall": 0.76,
+   "forged_high": 0.105,
+   "genuine_flagged": 0.885,
+   "genuine_high": 0.06,
+   "auc": 0.3011
+  }
+ },
+ "chosen_on_dev": {
+  "forged_recall": 0.3475609756097561,
+  "forged_high": 0.11585365853658537,
+  "genuine_flagged": 0.37575757575757573,
+  "genuine_high": 0.24242424242424243,
+  "auc": 0.5094
+ },
+ "chosen_by_dataset": {
+  "findit": {
+   "forged_recall": 0.7265625,
+   "forged_high": 0.296875,
+   "genuine_flagged": 0.3,
+   "genuine_high": 0.0,
+   "auc": 0.7839
+  },
+  "sidtd": {
+   "forged_recall": 0.105,
+   "forged_high": 0.0,
+   "genuine_flagged": 0.425,
+   "genuine_high": 0.4,
+   "auc": 0.3919
+  }
+ },
+ "config": {
+  "single_signal_confidence": {
+   "cnn": 0.2,
+   "ela": 0.2,
+   "noise": 0.0,
+   "copy_move": 0.0,
+   "photo_region": 0.32
+  },
+  "weights": {
+   "cnn": 0.03,
+   "ela": 0.0,
+   "noise": 0.0,
+   "copy_move": 0.06,
+   "photo_region": 0.0
+  }
+ },
+ "unchanged": [
+  "business_rules",
+  "pdf_forensics",
+  "metadata",
+  "authenticity",
+  "tier_medium",
+  "tier_high",
+  "corroboration_factor"
+ ]
+}

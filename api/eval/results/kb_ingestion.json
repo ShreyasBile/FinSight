@@ -1,0 +1,30 @@
+{
+ "agent_id": "kb_ingestion",
+ "measured_at": "2026-09-25T16:42:52+00:00",
+ "metrics": {
+  "recall_at_5": 0.9167,
+  "questions": 12,
+  "documents_ingested": 6,
+  "seed_recall_at_5_after_ingest": 0.975,
+  "ingest_p50_ms": 10.0
+ },
+ "target": {
+  "metric": "recall_at_5",
+  "target": 0.85,
+  "higher": true,
+  "label": "Retrieval recall@5 after ingest"
+ },
+ "primary_value": 0.9167,
+ "rating": "Strong",
+ "secondary": [],
+ "failures": [
+  {
+   "q": "What compensation is due if the lender delays returning the title deeds?",
+   "top": [
+    "RBI (Digital Lending) Directions, 2025",
+    "Master Direction \u2013 Know Your Customer (KYC) Direct",
+    "Master Direction \u2013 Credit Information Reporting, 2"
+   ]
+  }
+ ]
+}

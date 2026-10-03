@@ -1,0 +1,81 @@
+{
+ "body": {
+  "cleaned_preview": "img:6cd5a21eb7e104b7",
+  "confidence": 1.0,
+  "doc_type": "salary_slip",
+  "document_identity": {
+   "fields_ok": true,
+   "ok": true,
+   "rule": "salary_slip"
+  },
+  "fields": [
+   {
+    "flag": "ok",
+    "key": "employee_name",
+    "label": "Employee Name",
+    "value": "Rajesh Kumar"
+   },
+   {
+    "flag": "ok",
+    "key": "employer_name",
+    "label": "Employer Name",
+    "value": "ABC Transport Co."
+   },
+   {
+    "flag": "ok",
+    "key": "month_year",
+    "label": "Month/Year",
+    "value": "May 2024"
+   },
+   {
+    "flag": "ok",
+    "key": "designation",
+    "label": "Designation",
+    "value": "Manager"
+   },
+   {
+    "flag": "ok",
+    "key": "basic_pay",
+    "label": "Basic Pay (₹)",
+    "value": 48000
+   },
+   {
+    "flag": "ok",
+    "key": "hra",
+    "label": "HRA (₹)",
+    "value": 19200
+   },
+   {
+    "flag": "ok",
+    "key": "gross_salary",
+    "label": "Gross Salary (₹)",
+    "value": 96400
+   },
+   {
+    "flag": "ok",
+    "key": "net_salary",
+    "label": "Net Salary (₹)",
+    "value": 75000
+   }
+  ],
+  "needs_review": false,
+  "parsed": {
+   "basic_pay": 48000,
+   "designation": "Manager",
+   "employee_name": "Rajesh Kumar",
+   "employer_name": "ABC Transport Co.",
+   "gross_salary": 96400,
+   "hra": 19200,
+   "month_year": "May 2024",
+   "net_salary": 75000
+  },
+  "provider": "mock",
+  "raw": "{\"employee_name\": \"Rajesh Kumar\", \"employer_name\": \"ABC Transport Co.\", \"month_year\": \"May 2024\", \"designation\": \"Manager\", \"basic_pay\": 48000, \"hra\": 19200, \"gross_salary\": 96400, \"net_salary\": 75000}",
+  "tampering": null,
+  "timings": [
+   "extract_ms",
+   "preprocess_ms"
+  ]
+ },
+ "status": 200
+}

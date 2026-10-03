@@ -1,0 +1,160 @@
+{
+ "agent_id": "liveness",
+ "split": "test",
+ "data": {
+  "name": "NUAA Photograph Imposter Database (primary, full frames); CelebA-Spoof test crops (secondary)",
+  "split": "test (NUAA official test list)",
+  "n": 2000,
+  "n_celeba": 1000,
+  "subjects": [
+   "0001",
+   "0002",
+   "0003",
+   "0004",
+   "0005",
+   "0006",
+   "0007",
+   "0008",
+   "0009",
+   "0010",
+   "0011",
+   "0012",
+   "0013",
+   "0014",
+   "0015",
+   "0016"
+  ]
+ },
+ "metrics": {
+  "acer": {
+   "value": 0.0041,
+   "ci95": [
+    0.0013,
+    0.0077
+   ],
+   "n": 2000
+  },
+  "apcer": {
+   "value": 0.0,
+   "ci95": [
+    0,
+    0.0032
+   ],
+   "k": 0,
+   "n": 1207
+  },
+  "bpcer": {
+   "value": 0.0082,
+   "ci95": [
+    0.0038,
+    0.0178
+   ],
+   "k": 6,
+   "n": 729
+  },
+  "auc": {
+   "value": 1.0,
+   "ci95": [
+    1.0,
+    1.0
+   ],
+   "n": 1936
+  },
+  "no_face": 64,
+  "n_live": 729,
+  "n_attack": 1207,
+  "threshold": 0.5,
+  "celeba_spoof_crops": {
+   "acer": {
+    "value": 0.2936,
+    "ci95": [
+     0.2632,
+     0.3255
+    ],
+    "n": 1000
+   },
+   "apcer": {
+    "value": 0.2583,
+    "ci95": [
+     0.2271,
+     0.2923
+    ],
+    "k": 178,
+    "n": 689
+   },
+   "bpcer": {
+    "value": 0.3289,
+    "ci95": [
+     0.2783,
+     0.3838
+    ],
+    "k": 99,
+    "n": 301
+   },
+   "auc": {
+    "value": 0.7807,
+    "ci95": [
+     0.751,
+     0.8092
+    ],
+    "n": 990
+   },
+   "no_face": 10,
+   "n_live": 301,
+   "n_attack": 689,
+   "threshold": 0.5
+  },
+  "latency": {
+   "n": 2000,
+   "p50_s": 0.13,
+   "p95_s": 0.18,
+   "mean_s": 0.14
+  }
+ },
+ "target": {
+  "metric": "acer",
+  "target": 0.1,
+  "higher": false,
+  "label": "ACER = (APCER + BPCER) / 2"
+ },
+ "primary_value": 0.0041,
+ "rating": "Strong",
+ "secondary": [
+  {
+   "metric": "apcer",
+   "target": 0.1,
+   "higher": false,
+   "label": "Attacks accepted as live",
+   "value": 0.0,
+   "rating": "Strong"
+  },
+  {
+   "metric": "bpcer",
+   "target": 0.1,
+   "higher": false,
+   "label": "Live selfies rejected",
+   "value": 0.0082,
+   "rating": "Strong"
+  }
+ ],
+ "run": {
+  "git_commit": "d990476",
+  "git_dirty": true,
+  "python": "3.13.3",
+  "platform": "Windows-11-10.0.26200-SP0",
+  "cpu": "Intel64 Family 6 Model 183 Stepping 1, GenuineIntel",
+  "gpu": "NVIDIA GeForce RTX 4060 Laptop GPU, 8188 MiB",
+  "llm": {
+   "provider": "ollama",
+   "model": "qwen2.5vl:7b",
+   "temperature": 0.0,
+   "num_ctx": 8192,
+   "timeout_s": 180,
+   "keep_alive": "30m",
+   "effort": "low"
+  },
+  "split_seed": 20261001,
+  "dev_fraction": 0.3,
+  "measured_at": "2026-10-01T01:00:33+00:00"
+ }
+}

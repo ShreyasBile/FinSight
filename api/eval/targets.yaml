@@ -1,0 +1,105 @@
+# Acceptance targets, fixed BEFORE each agent is evaluated (2026-09-25).
+# rating: Strong = target met; Acceptable = within 10% of target; Weak = below that.
+# "higher": true when a larger value is better.
+preprocessing:
+  primary: {metric: field_text_recall_after, target: 0.85, higher: true, label: "Field text readable after cleanup (degraded cards)"}
+  secondary:
+    - {metric: recall_gain, target: 0.10, higher: true, label: "OCR recall gain vs raw image"}
+    - {metric: p50_s, target: 10.0, higher: false, label: "Median time per image (s)"}
+extraction:
+  primary: {metric: field_accuracy, target: 0.90, higher: true, label: "Field-level accuracy (clean synthetic set)"}
+  secondary:
+    - {metric: doc_all_correct, target: 0.60, higher: true, label: "Documents with every field correct"}
+    - {metric: json_ok_rate, target: 0.98, higher: true, label: "Valid JSON returned"}
+    - {metric: degraded_field_accuracy, target: 0.85, higher: true, label: "Field accuracy on degraded ID cards"}
+validation:
+  primary: {metric: accuracy, target: 1.0, higher: true, label: "Correct ok/error flag on generated IDs"}
+doc_identity:
+  primary: {metric: wrong_doc_recall, target: 0.90, higher: true, label: "Wrong uploads caught"}
+  secondary:
+    - {metric: false_block_rate, target: 0.05, higher: false, label: "Correct uploads wrongly blocked"}
+pii_masking:
+  primary: {metric: pii_recall, target: 1.0, higher: true, label: "Full ID numbers hidden (no leak)"}
+  secondary:
+    - {metric: last4_kept, target: 0.95, higher: true, label: "Last four digits still visible"}
+face_verification:
+  primary: {metric: verdict_accuracy, target: 0.90, higher: true, label: "Correct same/different verdict (confident verdicts)"}
+  secondary:
+    - {metric: detection_rate, target: 0.95, higher: true, label: "Faces found on ID cards"}
+    - {metric: low_quality_never_mismatch, target: 1.0, higher: true, label: "Low-quality faces never called a mismatch"}
+tampering_forensics:
+  primary: {metric: forged_recall, target: 0.85, higher: true, label: "Forged documents flagged MEDIUM or HIGH"}
+  secondary:
+    - {metric: genuine_false_high, target: 0.10, higher: false, label: "Genuine documents wrongly HIGH"}
+    - {metric: auc, target: 0.85, higher: true, label: "ROC-AUC of fused score"}
+authenticity:
+  primary: {metric: fabricated_recall, target: 0.70, higher: true, label: "Fabricated documents flagged"}
+  secondary:
+    - {metric: genuine_false_flag, target: 0.10, higher: false, label: "Genuine documents flagged"}
+    - {metric: cap_respected, target: 1.0, higher: true, label: "A lone authenticity flag never reaches HIGH"}
+tamper_explainer:
+  primary: {metric: grounded_rate, target: 0.95, higher: true, label: "Explanations citing only real figures"}
+  secondary:
+    - {metric: tier_unchanged, target: 1.0, higher: true, label: "Risk tier never changed"}
+tamper_locator:
+  primary: {metric: box_hit_rate, target: 0.80, higher: true, label: "Edited figure boxed (IoU >= 0.5)"}
+cross_verification:
+  primary: {metric: js_parity, target: 1.0, higher: true, label: "Identical to the browser logic"}
+  secondary:
+    - {metric: name_pair_accuracy, target: 0.95, higher: true, label: "Labelled Indian name pairs"}
+dedupe:
+  primary: {metric: recall, target: 0.95, higher: true, label: "Duplicates found"}
+  secondary:
+    - {metric: precision, target: 1.0, higher: true, label: "No false duplicates"}
+fraud_fusion:
+  primary: {metric: tier_accuracy_heldout, target: 0.90, higher: true, label: "Held-out scenario tier accuracy"}
+  secondary:
+    - {metric: monotonicity, target: 1.0, higher: true, label: "More evidence never lowers the score"}
+fraud_patterns:
+  primary: {metric: macro_f1, target: 0.85, higher: true, label: "Pattern detection F1"}
+  secondary:
+    - {metric: parse_accuracy, target: 0.95, higher: true, label: "Transactions parsed from statements"}
+fraud_triage:
+  primary: {metric: proposal_precision, target: 0.80, higher: true, label: "Proposals that are real cases/rings"}
+kb_ingestion:
+  primary: {metric: recall_at_5, target: 0.85, higher: true, label: "Retrieval recall@5 after ingest"}
+rule_authoring:
+  primary: {metric: obligation_recall, target: 0.70, higher: true, label: "Known rules recovered as candidates"}
+  secondary:
+    - {metric: valid_condition_rate, target: 0.90, higher: true, label: "Candidates with a well-formed condition"}
+regulatory_qa:
+  primary: {metric: hit_at_5, target: 0.85, higher: true, label: "Gold passage in top 5"}
+  secondary:
+    - {metric: grounded_answer_rate, target: 0.90, higher: true, label: "Synthesised answers fully grounded"}
+policy_check:
+  primary: {metric: rule_accuracy, target: 1.0, higher: true, label: "Violations detected one at a time"}
+income_analysis:
+  primary: {metric: f1, target: 0.90, higher: true, label: "Income-mismatch detection F1"}
+risk_scoring:
+  primary: {metric: auc, target: 0.75, higher: true, label: "ROC-AUC on held-out loans"}
+  secondary:
+    - {metric: monotonicity_violations, target: 0, higher: false, label: "Monotonicity violations"}
+credit_memo:
+  primary: {metric: grounded_rate, target: 0.95, higher: true, label: "Memos citing only real figures"}
+  secondary:
+    - {metric: section_completeness, target: 1.0, higher: true, label: "All required sections present"}
+underwriting_supervisor:
+  primary: {metric: agreement, target: 0.85, higher: true, label: "Agreement with expected recommendation"}
+  secondary:
+    - {metric: never_loosens, target: 1.0, higher: true, label: "Never looser than the rule baseline"}
+offer_generation:
+  primary: {metric: emi_exact, target: 1.0, higher: true, label: "EMI equal to the formula"}
+workflow_router:
+  primary: {metric: accuracy, target: 1.0, higher: true, label: "Next step matches the lifecycle diagram"}
+notifier:
+  primary: {metric: template_accuracy, target: 1.0, higher: true, label: "Correct template and fields"}
+  secondary:
+    - {metric: external_sends, target: 0, higher: false, label: "Messages sent outside the system"}
+audit_storage:
+  primary: {metric: roundtrip_integrity, target: 1.0, higher: true, label: "Stored files and rows intact"}
+  secondary:
+    - {metric: officer_masking, target: 1.0, higher: true, label: "Officer sheet hides PAN/Aadhaar"}
+process_mining_analyst:
+  primary: {metric: query_correctness, target: 1.0, higher: true, label: "Figures equal to direct SQL"}
+liveness:
+  primary: {metric: acer, target: 0.10, higher: false, label: "Average classification error (APCER+BPCER)/2"}

@@ -1,0 +1,15 @@
+{
+ "body": {
+  "complete": true,
+  "labels": [
+   "PAN"
+  ],
+  "masked_count": 1,
+  "masked_image": "img:cc848c1b17612f6e",
+  "timings": [
+   "mask_ms"
+  ],
+  "withheld": false
+ },
+ "status": 200
+}

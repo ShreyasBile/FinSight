@@ -1,0 +1,98 @@
+{
+ "agent_id": "fraud_triage",
+ "split": "dev",
+ "data": {
+  "name": "LFW index of 1,000 real faces + 80 planted rings (40 same-face pairs, 20 shared accounts, 20 shared files)",
+  "split": "dev",
+  "n_apps": 1800,
+  "n_rings": 80,
+  "correct": "a proposal is correct when all its applications belong to one planted ring; a ring is recalled when one proposal is exactly that ring"
+ },
+ "metrics": {
+  "proposal_precision": {
+   "value": 0.1516,
+   "ci95": [
+    0.1142,
+    0.1986
+   ],
+   "k": 42,
+   "n": 277
+  },
+  "ring_recall": {
+   "value": 0.525,
+   "ci95": [
+    0.417,
+    0.6308
+   ],
+   "k": 42,
+   "n": 80
+  },
+  "ring_touched_rate": {
+   "value": 1.0,
+   "ci95": [
+    0.9542,
+    1
+   ],
+   "k": 80,
+   "n": 80
+  },
+  "recall_by_ring_kind": {
+   "same_face_two_pans": {
+    "found": 0.05,
+    "n": 40
+   },
+   "shared_account": {
+    "found": 1.0,
+    "n": 20
+   },
+   "shared_file": {
+    "found": 1.0,
+    "n": 20
+   }
+  },
+  "proposals": 277,
+  "largest_proposal": 732,
+  "links": 2695,
+  "indexed": 1800,
+  "face_match_threshold": 0.363,
+  "seconds": 5.9
+ },
+ "target": {
+  "metric": "proposal_precision",
+  "target": 0.8,
+  "higher": true,
+  "label": "Ring proposals that are a planted ring"
+ },
+ "primary_value": 0.1516,
+ "rating": "Weak",
+ "secondary": [
+  {
+   "metric": "ring_recall",
+   "target": 0.9,
+   "higher": true,
+   "label": "Planted rings proposed",
+   "value": 0.525,
+   "rating": "Weak"
+  }
+ ],
+ "run": {
+  "git_commit": "d990476",
+  "git_dirty": true,
+  "python": "3.13.3",
+  "platform": "Windows-11-10.0.26200-SP0",
+  "cpu": "Intel64 Family 6 Model 183 Stepping 1, GenuineIntel",
+  "gpu": "NVIDIA GeForce RTX 4060 Laptop GPU, 8188 MiB",
+  "llm": {
+   "provider": "ollama",
+   "model": "qwen2.5vl:7b",
+   "temperature": 0.0,
+   "num_ctx": 8192,
+   "timeout_s": 180,
+   "keep_alive": "0s",
+   "effort": "low"
+  },
+  "split_seed": 20261001,
+  "dev_fraction": 0.3,
+  "measured_at": "2026-10-01T08:49:36+00:00"
+ }
+}

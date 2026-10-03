@@ -1,0 +1,128 @@
+{
+ "rule": "a pixel signal needs corroboration when its lone hits are at least as frequent on genuine as on forged development documents in every family where it fires alone",
+ "corroboration_min": 0.1,
+ "lone_hit_rates": {
+  "page": {
+   "n_forged": 128,
+   "n_genuine": 130,
+   "cnn": {
+    "forged": 0,
+    "genuine": 0,
+    "forged_rate": 0.0,
+    "genuine_rate": 0.0
+   },
+   "ela": {
+    "forged": 15,
+    "genuine": 23,
+    "forged_rate": 0.1172,
+    "genuine_rate": 0.1769
+   },
+   "noise": {
+    "forged": 7,
+    "genuine": 12,
+    "forged_rate": 0.0547,
+    "genuine_rate": 0.0923
+   },
+   "copy_move": {
+    "forged": 12,
+    "genuine": 5,
+    "forged_rate": 0.0938,
+    "genuine_rate": 0.0385
+   },
+   "photo_region": {
+    "forged": 0,
+    "genuine": 0,
+    "forged_rate": 0.0,
+    "genuine_rate": 0.0
+   }
+  },
+  "id": {
+   "n_forged": 200,
+   "n_genuine": 290,
+   "cnn": {
+    "forged": 0,
+    "genuine": 0,
+    "forged_rate": 0.0,
+    "genuine_rate": 0.0
+   },
+   "ela": {
+    "forged": 0,
+    "genuine": 24,
+    "forged_rate": 0.0,
+    "genuine_rate": 0.0828
+   },
+   "noise": {
+    "forged": 3,
+    "genuine": 10,
+    "forged_rate": 0.015,
+    "genuine_rate": 0.0345
+   },
+   "copy_move": {
+    "forged": 0,
+    "genuine": 2,
+    "forged_rate": 0.0,
+    "genuine_rate": 0.0069
+   },
+   "photo_region": {
+    "forged": 21,
+    "genuine": 1,
+    "forged_rate": 0.105,
+    "genuine_rate": 0.0034
+   }
+  }
+ },
+ "needs_corroboration": [
+  "ela",
+  "noise"
+ ],
+ "before_on_dev": {
+  "findit": {
+   "forged_recall": 0.6484375,
+   "forged_high": 0.2265625,
+   "genuine_flagged": 0.3153846153846154,
+   "genuine_high": 0.007692307692307693,
+   "auc": 0.6694
+  },
+  "sidtd": {
+   "forged_recall": 0.115,
+   "forged_high": 0.0,
+   "genuine_flagged": 0.52,
+   "genuine_high": 0.01,
+   "auc": 0.3456
+  },
+  "midv_genuine_photos": {
+   "genuine_flagged": 0.2,
+   "genuine_high": 0.011111111111111112,
+   "n": 90
+  }
+ },
+ "after_on_dev": {
+  "findit": {
+   "forged_recall": 0.4765625,
+   "forged_high": 0.2265625,
+   "genuine_flagged": 0.06153846153846154,
+   "genuine_high": 0.007692307692307693,
+   "auc": 0.7116
+  },
+  "sidtd": {
+   "forged_recall": 0.105,
+   "forged_high": 0.0,
+   "genuine_flagged": 0.425,
+   "genuine_high": 0.01,
+   "auc": 0.3454
+  },
+  "midv_genuine_photos": {
+   "genuine_flagged": 0.03333333333333333,
+   "genuine_high": 0.011111111111111112,
+   "n": 90
+  }
+ },
+ "unchanged": [
+  "weights",
+  "single_signal_confidence",
+  "genuine_floor",
+  "corroboration_factor",
+  "tier_medium",
+  "tier_high"
+ ]
+}

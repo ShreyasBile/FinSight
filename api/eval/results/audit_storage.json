@@ -1,0 +1,33 @@
+{
+ "agent_id": "audit_storage",
+ "measured_at": "2026-09-25T20:19:56+00:00",
+ "metrics": {
+  "roundtrip_integrity": 1.0,
+  "rows_ok": 1.0,
+  "officer_masking": 1.0,
+  "manager_full_values": 1.0,
+  "n_applications": 5,
+  "n_documents": 10,
+  "sql_write_success": 1.0,
+  "sql_write_idempotent": 1.0,
+  "sql_error": null
+ },
+ "target": {
+  "metric": "roundtrip_integrity",
+  "target": 1.0,
+  "higher": true,
+  "label": "Stored files and rows intact"
+ },
+ "primary_value": 1.0,
+ "rating": "Strong",
+ "secondary": [
+  {
+   "metric": "officer_masking",
+   "target": 1.0,
+   "higher": true,
+   "label": "Officer sheet hides PAN/Aadhaar",
+   "value": 1.0,
+   "rating": "Strong"
+  }
+ ]
+}

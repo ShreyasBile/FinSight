@@ -1,0 +1,29 @@
+{
+ "agent_id": "doc_identity",
+ "measured_at": "2026-09-25T21:55:35+00:00",
+ "metrics": {
+  "wrong_doc_recall": 1.0,
+  "false_block_rate": 0.0,
+  "n_wrong": 24,
+  "n_right": 21,
+  "missed": []
+ },
+ "target": {
+  "metric": "wrong_doc_recall",
+  "target": 0.9,
+  "higher": true,
+  "label": "Wrong uploads caught"
+ },
+ "primary_value": 1.0,
+ "rating": "Strong",
+ "secondary": [
+  {
+   "metric": "false_block_rate",
+   "target": 0.05,
+   "higher": false,
+   "label": "Correct uploads wrongly blocked",
+   "value": 0.0,
+   "rating": "Strong"
+  }
+ ]
+}
